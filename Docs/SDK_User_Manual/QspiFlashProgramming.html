@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QSPI Flash Programming &mdash; CBU5000V210 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=29a6c3e3"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/design-tabs.js?v=f930bc37"></script>
+        <script src="_static/tabs.js?v=3030b3cb"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            CBU5000V210
+          </a>
+              <div class="version">
+                2.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="CBU5000V210SDK/CBU5000V210SDK.html">CBU5000V210 SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ApiReference.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UwbExamples/UwbExamples.html">UWB Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpuExamples/CpuExamples.html">CPU Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Calibration.html">UWB Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix.html">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VersionHistory.html">Version History</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CBU5000V210</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">QSPI Flash Programming</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="qspi-flash-programming">
+<h1>QSPI Flash Programming<a class="headerlink" href="#qspi-flash-programming" title="Link to this heading"></a></h1>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-RW5nbGlzaA==" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tab" tabindex="0">English</button><button aria-controls="panel-0-5Lit5paH" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-5Lit5paH" name="5Lit5paH" role="tab" tabindex="-1">中文</button></div><div aria-labelledby="tab-0-RW5nbGlzaA==" class="sphinx-tabs-panel group-tab" id="panel-0-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tabpanel" tabindex="0"><p>Two types of Flash Algorithm (FLM) had been provided inside the “flm” folder.</p>
+<p>If the flm name is too long and cannot be programmed, proceed to shorten the flm name.</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Flash Algorithm Files</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Manufacturer</p></th>
+<th class="head"><p>Flash Model</p></th>
+<th class="head"><p>FLM File Name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Macronix</p></td>
+<td><p>MX25V4035F</p></td>
+<td><p>CB5000V210_MACRONIX_MX25V4035F_V01.01.FLM</p></td>
+</tr>
+<tr class="row-odd"><td><p>Puya</p></td>
+<td><p>P25Q40SH</p></td>
+<td><p>CB5000V210_PUYA_P25Q40SH_V01.01.FLM</p></td>
+</tr>
+</tbody>
+</table>
+</div><div aria-labelledby="tab-0-5Lit5paH" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-5Lit5paH" name="5Lit5paH" role="tabpanel" tabindex="0"><p>提供了两种 Flash 算法 (FLM)，存放在 “flm” 文件夹中。</p>
+<p>如果 flm 文件名过长导致无法编程，请将 flm 文件名缩短。</p>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Flash Algorithm Files</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>厂商</p></th>
+<th class="head"><p>Flash 型号</p></th>
+<th class="head"><p>FLM 文件名</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Macronix</p></td>
+<td><p>MX25V4035F</p></td>
+<td><p>CB5000V210_MACRONIX_MX25V4035F_V01.01.FLM</p></td>
+</tr>
+<tr class="row-odd"><td><p>Puya</p></td>
+<td><p>P25Q40SH</p></td>
+<td><p>CB5000V210_PUYA_P25Q40SH_V01.01.FLM</p></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<br><br><a class="reference internal image-reference" href="_images/options_for_target_project.png"><img alt="options_for_target_project.png" class="align-center" src="_images/options_for_target_project.png" style="width: 90%;" /></a>
+<br><br><section id="setup-flash-programming-algorithm-flm">
+<h2>Setup Flash Programming Algorithm (FLM)<a class="headerlink" href="#setup-flash-programming-algorithm-flm" title="Link to this heading"></a></h2>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-RW5nbGlzaA==" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-1-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tab" tabindex="0">English</button><button aria-controls="panel-1-5Lit5paH" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-1-5Lit5paH" name="5Lit5paH" role="tab" tabindex="-1">中文</button></div><div aria-labelledby="tab-1-RW5nbGlzaA==" class="sphinx-tabs-panel group-tab" id="panel-1-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tabpanel" tabindex="0"><p>Right click on project target and select the “Option for Target”.</p>
+</div><div aria-labelledby="tab-1-5Lit5paH" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-1-5Lit5paH" name="5Lit5paH" role="tabpanel" tabindex="0"><p>在项目目标上右键单击，然后选择“目标选项”。</p>
+</div></div>
+</div>
+<a class="reference internal image-reference" href="_images/setup_flash_programming_algorithm.png"><img alt="setup_flash_programming_algorithm.png" class="align-center" src="_images/setup_flash_programming_algorithm.png" style="width: 70%;" /></a>
+<br><br></section>
+<section id="flash-programming">
+<h2>Flash Programming<a class="headerlink" href="#flash-programming" title="Link to this heading"></a></h2>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-2-RW5nbGlzaA==" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-2-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tab" tabindex="0">English</button><button aria-controls="panel-2-5Lit5paH" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-2-5Lit5paH" name="5Lit5paH" role="tab" tabindex="-1">中文</button></div><div aria-labelledby="tab-2-RW5nbGlzaA==" class="sphinx-tabs-panel group-tab" id="panel-2-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tabpanel" tabindex="0"><ol class="arabic simple">
+<li><p>Under “Debug” tab , Go to “Settings”</p></li>
+<li><p>Select “Flash Download” tab</p></li>
+<li><p>Click on “Add”</p></li>
+<li><p>Pick the Flash Programming Algorithm(FLM) according to the SDK board used.</p></li>
+<li><p>Click on “Add” after the FLM selection.</p></li>
+<li><p>Revise the RAM for Algorithm: Size to “0x00008000” and click on “OK” to complete the setup</p></li>
+<li><p>After the FLM setup, click on “Download” button to program the binary into the SDK Flash.</p></li>
+</ol>
+</div><div aria-labelledby="tab-2-5Lit5paH" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-2-5Lit5paH" name="5Lit5paH" role="tabpanel" tabindex="0"><ol class="arabic simple">
+<li><p>在调试”选项卡下，进入“设置”。</p></li>
+<li><p>选择“闪存下载”选项卡。</p></li>
+<li><p>点击“添加”。</p></li>
+<li><p>根据使用的 SDK 开发板选择闪存编程（FLM）。</p></li>
+<li><p>在选择 FLM 后点击“添加”。</p></li>
+<li><p>修改RAM 大小为“0x00008000”，然后点击“确定”完成设置。</p></li>
+<li><p>完成设置完成 FLM 设置后，点击“下载”按钮将程序编程到 SDK 闪存中。</p></li>
+</ol>
+</div></div>
+</div>
+<a class="reference internal image-reference" href="_images/flash_programming.png"><img alt="flash_programming.png" class="align-center" src="_images/flash_programming.png" style="width: 90%;" /></a>
+<br><br></section>
+<section id="erase-chip">
+<h2>Erase Chip<a class="headerlink" href="#erase-chip" title="Link to this heading"></a></h2>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-3-RW5nbGlzaA==" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-3-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tab" tabindex="0">English</button><button aria-controls="panel-3-5Lit5paH" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-3-5Lit5paH" name="5Lit5paH" role="tab" tabindex="-1">中文</button></div><div aria-labelledby="tab-3-RW5nbGlzaA==" class="sphinx-tabs-panel group-tab" id="panel-3-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tabpanel" tabindex="0"><p>The erase and programming options for QSPI Flash allow for “Full Chip Erase and Programming” and “Sector Erase and Programming.” When initially powering on to program firmware (FW) into the Flash, the “Erase Full Chip” option should be selected (as shown in Figure 4 5 Erase Full Chip). This operation will erase all pages of the Flash.</p>
+<p>For subsequent firmware (FW) programming, if need to preserve the data of the first sector (size: 0x1000), you can choose the “Erase Sectors” option (as shown in Figure 4 6 Erase Sectors). This operation will retain the contents of the first sector.</p>
+</div><div aria-labelledby="tab-3-5Lit5paH" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-3-5Lit5paH" name="5Lit5paH" role="tabpanel" tabindex="0"><p>QSPI Flash 编程的擦除和烧写可以选择 “全部擦除烧写” 和 “局部擦除烧写” 。在初次上电烧写固件（FW）到 Flash 时，需要选择“Erase Full Chip”（如图4-5所示）。此操作将擦除整个 Flash 的所有页面。</p>
+<p>在之后的固件烧写过程，如果需要保留第一个扇区（大小为 0x1000）的数据，可以选择“Erase Sectors”选项（如图4-6所示）。此操作将保留第一个扇区的内容。</p>
+</div></div>
+</div>
+<section id="erase-full-chip">
+<h3>Erase Full Chip<a class="headerlink" href="#erase-full-chip" title="Link to this heading"></a></h3>
+<a class="reference internal image-reference" href="_images/erase_full_chip.png"><img alt="flash_programming.png" class="align-center" src="_images/erase_full_chip.png" style="width: 90%;" /></a>
+<br><br></section>
+<section id="erase-sectors">
+<h3>Erase Sectors<a class="headerlink" href="#erase-sectors" title="Link to this heading"></a></h3>
+<a class="reference internal image-reference" href="_images/erase_sectors.png"><img alt="flash_programming.png" class="align-center" src="_images/erase_sectors.png" style="width: 90%;" /></a>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Chipsbank.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

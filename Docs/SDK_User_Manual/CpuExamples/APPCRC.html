@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>APP-CRC &mdash; CBU5000V210 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=29a6c3e3"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/design-tabs.js?v=f930bc37"></script>
+        <script src="../_static/tabs.js?v=3030b3cb"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="APP-CRYPTO" href="APP_CRYPTO.html" />
+    <link rel="prev" title="APP_ADC" href="APP_ADC.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CBU5000V210
+          </a>
+              <div class="version">
+                2.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../CBU5000V210SDK/CBU5000V210SDK.html">CBU5000V210 SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ApiReference.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UwbExamples/UwbExamples.html">UWB Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="CpuExamples.html">CPU Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="DFU.html">APP_DFU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_ADC.html">APP_ADC</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">APP-CRC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_CRYPTO.html">APP-CRYPTO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_DMA.html">APP-DMA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_Efuse.html">APP-Efuse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_Gpio.html">APP-Gpio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_I2C.html">APP-I2C</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_PKA.html">APP-PKA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_Sleep.html">APP-Sleep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_SpiMaster.html">APP-SpiMaster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_SpiSlaver.html">APP-SpiSlaver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_Timer.html">APP-Timer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_Trng.html">APP-Trng</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APPCpuUart.html">APP-UART</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_Watchdog.html">APP-Watchdog</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Calibration.html">UWB Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Appendix.html">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../VersionHistory.html">Version History</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CBU5000V210</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="CpuExamples.html">CPU Examples</a></li>
+      <li class="breadcrumb-item active">APP-CRC</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="app-crc">
+<h1>APP-CRC<a class="headerlink" href="#app-crc" title="Link to this heading"></a></h1>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-5Lit5paH" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-5Lit5paH" name="5Lit5paH" role="tab" tabindex="0">中文</button><button aria-controls="panel-0-RW5nbGlzaA==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tab" tabindex="-1">English</button></div><div aria-labelledby="tab-0-5Lit5paH" class="sphinx-tabs-panel group-tab" id="panel-0-5Lit5paH" name="5Lit5paH" role="tabpanel" tabindex="0"><p><strong>概述</strong></p>
+<blockquote>
+<div><p>本文件提供了使用开发板（例如CB5000V210 Anchor演示板）验证CRC外设功能的指南。它涵盖了硬件连接、串行通信设置以及通过轮询和中断模式进行CRC计算验证的内容。</p>
+</div></blockquote>
+<p><strong>需求</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>以下开发板之一：</dt><dd><ul>
+<li><p>CB5000V210 Anchor演示板</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>软件：</dt><dd><ul>
+<li><p>串行终端工具（例如PuTTY, SSCOM）</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>用户界面</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>串口连接</strong>:</dt><dd><ul>
+<li><p>将GPIO00连接到串行接收线（RX）。</p></li>
+<li><p>将GPIO01连接到串行发送线（TX）。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><strong>确保所有连接牢固，以避免通信问题。</strong></p></li>
+</ul>
+<p><strong>构建和运行</strong></p>
+<ul class="simple">
+<li><p>该示例可以在ChipsBank Connect SDK文件夹结构中的”Firmware\Examples\peripheral_crc”找到。</p></li>
+</ul>
+<p><strong>测试</strong></p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><strong>连接开发板</strong></dt><dd><ul class="simple">
+<li><p>准备一个合适的USB线，确保两端与计算机和演示板兼容。</p></li>
+<li><p>将USB线的一端插入计算机的USB端口，另一端插入演示板的USB端口。</p></li>
+<li><p>打开计算机上的设备管理器，检查是否识别到新的COM端口。如果没有识别到，请检查USB线连接并确保安装了正确的驱动程序。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>配置串行终端</strong></dt><dd><ul class="simple">
+<li><p>在计算机上打开一个串行终端工具，例如PuTTY, SSCOM或任何类似的工具。</p></li>
+<li><p>在串行终端工具中，选择识别到的COM端口。</p></li>
+<li><p>设置波特率为115200，停止位为1，数据位顺序为LSB，校验位为NONE。</p></li>
+<li><p>点击连接按钮以建立与开发板的串行通信。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>重置开发板</strong></dt><dd><ul class="simple">
+<li><p>在演示板上找到复位按钮。</p></li>
+<li><p>按下并释放复位按钮以重启开发板。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>观察串行输出</strong></dt><dd><ul class="simple">
+<li><p>复位后，在串行终端工具中观察输出。首先应看到启动消息“Power-on reset”。</p></li>
+<li><p>随后，将看到CRC8、CRC16和CRC32计算结果的打印，例如“CRC-8 Result (with polling): 0xA6”。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>在线计算验证</strong></dt><dd><ul class="simple">
+<li><p>打开浏览器并访问[在线CRC计算器](<a class="reference external" href="https://www.crccalc.com/?crc=123456789&amp;method=&amp;datatype=ascii&amp;outtype=hex">https://www.crccalc.com/?crc=123456789&amp;method=&amp;datatype=ascii&amp;outtype=hex</a>)网站。</p></li>
+<li><p>在网站的输入框中，选择ASCII输入模式。</p></li>
+<li><p>对于CRC8验证，输入“Hello World!”，选择CRC8计算方法，并选择十六进制输出，然后记录结果。</p></li>
+<li><p>对于CRC16验证，输入“APP SDK CRC-16 Demo”，选择CRC16计算方法，并选择十六进制输出，然后记录结果。</p></li>
+<li><p>对于CRC32验证，输入“APP SDK CRC-32 Demo”，选择CRC32计算方法，并选择十六进制输出，然后记录结果。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>结果比较</strong></dt><dd><ul class="simple">
+<li><p>将在线计算器获得的CRC8、CRC16和CRC32结果与串行终端工具中显示的结果进行比较。</p></li>
+<li><p>如果结果匹配，则CRC计算正确。如果不匹配，请检查数据设置、串行端口配置或代码中的CRC计算函数。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<p><strong>预期输出</strong></p>
+<ul class="simple">
+<li><p>复位开发板后，串行终端将显示以下输出：</p></li>
+</ul>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Power-on reset
+
+Data to be performed for CRC8 calculations:  Hello World !
+CRC-8 Result (with polling): 0xA6
+CRC Result (with IRQ): 0xA6
+CRC-8 with IRQ finished!
+
+Data to be performed for CRC16 calculations:  APP SDK CRC-16 Demo
+CRC-16 Result (with polling): 0x1BFC
+CRC Result (with IRQ): 0x1BFC
+CRC-16 with IRQ finished!
+
+Data to be performed for CRC32 calculations:  APP SDK CRC-32 Demo
+CRC-32 Result (with polling): 0x3D8BF5F3
+CRC Result (with IRQ): 0x3D8BF5F3
+CRC-32 with IRQ finished!
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-RW5nbGlzaA==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tabpanel" tabindex="0"><p><strong>Overview</strong></p>
+<blockquote>
+<div><p>This document provides a guide to verify the functionality of the CRC peripheral using a development board (e.g., CB5000V210 Anchor demo board). It covers hardware connections, serial communication setup, and CRC calculation validation through polling and interrupt modes.</p>
+</div></blockquote>
+<p><strong>Requirements</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>One of the following development boards:</dt><dd><ul>
+<li><p>CB5000V210 Anchor demo board</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Software:</dt><dd><ul>
+<li><p>Serial terminal tool (e.g., PuTTY, SSCOM)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>User interface</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>Serial Port Connections</strong>:</dt><dd><ul>
+<li><p>Connect GPIO00 to the serial receive line (RX).</p></li>
+<li><p>Connect GPIO01 to the serial transmit line (TX).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><strong>Ensure all connections are secure to avoid communication issues.</strong></p></li>
+</ul>
+<p><strong>Building and running</strong></p>
+<ul class="simple">
+<li><p>This sample can be found under “Firmware\Examples\peripheral_crc” in the ChipsBank Connect SDK folder structure.</p></li>
+</ul>
+<p><strong>Testing</strong></p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><strong>Connect the Development Board</strong></dt><dd><ul class="simple">
+<li><p>Prepare a suitable USB cable, ensuring both ends are compatible with your computer and demo board.</p></li>
+<li><p>Insert one end of the USB cable into a USB port on your computer and the other end into the USB port on the demo board.</p></li>
+<li><p>Open the Device Manager on your computer to check if a new COM port has been recognized. If not, verify the USB cable connection and ensure the correct drivers are installed.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Configure the Serial Terminal</strong></dt><dd><ul class="simple">
+<li><p>Open a serial terminal tool on your computer, such as PuTTY, SSCOM, or any similar tool.</p></li>
+<li><p>In the serial terminal tool, select the recognized COM port.</p></li>
+<li><p>Set the baud rate to 115200, stop bits to 1, data bits order to LSB, and parity to NONE.</p></li>
+<li><p>Click the connect button to establish serial communication with the development board.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Reset the Development Board</strong></dt><dd><ul class="simple">
+<li><p>Locate the reset button on the demo board.</p></li>
+<li><p>Press and release the reset button to restart the development board.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Observe Serial Output</strong></dt><dd><ul class="simple">
+<li><p>After resetting, observe the output in the serial terminal tool. You should first see the power-on message “Power-on reset”.</p></li>
+<li><p>Subsequently, you will see the CRC8, CRC16, and CRC32 calculation results printed, such as “CRC-8 Result (with polling): 0xA6”.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Online Calculation Verification</strong></dt><dd><ul class="simple">
+<li><p>Open a web browser and visit the [Online CRC Calculator](<a class="reference external" href="https://www.crccalc.com/?crc=123456789&amp;method=&amp;datatype=ascii&amp;outtype=hex">https://www.crccalc.com/?crc=123456789&amp;method=&amp;datatype=ascii&amp;outtype=hex</a>) website.</p></li>
+<li><p>In the website’s input box, select ASCII input mode.</p></li>
+<li><p>For CRC8 verification, enter “Hello World!”, select the CRC8 calculation method, and choose hexadecimal output, then record the result.</p></li>
+<li><p>For CRC16 verification, enter “APP SDK CRC-16 Demo”, select the CRC16 calculation method, choose hexadecimal output, and record the result.</p></li>
+<li><p>For CRC32 verification, enter “APP SDK CRC-32 Demo”, select the CRC32 calculation method, choose hexadecimal output, and record the result.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Result Comparison</strong></dt><dd><ul class="simple">
+<li><p>Compare the CRC8, CRC16, and CRC32 results obtained from the online calculator with the results displayed in the serial terminal tool.</p></li>
+<li><p>If the results match, the CRC calculations are correct. If they do not match, check the data settings, serial port configuration, or CRC calculation functions in the code.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<p><strong>Expected Output</strong></p>
+<ul class="simple">
+<li><p>The following output will be displayed in the serial terminal after resetting the development board:</p></li>
+</ul>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Power-on reset
+
+Data to be performed for CRC8 calculations:  Hello World !
+CRC-8 Result (with polling): 0xA6
+CRC Result (with IRQ): 0xA6
+CRC-8 with IRQ finished!
+
+Data to be performed for CRC16 calculations:  APP SDK CRC-16 Demo
+CRC-16 Result (with polling): 0x1BFC
+CRC Result (with IRQ): 0x1BFC
+CRC-16 with IRQ finished!
+
+Data to be performed for CRC32 calculations:  APP SDK CRC-32 Demo
+CRC-32 Result (with polling): 0x3D8BF5F3
+CRC Result (with IRQ): 0x3D8BF5F3
+CRC-32 with IRQ finished!
+</pre></div>
+</div>
+</div></div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="APP_ADC.html" class="btn btn-neutral float-left" title="APP_ADC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="APP_CRYPTO.html" class="btn btn-neutral float-right" title="APP-CRYPTO" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Chipsbank.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

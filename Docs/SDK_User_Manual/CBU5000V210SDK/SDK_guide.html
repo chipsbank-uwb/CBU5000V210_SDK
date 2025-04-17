@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting Started Guide &mdash; CBU5000V210 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=29a6c3e3"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/design-tabs.js?v=f930bc37"></script>
+        <script src="../_static/tabs.js?v=3030b3cb"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="API" href="../ApiReference.html" />
+    <link rel="prev" title="Baremetal &amp; FreeRTOS" href="BaremetalAndFreeRTOS.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CBU5000V210
+          </a>
+              <div class="version">
+                2.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="CBU5000V210SDK.html">CBU5000V210 SDK</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="SDKBlockDiagram.html">SDK Block Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BaremetalAndFreeRTOS.html">Baremetal &amp; FreeRTOS</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Getting Started Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ApiReference.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UwbExamples/UwbExamples.html">UWB Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CpuExamples/CpuExamples.html">CPU Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calibration.html">UWB Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Appendix.html">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../VersionHistory.html">Version History</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CBU5000V210</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="CBU5000V210SDK.html">CBU5000V210 SDK</a></li>
+      <li class="breadcrumb-item active">Getting Started Guide</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="getting-started-guide">
+<h1>Getting Started Guide<a class="headerlink" href="#getting-started-guide" title="Link to this heading"></a></h1>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-5Lit5paH" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-5Lit5paH" name="5Lit5paH" role="tab" tabindex="0">中文</button><button aria-controls="panel-0-RW5nbGlzaA==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tab" tabindex="-1">English</button></div><div aria-labelledby="tab-0-5Lit5paH" class="sphinx-tabs-panel group-tab" id="panel-0-5Lit5paH" name="5Lit5paH" role="tabpanel" tabindex="0"><p><strong>概述</strong></p>
+<p>本指南旨在指导用户通过设置必要的软件环境来使用CBU5000V210芯片进行硬件开发。在获取我们的SDK后，用户将学习如何：</p>
+<ul class="simple">
+<li><p>配置所需的开发工具和软件。</p></li>
+<li><p>连接硬件组件，包括开发板和PC。</p></li>
+<li><p>编译和下载示例项目，例如 <code class="docutils literal notranslate"><span class="pre">peripheral_uart</span></code> 例程。</p></li>
+<li><p>使用串口助手进行测试。</p></li>
+<li><p>基于提供的示例扩展和开发自己的应用程序。</p></li>
+</ul>
+<p>通过遵循本指南，用户将能够有效地使用SDK在CBU5000V210开发板上开发和测试应用程序。</p>
+<p><strong>准备工作</strong></p>
+<ul>
+<li><p>硬件</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>CBU5000V210开发板</strong>：作为硬件开发的核心设备。</p></li>
+<li><p><strong>USB数据线（支持数据传输）</strong>：用于将开发板连接到PC，实现数据传输和供电。</p></li>
+<li><p><strong>PC（Windows系统）</strong>：运行开发工具和测试软件的平台。</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>软件</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>编译工具</strong>：Keil v5.41或更高版本。用于编译应用程序并为开发板生成可执行固件。</p></li>
+<li><p><strong>串口助手</strong>：如SSCOM。用于测试开发板的串口功能并显示通信结果。</p></li>
+<li><p><strong>SDK开发包</strong>：包含所需的API（软件库和源代码）以及基于Keil的示例项目。</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>设置开发环境</strong></p>
+<p><strong>1. 安装Keil IDE开发工具</strong></p>
+<p>访问官方Arm Keil网站 (<a class="reference external" href="https://www.keil.com/download/product/">https://www.keil.com/download/product/</a>) 下载最新的Keil开发工具，并按照安装向导完成安装。</p>
+<p><strong>2. 获取SDK</strong></p>
+<p>在基于CBU5000V210芯片开发应用程序之前，可以从ChipsBank提供的指定GitHub仓库获取最新的SDK。</p>
+<p><strong>3. 安装软件包</strong></p>
+<p>安装Keil工具后，需要安装CBU5000V210芯片的软件包。具体步骤如下：</p>
+<ul>
+<li><p><strong>步骤1</strong>：定位软件包。软件包位于SDK的 <code class="docutils literal notranslate"><span class="pre">\Tools\pack</span></code> 路径下，文件名为 <code class="docutils literal notranslate"><span class="pre">Chipsbank.CBU5000V210_DFP.1.0.0.pack</span></code> 。双击该文件以运行安装程序。</p></li>
+<li><p><strong>步骤2</strong>：进行安装。在安装向导中，点击``Next``。</p>
+<a class="reference internal image-reference" href="../_images/com.png"><img alt="install_pack1.png" class="align-center" src="../_images/com.png" style="width: 70%;" /></a>
+<p style="text-align: center;">安装步骤2</p></li>
+<li><p><strong>步骤3</strong>：完成安装。成功安装后，将显示``Finish``提示。点击“完成”以完成软件包安装。如果安装失败，请从步骤1重新开始。</p>
+<a class="reference internal image-reference" href="../_images/install_pack2.png"><img alt="install_pack2.png" class="align-center" src="../_images/install_pack2.png" style="width: 70%;" /></a>
+<p style="text-align: center;">安装步骤3</p></li>
+</ul>
+<p><strong>创建第一个项目</strong></p>
+<p>从SDK的 <code class="docutils literal notranslate"><span class="pre">\Firmware\Examples</span></code> 目录中选择一个例程进行开发。本指南以 <code class="docutils literal notranslate"><span class="pre">peripheral_uart</span></code> 例程为例。您可以复制并重命名该项目以便后续开发。该目录中的所有项目都可以直接编译，也可以基于这些例程进行二次开发。</p>
+<p><strong>连接设备</strong></p>
+<p>使用支持数据传输的USB数据线将CBU5000V210锚点开发板连接到PC。同时，将开发板上的USB转串口接口连接到芯片的串口，其中 <code class="docutils literal notranslate"><span class="pre">TX</span></code> 连接到 <code class="docutils literal notranslate"><span class="pre">GPIO00</span></code> ， <code class="docutils literal notranslate"><span class="pre">RX</span></code> 连接到 <code class="docutils literal notranslate"><span class="pre">GPIO01</span></code> （您可以参考开发板原理图 <code class="docutils literal notranslate"><span class="pre">demo</span> <span class="pre">kit</span> <span class="pre">CBD5213</span></code> 以确认连接）。</p>
+<p><strong>1. 驱动安装</strong></p>
+<p>如果使用USB数据线下载，无需安装驱动。如果使用其他下载方法（如ST-Link、J-Link等），可以从网上下载相应的驱动并安装。</p>
+<p><strong>2. 查看端口</strong></p>
+<p>打开设备管理器，查看“端口（COM和LPT）”中的COM端口列表。断开USB串口线与PC的连接，然后重新连接。观察列表中消失后又重新出现的端口。该端口即为开发板的串口。</p>
+<a class="reference internal image-reference" href="../_images/com.png"><img alt="Windows设备管理器中的USB串口" class="align-center" src="../_images/com.png" style="width: 70%;" /></a>
+<p style="text-align: center;">Windows设备管理器中的USB串口</p><p><strong>编译和下载</strong></p>
+<ul>
+<li><p><strong>选择下载方法</strong>：点击 <code class="docutils literal notranslate"><span class="pre">Options</span> <span class="pre">for</span> <span class="pre">Target...</span></code> ，选择 <code class="docutils literal notranslate"><span class="pre">Debug</span></code> ，并根据实际需求选择下载方法。本教程使用USB下载方法，因此选择 <code class="docutils literal notranslate"><span class="pre">CMSIS_DAP.</span> <span class="pre">ARMv8-M</span> <span class="pre">Debugger</span></code> 。</p>
+<a class="reference internal image-reference" href="../_images/select_debug.png"><img alt="选择调试下载模式" class="align-center" src="../_images/select_debug.png" style="width: 70%;" /></a>
+<p style="text-align: center;">选择调试下载模式</p></li>
+</ul>
+<p>完成上述操作后，可以开始编译和下载过程。如果编译过程中没有错误，可以直接下载固件。</p>
+<a class="reference internal image-reference" href="../_images/download.png"><img alt="软件包安装完成" class="align-center" src="../_images/download.png" style="width: 70%;" /></a>
+<p style="text-align: center;">固件下载</p><p>下载完成后，打开串口助手。配置参数如下：</p>
+<ul class="simple">
+<li><p><strong>波特率</strong>：115200</p></li>
+<li><p><strong>停止位</strong>：1</p></li>
+<li><p><strong>数据位顺序</strong>：LSB</p></li>
+<li><p><strong>校验位</strong>：NONE</p></li>
+</ul>
+<p>配置完上述参数后，启用串口。按下开发板上的复位按钮，然后通过串口助手发送任何数据。这里我们发送 <code class="docutils literal notranslate"><span class="pre">hello</span> <span class="pre">world</span> <span class="pre">!</span></code> 。</p>
+<p><strong>预期输出</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>app_uart_echo_demo
+
+hello world !
+</pre></div>
+</div>
+<p>如果您得到上述结果，恭喜您完成了CBU5000V210芯片的入门学习。现在您可以尝试其他例程，或者开始开发自己的应用程序。</p>
+</div><div aria-labelledby="tab-0-RW5nbGlzaA==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tabpanel" tabindex="0"><p><strong>Overview</strong></p>
+<p>This document aims to guide users through the process of setting up the necessary software environment for hardware development using the CBU5000V210 chip. After obtaining our SDK, users will learn how to:</p>
+<ul class="simple">
+<li><p>Configure the required development tools and software.</p></li>
+<li><p>Connect the hardware components, including the development board and the PC.</p></li>
+<li><p>Compile and download example projects, such as the <cite>peripheral_uart</cite> routine.</p></li>
+<li><p>Use the serial assistant for testing.</p></li>
+<li><p>Extend and develop their own applications based on the provided examples.</p></li>
+</ul>
+<p>By following this guide, users will be able to effectively use the SDK to develop and test their applications on the CBU5000V210 development board.</p>
+<p><strong>Preparatory work</strong></p>
+<ul>
+<li><p>Hardware</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>CBU5000V210 anchor Demo board</strong>: It serves as the core device for hardware development.</p></li>
+<li><p><strong>USB data cable (capable of data transmission)</strong>: Used to connect the development board to a PC, enabling data transfer and power supply.</p></li>
+<li><p><strong>PC (Windows system)</strong>: The platform for running development tools and testing software.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Software</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Compilation tool</strong>: Keil v5.41 or higher versions. It is used to compile application programs and generate executable firmware for the development board.</p></li>
+<li><p><strong>Serial port assistant</strong>: Such as SSCOM. It is used to test the serial port function of the development board and display communication results.</p></li>
+<li><p><strong>SDK development package</strong>: It contains the required APIs (software libraries and source codes) and Keil-based example projects.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>Setting up the development environment</strong></p>
+<p><strong>1. Installing the Keil IDE development tool</strong></p>
+<p>Visit the official Arm Keil website (<a class="reference external" href="https://www.keil.com/download/product/">https://www.keil.com/download/product/</a>) to download the latest Keil development tool, and complete the installation following the installation wizard.</p>
+<p><strong>2. Obtaining the SDK</strong></p>
+<p>Before developing applications based on the CBU5000V210 chip, you can obtain the latest SDK from the specified GitHub repository provided by ChipsBank.</p>
+<p><strong>3. Installing the software package</strong></p>
+<p>After installing the Keil tool, it is necessary to install the software package for the CBU5000V210 chip. The specific steps are as follows:</p>
+<ul>
+<li><p><strong>Step 1</strong>: Locate the software package. The software package is located in the <code class="docutils literal notranslate"><span class="pre">\Tools\pack</span></code> path of the SDK, with the file name <code class="docutils literal notranslate"><span class="pre">Chipsbank.CBU5000V210_DFP.1.0.0.pack</span></code>. Double-click this file to run the installation program.</p></li>
+<li><p><strong>Step 2</strong>: Proceed with the installation. In the installation wizard, click <code class="docutils literal notranslate"><span class="pre">Next</span></code> .</p>
+<a class="reference internal image-reference" href="../_images/install_pack1.png"><img alt="install_pack1.png" class="align-center" src="../_images/install_pack1.png" style="width: 70%;" /></a>
+<p style="text-align: center;">Installation step 2 </p></li>
+<li><p><strong>Step 3</strong>: Complete the installation. After a successful installation, a <code class="docutils literal notranslate"><span class="pre">successfully</span></code> prompt will be displayed. Click <code class="docutils literal notranslate"><span class="pre">Finish</span></code> to complete the software package installation. If the installation fails, please start from step 1 again.</p>
+<a class="reference internal image-reference" href="../_images/install_pack2.png"><img alt="install_pack2.png" class="align-center" src="../_images/install_pack2.png" style="width: 70%;" /></a>
+<p style="text-align: center;">Installation step 3 </p></li>
+</ul>
+<p><strong>Creating your first project</strong></p>
+<p>Select a routine from the <code class="docutils literal notranslate"><span class="pre">\Firmware\Examples</span></code> directory of the SDK for development. This guide takes the <code class="docutils literal notranslate"><span class="pre">peripheral_uart</span></code>  routine as an example. You can copy and rename this project for convenient subsequent development. All projects in this directory can be directly compiled, and you can also conduct secondary development based on the routines.</p>
+<p><strong>Connecting the device</strong></p>
+<p>Connect the CBU5000V210 anchor Demo board to a PC using a USB data cable capable of data transmission. At the same time, connect the USB-to-serial port interface on the development board to the serial port of the chip, with <code class="docutils literal notranslate"><span class="pre">TX</span></code> connected to <code class="docutils literal notranslate"><span class="pre">GPIO00</span></code> and <code class="docutils literal notranslate"><span class="pre">RX</span></code> connected to <code class="docutils literal notranslate"><span class="pre">GPIO01</span></code> (you can refer to the development board schematic diagram <code class="docutils literal notranslate"><span class="pre">demo</span> <span class="pre">kit</span> <span class="pre">CBD5213</span></code> to confirm the connection).</p>
+<p><strong>1. Drive installation</strong></p>
+<p>If you use a USB cable to download, you do not need to install the driver. If you use other download methods (such as ST-Link, J-Link, etc.), you can download the corresponding driver from the Internet and install it.</p>
+<p><strong>2. Viewing the Port</strong></p>
+<p>Open the Device Manager and view the COM port list in “Ports (COM and LPT)”. Disconnect the USB serial port cable from the PC and then reconnect it. Observe which port in the list disappears and then reappears. This port is the serial port of the development board.</p>
+<a class="reference internal image-reference" href="../_images/com.png"><img alt="USB serial port for Windows Device Manager" class="align-center" src="../_images/com.png" style="width: 70%;" /></a>
+<p style="text-align: center;">USB serial port for Windows Device Manager</p><p><strong>Compiling and downloading</strong></p>
+<ul>
+<li><p><strong>Select the download method</strong>: Click <code class="docutils literal notranslate"><span class="pre">Options</span> <span class="pre">for</span> <span class="pre">Target...</span></code>, select <code class="docutils literal notranslate"><span class="pre">Debug</span></code>, and select the download method according to actual requirements. In this tutorial, the USB download method is used, so select <code class="docutils literal notranslate"><span class="pre">CMSIS_DAP.</span> <span class="pre">ARMv8-M</span> <span class="pre">Debugger</span></code>.</p>
+<a class="reference internal image-reference" href="../_images/select_debug.png"><img alt="Select debug download mode" class="align-center" src="../_images/select_debug.png" style="width: 70%;" /></a>
+<p style="text-align: center;">Select debug download mode</p></li>
+</ul>
+<p>After completing the above operations, you can start the compilation and download process. First, if there are no errors during compilation, you can directly download the firmware.</p>
+<a class="reference internal image-reference" href="../_images/download.png"><img alt="Software package installation complete" class="align-center" src="../_images/download.png" style="width: 70%;" /></a>
+<p style="text-align: center;">Firmware download</p><p>After the download is completed, open the serial port assistant. Configure the parameters as follows:</p>
+<ul class="simple">
+<li><p><strong>Baud rate</strong>: 115200</p></li>
+<li><p><strong>Stop bit</strong>: 1</p></li>
+<li><p><strong>Bit order</strong>: LSB</p></li>
+<li><p><strong>Parity bit</strong>: NONE</p></li>
+</ul>
+<p>After configuring the above parameters, enable the serial port. Press the reset button on the development board, and then send any data through the serial port assistant. Here, we send <code class="docutils literal notranslate"><span class="pre">hello</span> <span class="pre">world</span> <span class="pre">!</span></code>.</p>
+<p><strong>Expected Output</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>app_uart_echo_demo
+
+hello world !
+</pre></div>
+</div>
+<p>If you get the above results, congratulations you have completed the Introductory study of the CBU5000V210 chip,Now you can try some other routines, or just start developing your own application</p>
+</div></div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="BaremetalAndFreeRTOS.html" class="btn btn-neutral float-left" title="Baremetal &amp; FreeRTOS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../ApiReference.html" class="btn btn-neutral float-right" title="API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Chipsbank.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

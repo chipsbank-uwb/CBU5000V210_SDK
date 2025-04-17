@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SDK High Level Design &mdash; CBU5000V210 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=29a6c3e3"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/design-tabs.js?v=f930bc37"></script>
+        <script src="../_static/tabs.js?v=3030b3cb"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CBU5000V210
+          </a>
+              <div class="version">
+                2.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="CBU5000V210SDK.html">CBU5000V210 SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ApiReference.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UwbExamples/UwbExamples.html">UWB Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CpuExamples/CpuExamples.html">CPU Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calibration.html">UWB Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Appendix.html">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../VersionHistory.html">Version History</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CBU5000V210</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">SDK High Level Design</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sdk-high-level-design">
+<h1>SDK High Level Design<a class="headerlink" href="#sdk-high-level-design" title="Link to this heading"></a></h1>
+<figure class="align-center">
+<p class="plantuml">
+<img src="../_images/plantuml-5682abc5331496efb1fea27188a0868f4f835e3c.png" alt="Title SDK High Level Design
+
+scale 0.8
+hide footbox
+autonumber
+
+actor User as User
+ 
+box CPU Subsystem #lightyellow
+    participant main as main
+end box
+box System Application #lightyellow
+    participant Uart_Commander as Uart_Commander
+end box
+box UWB Application #lightyellow
+    participant uwbApps as uwbApps
+end box
+box Chipsbank_LIB #lightgreen 
+    participant CB_LIB as CB_LIB
+end box
+
+== Initialization ==
+main --&gt; CB_LIB: Uart initialization
+main --&gt; CB_LIB: UWB initialization
+
+== Run time ==
+User --&gt; CB_LIB: Send command,\n&amp; arguments
+CB_LIB --&gt; Uart_Commander: //IRQ callback//
+Uart_Commander --&gt; Uart_Commander: Parse received\ncommand,&amp; arguments
+Uart_Commander --&gt; uwbApps: Execute UWB Apps
+uwbApps --&gt; CB_LIB: UWB API"/>
+</p>
+</figure>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-RW5nbGlzaA==" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tab" tabindex="0">English</button><button aria-controls="panel-0-5Lit5paH" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-5Lit5paH" name="5Lit5paH" role="tab" tabindex="-1">中文</button></div><div aria-labelledby="tab-0-RW5nbGlzaA==" class="sphinx-tabs-panel group-tab" id="panel-0-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tabpanel" tabindex="0"><p>During initialization, the UART module interacts with the Chipsbank Library (CB_LIB) to establish communication. This step ensures that the system is prepared for data transmission and reception.</p>
+<p>At runtime, the User interacts with the system by sending commands and arguments through the CB_LIB. Upon receiving data, the CB_LIB triggers an interrupt callback (IRQ), prompting the Uart_Commander module in the System Application to come into action. The Uart_Commander parses the received command and associated arguments, preparing them for further processing.</p>
+<p>Depending on the nature of the command, the Uart_Commander triggers the execution of UWB applications (uwbApps). These applications utilize the UWB API provided by the CB_LIB to carry out tasks related to Ultra-Wideband (UWB) communication.</p>
+</div><div aria-labelledby="tab-0-5Lit5paH" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-5Lit5paH" name="5Lit5paH" role="tabpanel" tabindex="0"><p>在初始化期间，UART模块与Chipsbank Library（CB_LIB）交互以建立通信。这一步确保系统准备好进行数据传输和接收。</p>
+<p>在运行时，用户通过CB_LIB发送命令和参数与系统交互。接收到数据后，CB_LIB触发中断回调（IRQ），促使系统应用中的Uart_Commander模块开始运行。Uart_Commander解析接收到的命令和相关参数，并为进一步处理做准备。</p>
+<p>根据命令的性质，Uart_Commander触发执行UWB应用程序（uwbApps）。这些应用程序利用由CB_LIB提供的UWB API执行与超宽带（UWB）通信相关的任务。</p>
+</div></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Chipsbank.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

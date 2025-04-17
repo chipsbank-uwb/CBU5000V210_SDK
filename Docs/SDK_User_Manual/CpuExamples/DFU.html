@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>APP_DFU &mdash; CBU5000V210 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=29a6c3e3"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/design-tabs.js?v=f930bc37"></script>
+        <script src="../_static/tabs.js?v=3030b3cb"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="APP_ADC" href="APP_ADC.html" />
+    <link rel="prev" title="CPU Examples" href="CpuExamples.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CBU5000V210
+          </a>
+              <div class="version">
+                2.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../CBU5000V210SDK/CBU5000V210SDK.html">CBU5000V210 SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ApiReference.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UwbExamples/UwbExamples.html">UWB Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="CpuExamples.html">CPU Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">APP_DFU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_ADC.html">APP_ADC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APPCRC.html">APP-CRC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_CRYPTO.html">APP-CRYPTO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_DMA.html">APP-DMA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_Efuse.html">APP-Efuse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_Gpio.html">APP-Gpio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_I2C.html">APP-I2C</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_PKA.html">APP-PKA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_Sleep.html">APP-Sleep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_SpiMaster.html">APP-SpiMaster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_SpiSlaver.html">APP-SpiSlaver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_Timer.html">APP-Timer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_Trng.html">APP-Trng</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APPCpuUart.html">APP-UART</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_Watchdog.html">APP-Watchdog</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Calibration.html">UWB Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Appendix.html">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../VersionHistory.html">Version History</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CBU5000V210</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="CpuExamples.html">CPU Examples</a></li>
+      <li class="breadcrumb-item active">APP_DFU</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="app-dfu">
+<h1>APP_DFU<a class="headerlink" href="#app-dfu" title="Link to this heading"></a></h1>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-5Lit5paH" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-5Lit5paH" name="5Lit5paH" role="tab" tabindex="0">中文</button><button aria-controls="panel-0-RW5nbGlzaA==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tab" tabindex="-1">English</button></div><div aria-labelledby="tab-0-5Lit5paH" class="sphinx-tabs-panel group-tab" id="panel-0-5Lit5paH" name="5Lit5paH" role="tabpanel" tabindex="0"><p><strong>概述</strong></p>
+<p>本文档提供了使用开发板（例如CB5000V210 Anchor开发板）验证DFU功能的指南。它涵盖了硬件连接、串行通信设置。</p>
+<p><strong>要求</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt><em>以下开发板之一：</em></dt><dd><ul>
+<li><p>CB5000V210 Anchor开发板</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><em>软件：</em></dt><dd><ul>
+<li><p>上位机 DFU 升级软件</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p><strong>用户界面</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>串口连接</strong>:</dt><dd><ul>
+<li><p>将GPIO00连接到串行接收线（RX）。</p></li>
+<li><p>将GPIO01连接到串行发送线（TX）。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><strong>确保所有连接牢固，以避免通信问题。</strong></p></li>
+</ul>
+<p><strong>构建和运行</strong></p>
+<ul class="simple">
+<li><p>该示例可以在ChipsBank Connect SDK文件夹结构中的 <code class="docutils literal notranslate"><span class="pre">Firmware\\Examples\\DFU_Bootload</span></code> 及 <code class="docutils literal notranslate"><span class="pre">Firmware\\Examples\\DFU_APP</span></code> 找到相关程序。</p></li>
+</ul>
+<p><strong>测试</strong></p>
+<ol class="arabic">
+<li><dl class="simple">
+<dt><strong>连接开发板</strong></dt><dd><ul class="simple">
+<li><p>准备一个合适的USB线，确保两端与您的计算机和开发板兼容。</p></li>
+<li><p>将USB线的一端插入计算机的USB端口，另一端插入开发板的USB端口。</p></li>
+<li><p>打开计算机上的设备管理器，检查是否识别到新的COM端口。如果没有，请检查USB线连接并确保安装了正确的驱动程序。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>重置开发板</strong></dt><dd><ul class="simple">
+<li><p>首先下载DFU_Bootload程序，下载完成后进行断电复位。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>上位机升级</strong></dt><dd><ul class="simple">
+<li><p>打开上位机软件：开启 DFU 升级对应的上位机软件。</p></li>
+<li><p>端口与波特率设置：在软件中选择对应的端口，设置波特率为 921600 。</p></li>
+<li><p>检查端口：确认上位机软件检测到开发板对应的端口。</p></li>
+<li><p>选择升级文件：在软件中选中 DFU_APP 工程下的 bin 文件。</p></li>
+<li><p>开始升级：点击开始升级按钮，执行 DFU 升级操作。</p></li>
+<li><p>结果查看：升级完成后，查看固件号是否发生改变。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>上位机显示如下</strong></dt><dd><a class="reference internal image-reference" href="../_images/DFU.png"><img alt="DFU.png" class="align-center" src="../_images/DFU.png" style="width: 70%;" /></a>
+</dd>
+</dl>
+</li>
+</ol>
+<p><strong>预期输出</strong></p>
+<blockquote>
+<div><p>升级完成后，可观察到固件号发生变化，表明 DFU 升级成功。</p>
+</div></blockquote>
+<p><strong>添加DFU到其应用程序中</strong></p>
+<ol class="arabic">
+<li><p><strong>修改sct</strong></p>
+<blockquote>
+<div><p>根据FlasH内存分配表（在此文档下半部分）对应用程序需要修改.sct文件的配置，设置基地址为0x00004000,大小配置为0x00040000，如下图所示：</p>
+<a class="reference internal image-reference" href="../_images/sct.png"><img alt="sct.png" class="align-center" src="../_images/sct.png" style="width: 70%;" /></a>
+</div></blockquote>
+</li>
+<li><p><strong>添加DFU库</strong></p>
+<blockquote>
+<div><p>DFU相关功能的库在SDK文件夹 <code class="docutils literal notranslate"><span class="pre">\Firmware\Components\Midlayer\Dfu</span></code> 路径下，需要把对应的库即路径添加到keil工程中，如下图所示：</p>
+<a class="reference internal image-reference" href="../_images/dfu_library.png"><img alt="dfu_library.png" class="align-center" src="../_images/dfu_library.png" style="width: 70%;" /></a>
+</div></blockquote>
+</li>
+<li><p><strong>添加初始化及任务</strong></p>
+<blockquote>
+<div><p>在需要实现DFU功能的应用程序中，需要添加DFU库的初始化及任务，以保持时刻等待更新的状态，程序如下图所示：</p>
+</div></blockquote>
+</li>
+<li><p><strong>编写DFU任务函数</strong></p></li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>void app_task_uart_dfu(void *pvParameters)
+{
+    dfu_uart_init();
+    while (1)
+    {
+        dfu_uart_polling();
+    }
+}
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p><strong>创建DFU任务</strong></p></li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>xTaskCreate((TaskFunction_t)app_task_uart_dfu, &quot;Task: BLE Application&quot;, 1024, NULL, 1, NULL);
+</pre></div>
+</div>
+<p><strong>Flash map</strong></p>
+<p>以下是flash的内存分配表</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Bus Address</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Bank Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Flash Address</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x7E000</p></td>
+<td><p>4K</p></td>
+<td><p>User Calibration</p></td>
+<td></td>
+<td><p>0x7F000</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x7D000</p></td>
+<td><p>4K</p></td>
+<td><p>Boot setting A</p></td>
+<td></td>
+<td><p>0x7E000</p></td>
+</tr>
+<tr class="row-even"><td><p>0x7C000</p></td>
+<td><p>4K</p></td>
+<td><p>Boot setting B</p></td>
+<td><p>Backup for boot setting</p></td>
+<td><p>0x7D000</p></td>
+</tr>
+<tr class="row-odd"><td><p>…</p></td>
+<td></td>
+<td><p>User Data (Option)</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0x40000*</p></td>
+<td><p>240K</p></td>
+<td><p>Backup bank</p></td>
+<td><p>Save the new APP</p></td>
+<td><p>0x41000*</p></td>
+</tr>
+<tr class="row-odd"><td><p>…</p></td>
+<td></td>
+<td><p>User Data (Option)</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0x04000</p></td>
+<td><p>240K</p></td>
+<td><p>APP bank</p></td>
+<td></td>
+<td><p>0x05000</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00000</p></td>
+<td><p>16K</p></td>
+<td><p>Dfu Boot</p></td>
+<td><p>UART+Copy+Jump</p></td>
+<td><p>0x01000</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意：</strong></p>
+<ul class="simple">
+<li><p>1.芯片引导信息区（4K）不包括在Flash Map上。</p></li>
+<li><p>2.Flash代码区（&lt;=256K）： Dfu Boot 16K + APP Bank 240K = 256K。</p></li>
+<li><p>3.备份bank起始地址可通过更新进度配置。</p></li>
+</ul>
+<p><strong>Boot 配置区</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Size</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>CRC</p></td>
+<td><p>CRC for Boot setting
+(Boot mode + APP bank info +
+Backup bank info + ECC Public Key)</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Boot mode</p></td>
+<td><p>1: Stay at boot mode only.
+0: Normal boot</p></td>
+</tr>
+<tr class="row-even"><td><p>4*10</p></td>
+<td><p>APP bank info</p></td>
+<td><ul class="simple">
+<li><p>4Byte: Firmware Start address</p></li>
+<li><p>4Byte: Reserve</p></li>
+<li><p>4Byte: Firmware Size</p></li>
+<li><p>4Byte: Firmware CRC</p></li>
+<li><p>4Byte: Firmware Version</p></li>
+<li><p>4Byte: Firmware Active</p></li>
+<li><p>4Byte x 4: Reserve</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>4*10</p></td>
+<td><p>Backup bank info</p></td>
+<td><ul class="simple">
+<li><p>4Byte: Firmware Start address</p></li>
+<li><p>4Byte: Load Address</p></li>
+<li><p>4Byte: Firmware Size</p></li>
+<li><p>4Byte: Firmware CRC</p></li>
+<li><p>4Byte: Firmware Version</p></li>
+<li><p>4Byte: Firmware Active</p></li>
+<li><p>4Byte x 4: Reserve</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>64</p></td>
+<td><p>ECC Public Key</p></td>
+<td><p>Public Key for verify the update</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>命令帧 (Max 256 Byte)</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Head</p></th>
+<th class="head"><p>CMD_H</p></th>
+<th class="head"><p>CMD_L</p></th>
+<th class="head"><p>Request/ Respond</p></th>
+<th class="head"><p>Data length(MAX 128Byte)</p></th>
+<th class="head"><p>Data(n byte)</p></th>
+<th class="head"><p>Check sum</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x5A</p></td>
+<td></td>
+<td></td>
+<td><p>0</p></td>
+<td><p>n</p></td>
+<td></td>
+<td><p>Command ID + len + Data</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>响应帧</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Head</p></th>
+<th class="head"><p>CMD_H</p></th>
+<th class="head"><p>CMD_L</p></th>
+<th class="head"><p>Request/ Respond</p></th>
+<th class="head"><p>Data length(MAX 128Byte)</p></th>
+<th class="head"><p>Data(n byte)</p></th>
+<th class="head"><p>Check sum</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x5A</p></td>
+<td></td>
+<td></td>
+<td><p>1</p></td>
+<td><p>n</p></td>
+<td><p>code</p></td>
+<td><p>Command ID + len + Data</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>命令列表</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>NB</p></th>
+<th class="head"><p>Command ID</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0x0100</p></td>
+<td><p>Get firmware version</p></td>
+<td><p>Fix respond just for confirm</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>0x0110</p></td>
+<td><p>Start upgrade with
+version</p></td>
+<td><p>The firmware version going to update
+(address is Backup bank address)</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>0x0111</p></td>
+<td><p>Pack Data</p></td>
+<td><p>The specific firmware data in the pack</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>0x0112</p></td>
+<td><p>Verify and active</p></td>
+<td><p>Verify the firmware when send all packs.</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>0x0113</p></td>
+<td><p>Finish DFU</p></td>
+<td><p>Exit DFU mode</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>0x0120</p></td>
+<td><p>Reset</p></td>
+<td><p>Reset the chip</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>启动升级命令格式</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Size(Byte)</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Version</p></td>
+<td><p>The firmware version of firmware file.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>包命令格式</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Size(Byte)</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Address Offset</p></td>
+<td><p>The address offset of this pack.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Size</p></td>
+<td><p>The size of this pack.</p></td>
+</tr>
+<tr class="row-even"><td><p>128</p></td>
+<td><p>Data</p></td>
+<td><p>The firmware file data</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>CRC</p></td>
+<td><p>The CRC of this pack.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>验证和激活</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Size(Byte)</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>CRC</p></td>
+<td><p>The CRC of whole new firmware file.</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Size(option)</p></td>
+<td><p>The size of new firmware file.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>固件信息响应</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Size(Byte)</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>APP bank start address</p></td>
+<td><p>The start address of application firmware.</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Load address</p></td>
+<td><p>The start address of where to save the firmware.</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Size</p></td>
+<td><p>The size of new firmware file.</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>CRC</p></td>
+<td><p>The CRC of whole firmware file.</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Version</p></td>
+<td><p>The firmware version of firmware file.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Bank信息命令格式</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Size(Byte)</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>APP bank start address</p></td>
+<td><p>The start address of application firmware.</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Load address</p></td>
+<td><p>The start address of where to save the firmware.</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Version</p></td>
+<td><p>The firmware version of firmware file.</p></td>
+</tr>
+</tbody>
+</table>
+</div><div aria-labelledby="tab-0-RW5nbGlzaA==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tabpanel" tabindex="0"><blockquote>
+<div><p><strong>Overview</strong></p>
+<p>This document provides a guide for verifying the DFU (Device Firmware Upgrade) functionality using a development board (e.g., CB5000V210 Anchor development board). It covers hardware connections and serial communication settings.</p>
+<p><strong>Requirements</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt><em>One of the following development boards:</em></dt><dd><ul>
+<li><p>CB5000V210 Anchor development board</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><em>Software:</em></dt><dd><ul>
+<li><p>Upper machine DFU upgrade software</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p><strong>User Interface</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>Serial Port Connection</strong>:</dt><dd><ul>
+<li><p>Connect GPIO00 to the serial receive line (RX).</p></li>
+<li><p>Connect GPIO01 to the serial transmit line (TX).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><strong>Ensure all connections are secure to avoid communication issues.</strong></p></li>
+</ul>
+<p><strong>Build and Run</strong></p>
+<ul class="simple">
+<li><p>The example can be found in the ChipsBank Connect SDK folder structure under <code class="docutils literal notranslate"><span class="pre">Firmware\\Examples\\DFU_Bootload</span></code> and <code class="docutils literal notranslate"><span class="pre">Firmware\\Examples\\DFU_APP</span></code> .</p></li>
+</ul>
+<p><strong>Testing</strong></p>
+<ol class="arabic">
+<li><dl class="simple">
+<dt><strong>Connect the Development Board</strong></dt><dd><ul class="simple">
+<li><p>Prepare a suitable USB cable, ensuring both ends are compatible with your computer and the development board.</p></li>
+<li><p>Insert one end of the USB cable into your computer’s USB port and the other end into the development board’s USB port.</p></li>
+<li><p>Open the device manager on your computer to check if a new COM port is recognized. If not, check the USB cable connection and ensure the correct drivers are installed.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Reset the Development Board</strong></dt><dd><ul class="simple">
+<li><p>First, download the DFU_Bootload program. After downloading, perform a power cycle reset.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Upper Machine Upgrade</strong></dt><dd><ul class="simple">
+<li><p>Open the upper machine software: Launch the DFU upgrade corresponding upper machine software.</p></li>
+<li><p>Port and Baud Rate Settings: Select the corresponding port in the software and set the baud rate to 921600.</p></li>
+<li><p>Check Port: Confirm that the upper machine software detects the development board’s corresponding port.</p></li>
+<li><p>Select Upgrade File: In the software, select the bin file under the DFU_APP project.</p></li>
+<li><p>Start Upgrade: Click the start upgrade button to execute the DFU upgrade operation.</p></li>
+<li><p>Result Verification: After the upgrade is complete, check if the firmware version has changed to confirm successful DFU upgrade.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Upper Machine Display</strong></dt><dd><a class="reference internal image-reference" href="../_images/DFU.png"><img alt="DFU.png" class="align-center" src="../_images/DFU.png" style="width: 70%;" /></a>
+</dd>
+</dl>
+</li>
+</ol>
+<p><strong>Expected Output</strong></p>
+<blockquote>
+<div><p>After the upgrade is complete, you should observe a change in the firmware version, indicating a successful DFU upgrade.</p>
+</div></blockquote>
+<p><strong>Adding DFU to Your Application</strong></p>
+<ol class="arabic">
+<li><p><strong>Modify sct</strong></p>
+<blockquote>
+<div><p>The application needs to modify the .sct file configuration(In the bottom half of this document), setting the base address to 0x00004000 and the size to 0x00040000, as shown in the following image:</p>
+<a class="reference internal image-reference" href="../_images/sct.png"><img alt="sct.png" class="align-center" src="../_images/sct.png" style="width: 70%;" /></a>
+</div></blockquote>
+</li>
+<li><p><strong>Add DFU Library</strong></p>
+<blockquote>
+<div><p>The DFU-related libraries are located in the SDK folder <code class="docutils literal notranslate"><span class="pre">\Firmware\Components\Midlayer\Dfu</span></code> . You need to add the corresponding library path to your Keil project, as shown in the following image:</p>
+<a class="reference internal image-reference" href="../_images/dfu_library.png"><img alt="dfu_library.png" class="align-center" src="../_images/dfu_library.png" style="width: 70%;" /></a>
+</div></blockquote>
+</li>
+<li><p><strong>Add Initialization and Tasks</strong></p></li>
+</ol>
+<p>In the application that needs to implement the DFU function, it is necessary to add the initialization and task of the DFU library to maintain the state of waiting for updates at all times, as shown in the following figure:</p>
+<p>Write DFU task functions</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>void app_task_uart_dfu(void *pvParameters)
+{
+    dfu_uart_init();
+    while (1)
+    {
+        dfu_uart_polling();
+    }
+}
+</pre></div>
+</div>
+<p>Create a DFU task</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>xTaskCreate((TaskFunction_t)app_task_uart_dfu, &quot;Task: BLE Application&quot;, 1024, NULL, 1, NULL);
+</pre></div>
+</div>
+</div></blockquote>
+<dl>
+<dt><strong>Flash map</strong></dt><dd><p>The following is flash’s memory allocation table</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Bus Address</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Bank Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Flash Address</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x7E000</p></td>
+<td><p>4K</p></td>
+<td><p>User Calibration</p></td>
+<td></td>
+<td><p>0x7F000</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x7D000</p></td>
+<td><p>4K</p></td>
+<td><p>Boot setting A</p></td>
+<td></td>
+<td><p>0x7E000</p></td>
+</tr>
+<tr class="row-even"><td><p>0x7C000</p></td>
+<td><p>4K</p></td>
+<td><p>Boot setting B</p></td>
+<td><p>Backup for boot setting</p></td>
+<td><p>0x7D000</p></td>
+</tr>
+<tr class="row-odd"><td><p>…</p></td>
+<td></td>
+<td><p>User Data (Option)</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0x40000*</p></td>
+<td><p>240K</p></td>
+<td><p>Backup bank</p></td>
+<td><p>Save the new APP</p></td>
+<td><p>0x41000*</p></td>
+</tr>
+<tr class="row-odd"><td><p>…</p></td>
+<td></td>
+<td><p>User Data (Option)</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0x04000</p></td>
+<td><p>240K</p></td>
+<td><p>APP bank</p></td>
+<td></td>
+<td><p>0x05000</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00000</p></td>
+<td><p>16K</p></td>
+<td><p>Dfu Boot</p></td>
+<td><p>UART+Copy+Jump</p></td>
+<td><p>0x01000</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note：</strong></p>
+<ul class="simple">
+<li><ol class="arabic simple">
+<li><p>The chip booting info area(4K) not included on the Flash Map.</p></li>
+</ol>
+</li>
+<li><ol class="arabic simple" start="2">
+<li><p>Flash code area(&lt;=256K): Dfu Boot 16K + APP Bank 230K = 246K.</p></li>
+</ol>
+</li>
+<li><ol class="arabic simple" start="3">
+<li><p>Backup Bank start address configurable by update progress.</p></li>
+</ol>
+</li>
+</ul>
+<p><strong>Boot setting bank</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Size</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>CRC</p></td>
+<td><p>CRC for Boot setting
+(Boot mode + APP bank info +
+Backup bank info + ECC Public Key)</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Boot mode</p></td>
+<td><p>1: Stay at boot mode only.
+0: Normal boot</p></td>
+</tr>
+<tr class="row-even"><td><p>4*10</p></td>
+<td><p>APP bank info</p></td>
+<td><ul class="simple">
+<li><p>4Byte: Firmware Start address</p></li>
+<li><p>4Byte: Reserve</p></li>
+<li><p>4Byte: Firmware Size</p></li>
+<li><p>4Byte: Firmware CRC</p></li>
+<li><p>4Byte: Firmware Version</p></li>
+<li><p>4Byte: Firmware Active</p></li>
+<li><p>4Byte x 4: Reserve</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>4*10</p></td>
+<td><p>Backup bank info</p></td>
+<td><ul class="simple">
+<li><p>4Byte: Firmware Start address</p></li>
+<li><p>4Byte: Load Address</p></li>
+<li><p>4Byte: Firmware Size</p></li>
+<li><p>4Byte: Firmware CRC</p></li>
+<li><p>4Byte: Firmware Version</p></li>
+<li><p>4Byte: Firmware Active</p></li>
+<li><p>4Byte x 4: Reserve</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>64</p></td>
+<td><p>ECC Public Key</p></td>
+<td><p>Public Key for verify the update</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Command Frame (Max 256 Byte)</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Head</p></th>
+<th class="head"><p>CMD_H</p></th>
+<th class="head"><p>CMD_L</p></th>
+<th class="head"><p>Request/ Respond</p></th>
+<th class="head"><p>Data length(MAX 128Byte)</p></th>
+<th class="head"><p>Data(n byte)</p></th>
+<th class="head"><p>Check sum</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x5A</p></td>
+<td></td>
+<td></td>
+<td><p>0</p></td>
+<td><p>n</p></td>
+<td></td>
+<td><p>Command ID + len + Data</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Respond frame</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Head</p></th>
+<th class="head"><p>CMD_H</p></th>
+<th class="head"><p>CMD_L</p></th>
+<th class="head"><p>Request/ Respond</p></th>
+<th class="head"><p>Data length(MAX 128Byte)</p></th>
+<th class="head"><p>Data(n byte)</p></th>
+<th class="head"><p>Check sum</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x5A</p></td>
+<td></td>
+<td></td>
+<td><p>1</p></td>
+<td><p>n</p></td>
+<td><p>code</p></td>
+<td><p>Command ID + len + Data</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Command list</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>NB</p></th>
+<th class="head"><p>Command ID</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0x0100</p></td>
+<td><p>Get firmware version</p></td>
+<td><p>Fix respond just for confirm</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>0x0110</p></td>
+<td><p>Start upgrade with
+version</p></td>
+<td><p>The firmware version going to update
+(address is Backup bank address)</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>0x0111</p></td>
+<td><p>Pack Data</p></td>
+<td><p>The specific firmware data in the pack</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>0x0112</p></td>
+<td><p>Verify and active</p></td>
+<td><p>Verify the firmware when send all packs.</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>0x0113</p></td>
+<td><p>Finish DFU</p></td>
+<td><p>Exit DFU mode</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>0x0120</p></td>
+<td><p>Reset</p></td>
+<td><p>Reset the chip</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Start upgrade command format</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Size(Byte)</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Version</p></td>
+<td><p>The firmware version of firmware file.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Pack command format</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Size(Byte)</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Address Offset</p></td>
+<td><p>The address offset of this pack.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Size</p></td>
+<td><p>The size of this pack.</p></td>
+</tr>
+<tr class="row-even"><td><p>128</p></td>
+<td><p>Data</p></td>
+<td><p>The firmware file data</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>CRC</p></td>
+<td><p>The CRC of this pack.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Verify and active</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Size(Byte)</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>CRC</p></td>
+<td><p>The CRC of whole new firmware file.</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Size(option)</p></td>
+<td><p>The size of new firmware file.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Firmware Info respond</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Size(Byte)</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>APP bank start address</p></td>
+<td><p>The start address of application firmware.</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Load address</p></td>
+<td><p>The start address of where to save the firmware.</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Size</p></td>
+<td><p>The size of new firmware file.</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>CRC</p></td>
+<td><p>The CRC of whole firmware file.</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Version</p></td>
+<td><p>The firmware version of firmware file.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Bank info command format</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Size(Byte)</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>APP bank start address</p></td>
+<td><p>The start address of application firmware.</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Load address</p></td>
+<td><p>The start address of where to save the firmware.</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Version</p></td>
+<td><p>The firmware version of firmware file.</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</div></div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="CpuExamples.html" class="btn btn-neutral float-left" title="CPU Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="APP_ADC.html" class="btn btn-neutral float-right" title="APP_ADC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Chipsbank.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

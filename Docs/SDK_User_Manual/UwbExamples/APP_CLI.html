@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>APP_CLI &mdash; CBU5000V210 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=29a6c3e3"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/design-tabs.js?v=f930bc37"></script>
+        <script src="../_static/tabs.js?v=3030b3cb"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="UART Commander" href="../UartCommander.html" />
+    <link rel="prev" title="APP-PSR" href="APP_PSR.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CBU5000V210
+          </a>
+              <div class="version">
+                2.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../CBU5000V210SDK/CBU5000V210SDK.html">CBU5000V210 SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ApiReference.html">API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="UwbExamples.html">UWB Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="APP_COMMTRX.html">APP-COMMTRX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_DSTWR.html">APP-DSTWR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_PDOA.html">APP-PDOA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_RNGAOA.html">APP-RNGAOA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_PeriodicTRX.html">APP-PeriodicTRX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_RXPER.html">APP-RXPER</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_PSR.html">APP-PSR</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">APP_CLI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../UartCommander.html">UART Commander</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#user-commands">User Commands</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../CpuExamples/CpuExamples.html">CPU Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calibration.html">UWB Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Appendix.html">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../VersionHistory.html">Version History</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CBU5000V210</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="UwbExamples.html">UWB Examples</a></li>
+      <li class="breadcrumb-item active">APP_CLI</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="app-cli">
+<h1>APP_CLI<a class="headerlink" href="#app-cli" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../UartCommander.html">UART Commander</a></li>
+</ul>
+</div>
+<section id="user-commands">
+<h2>User Commands<a class="headerlink" href="#user-commands" title="Link to this heading"></a></h2>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">中文</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">English</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p><strong>概述</strong></p>
+<blockquote>
+<div><p>本文档提供了完整的UWB功能综合指南，包括通信、测距、角度测量等多种功能。通过UART Commander接口，用户可以方便地控制和测试各种UWB操作模式。该文档详细说明了如何使用命令行接口来配置和执行不同的UWB功能，包括：
+- UWB通信（TX/RX）
+- 双面双向测距（DSTWR）
+- 到达相位差（PDOA）
+- 测距和到达角（RNGAOA）</p>
+<p><strong>要求</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>需要以下开发板中的两个：</dt><dd><ul>
+<li><p>CB5000V210 Anchor开发板（一个作为发射器，一个作为接收器）</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>软件：</dt><dd><ul>
+<li><p>串行终端工具（例如PuTTY、SSCOM）</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>用户界面</strong></p>
+<ul class="simple">
+<li><p>在每个开发板上找到GPIO00引脚，并将其连接到串行接收线（RX）。</p></li>
+<li><p>在每个开发板上找到GPIO01引脚，并将其连接到串行发送线（TX）。</p></li>
+<li><p>确保连接牢固，以避免通信问题。</p></li>
+</ul>
+<p><strong>构建和运行</strong></p>
+<ul class="simple">
+<li><p>该示例可以在ChipsBank Connect SDK文件夹结构中的”Firmware\Examples\uwb_CLI”找到。</p></li>
+</ul>
+<p><strong>测试</strong></p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><strong>连接开发板</strong></dt><dd><ul class="simple">
+<li><p>准备合适的USB线，确保两端与您的计算机和开发板兼容。</p></li>
+<li><p>将USB线的一端插入计算机的USB端口，另一端插入开发板的USB端口。</p></li>
+<li><p>打开计算机上的设备管理器，检查是否识别到新的COM端口。如果没有，请检查USB线连接并确保安装了正确的驱动程序。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>配置串行终端</strong></dt><dd><ul class="simple">
+<li><p>在计算机上打开两个串行终端工具，例如PuTTY、SSCOM或类似工具。</p></li>
+<li><p>在每个串行终端工具中选择识别到的COM端口。</p></li>
+<li><p>将波特率设置为115200，停止位设置为1，数据位顺序设置为LSB，奇偶校验设置为NONE。</p></li>
+<li><p>点击连接按钮以建立与每个开发板的串行通信。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>重置开发板</strong></dt><dd><ul class="simple">
+<li><p>在每个开发板上找到复位按钮。</p></li>
+<li><p>按下并释放复位按钮以重启每个开发板。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>执行测试操作</strong></dt><dd><ul class="simple">
+<li><p>将两个开发板刷入uwb_CLI固件。</p></li>
+<li><p>重置两个开发板后，串行终端将显示”CB LIB version: 1.4.10”，然后是”APP_UWB_CLI”。</p></li>
+<li><p>在两个开发板的串行终端中分别输入指令，然后按回车键。</p></li>
+<li><p>观察两个开发板上的串行终端输出以验证。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</div></blockquote>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">APP_UART_Func_a(uint32_t</span> <span class="pre">const</span> <span class="pre">argc,</span> <span class="pre">uint32_t</span> <span class="pre">*args)</span></code></p></li>
+</ol>
+<p>UWB TRX操作模式命令处理函数。</p>
+<p>此函数处理UART命令以配置和执行UWB传输(TX)或接收(RX)操作。根据操作模式，它设置所需的包配置、有效载荷和端口，并触发相应的UWB操作。</p>
+<dl class="simple">
+<dt>参数:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>argc: 传递给函数的参数数量</dt><dd><ul>
+<li><p>对于TX: 必须为1</p></li>
+<li><p>对于RX: 必须为1</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>args: 参数数组指针</dt><dd><ul>
+<li><dl class="simple">
+<dt>对于TX:</dt><dd><ul>
+<li><p>args[0]: UWB操作模式(1表示TX)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>对于RX:</dt><dd><ul>
+<li><p>args[0]: UWB操作模式(2表示RX)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt>用法:</dt><dd><ul class="simple">
+<li><p>TX模式: a,1</p></li>
+<li><p>RX模式: a,2</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>预期输出</strong></p>
+<p><strong>指令</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="go">a,1</span>
+</span></pre></div>
+</div>
+<p><strong>结果</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>app_uwb_commtx_main
+app_uwb_commtrx_tx_done_irq_callback(): TX timestamp
+&gt; txStart  - 476544ns
+&gt; sfdMark  - 549704ns
+&gt; sts1Mark - 0ns
+&gt; sts2Mark - 0ns
+&gt; txDone   - 595784ns
+</pre></div>
+</div>
+<p><strong>指令</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="go">a,2</span>
+</span></pre></div>
+</div>
+<p><strong>结果</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>app_uwb_commrx_main
+app_uwb_commtrx_rx0_done_irq_callback() - status register: OK
+--- Payload: ---
+payload size - 16
+payload content - : 0123456789abcdef
+--- RX Timestamp: ---
+&gt; rxTsu 1652152966.031763ns
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><code class="docutils literal notranslate"><span class="pre">APP_UART_Func_b(uint32_t</span> <span class="pre">const</span> <span class="pre">argc,</span> <span class="pre">uint32_t</span> <span class="pre">*args)</span></code></p></li>
+</ol>
+<p>DSTWR(双面双向测距)操作模式命令处理函数。</p>
+<p>此函数处理UART命令以配置和执行DSTWR操作，包括暂停、发起者和响应者模式。它初始化测距操作的配置并支持扩展配置。</p>
+<dl class="simple">
+<dt>参数:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>argc: 传递给函数的参数数量</dt><dd><ul>
+<li><p>对于暂停: 必须为1</p></li>
+<li><p>对于发起者或响应者: 必须为1</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>args: 参数数组指针</dt><dd><ul>
+<li><dl class="simple">
+<dt>args[0]: DSTWR操作模式</dt><dd><ul>
+<li><p>0: 暂停</p></li>
+<li><p>1: 发起者</p></li>
+<li><p>2: 响应者</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt>用法:</dt><dd><ul class="simple">
+<li><p>暂停模式: b,0</p></li>
+<li><p>发起者模式: b,1</p></li>
+<li><p>响应者模式: b,2</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>预期输出</strong></p>
+<p><strong>指令</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="go">b,1</span>
+</span></pre></div>
+</div>
+<p><strong>结果</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>app_dstwr_initiator
+Cycle:0, D:24.953244cm
+Cycle:1, D:24.250085cm
+Cycle:2, D:24.132528cm
+Cycle:3, D:24.484439cm
+Cycle:4, D:24.718688cm
+Cycle:5, D:23.898266cm
+Cycle:6, D:24.367194cm
+Cycle:7, D:22.844035cm
+Cycle:8, D:24.601766cm
+Cycle:9, D:23.664222cm
+</pre></div>
+</div>
+<p><strong>指令</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="go">b,2</span>
+</span></pre></div>
+</div>
+<p><strong>结果</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>app_dstwr_responder
+Cycle:0 - Ranging Successful
+Cycle:1 - Ranging Successful
+Cycle:2 - Ranging Successful
+Cycle:3 - Ranging Successful
+Cycle:4 - Ranging Successful
+Cycle:5 - Ranging Successful
+Cycle:6 - Ranging Successful
+Cycle:7 - Ranging Successful
+Cycle:8 - Ranging Successful
+Cycle:9 - Ranging Successful
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><code class="docutils literal notranslate"><span class="pre">APP_UART_Func_c(uint32_t</span> <span class="pre">const</span> <span class="pre">argc,</span> <span class="pre">uint32_t</span> <span class="pre">*args)</span></code></p></li>
+</ol>
+<p>PDOA(到达相位差)操作模式命令处理函数。</p>
+<p>此函数处理UART命令以配置和执行PDOA操作。根据模式(暂停、发起者或响应者)，它设置所需的配置并触发相应的操作。</p>
+<dl class="simple">
+<dt>参数:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>argc: 传递给函数的参数数量</dt><dd><ul>
+<li><p>对于暂停: 必须为1</p></li>
+<li><p>对于发起者或响应者: 必须为1</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>args: 参数数组指针</dt><dd><ul>
+<li><dl class="simple">
+<dt>args[0]: PDOA操作模式</dt><dd><ul>
+<li><p>0: 暂停</p></li>
+<li><p>1: 发起者</p></li>
+<li><p>2: 响应者</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt>用法:</dt><dd><ul class="simple">
+<li><p>暂停模式: c,0</p></li>
+<li><p>发起者模式: c,1</p></li>
+<li><p>响应者模式: c,2</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>预期输出</strong></p>
+<p><strong>指令</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="go">c,1</span>
+</span></pre></div>
+</div>
+<p><strong>结果</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>app_pdoa_initiator
+PD01:66.496780, PD02:-133.136387, PD12:161.053499 (in degrees)
+azimuth: 11.807812 degrees
+elevation: 67.096130 degrees
+PD01:74.412671, PD02:-143.051851, PD12:148.874783 (in degrees)
+azimuth: 8.688437 degrees
+elevation: 78.918114 degrees
+PD01:63.656728, PD02:-137.767266, PD12:158.521073 (in degrees)
+azimuth: 10.255118 degrees
+elevation: 67.282646 degrees
+PD01:66.474807, PD02:-140.052492, PD12:152.368542 (in degrees)
+azimuth: 9.583684 degrees
+elevation: 78.694305 degrees
+PD01:60.064089, PD02:-139.107639, PD12:160.828272 (in degrees)
+azimuth: 9.807495 degrees
+elevation: 63.563126 degrees
+</pre></div>
+</div>
+<p><strong>指令</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="go">c,2</span>
+</span></pre></div>
+</div>
+<p><strong>结果</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>app_pdoa_responder
+[PDOA TX Done]
+[PDOA TX Done]
+[PDOA TX Done]
+[PDOA TX Done]
+[PDOA TX Done]
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p><code class="docutils literal notranslate"><span class="pre">APP_UART_Func_d(uint32_t</span> <span class="pre">const</span> <span class="pre">argc,</span> <span class="pre">uint32_t</span> <span class="pre">*args)</span></code></p></li>
+</ol>
+<p>RNGAOA(测距和到达角)操作模式命令处理函数。</p>
+<p>此函数处理UART命令以配置和执行RNGAOA操作，包括暂停、发起者和响应者模式。它支持频率、包计数、测距和角度偏差的配置，以及DS-PDOA激活。</p>
+<dl class="simple">
+<dt>参数:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>argc: 传递给函数的参数数量</dt><dd><ul>
+<li><p>对于暂停: 必须为1</p></li>
+<li><p>对于发起者或响应者: 必须为1</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>args: 参数数组指针</dt><dd><ul>
+<li><dl class="simple">
+<dt>args[0]: RNGAOA操作模式</dt><dd><ul>
+<li><p>0: 暂停</p></li>
+<li><p>1: 发起者</p></li>
+<li><p>2: 响应者</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt>用法:</dt><dd><ul class="simple">
+<li><p>暂停模式: d,0</p></li>
+<li><p>发起者模式: d,1</p></li>
+<li><p>响应者模式: d,2</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>预期输出</strong></p>
+<p><strong>指令</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="go">d,1</span>
+</span></pre></div>
+</div>
+<p><strong>结果</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>app_rngaoa_initiator
+Cycle:0, D:24.015871cm
+PD01:69.616989, PD02:-167.848755, PD12:118.831749 (in degrees)
+azimuth: 0.634716 degrees
+elevation: 80.931549 degrees
+Cycle:1, D:22.843954cm
+PD01:65.584885, PD02:-170.221863, PD12:124.824974 (in degrees)
+azimuth: -0.032129 degrees
+elevation: 81.082191 degrees
+Cycle:2, D:23.546921cm
+PD01:66.947235, PD02:-165.739304, PD12:127.763908 (in degrees)
+azimuth: 1.306151 degrees
+elevation: 80.763687 degrees
+Cycle:3, D:23.312502cm
+PD01:65.963928, PD02:-168.288223, PD12:127.384872 (in degrees)
+azimuth: 0.634716 degrees
+elevation: 80.931549 degrees
+</pre></div>
+</div>
+<p><strong>指令</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="go">d,2</span>
+</span></pre></div>
+</div>
+<p><strong>结果</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>app_rngaoa_responder
+Cycle:0 - Ranging Successful
+PD01:69.616993, PD02:-167.848750, PD12:118.831751 (in degrees)
+azimuth: 0.634716 degrees
+elevation: 80.931549 degrees
+Cycle:1 - Ranging Successful
+PD01:65.584887, PD02:-170.221870, PD12:124.824976 (in degrees)
+azimuth: -0.032129 degrees
+elevation: 81.082191 degrees
+Cycle:2 - Ranging Successful
+PD01:66.947233, PD02:-165.739311, PD12:127.763909 (in degrees)
+azimuth: 1.306151 degrees
+elevation: 80.763687 degrees
+Cycle:3 - Ranging Successful
+PD01:65.963927, PD02:-168.288217, PD12:127.384869 (in degrees)
+azimuth: 0.634716 degrees
+elevation: 80.931549 degrees
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p><strong>Overview</strong></p>
+<blockquote>
+<div><p>This document provides a comprehensive guide to all UWB functionalities, including communication, ranging, and angle measurement capabilities. Through the UART Commander interface, users can easily control and test various UWB operation modes. The document details how to use the command-line interface to configure and execute different UWB functions, including:
+- UWB Communication (TX/RX)
+- Double-Sided Two-Way Ranging (DSTWR)
+- Phase Difference of Arrival (PDOA)
+- Ranging and Angle of Arrival (RNGAOA)</p>
+<p><strong>Requirements</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Two of the following development boards:</dt><dd><ul>
+<li><p>CB5000V210 Anchor demo boards (one as initiator, one as responder)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Software:</dt><dd><ul>
+<li><p>Serial terminal tool (e.g., PuTTY, SSCOM)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>User interface</strong></p>
+<ul class="simple">
+<li><p>Locate the GPIO00 pin on each development board and connect it to the serial receive line (RX).</p></li>
+<li><p>Locate the GPIO01 pin on each development board and connect it to the serial transmit line (TX).</p></li>
+<li><p>Ensure the connections are secure to avoid communication issues.</p></li>
+</ul>
+<p><strong>Building and running</strong></p>
+<p>This sample can be found under “Firmware\Examples\uwb_CLI” in the ChipsBank Connect SDK folder structure.</p>
+<p><strong>Testing</strong></p>
+<ol class="arabic">
+<li><p><strong>Connect the Development Boards</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Prepare suitable USB cables, ensuring both ends are compatible with your computer and demo boards.</p></li>
+<li><p>Insert one end of each USB cable into USB ports on your computer and the other ends into the USB ports on the demo boards.</p></li>
+<li><p>Open the Device Manager on your computer to check if new COM ports have been recognized. If not, verify the USB cable connections and ensure the correct drivers are installed.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Configure the Serial Terminals</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Open two serial terminal tools on your computer, such as PuTTY, SSCOM, or any similar tool.</p></li>
+<li><p>In each serial terminal tool, select the recognized COM port for each board.</p></li>
+<li><p>Set the baud rate to 115200, stop bits to 1, data bits order to LSB, and parity to NONE.</p></li>
+<li><p>Click the connect button to establish serial communication with each development board.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Reset the Development Boards</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Locate the reset button on each demo board.</p></li>
+<li><p>Press and release the reset button to restart each development board.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Execute Test Operations</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Flash the uwb_CLI firmware onto both development boards.</p></li>
+<li><p>After resetting both boards, the serial terminal will display “CB LIB version: 1.4.10” followed by “APP_UWB_CLI”.</p></li>
+<li><p>Enter commands in the serial terminal of each development board and press Enter.</p></li>
+<li><p>Observe the serial terminal output on both development boards to verify the results.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">APP_UART_Func_a(uint32_t</span> <span class="pre">const</span> <span class="pre">argc,</span> <span class="pre">uint32_t</span> <span class="pre">*args)</span></code></p></li>
+</ol>
+<p>UWB TRX Operation Mode Command Handler.</p>
+<p>This function processes UART commands to configure and execute UWB transmissions (TX) or receptions (RX). Depending on the operation mode, it sets up the required packet configurations, payloads, and ports, and triggers the appropriate UWB operations.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>argc: Number of arguments passed to the function</dt><dd><ul>
+<li><p>For TX: Must be 1</p></li>
+<li><p>For RX: Must be 1</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>args: Pointer to the array of arguments</dt><dd><ul>
+<li><dl class="simple">
+<dt>For TX:</dt><dd><ul>
+<li><p>args[0]: UWB operation mode (1 for TX)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>For RX:</dt><dd><ul>
+<li><p>args[0]: UWB operation mode (2 for RX)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt>Usage:</dt><dd><ul class="simple">
+<li><p>TX mode: a,1</p></li>
+<li><p>RX mode: a,2</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Expected Output</strong></p>
+<p><strong>Command</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="go">a,1</span>
+</span></pre></div>
+</div>
+<p><strong>Result</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>app_uwb_commtx_main
+app_uwb_commtrx_tx_done_irq_callback(): TX timestamp
+&gt; txStart  - 476544ns
+&gt; sfdMark  - 549704ns
+&gt; sts1Mark - 0ns
+&gt; sts2Mark - 0ns
+&gt; txDone   - 595784ns
+</pre></div>
+</div>
+<p><strong>Command</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="go">a,2</span>
+</span></pre></div>
+</div>
+<p><strong>Result</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>app_uwb_commrx_main
+app_uwb_commtrx_rx0_done_irq_callback() - status register: OK
+--- Payload: ---
+payload size - 16
+payload content - : 0123456789abcdef
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><code class="docutils literal notranslate"><span class="pre">APP_UART_Func_b(uint32_t</span> <span class="pre">const</span> <span class="pre">argc,</span> <span class="pre">uint32_t</span> <span class="pre">*args)</span></code></p></li>
+</ol>
+<p>DSTWR (Double-Sided Two-Way Ranging) Operation Mode Command Handler.</p>
+<p>This function processes UART commands to configure and execute DSTWR operations, including Suspend, Initiator, and Responder modes. It initializes the configuration for ranging operations and supports extended configurations.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>argc: Number of arguments passed to the function</dt><dd><ul>
+<li><p>For Suspend: Must be 1</p></li>
+<li><p>For Initiator or Responder: Must be 1</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>args: Pointer to the array of arguments</dt><dd><ul>
+<li><dl class="simple">
+<dt>args[0]: DSTWR operation mode</dt><dd><ul>
+<li><p>0: Suspend</p></li>
+<li><p>1: Initiator</p></li>
+<li><p>2: Responder</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt>Usage:</dt><dd><ul class="simple">
+<li><p>Suspend mode: b,0</p></li>
+<li><p>Initiator mode: b,1</p></li>
+<li><p>Responder mode: b,2</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Expected Output</strong></p>
+<p><strong>Command</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="go">b,1</span>
+</span></pre></div>
+</div>
+<p><strong>Result</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>app_dstwr_initiator
+Cycle:0, D:24.953244cm
+Cycle:1, D:24.250085cm
+Cycle:2, D:24.132528cm
+Cycle:3, D:24.484439cm
+Cycle:4, D:24.718688cm
+Cycle:5, D:23.898266cm
+Cycle:6, D:24.367194cm
+Cycle:7, D:22.844035cm
+Cycle:8, D:24.601766cm
+Cycle:9, D:23.664222cm
+</pre></div>
+</div>
+<p><strong>Command</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="go">b,2</span>
+</span></pre></div>
+</div>
+<p><strong>Result</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>app_dstwr_responder
+Cycle:0 - Ranging Successful
+Cycle:1 - Ranging Successful
+Cycle:2 - Ranging Successful
+Cycle:3 - Ranging Successful
+Cycle:4 - Ranging Successful
+Cycle:5 - Ranging Successful
+Cycle:6 - Ranging Successful
+Cycle:7 - Ranging Successful
+Cycle:8 - Ranging Successful
+Cycle:9 - Ranging Successful
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><code class="docutils literal notranslate"><span class="pre">APP_UART_Func_c(uint32_t</span> <span class="pre">const</span> <span class="pre">argc,</span> <span class="pre">uint32_t</span> <span class="pre">*args)</span></code></p></li>
+</ol>
+<p>PDOA (Phase Difference of Arrival) Operation Mode Command Handler.</p>
+<p>This function processes UART commands to configure and execute PDOA operations. Depending on the mode (Suspend, Initiator, or Responder), it sets up the required configurations and triggers the appropriate operations.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>argc: Number of arguments passed to the function</dt><dd><ul>
+<li><p>For Suspend: Must be 1</p></li>
+<li><p>For Initiator or Responder: Must be 1</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>args: Pointer to the array of arguments</dt><dd><ul>
+<li><dl class="simple">
+<dt>args[0]: PDOA operation mode</dt><dd><ul>
+<li><p>0: Suspend</p></li>
+<li><p>1: Initiator</p></li>
+<li><p>2: Responder</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt>Usage:</dt><dd><ul class="simple">
+<li><p>Suspend mode: c,0</p></li>
+<li><p>Initiator mode: c,1</p></li>
+<li><p>Responder mode: c,2</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Expected Output</strong></p>
+<p><strong>Command</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="go">c,1</span>
+</span></pre></div>
+</div>
+<p><strong>Result</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>app_pdoa_initiator
+PD01:66.496780, PD02:-133.136387, PD12:161.053499 (in degrees)
+azimuth: 11.807812 degrees
+elevation: 67.096130 degrees
+PD01:74.412671, PD02:-143.051851, PD12:148.874783 (in degrees)
+azimuth: 8.688437 degrees
+elevation: 78.918114 degrees
+PD01:63.656728, PD02:-137.767266, PD12:158.521073 (in degrees)
+azimuth: 10.255118 degrees
+elevation: 67.282646 degrees
+PD01:66.474807, PD02:-140.052492, PD12:152.368542 (in degrees)
+azimuth: 9.583684 degrees
+elevation: 78.694305 degrees
+PD01:60.064089, PD02:-139.107639, PD12:160.828272 (in degrees)
+azimuth: 9.807495 degrees
+elevation: 63.563126 degrees
+</pre></div>
+</div>
+<p><strong>Command</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="go">c,2</span>
+</span></pre></div>
+</div>
+<p><strong>Result</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>app_pdoa_responder
+[PDOA TX Done]
+[PDOA TX Done]
+[PDOA TX Done]
+[PDOA TX Done]
+[PDOA TX Done]
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p><code class="docutils literal notranslate"><span class="pre">APP_UART_Func_d(uint32_t</span> <span class="pre">const</span> <span class="pre">argc,</span> <span class="pre">uint32_t</span> <span class="pre">*args)</span></code></p></li>
+</ol>
+<p>RNGAOA (Ranging and Angle of Arrival) Operation Mode Command Handler.</p>
+<p>This function processes UART commands to configure and execute RNGAOA operations, including Suspend, Initiator, and Responder modes. It supports configuration of frequency, packet count, ranging and angle biases, and DS-PDOA activation.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>argc: Number of arguments passed to the function</dt><dd><ul>
+<li><p>For Suspend: Must be 1</p></li>
+<li><p>For Initiator or Responder: Must be 1</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>args: Pointer to the array of arguments</dt><dd><ul>
+<li><dl class="simple">
+<dt>args[0]: RNGAOA operation mode</dt><dd><ul>
+<li><p>0: Suspend</p></li>
+<li><p>1: Initiator</p></li>
+<li><p>2: Responder</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt>Usage:</dt><dd><ul class="simple">
+<li><p>Suspend mode: d,0</p></li>
+<li><p>Initiator mode: d,1</p></li>
+<li><p>Responder mode: d,2</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Expected Output</strong></p>
+<p><strong>Command</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="go">d,1</span>
+</span></pre></div>
+</div>
+<p><strong>Result</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>app_rngaoa_initiator
+Cycle:0, D:24.015871cm
+PD01:69.616989, PD02:-167.848755, PD12:118.831749 (in degrees)
+azimuth: 0.634716 degrees
+elevation: 80.931549 degrees
+Cycle:1, D:22.843954cm
+PD01:65.584885, PD02:-170.221863, PD12:124.824974 (in degrees)
+azimuth: -0.032129 degrees
+elevation: 81.082191 degrees
+Cycle:2, D:23.546921cm
+PD01:66.947235, PD02:-165.739304, PD12:127.763908 (in degrees)
+azimuth: 1.306151 degrees
+elevation: 80.763687 degrees
+</pre></div>
+</div>
+<p><strong>Command</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="go">d,2</span>
+</span></pre></div>
+</div>
+<p><strong>Result</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>app_rngaoa_responder
+Cycle:0 - Ranging Successful
+PD01:69.616993, PD02:-167.848750, PD12:118.831751 (in degrees)
+azimuth: 0.634716 degrees
+elevation: 80.931549 degrees
+Cycle:1 - Ranging Successful
+PD01:65.584887, PD02:-170.221870, PD12:124.824976 (in degrees)
+azimuth: -0.032129 degrees
+elevation: 81.082191 degrees
+Cycle:2 - Ranging Successful
+PD01:66.947233, PD02:-165.739311, PD12:127.763909 (in degrees)
+azimuth: 1.306151 degrees
+elevation: 80.763687 degrees
+Cycle:3 - Ranging Successful
+PD01:65.963927, PD02:-168.288217, PD12:127.384869 (in degrees)
+azimuth: 0.634716 degrees
+elevation: 80.931549 degrees
+</pre></div>
+</div>
+</div></div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="APP_PSR.html" class="btn btn-neutral float-left" title="APP-PSR" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../UartCommander.html" class="btn btn-neutral float-right" title="UART Commander" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Chipsbank.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

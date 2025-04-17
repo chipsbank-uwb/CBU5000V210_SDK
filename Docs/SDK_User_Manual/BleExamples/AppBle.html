@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>APP-BLE &mdash; CBU5000V210 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=29a6c3e3"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CBU5000V210
+          </a>
+              <div class="version">
+                2.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../CBU5000V210SDK/CBU5000V210SDK.html">CBU5000V210 SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ApiReference.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UwbExamples/UwbExamples.html">UWB Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CpuExamples/CpuExamples.html">CPU Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calibration.html">UWB Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Appendix.html">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../VersionHistory.html">Version History</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CBU5000V210</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">APP-BLE</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="app-ble">
+<h1>APP-BLE<a class="headerlink" href="#app-ble" title="Link to this heading"></a></h1>
+<section id="user-guide">
+<h2>User Guide<a class="headerlink" href="#user-guide" title="Link to this heading"></a></h2>
+<section id="ble-configuration">
+<h3>BLE Configuration<a class="headerlink" href="#ble-configuration" title="Link to this heading"></a></h3>
+<p>The default configuration of BLE in the project is <strong>Off</strong>.</p>
+<p>Users can change configurations in <cite>APP_CompileOption.h</cite> to enable BLE.</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>Required Configuration</strong></p></td>
+<td><p><strong>Value</strong></p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p><code class="docutils literal notranslate"><span class="pre">APP_FREERTOS_ENABLE</span></code></p></td>
+<td rowspan="2"><p><code class="docutils literal notranslate"><span class="pre">APP_FALSE</span></code>: Off</p>
+<p><code class="docutils literal notranslate"><span class="pre">APP_TRUE</span></code>: On</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="2"><p><code class="docutils literal notranslate"><span class="pre">APP_BLE_ENABLE</span></code></p></td>
+<td rowspan="2"><p><code class="docutils literal notranslate"><span class="pre">APP_FALSE</span></code>: Off</p>
+<p><code class="docutils literal notranslate"><span class="pre">APP_TRUE</span></code>: On</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="ble-application-configurations">
+<h3>BLE Application Configurations<a class="headerlink" href="#ble-application-configurations" title="Link to this heading"></a></h3>
+<p><strong>· Enable BLE</strong></p>
+<p>BLE application codes are localized in the <cite>AppBLE.c</cite> file, by default, the project is configured for <strong>peripheral</strong> application.</p>
+<p>Users can configure which application to enable in <cite>AppBLE.h</cite> file.</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>Application Configuration</strong></p></td>
+<td><p><strong>Value</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">BLE_HOST_ADVERTISER_APP_ENABLED</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">APP_FALSE</span></code>: Off</p>
+<p><code class="docutils literal notranslate"><span class="pre">APP_TRUE</span></code>: On</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">BLE_HOST_PERIPHERAL_APP_ENABLED</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">APP_FALSE</span></code>: Off</p>
+<p><code class="docutils literal notranslate"><span class="pre">APP_TRUE</span></code>: On</p>
+</td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">BLE_HOST_CENTRAL_APP_ENABLED</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">APP_FALSE</span></code>: Off</p>
+<p><code class="docutils literal notranslate"><span class="pre">APP_TRUE</span></code>: On</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">BLE_HOST_SCANNER_APP_ENABLED</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">APP_FALSE</span></code>: Off</p>
+<p><code class="docutils literal notranslate"><span class="pre">APP_TRUE</span></code>: On</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>In addition to configuring which application to use, users can also modify different parameters in the codes to implement their various demands.</p>
+<p>Following are examples of how to modify the parameters in the <cite>AppBLE.c</cite> file to adjust the application’s advertisement function.</p>
+<p><strong>· Change Advertisement Parameters for Function: ble_gap_adv_start</strong></p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>Parameter</strong></p></td>
+<td><p><strong>Meaning</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">own_addr_type</span></code></p></td>
+<td><p>The type of address the stack should use.</p>
+<br><p>Valid values:</p>
+<br><p><code class="docutils literal notranslate"><span class="pre">BLE_OWN_ADDR_PUBLIC</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">BLE_OWN_ADDR_RANDOM</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">BLE_OWN_ADDR_RPA_PUBLIC_DEFAULT</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">BLE_OWN_ADDR_RPA_RANDOM_DEFAULT</span></code></p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">direct_addr</span></code></p></td>
+<td><p>The peer’s address for directed advertising.</p>
+<br><p>Using directed advertising: non-NULL.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">duration_ms</span></code></p></td>
+<td><p>The duration of the advertisement procedure.</p>
+<br><p>Unit: milliseconds.</p>
+<p>Specify BLE_HS_FOREVER for no expiration.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">adv_params</span></code></p></td>
+<td><p>Additional arguments specifying the particulars
+of the advertising procedure:</p>
+<br><p><code class="docutils literal notranslate"><span class="pre">conn_mode</span></code>: Advertising mode.</p>
+<p><code class="docutils literal notranslate"><span class="pre">disc_mode</span></code>: Discoverable mode.</p>
+<p><code class="docutils literal notranslate"><span class="pre">itvl_min</span></code>: Minimum advertising interval.</p>
+<p><code class="docutils literal notranslate"><span class="pre">itvl_max</span></code>: Maximum advertising interval.</p>
+<p><code class="docutils literal notranslate"><span class="pre">channel_map</span></code>: Advertising channel map.</p>
+<p><code class="docutils literal notranslate"><span class="pre">filter_policy</span></code>: Advertising filter policy.</p>
+<p><code class="docutils literal notranslate"><span class="pre">high_duty_cycle</span></code>: High Duty cycle for Directed
+Advertising.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cb</span></code></p></td>
+<td><p>The callback to associate with this advertising
+procedure.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cb_arg</span></code></p></td>
+<td><p>The optional argument to pass to the callback
+function.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>· Configure the advertisement fields for parameter in Function: ble_gap_adv_set_fields.</strong></p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>Struct Field</strong></p></td>
+<td><p><strong>Meaning</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">flags</span></code></p></td>
+<td><p>Flags.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">uuids16</span></code></p></td>
+<td><p>16-bit service class UUIDs.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">num_uuids16</span></code></p></td>
+<td><p>Number of 16-bit UUIDs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">uuids16_is_complete</span></code></p></td>
+<td><p>Indicates if the list of 16-bit UUIDs is complete.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">uuids32</span></code></p></td>
+<td><p>32-bit service class UUIDs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">num_uuids32</span></code></p></td>
+<td><p>Number of 32-bit UUIDs.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">uuids32_is_complete</span></code></p></td>
+<td><p>Indicates if the list of 32-bit UUIDs is complete.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">uuids128</span></code></p></td>
+<td><p>128-bit service class UUIDs.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">num_uuids128</span></code></p></td>
+<td><p>Number of 128-bit UUIDs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">uuids128_is_complete</span></code></p></td>
+<td><p>Indicates if the list of 128-bit UUIDs is complete.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">name</span></code></p></td>
+<td><p>Local name.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">name_len</span></code></p></td>
+<td><p>Length of the local name.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">name_is_complete</span></code></p></td>
+<td><p>Indicates if the list of local names is complete.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tx_pwr_lvl</span></code></p></td>
+<td><p>Tx power level.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tx_pwr_lvl_is_present</span></code></p></td>
+<td><p>Indicates if Tx power level is present.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">slave_itvl_range</span></code></p></td>
+<td><p>Slave connection interval range.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">svc_data_uuid16</span></code></p></td>
+<td><p>Service data - 16-bit UUID.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">svc_data_uuid16_len</span></code></p></td>
+<td><p>Length of the service data with 16-bit UUID.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">public_tgt_addr</span></code></p></td>
+<td><p>Public target address.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">num_public_tgt_addrs</span></code></p></td>
+<td><p>Number of public target addresses.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">appearance</span></code></p></td>
+<td><p>Appearance.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">appearance_is_present</span></code></p></td>
+<td><p>Indicates if Appearance is present.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">adv_itvl</span></code></p></td>
+<td><p>Advertising interval.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">adv_itvl_is_present</span></code></p></td>
+<td><p>Indicates if advertising interval is present.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">svc_data_uuid32</span></code></p></td>
+<td><p>Service data - 32-bit UUID.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">svc_data_uuid32_len</span></code></p></td>
+<td><p>Length of the service data with 32-bit UUID.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">svc_data_uuid128</span></code></p></td>
+<td><p>Service data - 128-bit UUID.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">svc_data_uuid128_len</span></code></p></td>
+<td><p>Length of the service data with 128-bit UUID.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">uri</span></code></p></td>
+<td><p>URI.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">uri_len</span></code></p></td>
+<td><p>Length of the URI.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mfg_data</span></code></p></td>
+<td><p>Manufacturer specific data.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mfg_data_len</span></code></p></td>
+<td><p>Length of manufacturer specific data.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">broadcast_name</span></code></p></td>
+<td><p>Broadcast name.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">broadcast_name_len</span></code></p></td>
+<td><p>Length of the Broadcast name.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>· Configure scanning parameters.</strong></p>
+<p>The behavior of the scan can be controlled through the structure ble_gap_disc_params.</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>Struct Field</strong></p></td>
+<td><p><strong>Meaning</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">itvl</span></code></p></td>
+<td><p>Scan interval in 0.625ms units.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">window</span></code></p></td>
+<td><p>Scan window in 0.625ms units.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">filter_policy</span></code></p></td>
+<td><p>Scan filter policy.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">limited</span></code></p></td>
+<td><p>If limited discovery procedure should be used.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">passive</span></code></p></td>
+<td><p>If passive scan should be used.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">filter_duplicates</span></code></p></td>
+<td><p>If enable duplicates filtering.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>· Configure the name of the connected peripheral.</strong></p>
+<p>By default, only peripheral devices with the name <strong>“Test”</strong> can be connected, users can configure different device name, device UUID and other conditions to filter the connected peripheral device according to their own needs.</p>
+<p>User can configure this in the <strong>central_scan_event function</strong> in <cite>AppBLE.c</cite>.</p>
+</section>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<p><strong>APP_BLE_Advertiser - Example</strong></p>
+<p>· Advertiser can be scanned when advertising.</p>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="../_images/ble_adv_iosblue.jpg"><img alt="../_images/ble_adv_iosblue.jpg" src="../_images/ble_adv_iosblue.jpg" style="width: 30%;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>iOS - LightBlue</strong></span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="../_images/ble_adv_debug_asst.jpg"><img alt="../_images/ble_adv_debug_asst.jpg" src="../_images/ble_adv_debug_asst.jpg" style="width: 30%;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>Android - BLE Debug Assistant</strong></span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id3">
+<a class="reference internal image-reference" href="../_images/ble_adv_nrf_connect.png"><img alt="../_images/ble_adv_nrf_connect.png" src="../_images/ble_adv_nrf_connect.png" style="width: 30%;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>Windows - nRF Connect</strong></span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><strong>APP_BLE_Peripheral - Example</strong></p>
+<p>· Peripheral can be scanned when advertising and can be connected.</p>
+<figure class="align-center" id="id4">
+<a class="reference internal image-reference" href="../_images/ble_peripheral_iosblue.jpg"><img alt="../_images/ble_peripheral_iosblue.jpg" src="../_images/ble_peripheral_iosblue.jpg" style="width: 30%;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>iOS - LightBlue</strong></span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id5">
+<a class="reference internal image-reference" href="../_images/ble_peripheral_debug_asst.jpg"><img alt="../_images/ble_peripheral_debug_asst.jpg" src="../_images/ble_peripheral_debug_asst.jpg" style="width: 30%;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>Android - BLE Debug Assistant</strong></span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id6">
+<a class="reference internal image-reference" href="../_images/ble_peripheral_nrf_connect.png"><img alt="../_images/ble_peripheral_nrf_connect.png" src="../_images/ble_peripheral_nrf_connect.png" style="width: 30%;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>Windows - nRF Connect</strong></span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><strong>APP_BLE_Central - Example</strong></p>
+<p>· Central can scan advertising devices and connect to peripheral.</p>
+<figure class="align-center" id="id7">
+<a class="reference internal image-reference" href="../_images/ble_central.png"><img alt="../_images/ble_central.png" src="../_images/ble_central.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>Windows - nRF Connect</strong></span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><strong>APP_BLE_Scanner - Example</strong></p>
+<p>· Scanner can scan advertising devices.</p>
+<figure class="align-center" id="id8">
+<a class="reference internal image-reference" href="../_images/ble_scanner_teraterm.png"><img alt="../_images/ble_scanner_teraterm.png" src="../_images/ble_scanner_teraterm.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>Windows - Tera Term</strong></span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>· To see the scanner’s output, user needs to enable the <code class="docutils literal notranslate"><span class="pre">APP_BLE_UARTPRINT_ENABLE</span></code> configuration.</p>
+<p>· In <cite>AppBLE.c</cite>, <code class="docutils literal notranslate"><span class="pre">APP_BLE_UARTPRINT_ENABLE</span></code> default to <strong>disabled</strong>, change from <strong>APP_FALSE</strong> to <strong>APP_TRUE</strong> to enable it.</p>
+<p>· For the UART configuration, it is also available in the <cite>AppBLE.c</cite> file, there is a relevant content in the <code class="docutils literal notranslate"><span class="pre">APP_BLE_UartInit()</span></code> initialization function, please modify it according to your needs.</p>
+</section>
+<section id="application-flow">
+<h2>Application Flow<a class="headerlink" href="#application-flow" title="Link to this heading"></a></h2>
+<figure class="align-center">
+<p class="plantuml">
+<img src="../_images/plantuml-22cf6d7747634f3becef701031ef53f053a3b55c.png" alt="Title APP-BLE  (Advertiser &amp; Peripheral)
+
+scale 0.8
+hide footbox
+autonumber
+
+box CPU Subsystem #lightyellow
+    participant main as main
+end box
+box System Application #lightblue
+    participant APP_Rtos as Rtos
+    participant APP_BLE as BLE
+end box
+box FreeRTOS #lightyellow
+    participant FreeRTOS as FreeRTOS
+end box
+box BLE HOST #lightskyblue
+    participant Host as Host
+end box
+box Chipsbank_LIB #lightgreen 
+    participant CB_LIB as CB_LIB
+end box
+
+== Initialization ==
+main --&gt; CB_LIB: Initializations
+
+main --&gt; Rtos: APP_RTOS_Init
+Rtos --&gt; FreeRTOS: xTaskCreate: create task for UWB
+main --&gt; BLE: APP_BLE_Init
+BLE  --&gt; CB_LIB: Init BLE Controller
+BLE  --&gt; Host: Init BLE Host
+BLE  --&gt; BLE: Init Apps &amp; Register Callback functions
+
+BLE  --&gt; FreeRTOS: xTaskCreate: create Host &amp; Controller Task
+
+main --&gt; Rtos: APP_RTOS_StartScheduler
+Rtos --&gt; FreeRTOS: vTaskStartScheduler: Start task scheduler
+
+== BLE Host &amp; Controller Sync and Reset Callback ==
+alt on_sync
+Host --&gt; BLE: Callback on_sync()
+BLE --&gt; Host: Set BLE address
+BLE --&gt; Host: Config Advertising Parameters
+BLE --&gt; Host: Start advertising
+Host --&gt; CB_LIB: Start Advertising
+CB_LIB --&gt; : Broadcast Advertising Packets
+else on_reset
+Host --&gt; BLE: Callback on_reset()
+BLE --&gt; BLE: Reset until success
+end
+
+== GAP Event Handling ==
+CB_LIB &lt;--: BLE Event
+
+CB_LIB --&gt; Host: BLE Events
+Host --&gt; BLE: Call event handler
+BLE --&gt; BLE: Handle Events(Advertising/ Connection)
+
+== GATT Operations (Peripheral Only) ==
+BLE &lt;--&gt; : GATT Request and Response"/>
+</p>
+</figure>
+<figure class="align-center">
+<p class="plantuml">
+<img src="../_images/plantuml-ae363556836acb2585dee12d79e51bab0cd8efcd.png" alt="title APP-BLE (Scanner &amp; Central)
+scale 0.8
+hide footbox
+autonumber
+box CPU Subsystem #lightyellow
+    participant main as main
+end box
+box System Application #lightblue
+    participant APP_Rtos as Rtos
+    participant APP_BLE as BLE
+end box
+box FreeRTOS #lightyellow
+    participant FreeRTOS as FreeRTOS
+end box
+box BLE HOST #lightskyblue
+    participant Host as Host
+end box
+box Chipsbank_LIB #lightgreen 
+    participant CB_LIB as CB_LIB
+end box
+
+== Initialization ==
+main --&gt; CB_LIB: Initializations
+main --&gt; Rtos: APP_RTOS_Init
+Rtos --&gt; FreeRTOS: xTaskCreate: create task for BLE Central
+main --&gt; BLE: APP_BLE_Init
+BLE  --&gt; CB_LIB: Init BLE Controller
+BLE  --&gt; Host: Init BLE Host
+BLE  --&gt; BLE: Init Apps &amp; Register Callback functions
+BLE  --&gt; FreeRTOS: xTaskCreate: create Host &amp; Controller Task
+main --&gt; Rtos: APP_RTOS_StartScheduler
+Rtos --&gt; FreeRTOS: vTaskStartScheduler: Start task scheduler
+
+== Central Sync and Reset Callback ==
+alt on_sync
+Host --&gt; BLE: Callback on_sync()
+BLE --&gt; BLE: ble_app_set_addr()
+BLE --&gt; Host: Start BLE Scanning
+Host --&gt; CB_LIB: Start Scanning
+CB_LIB --&gt; : Send Scan Request
+else on_reset
+Host --&gt; BLE: Callback on_reset()
+BLE --&gt; BLE: Reset until success
+end
+
+== Scanning and Connection ==
+CB_LIB &lt;-- : Advertising Event
+CB_LIB --&gt; Host: Discovered device event
+alt Scanner Process
+    Host --&gt; BLE: scan_event()
+    BLE --&gt; BLE: Parse and display advertising fields
+    BLE --&gt; Host: Restart Scan if discovery complete
+    Host --&gt; CB_LIB: Continue Scanning
+    CB_LIB --&gt; : Send Scan Request
+else Central Process
+    Host --&gt; BLE: central_scan_event()
+    BLE --&gt; BLE: Compare device name
+    alt Match target device
+        BLE --&gt; Host: Cancel scan
+        Host --&gt; CB_LIB: Connect to device
+        CB_LIB --&gt; : Send Connection Request
+        CB_LIB &lt;-- : Connection Accepted
+        CB_LIB --&gt; BLE: Connection established
+    else No match
+        BLE --&gt; Host: Restart Scan
+        Host --&gt; CB_LIB: Continue Scanning
+        CB_LIB --&gt; : Send Scan Request
+    end
+end"/>
+</p>
+</figure>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Chipsbank.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

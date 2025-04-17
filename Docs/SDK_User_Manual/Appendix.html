@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Appendix &mdash; CBU5000V210 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=29a6c3e3"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/design-tabs.js?v=f930bc37"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Version History" href="VersionHistory.html" />
+    <link rel="prev" title="UWB Calibration" href="Calibration.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            CBU5000V210
+          </a>
+              <div class="version">
+                2.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="CBU5000V210SDK/CBU5000V210SDK.html">CBU5000V210 SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ApiReference.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UwbExamples/UwbExamples.html">UWB Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpuExamples/CpuExamples.html">CPU Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Calibration.html">UWB Calibration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Appendix</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#transmit-power-code">Transmit Power Code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="VersionHistory.html">Version History</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CBU5000V210</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Appendix</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="appendix">
+<h1>Appendix<a class="headerlink" href="#appendix" title="Link to this heading"></a></h1>
+<section id="transmit-power-code">
+<h2>Transmit Power Code<a class="headerlink" href="#transmit-power-code" title="Link to this heading"></a></h2>
+<div class="math notranslate nohighlight">
+\[\text{Output Power at Chip Port} = (\text{Power Code} \times 0.5 + (-55)) \, \text{dBm/MHz}\]</div>
+<p>where in the code 8,9,10,11 shall not be used.</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>Code</strong></p></td>
+<td><p><strong>Power</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>-55</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>-54.5</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>-54</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>-53.5</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>-53</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>-52.5</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>-52</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>-51.5</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>Not used</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>Not used</p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>Not used</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>Not used</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>-49</p></td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>-48.5</p></td>
+</tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>-48</p></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>-47.5</p></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>-47</p></td>
+</tr>
+<tr class="row-odd"><td><p>17</p></td>
+<td><p>-46.5</p></td>
+</tr>
+<tr class="row-even"><td><p>18</p></td>
+<td><p>-46</p></td>
+</tr>
+<tr class="row-odd"><td><p>19</p></td>
+<td><p>-45.5</p></td>
+</tr>
+<tr class="row-even"><td><p>20</p></td>
+<td><p>-45</p></td>
+</tr>
+<tr class="row-odd"><td><p>21</p></td>
+<td><p>-44.5</p></td>
+</tr>
+<tr class="row-even"><td><p>22</p></td>
+<td><p>-44</p></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>-43.5</p></td>
+</tr>
+<tr class="row-even"><td><p>24</p></td>
+<td><p>-43</p></td>
+</tr>
+<tr class="row-odd"><td><p>25</p></td>
+<td><p>-42.5</p></td>
+</tr>
+<tr class="row-even"><td><p>26</p></td>
+<td><p>-42</p></td>
+</tr>
+<tr class="row-odd"><td><p>27</p></td>
+<td><p>-41.5</p></td>
+</tr>
+<tr class="row-even"><td><p>28</p></td>
+<td><p>-41</p></td>
+</tr>
+<tr class="row-odd"><td><p>29</p></td>
+<td><p>-40.5</p></td>
+</tr>
+<tr class="row-even"><td><p>30</p></td>
+<td><p>-40</p></td>
+</tr>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>-39.5</p></td>
+</tr>
+<tr class="row-even"><td><p>32</p></td>
+<td><p>-39</p></td>
+</tr>
+<tr class="row-odd"><td><p>33</p></td>
+<td><p>-38.5</p></td>
+</tr>
+<tr class="row-even"><td><p>34</p></td>
+<td><p>-38</p></td>
+</tr>
+<tr class="row-odd"><td><p>35</p></td>
+<td><p>-37.5</p></td>
+</tr>
+<tr class="row-even"><td><p>36</p></td>
+<td><p>-37</p></td>
+</tr>
+<tr class="row-odd"><td><p>37</p></td>
+<td><p>-36.5</p></td>
+</tr>
+<tr class="row-even"><td><p>38</p></td>
+<td><p>-36</p></td>
+</tr>
+<tr class="row-odd"><td><p>39</p></td>
+<td><p>-35.5</p></td>
+</tr>
+<tr class="row-even"><td><p>40</p></td>
+<td><p>-35</p></td>
+</tr>
+<tr class="row-odd"><td><p>41</p></td>
+<td><p>-34.5</p></td>
+</tr>
+<tr class="row-even"><td><p>42</p></td>
+<td><p>-34</p></td>
+</tr>
+<tr class="row-odd"><td><p>43</p></td>
+<td><p>-33.5</p></td>
+</tr>
+<tr class="row-even"><td><p>44</p></td>
+<td><p>-33</p></td>
+</tr>
+<tr class="row-odd"><td><p>45</p></td>
+<td><p>-32.5</p></td>
+</tr>
+<tr class="row-even"><td><p>46</p></td>
+<td><p>-32</p></td>
+</tr>
+<tr class="row-odd"><td><p>47</p></td>
+<td><p>-31.5</p></td>
+</tr>
+<tr class="row-even"><td><p>48</p></td>
+<td><p>-31</p></td>
+</tr>
+<tr class="row-odd"><td><p>49</p></td>
+<td><p>-30.5</p></td>
+</tr>
+<tr class="row-even"><td><p>50</p></td>
+<td><p>-30</p></td>
+</tr>
+<tr class="row-odd"><td><p>51</p></td>
+<td><p>-29.5</p></td>
+</tr>
+<tr class="row-even"><td><p>52</p></td>
+<td><p>-29</p></td>
+</tr>
+<tr class="row-odd"><td><p>53</p></td>
+<td><p>-28.5</p></td>
+</tr>
+<tr class="row-even"><td><p>54</p></td>
+<td><p>-28</p></td>
+</tr>
+<tr class="row-odd"><td><p>55</p></td>
+<td><p>-27.5</p></td>
+</tr>
+<tr class="row-even"><td><p>56</p></td>
+<td><p>-27</p></td>
+</tr>
+<tr class="row-odd"><td><p>57</p></td>
+<td><p>-26.5</p></td>
+</tr>
+<tr class="row-even"><td><p>58</p></td>
+<td><p>-26</p></td>
+</tr>
+<tr class="row-odd"><td><p>59</p></td>
+<td><p>-25.5</p></td>
+</tr>
+<tr class="row-even"><td><p>60</p></td>
+<td><p>-25</p></td>
+</tr>
+<tr class="row-odd"><td><p>61</p></td>
+<td><p>-24.5</p></td>
+</tr>
+<tr class="row-even"><td><p>62</p></td>
+<td><p>-24</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Calibration.html" class="btn btn-neutral float-left" title="UWB Calibration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="VersionHistory.html" class="btn btn-neutral float-right" title="Version History" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Chipsbank.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

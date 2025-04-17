@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>APP-PSR &mdash; CBU5000V210 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=29a6c3e3"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/design-tabs.js?v=f930bc37"></script>
+        <script src="../_static/tabs.js?v=3030b3cb"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="APP_CLI" href="APP_CLI.html" />
+    <link rel="prev" title="APP-RXPER" href="APP_RXPER.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CBU5000V210
+          </a>
+              <div class="version">
+                2.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../CBU5000V210SDK/CBU5000V210SDK.html">CBU5000V210 SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ApiReference.html">API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="UwbExamples.html">UWB Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="APP_COMMTRX.html">APP-COMMTRX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_DSTWR.html">APP-DSTWR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_PDOA.html">APP-PDOA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_RNGAOA.html">APP-RNGAOA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_PeriodicTRX.html">APP-PeriodicTRX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_RXPER.html">APP-RXPER</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">APP-PSR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_CLI.html">APP_CLI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../CpuExamples/CpuExamples.html">CPU Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calibration.html">UWB Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Appendix.html">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../VersionHistory.html">Version History</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CBU5000V210</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="UwbExamples.html">UWB Examples</a></li>
+      <li class="breadcrumb-item active">APP-PSR</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="app-psr">
+<h1>APP-PSR<a class="headerlink" href="#app-psr" title="Link to this heading"></a></h1>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-5Lit5paH" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-5Lit5paH" name="5Lit5paH" role="tab" tabindex="0">中文</button><button aria-controls="panel-0-RW5nbGlzaA==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tab" tabindex="-1">English</button></div><div aria-labelledby="tab-0-5Lit5paH" class="sphinx-tabs-panel group-tab" id="panel-0-5Lit5paH" name="5Lit5paH" role="tabpanel" tabindex="0"><p><strong>概述</strong></p>
+<p>本文档提供了UWB PSR（Preamble Scanning Receiver，前导码扫描接收器）功能的实现指南。该示例用于扫描和检测UWB信号中的前导码。</p>
+<p><strong>要求</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>需要以下开发板中的一个：</dt><dd><ul>
+<li><p>CB5000V210 Anchor开发板</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>软件：</dt><dd><ul>
+<li><p>串行终端工具（例如PuTTY、SSCOM）</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>用户界面</strong></p>
+<ul class="simple">
+<li><p>在每个开发板上找到GPIO00引脚，并将其连接到串行接收线（RX）。</p></li>
+<li><p>在每个开发板上找到GPIO01引脚，并将其连接到串行发送线（TX）。</p></li>
+<li><p>确保连接牢固，以避免通信问题。</p></li>
+</ul>
+<p><strong>构建和运行</strong></p>
+<ul class="simple">
+<li><p>该示例可以在ChipsBank Connect SDK文件夹结构中的”Firmware\Examples\uwb_psr”找到。</p></li>
+</ul>
+<p><strong>测试</strong></p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><strong>连接开发板</strong></dt><dd><ul class="simple">
+<li><p>准备合适的USB线，确保两端与您的计算机和开发板兼容。</p></li>
+<li><p>将USB线的一端插入计算机的USB端口，另一端插入开发板的USB端口。</p></li>
+<li><p>打开计算机上的设备管理器，检查是否识别到新的COM端口。如果没有，请检查USB线连接并确保安装了正确的驱动程序。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>配置串行终端</strong></dt><dd><ul class="simple">
+<li><p>在计算机上打开一个串行终端工具，例如PuTTY、SSCOM或类似工具。</p></li>
+<li><p>在每个串行终端工具中选择识别到的COM端口。</p></li>
+<li><p>将波特率设置为115200，停止位设置为1，数据位顺序设置为LSB，奇偶校验设置为NONE。</p></li>
+<li><p>点击连接按钮以建立与每个开发板的串行通信。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>重置开发板</strong></dt><dd><ul class="simple">
+<li><p>在开发板上找到复位按钮。</p></li>
+<li><p>按下并释放复位按钮以重启开发板。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>执行测试操作</strong></dt><dd><ul class="simple">
+<li><p>重置开发板后，在串行终端工具中观察输出。</p></li>
+<li><p>将开发板刷入uwb_psr固件</p></li>
+<li><dl class="simple">
+<dt>重置开发板后，设备将自动开始运行：</dt><dd><ul>
+<li><p>显示”APP PSR”和”Scanning”信息</p></li>
+<li><p>开始扫描前导码索引9-24</p></li>
+<li><p>显示每个前导码的状态（Not Used/Used）</p></li>
+<li><p>扫描完成后，可以观察到哪些前导码被使用</p></li>
+<li><p>根据扫描结果，可以选择最佳的前导码用于后续通信</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<p><strong>预期输出</strong></p>
+<ul class="simple">
+<li><p>重置开发板后，串行终端将显示以下输出：</p></li>
+</ul>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>APP PSR
+Scanning
+| Preamble Code Index |    Status    |
++---------------------+--------------+
+|          9          | Not Used     |
+|         10          | Not Used     |
+|         11          | Not Used     |
+|         12          | Not Used     |
+|         13          | Not Used     |
+|         14          | Not Used     |
+|         15          | Not Used     |
+|         16          | Not Used     |
+|         17          | Not Used     |
+|         18          | Not Used     |
+|         19          | Not Used     |
+|         20          | Not Used     |
+|         21          | Not Used     |
+|         22          | Not Used     |
+|         23          | Not Used     |
+|         24          | Not Used     |
++---------------------+--------------+
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-RW5nbGlzaA==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tabpanel" tabindex="0"><p><strong>Overview</strong></p>
+<p>This document provides a guide to the implementation of UWB PSR (Preamble Scanning Receiver) functionality. This example is used to scan and detect preambles in UWB signals.</p>
+<p><strong>Requirements</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>One of the following development boards:</dt><dd><ul>
+<li><p>CB5000V210 Anchor demo board</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Software:</dt><dd><ul>
+<li><p>Serial terminal tool (e.g., PuTTY, SSCOM)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>User interface</strong></p>
+<ul class="simple">
+<li><p>Locate the GPIO00 pin on the development board and connect it to the serial receive line (RX).</p></li>
+<li><p>Locate the GPIO01 pin on the development board and connect it to the serial transmit line (TX).</p></li>
+<li><p>Ensure the connections are secure to avoid communication issues.</p></li>
+</ul>
+<p><strong>Building and running</strong></p>
+<ul class="simple">
+<li><p>This sample can be found under “Firmware\Examples\uwb_psr” in the ChipsBank Connect SDK folder structure.</p></li>
+</ul>
+<p><strong>Testing</strong></p>
+<ol class="arabic">
+<li><p><strong>Connect the Development Board</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Prepare a suitable USB cable, ensuring both ends are compatible with your computer and demo board.</p></li>
+<li><p>Insert one end of the USB cable into a USB port on your computer and the other end into the USB port on the demo board.</p></li>
+<li><p>Open the Device Manager on your computer to check if a new COM port has been recognized. If not, verify the USB cable connection and ensure the correct drivers are installed.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Configure the Serial Terminal</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Open a serial terminal tool on your computer, such as PuTTY, SSCOM, or any similar tool.</p></li>
+<li><p>In the serial terminal tool, select the recognized COM port.</p></li>
+<li><p>Set the baud rate to 115200, stop bits to 1, data bits order to LSB, and parity to NONE.</p></li>
+<li><p>Click the connect button to establish serial communication with the development board.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Reset the Development Board</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Locate the reset button on the development board.</p></li>
+<li><p>Press and release the reset button to restart the development board.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Execute Test Operations</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>After resetting the board, observe the output in the serial terminal tool.</p></li>
+<li><p>Flash the development board with uwb_psr firmware.</p></li>
+<li><dl class="simple">
+<dt>After resetting the board, the device will automatically start running:</dt><dd><ul>
+<li><p>Display “APP PSR” and “Scanning” information</p></li>
+<li><p>Begin scanning preamble code indices 9-24</p></li>
+<li><p>Show the status of each preamble (Not Used/Used)</p></li>
+<li><p>After scanning completes, observe which preambles are being used</p></li>
+<li><p>Based on the scan results, select the optimal preamble for subsequent communication</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+<p><strong>Expected Output</strong></p>
+<ul class="simple">
+<li><p>The following output will be displayed in the serial terminal after resetting the development board:</p></li>
+</ul>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>APP PSR
+Scanning
+| Preamble Code Index |    Status    |
++---------------------+--------------+
+|          9          | Not Used     |
+|         10          | Not Used     |
+|         11          | Not Used     |
+|         12          | Not Used     |
+|         13          | Not Used     |
+|         14          | Not Used     |
+|         15          | Not Used     |
+|         16          | Not Used     |
+|         17          | Not Used     |
+|         18          | Not Used     |
+|         19          | Not Used     |
+|         20          | Not Used     |
+|         21          | Not Used     |
+|         22          | Not Used     |
+|         23          | Not Used     |
+|         24          | Not Used     |
++---------------------+--------------+
+</pre></div>
+</div>
+</div></div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="APP_RXPER.html" class="btn btn-neutral float-left" title="APP-RXPER" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="APP_CLI.html" class="btn btn-neutral float-right" title="APP_CLI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Chipsbank.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

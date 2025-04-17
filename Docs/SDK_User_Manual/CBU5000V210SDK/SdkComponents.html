@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SDK Components &mdash; CBU5000V210 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=29a6c3e3"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/design-tabs.js?v=f930bc37"></script>
+        <script src="../_static/tabs.js?v=3030b3cb"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CBU5000V210
+          </a>
+              <div class="version">
+                2.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="CBU5000V210SDK.html">CBU5000V210 SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ApiReference.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UwbExamples/UwbExamples.html">UWB Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CpuExamples/CpuExamples.html">CPU Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calibration.html">UWB Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Appendix.html">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../VersionHistory.html">Version History</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CBU5000V210</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">SDK Components</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sdk-components">
+<h1>SDK Components<a class="headerlink" href="#sdk-components" title="Link to this heading"></a></h1>
+<section id="component-level-view-of-sdk-cpu-subsystem">
+<h2>Component level view of SDK (CPU Subsystem)<a class="headerlink" href="#component-level-view-of-sdk-cpu-subsystem" title="Link to this heading"></a></h2>
+<figure class="align-center">
+<p class="plantuml">
+<img src="../_images/plantuml-43836cb1223a437c0a854f99991e723c111e6709.png" alt="package &quot;SYSTEM APPs&quot; {
+ [APP_SYS_UART_COMMANDER]
+ [APP_SYS_IRQ_CALLBACK]
+}
+
+package &quot;CPU APPs&quot; { 
+ [APP_CPU_UART] #lightyellow
+ [APP_CPU_TIMER] #lightyellow
+ [APP_CPU_GPIO] #lightyellow
+ [APP_CPU_SLEEP] #lightyellow
+ [APP_CPU_WDT] #lightyellow
+}
+package &quot;CB LIB&quot; {
+    [Chipsbank_LIB] #yellow
+}
+
+[APP_SYS_UART_COMMANDER] ..&gt; [APP_CPU_UART]
+[APP_SYS_IRQ_CALLBACK] &lt;..&gt; [APP_CPU_TIMER]: Register &amp; Execute\ncallback
+[APP_SYS_IRQ_CALLBACK] &lt;..&gt; [APP_CPU_GPIO]: Register &amp; Execute\ncallback
+[APP_SYS_IRQ_CALLBACK] &lt;..&gt; [APP_CPU_SLEEP]: Register &amp; Execute\ncallback
+[APP_SYS_IRQ_CALLBACK] &lt;.. [Chipsbank_LIB]: IRQ\noccurred
+
+[APP_CPU_UART]  ..&gt; [Chipsbank_LIB]
+[APP_CPU_TIMER] ..&gt; [Chipsbank_LIB]
+[APP_CPU_GPIO]  ..&gt; [Chipsbank_LIB]
+[APP_CPU_SLEEP]  ..&gt; [Chipsbank_LIB]"/>
+</p>
+</figure>
+</section>
+<section id="component-level-view-of-sdk-uwb">
+<h2>Component level view of SDK (UWB)<a class="headerlink" href="#component-level-view-of-sdk-uwb" title="Link to this heading"></a></h2>
+<figure class="align-center">
+<p class="plantuml">
+<img src="../_images/plantuml-4bcf560f3e433d0deacec6f01404ee27aff7ffa1.png" alt="package &quot;SYSTEM APPs&quot; {
+ [APP_SYS_IRQ_CALLBACK]
+}
+
+package &quot;UWB APPs&quot; {
+ [APP_UWB_COMMTRX] #lightcyan
+ [APP_UWB_PDOA] #lightcyan
+ [APP_UWB_AOA] #lightcyan
+ [APP_UWB_DSTWR] #lightcyan
+ [APP_UWB_RXPER] #lightcyan
+ [APP_UWB_RNGAOA] #lightcyan
+}
+
+package &quot;CB LIB&quot; {
+    [Chipsbank_LIB] #yellow
+}
+
+[APP_SYS_IRQ_CALLBACK] &lt;..&gt; [APP_UWB_COMMTRX]: Register &amp; Execute\ncallback
+[APP_SYS_IRQ_CALLBACK] &lt;..&gt; [APP_UWB_AOA]: Register &amp; Execute\ncallback
+[APP_SYS_IRQ_CALLBACK] &lt;..&gt; [APP_UWB_DSTWR]: Register &amp; Execute\ncallback
+[APP_SYS_IRQ_CALLBACK] &lt;..&gt; [APP_UWB_PDOA]: Register &amp; Execute\ncallback
+[APP_SYS_IRQ_CALLBACK] &lt;.. [Chipsbank_LIB]: IRQ\noccurred
+
+
+[APP_UWB_COMMTRX] ..&gt; [Chipsbank_LIB]
+[APP_UWB_PDOA] ..&gt; [Chipsbank_LIB]
+[APP_UWB_AOA] ..&gt; [Chipsbank_LIB]
+[APP_UWB_DSTWR] ..&gt; [Chipsbank_LIB]"/>
+</p>
+</figure>
+</section>
+<section id="component-level-view-of-sdk-ble">
+<h2>Component level view of SDK (BLE)<a class="headerlink" href="#component-level-view-of-sdk-ble" title="Link to this heading"></a></h2>
+<figure class="align-center">
+<p class="plantuml">
+<img src="../_images/plantuml-db18c037a71b4c8dd2e33cc6931eb3ce19a61dc0.png" alt="package &quot;BLE APPs&quot; {
+ [APP_BLE] #lightcyan
+}
+
+package &quot;BLE Host&quot; {
+ [BLE_HOST] #skyblue
+}
+
+package &quot;BLE Controller&quot; {
+ [Chipsbank_LIB] #yellow
+}
+
+[APP_BLE] &lt;..&gt; [BLE_HOST]: Call\n &amp; \ncallback
+[BLE_HOST] &lt;..&gt; [Chipsbank_LIB]: Call\n &amp; \ncallback"/>
+</p>
+</figure>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-RW5nbGlzaA==" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tab" tabindex="0">English</button><button aria-controls="panel-0-5Lit5paH" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-5Lit5paH" name="5Lit5paH" role="tab" tabindex="-1">中文</button></div><div aria-labelledby="tab-0-RW5nbGlzaA==" class="sphinx-tabs-panel group-tab" id="panel-0-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tabpanel" tabindex="0"><p>The diagram offers a visual representation of the software architecture within a system, showcasing various software modules grouped into distinct packages. Each package serves as a container for logically related functionalities and services, contributing to the overall functionality and operation of the system.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">SYSTEM APPs</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">CPU APPs</button><button aria-controls="panel-1-1-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-2" name="1-2" role="tab" tabindex="-1">UWB APPs</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><p>APP_SYS_UART_COMMANDER: Designed to manage all UART-related operations within the system. It’s responsible for receiving incoming commands and their associated parameters, then executing these commands accordingly.</p>
+<p>APP_SYS_IRQ_CALLBACK: Serving a critical role in system-wide event handling, this module facilitates the registration and execution of interrupt service routines (ISRs). Multiple applications could therefore share the same ISR, and the registered function pointer will be invoked upon an IRQ occurrence.</p>
+</div><div aria-labelledby="tab-1-1-1" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-1" name="1-1" role="tabpanel" tabindex="0"><p>APP_CPU_SLEEP: This application manages the SLEEP mode functionality.</p>
+<p>APP_CPU_UART: This application is responsible for managing UART communication and also includes an API for debug printing.</p>
+<p>APP_CPU_TIMER: This application manages TIMER modules within the CPU subsystem. There are four configurable timers, and each timer can have up to four timer events.</p>
+<p>APP_CPU_GPIO: This application manages GPIO operations such as setting, reading, and handling IO interrupts.</p>
+<p>APP_CPU_WDT: This application manages the Watchdog Timer (WDT) operations such as setting up the watchdog, resetting it, and handling watchdog interrupts.</p>
+</div><div aria-labelledby="tab-1-1-2" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-2" name="1-2" role="tabpanel" tabindex="0"><p>APP_UWB_COMMTRX: Focused on UWB communication tasks, this module facilitates data transmission and reception over UWB channels.</p>
+<p>APP_UWB_PDOA: Specializing in UWB-based Positioning and Direction of Arrival (PDOA) functionalities, this module offers capabilities for determining the spatial location and direction of UWB-enabled devices within the system’s vicinity.</p>
+<p>APP_UWB_AOA: This application uses the PDOA functionality to calculate the Angle of Arrival (AOA) and derive the angle of the UWB sender with respect to the receiver.</p>
+<p>APP_UWB_DSTWR: This application demonstrates the Double-Sided Two-Way Ranging (DSTWR) functionality. This module uses the Time of Flight (ToF) of UWB packets to determine the distance between two UWB devices.</p>
+<p>APP_UWB_RNGAOA: This function executes the UWB ranging and AOA (Angle of Arrival) measurement process. It initializes the necessary configurations, synchronizes with the responder or initiator, and performs the double-sided two-way ranging (DSTWR) operation. After the DSTWR operation, it performs Phase Difference of Arrival (PDOA) calculations followed by AOA computations. Throughout the process, it logs the results and relevant status information. Once the measurement is complete, it outputs the distance and angle data.</p>
+</div></div>
+</div><div aria-labelledby="tab-0-5Lit5paH" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-5Lit5paH" name="5Lit5paH" role="tabpanel" tabindex="0"><p>图表提供了系统内软件架构的视觉表示，展示了分组为不同包的各种软件模块。每个包都充当逻辑相关功能和服务的容器，有助于系统的整体功能和操作。</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-2-2-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-2-2-0" name="2-0" role="tab" tabindex="0">SYSTEM APPs</button><button aria-controls="panel-2-2-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-2-2-1" name="2-1" role="tab" tabindex="-1">CPU APPs</button><button aria-controls="panel-2-2-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-2-2-2" name="2-2" role="tab" tabindex="-1">UWB APPs</button></div><div aria-labelledby="tab-2-2-0" class="sphinx-tabs-panel" id="panel-2-2-0" name="2-0" role="tabpanel" tabindex="0"><p>设计用于管理系统内的所有UART相关操作。它负责接收传入的命令及其相关参数，然后相应地执行这些命令。</p>
+<p>在系统范围的事件处理中发挥着至关重要的作用，该模块促进了中断服务程序（ISRs）的注册和执行。因此，多个应用程序可以共享同一个ISR，并且在发生中断请求时将调用已注册的函数指针。</p>
+</div><div aria-labelledby="tab-2-2-1" class="sphinx-tabs-panel" hidden="true" id="panel-2-2-1" name="2-1" role="tabpanel" tabindex="0"><p>这个应用程序管理睡眠模式功能。</p>
+<p>这个应用程序负责管理UART通信，并且还包含用于调试打印的API。</p>
+<p>这个应用程序管理CPU子系统内的定时器模块。系统中有四个可配置的定时器，每个定时器最多可以拥有四个定时器事件。</p>
+<p>这个应用程序管理GPIO操作，例如设置、读取和处理IO中断。</p>
+<p>这个应用程序管理看门狗定时器（WDT）操作，例如设置看门狗、复位看门狗以及处理看门狗中断。</p>
+</div><div aria-labelledby="tab-2-2-2" class="sphinx-tabs-panel" hidden="true" id="panel-2-2-2" name="2-2" role="tabpanel" tabindex="0"><p>专注于UWB通信任务，该模块促进了通过UWB信道的数据传输和接收。</p>
+<p>该模块专门针对基于UWB的定位和到达方向（PDOA）功能，提供了确定系统范围内启用UWB的设备的空间位置和方向的能力。</p>
+<p>该应用程序使用 (PDOA) 功能计算到达角 (AOA)，并得出 UWB 发送器相对于接收器的角度。</p>
+<p>该应用演示了双面双向测距 (DSTWR) 功能。该模块使用 UWB 数据包的飞行时间 (ToF) 来确定两个 UWB 设备之间的距离。</p>
+<p>该功能执行超宽带 (UWB) 测距和 AOA (到达角) 测量过程。它初始化必要配置，与响应者或发起者同步，并执行双向双程测距 (DSTWR) 操作。DSTWR 操作完成后，它执行到达相位差 (PDOA) 计算，然后进行 AOA 计算。在整个过程中，它记录结果和相关状态信息。测量完成后，它输出距离和角度数据</p>
+</div></div>
+</div></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Chipsbank.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+/**
+ * @file    AppUwbPeriodicRx.h
+ * @brief   Implementation of UWB-COMMTRX: Periodic RX
+ * @details This module provides functions to initialize, and receive data periodically using the UWB.
+ * @author  Chipsbank
+ * @date    2024
+ */
+
+#ifndef __APP_UWB_PERIODIC_RX_H
+#define __APP_UWB_PERIODIC_RX_H
+
+//-------------------------------
+// INCLUDE SECTION
+//-------------------------------
+#include "APP_CompileOption.h"
+#include "APP_common.h"
+#include "CB_system_types.h"
+
+//-------------------------------
+// DEFINE SECTION
+//-------------------------------
+
+//-------------------------------
+// ENUM SECTION
+//-------------------------------
+
+//-------------------------------
+// STRUCT/UNION SECTION
+//-------------------------------
+typedef struct
+{
+ 
+  cb_uwbsystem_rxport_en     enRxPort;
+  uint8_t         logOpt;
+  uint32_t        packetsToRcv;
+} stUwbPeriodicRxPacketConfig;
+
+//-------------------------------
+// GLOBAL VARIABLE SECTION
+//-------------------------------
+//-------------------------------
+// FUNCTION PROTOTYPE SECTION
+//-------------------------------
+void app_periodic_rx(void);
+void app_uwb_periodicrx_receive_packet(const stUwbPeriodicRxPacketConfig* const packetConfig);
+
+#endif // __APP_UWB_PERIODIC_RX_H
