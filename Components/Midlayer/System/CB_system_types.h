@@ -31,10 +31,11 @@
  */
 typedef enum
 {
-  EN_UWB_RX_0 = 0,  // UWB RX port 0
-  EN_UWB_RX_1,      // UWB RX port 1
-  EN_UWB_RX_2,      // UWB RX port 2
-  EN_UWB_RX_ALL,    // All UWB RX ports
+  EN_UWB_RX_0   = 0b001,  // UWB RX port 0
+  EN_UWB_RX_1   = 0b010,  // UWB RX port 1
+  EN_UWB_RX_2   = 0b100,  // UWB RX port 2
+  EN_UWB_RX_02  = 0b101,  // UWB RX port 0 & 2 
+  EN_UWB_RX_ALL = 0b111,  // All UWB RX ports
 } cb_uwbsystem_rxport_en;
 
 typedef enum 
@@ -44,9 +45,9 @@ typedef enum
   EN_UWB_Channel_8  = 8,  // Fira3.0 UCI definition
   EN_UWB_Channel_9  = 9,  // Fira3.0 UCI definition (Default)
   EN_UWB_Channel_10 = 10, // Fira3.0 UCI definition
-  EN_UWB_Channel_12 = 12, // Fira3.0 UCI definition
-  EN_UWB_Channel_13 = 13, // Fira3.0 UCI definition
-  EN_UWB_Channel_14 = 14  // Fira3.0 UCI definition
+  EN_UWB_Channel_12 = 12, // Fira3.0 UCI definition, not supported yet, temporary set as Channel 9 internally
+  EN_UWB_Channel_13 = 13, // Fira3.0 UCI definition, not supported yet, temporary set as Channel 9 internally
+  EN_UWB_Channel_14 = 14  // Fira3.0 UCI definition, not supported yet, temporary set as Channel 9 internally
 }cb_uwbsystem_channelnum_en;
 
 typedef enum 
@@ -78,10 +79,10 @@ typedef enum {
 
 typedef enum 
 {
-  EN_PRF_MODE_BPRF        = 0, // Fira3.0 UCI definition
+  EN_PRF_MODE_BPRF_62P4   = 0, // Fira3.0 UCI definition
   EN_PRF_MODE_HPRF_124P8  = 1, // Fira3.0 UCI definition
   EN_PRF_MODE_HPRF_249P6  = 2, // Fira3.0 UCI definition
-  EN_PRF_MODE_LG4A_0P85   = 3  // Fira3.0 RFU : In-house used
+  EN_PRF_MODE_LG4A_62P4   = 3  // Fira3.0 RFU : In-house used
 }cb_uwbsystem_prfmode_en;
 
 typedef enum 
@@ -101,7 +102,7 @@ typedef enum {
 /**
  * @brief Enumeration defining UWB Preamble Code Indexes
  * 
- * @note 9 - 23 is used for BPRF, 24-32 is used for HPRF
+ * @note 9 - 24 is used for BPRF, 25-32 is used for HPRF
  */
 typedef enum
 {
@@ -192,6 +193,11 @@ typedef enum
   EN_UWB_CONFIG_RX = 1,
 }cb_uwbsystem_configmodule_selection_en;
 
+typedef enum
+{
+  EN_UWB_CFO_GAIN_SET   = 0,
+  EN_UWB_CFO_GAIN_RESET = 1,
+}cb_uwbsystem_rxconfig_cfo_gain_en;
 
 typedef struct
 {
@@ -268,16 +274,6 @@ typedef struct
 	int16_t  rssiRx;
 	uint8_t  gainIdx;
 }__attribute__((aligned(4))) cb_uwbsystem_rx_signalinfo_st;
-
-/**
- * @brief Structure that contains rssi status for RX0, RX1, RX2
- */
-typedef struct
-{
-	cb_uwbsystem_rx_signalinfo_st rx0_info;
-	cb_uwbsystem_rx_signalinfo_st rx1_info;
-	cb_uwbsystem_rx_signalinfo_st rx2_info;
-}cb_uwbsystem_rxall_signalinfo_st;
 
 /**
  * @brief Structure representing phr status
@@ -484,6 +480,22 @@ typedef struct {
   int16_t Q_data; // CIR_Q_data
   int16_t I_data; // CIR_I_data
 } __attribute__((aligned(4))) cb_uwbsystem_rx_cir_iqdata_st;
+
+typedef struct {
+  uint8_t  enableBypass;
+  uint32_t  gainValue;
+} cb_uwbsystem_rx_dbb_gain_st; 
+
+typedef struct {
+  uint8_t  enableBypass;
+  uint32_t  cfoValue;
+} cb_uwbsystem_rx_dbb_cfo_st; 
+
+typedef struct {
+  cb_uwbsystem_rx_dbb_gain_st stRxGain;
+  cb_uwbsystem_rx_dbb_cfo_st  stRxCfo;
+} cb_uwbsystem_rx_dbb_config_st;
+
 
 //-------------------------------
 // GLOBAL VARIABLE SECTION

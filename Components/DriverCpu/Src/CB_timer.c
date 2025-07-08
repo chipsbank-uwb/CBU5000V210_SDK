@@ -76,6 +76,9 @@ void cb_timer_1_irq_callback(void);
 void cb_timer_2_irq_callback(void);
 void cb_timer_3_irq_callback(void);
 
+
+static enTimerTimeUnit g_TimerTimeUnits[4] = { EN_TIMER_MS };
+
 //-------------------------------
 // FUNCTION BODY SECTION
 //-------------------------------
@@ -188,6 +191,7 @@ void cb_timer_configure_timer(stTimerSetUp* TimerSetUp)
     TARGET_TIMER->MODE= TimerMode;
     // Configure Timeout Events
     enTimerTimeUnit Unit = TimerSetUp->TimeUnit;
+     g_TimerTimeUnits[enTimer] = TimerSetUp->TimeUnit;
     uint32_t ClockScale;
     if (Unit == EN_TIMER_MS)
     {
@@ -285,10 +289,12 @@ void cb_timer_struct_init(stTimerSetUp* TimerSetUp)
  */
 void cb_set_timeout_expiration(enTimer enTimer, uint8_t timeoutEvent, uint32_t timeoutVal)
 {
-    // Define the time unit as milliseconds
-    enTimerTimeUnit Unit = EN_TIMER_MS;
-    uint32_t ClockScale;
+    // Get the pointer to the specified timer
+    TIMER_TypeDef* timer = arrTimerList[enTimer].TIMER;
+    enTimerTimeUnit Unit =  g_TimerTimeUnits[enTimer];
 
+    // enTimerTimeUnit Unit = EN_TIMER_MS;
+    uint32_t ClockScale;
     // Calculate the clock scale based on the time unit
     if (Unit == EN_TIMER_MS) {
             ClockScale = (GC_SYSTEM_CLOCK_CHIPSET_64MHZ / DEF_TIMER_MS); // Clock scale for milliseconds

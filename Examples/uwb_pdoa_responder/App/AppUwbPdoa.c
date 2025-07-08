@@ -34,8 +34,9 @@
 //-------------------------------
 #define DEF_SYNC_RX_PAYLOAD_SIZE       4
 #define DEF_SYNC_ACK_TX_PAYLOAD_SIZE   3
-#define DEF_AOA_AZIMUTH_BIAS          (170.0f)
-#define DEF_AOA_ELEVATION_BIAS        (40.0f)
+#define DEF_PDOA_PD01_BIAS              (170.0f)// 3D
+#define DEF_PDOA_PD02_BIAS              (40.0f) // 2D,3D
+#define DEF_PDOA_PD12_BIAS              (10.0f) // 3D
 
 typedef enum {
   // IDLE STATE
@@ -69,12 +70,13 @@ typedef struct
 //-------------------------------
 // GLOBAL VARIABLE SECTION
 //-------------------------------
-static uint8_t s_applicationTimeout         = APP_FALSE;
+static uint8_t s_applicationTimeout                 = APP_FALSE;
+static cb_uwbsystem_rx_dbb_config_st s_stRxCfg_CfoGainBypass  = { 0 };
 
 /* Default Rx packet configuration.*/
 static cb_uwbsystem_packetconfig_st s_stUwbPacketConfig = 
 {
-  .prfMode            = EN_PRF_MODE_BPRF,                 // PRF mode selection
+  .prfMode            = EN_PRF_MODE_BPRF_62P4,                 // PRF mode selection
   .psduDataRate       = EN_PSDU_DATA_RATE_6P81,           // PSDU data rate
   .bprfPhrDataRate    = EN_BPRF_PHR_DATA_RATE_0P85,       // BPRF PHR data rate
   .preambleCodeIndex  = EN_UWB_PREAMBLE_CODE_IDX_9,       // Preamble code index (9-32)
@@ -99,10 +101,11 @@ static uint8_t s_syncExpectedRxPayload[DEF_SYNC_RX_PAYLOAD_SIZE]   = {0x53,0x59,
 static uint8_t s_syncAckPayload[DEF_SYNC_ACK_TX_PAYLOAD_SIZE]      = {0x41,0x43,0x4B};
 
 static uint8_t                          s_countOfPdoaScheduledRx   = 0;
-static cb_uwbsystem_rxall_signalinfo_st  s_stRssiResults            = {0};
+static cb_uwbsystem_rx_signalinfo_st  s_stRssiResults            = {0};
 static cb_uwbsystem_pdoaresult_st       s_stPdoaOutputResult       = {0};
-static float                            s_azimuthBias              = DEF_AOA_AZIMUTH_BIAS;
-static float                            s_elevationBias            = DEF_AOA_ELEVATION_BIAS;
+static float                            s_pd01Bias                 = DEF_PDOA_PD01_BIAS;
+static float                            s_pd02Bias                 = DEF_PDOA_PD02_BIAS;
+static float                            s_pd12Bias                 = DEF_PDOA_PD12_BIAS;
 static float                            s_aziResult                = 0.0f;
 static float                            s_eleResult                = 0.0f;
 
@@ -240,12 +243,21 @@ void app_pdoa_responder(void)
       //-------------------------------------  
       case EN_APP_STATE_PDOA_PREPARE:
         app_pdoa_timer_init(DEF_PDOA_OVERALL_PROCESS_TIMEOUT_MS);  
-        cb_framework_uwb_pdoa_rx_init(&s_stUwbPacketConfig, &stPdoaRxIrqEnable, s_stRssiResults.rx0_info.cfoEst);
+        s_stRxCfg_CfoGainBypass.stRxGain = (cb_uwbsystem_rx_dbb_gain_st){
+            .enableBypass = APP_TRUE,
+            .gainValue    = s_stRssiResults.gainIdx
+        };
+
+        s_stRxCfg_CfoGainBypass.stRxCfo = (cb_uwbsystem_rx_dbb_cfo_st){
+            .enableBypass = APP_TRUE,
+            .cfoValue     = s_stRssiResults.cfoEst
+        };
+        cb_framework_uwb_rxconfig_cfo_gain(EN_UWB_CFO_GAIN_SET, &s_stRxCfg_CfoGainBypass);
         s_enAppPdoaResponderState = EN_APP_STATE_PDOA_RECEIVE;
         break;
         
       case EN_APP_STATE_PDOA_RECEIVE:
-        cb_framework_uwb_pdoa_rx_start(&stPdoaRxIrqEnable, s_stRssiResults.rx0_info.gainIdx);
+        cb_framework_uwb_rx_start(EN_UWB_RX_ALL, &s_stUwbPacketConfig, &stPdoaRxIrqEnable, EN_TRX_START_NON_DEFERRED);
         s_enAppPdoaResponderState = EN_APP_STATE_PDOA_WAIT_RX_DONE;
         break;
       
@@ -256,17 +268,18 @@ void app_pdoa_responder(void)
           s_stIrqStatus.Rx1SfdDetected = APP_FALSE; 
           s_stIrqStatus.Rx2SfdDetected = APP_FALSE;
           
-          cb_framework_uwb_pdoa_store_cir_data(s_countOfPdoaScheduledRx);          
-          cb_framework_uwb_pdoa_rx_stop();
+          cb_framework_uwb_pdoa_store_cir_data(s_countOfPdoaScheduledRx);     
+            
           s_countOfPdoaScheduledRx++;
           if (s_countOfPdoaScheduledRx < DEF_NUMBER_OF_PDOA_REPEATED_RX)
           {
-            s_enAppPdoaResponderState = EN_APP_STATE_PDOA_RECEIVE;
+            cb_framework_uwb_rx_restart(EN_UWB_RX_ALL, &s_stUwbPacketConfig, &stPdoaRxIrqEnable, EN_TRX_START_NON_DEFERRED);
           }
           else 
           {
-            cb_framework_uwb_pdoa_rx_end();    
+            cb_framework_uwb_rx_end(EN_UWB_RX_ALL);   
             s_countOfPdoaScheduledRx = 0;
+            cb_framework_uwb_rxconfig_cfo_gain(EN_UWB_CFO_GAIN_RESET, NULL);
             s_enAppPdoaResponderState = EN_APP_STATE_PDOA_POSTINGPROCESSING;
           }
         }
@@ -278,7 +291,7 @@ void app_pdoa_responder(void)
         app_uwb_pdoa_print("PD01:%f, PD02:%f, PD12:%f (in degrees)\n",s_stPdoaOutputResult.median.rx0_rx1,s_stPdoaOutputResult.median.rx0_rx2,s_stPdoaOutputResult.median.rx1_rx2);          
         
         // AOA
-        cb_framework_uwb_pdoa_calculate_aoa(s_stPdoaOutputResult.median, s_azimuthBias, s_elevationBias,  &s_aziResult, &s_eleResult);
+        cb_framework_uwb_pdoa_calculate_aoa(s_stPdoaOutputResult.median, s_pd01Bias, s_pd02Bias, s_pd12Bias, &s_aziResult, &s_eleResult);
         app_uwb_pdoa_print("azimuth: %f degrees\nelevation: %f degrees\n", (double)s_aziResult,(double)s_eleResult);    
         
         s_enAppPdoaResponderState = EN_APP_STATE_TERMINATE;
@@ -303,7 +316,11 @@ void app_pdoa_reset(void)
   s_countOfPdoaScheduledRx   = 0;
   cb_framework_uwb_tx_end();            // ensure propoer TX end upon abnormal condition
   cb_framework_uwb_rx_end(EN_UWB_RX_0); // ensure propoer RX end upon abnormal condition
+  cb_framework_uwb_rxconfig_cfo_gain(EN_UWB_CFO_GAIN_RESET, NULL); // ensure CFO and gain settings are reset upon abnormal condition
+
 }
+
+
 
 void app_pdoa_timer_init(uint16_t timeoutMs)
 {

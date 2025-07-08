@@ -238,16 +238,14 @@ void cb_uwbdriver_rx1_init(void);
 void cb_uwbdriver_rx2_init(void);
 
 /**
+ * @brief Initializes RX0 and RX2 module.
+ */
+void cb_uwbdriver_rx02_init(void);
+
+/**
  * @brief Initializes all RX modules.
  */
 void cb_uwbdriver_rx_all_init(void);
-
-/**
- * @brief Starts the PDOA RX process for all modules with the provided gain index.
- * 
- * @param pdoaGainIdx Pointer to the PDOA gain index.
- */
-void cb_uwbdriver_pdoa_rx_all_start(uint32_t* pdoaGainIdx);
 
 /**
  * @brief Starts the TX process.
@@ -270,54 +268,36 @@ void cb_uwbdriver_stage_rx0_start(void);
 void cb_uwbdriver_tx_stop(void);
 
 /**
- * @brief Starts the RX0 process.
+ * @brief Freezes the TX PLL.
  */
-void cb_uwbdriver_rx0_start(void);
+void cb_uwbdriver_tx_freezepll(void);
 
 /**
- * @brief Stops the RX0 process.
+ * @brief Unfreezes the TX PLL.
  */
-void cb_uwbdriver_rx0_stop(void);
+void cb_uwbdriver_tx_unfreezepll(void);
 
 /**
- * @brief Starts the RX1 process.
+ * @brief Starts RX on specified port with gain configuration
+ * 
+ * @param enRxPort The RX port(s) to start (can be single port or combination)
+ * @param s_sysBypassConfig Pointer to RX gain bypass configuration
  */
-void cb_uwbdriver_rx1_start(void);
+void cb_uwbdriver_rx_start(cb_uwbsystem_rxport_en enRxPort, cb_uwbsystem_rx_dbb_gain_st* s_sysBypassConfig);
 
 /**
- * @brief Stops the RX1 process.
+ * @brief Stops RX on specified port
+ * 
+ * @param enRxPort The RX port(s) to stop (can be single port or combination)
  */
-void cb_uwbdriver_rx1_stop(void);
+void cb_uwbdriver_rx_stop(cb_uwbsystem_rxport_en enRxPort);
 
 /**
- * @brief Starts the RX2 process.
+ * @brief Turns off RX module on specified port
+ * 
+ * @param enRxPort The RX port(s) to turn off (can be single port or combination)
  */
-void cb_uwbdriver_rx2_start(void);
-
-/**
- * @brief Stops the RX2 process.
- */
-void cb_uwbdriver_rx2_stop(void);
-
-/**
- * @brief Starts all RX processes.
- */
-void cb_uwbdriver_rx_all_start(void);
-
-/**
- * @brief Turns off RX0 module.
- */
-void cb_uwbdriver_rx0_off(void);
-
-/**
- * @brief Turns off RX1 module.
- */
-void cb_uwbdriver_rx1_off(void);
-
-/**
- * @brief Turns off RX2 module.
- */
-void cb_uwbdriver_rx2_off(void);
+void cb_uwbdriver_rx_off(cb_uwbsystem_rxport_en enRxPort);
 
 /**
  * @brief Initializes the TX module.
@@ -457,7 +437,7 @@ uint8_t cb_uwbdriver_get_rx_cir_quality_flag(void);
  * @brief Stores RX CIR register data into the destination array.
  * 
  * @param destArray Pointer to the destination array.
- * @param enRxPort The RX port to retrieve data from.
+ * @param enRxPort The RX port to retrieve data from (EN_UWB_RX_0, EN_UWB_RX_1, EN_UWB_RX_2).
  * @param startingPosition The starting position in the CIR register.
  * @param numSamples The number of samples to store.
  */
@@ -468,7 +448,7 @@ void cb_uwbdriver_store_rx_cir_register(cb_uwbsystem_rx_cir_iqdata_st* destArray
  * 
  * @param p_rxTsuStatus Pointer to the RX TSU status structure.
  * @param p_rxTimeStampData Pointer to the RX timestamp data structure.
- * @param enRxPort The RX port to retrieve data from.
+ * @param enRxPort The RX port to retrieve data from (EN_UWB_RX_0, EN_UWB_RX_1, or EN_UWB_RX_2).
  */
 void cb_uwbdriver_store_rx_tsu_status(cb_uwbsystem_rx_tsustatus_st* p_rxTsuStatus, cb_uwbsystem_rx_tsu_st* p_rxTimeStampData, cb_uwbsystem_rxport_en enRxPort);
 
@@ -476,14 +456,14 @@ void cb_uwbdriver_store_rx_tsu_status(cb_uwbsystem_rx_tsustatus_st* p_rxTsuStatu
  * @brief Retrieves the RX TSU timestamp.
  * 
  * @param rxTsuTimestamp Pointer to the structure to store the RX TSU timestamp.
- * @param enRxPort The RX port to retrieve the timestamp from.
+ * @param enRxPort The RX port to retrieve the timestamp from (EN_UWB_RX_0, EN_UWB_RX_1, or EN_UWB_RX_2).
  */
 void cb_uwbdriver_get_rx_tsu_timestamp(cb_uwbsystem_rx_tsutimestamp_st* rxTsuTimestamp, cb_uwbsystem_rxport_en enRxPort);
 
 /**
  * @brief Retrieves the RX DCOC values for the specified RX port.
  * 
- * @param enRxPort The RX port to retrieve the DCOC values from.
+ * @param enRxPort The RX port to retrieve the DCOC values from (EN_UWB_RX_0, EN_UWB_RX_1, EN_UWB_RX_2).
  * @return The RX DCOC values as a structure.
  */
 cb_uwbsystem_rx_dcoc_st cb_uwbdriver_get_rx_dcoc(cb_uwbsystem_rxport_en enRxPort);
@@ -491,10 +471,10 @@ cb_uwbsystem_rx_dcoc_st cb_uwbdriver_get_rx_dcoc(cb_uwbsystem_rxport_en enRxPort
 /**
  * @brief Retrieves the RX RSSI results for the specified RX ports.
  * 
- * @param rssiRxPorts The RX ports to retrieve the RSSI results from.
+ * @param rssiRxPorts The RX ports to retrieve the RSSI results from (can be single port or combination).
  * @return The RX RSSI results as a structure.
  */
-cb_uwbsystem_rxall_signalinfo_st cb_uwbdriver_get_rx_rssi(cb_uwbsystem_rxport_en rssiRxPorts);
+cb_uwbsystem_rx_signalinfo_st cb_uwbdriver_get_rx_rssi(cb_uwbsystem_rxport_en rssiRxPorts);
 
 /**
  * @brief Retrieves the UWB RX ETC status register values.
@@ -513,10 +493,10 @@ cb_uwbsystem_rxstatus_un cb_uwbdriver_get_uwb_rx_status_register(void);
 /**
  * @brief Configures the RX sync CFO estimation bypass CRS.
  * 
- * @param val The value to configure.
  * @param en Enable or disable the bypass CRS.
+ * @param val The value to configure.
  */
-void cb_uwbdriver_configure_rx_sync_cfo_est_bypass_crs(uint32_t val, uint8_t en);
+void cb_uwbdriver_configure_fixed_cfo_value(uint8_t en, uint32_t val);
 
 /**
  * @brief Enables the specified absolute timer.
@@ -578,7 +558,7 @@ void cb_uwbdriver_configure_event_timestamp_mask(enUwbEventTimestampMask eventTi
  * @param eventTimestampMask The event timestamp mask to retrieve the value for.
  * @return The event timestamp value.
  */
-uint32_t cb_uwbdriver_get_event_timestamp_value(enUwbEventTimestampMask eventTimestampMask);
+uint32_t cb_uwbdriver_get_event_timestamp_in_ns(enUwbEventTimestampMask eventTimestampMask);
 
 /**
  * @brief Clears the TSU module.
@@ -586,7 +566,7 @@ uint32_t cb_uwbdriver_get_event_timestamp_value(enUwbEventTimestampMask eventTim
 void cb_uwbdriver_tsu_clear(void);
 
 /**
- * @brief Prepares the RX module for starting.
+ * @brief Prepares the RX module for starting only RX0.
  */
 void cb_uwbdriver_rx_start_prepare(void);
 

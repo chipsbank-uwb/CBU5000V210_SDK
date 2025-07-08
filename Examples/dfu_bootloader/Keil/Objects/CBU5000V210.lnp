@@ -1,0 +1,28 @@
+--cpu=Cortex-M33
+".\objects\main.o"
+".\objects\cb_flash.o"
+".\objects\cb_sleepdeepsleep.o"
+".\objects\cb_crc.o"
+".\objects\cb_gpio.o"
+".\objects\cb_iomux.o"
+".\objects\cb_qspi.o"
+".\objects\cb_scr.o"
+".\objects\cb_uart.o"
+".\objects\cb_wdt.o"
+".\objects\crc8.o"
+".\objects\crc16.o"
+".\objects\crc32.o"
+".\objects\crcccitt.o"
+".\objects\crcdnp.o"
+".\objects\crckrmit.o"
+".\objects\crcsick.o"
+".\objects\nmea-chk.o"
+".\objects\dfu_handler.o"
+".\objects\dfu_uart.o"
+".\objects\nonlib_sharedutils.o"
+".\objects\startup_armcm33.o"
+".\objects\system_armcm33.o"
+--strict --scatter ".\ARMCM33_DSP_FP\ARMCM33_ac6.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\CBU5000V210.map" -o .\Objects\CBU5000V210.axf

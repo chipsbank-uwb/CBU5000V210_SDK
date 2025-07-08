@@ -27,13 +27,6 @@
 #include "AppUwbPdoa.h"
 #include "AppUwbRngAoa.h"
 
-#if (APP_UWB_RX_PER_ENABLE == APP_TRUE)
-#include "AppUwbRxPer.h"
-#endif
-#if (APP_UWB_RADAR_ENABLE == APP_TRUE)
-#include "App/AppUwbRadar.h"
-#endif
-
 //-------------------------------
 // CONFIGURATION SECTION
 //-------------------------------
@@ -394,159 +387,30 @@ void APP_UART_Func_d(uint32_t const argc, uint32_t *args)
 }
 
 
- /**
- * @brief TRX-Periodic Command parser for customer.
- * 
- * @param args Pointer to the array of arguments.
- */
 void APP_UART_Func_e(uint32_t const argc, uint32_t *args)
 {
-  /* usage: unused  */  
+    /* usage: unused  */  
 }
 
-/**
- * @brief Radar Command parser for customer.
- * 
- * @param args Pointer to the array of arguments.
- */
-void APP_UART_Func_f(uint32_t const argc, uint32_t *args) {
-#if (APP_UWB_RADAR_ENABLE == APP_TRUE)
-  /* usage: f,arg1,arg2,arg3,arg4
-  (arg1) sampling frequency  Typically 10(Hz)
-  (arg2) pa code index       [1,31]
-  (arg3) scale bit           [0,7]
-  (arg4) gain idx            [0,7]
-  */  
-  uint32_t command = args[0];
-  uint32_t pa = args[1];
-  uint32_t scale_bit = args[2];
-  uint32_t gain_idx = args[3];
-  
-  if (command == APP_FALSE)
-  {
-    APP_SYS_UARTCOMMANDER_PRINT("[APP_RADAR_Stop]\n");
-    APP_RadarStop();
-  }
-  else
-  {
-    APP_RadarInit(command, pa, scale_bit, gain_idx);
-    g_task_g_execute = APP_TRUE;
-  }
-#endif
+
+void APP_UART_Func_f(uint32_t const argc, uint32_t *args) 
+{
+    /* usage: unused  */  
 }
 
-/**
- * @brief RX Packet Error Rate (RX PER) Command parser for internal test.
- * 
- * @param args Pointer to the array of arguments.
- */
 void APP_UART_Func_g(uint32_t const argc, uint32_t *args) 
 {
-#if (APP_UWB_RX_PER_ENABLE == APP_TRUE)
-   /* usage: g,arg0,arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8
-  (arg0) rx port               0: Rx0
-                               1: Rx1
-                               2: Rx2
-  (arg1) receive duration      Typically 10000 (ms)
-  (arg2) num of cir taps       default 3
-  (arg3) cir window            default 11
-  (arg4) preamble detection    {1800: m1p2,m3p2}; {3000: others}
-         threshold             
-  (arg5) preamble detection    {7: m1p2}; {5: m3p2}; {3:others}
-          count threshold 
-  (arg6) out_hold_cnt         {3: m1p2,m3p2}; {4: others}
-  */  
-  APP_SYS_UARTCOMMANDER_PRINT("%s\n", __PRETTY_FUNCTION__);
-
-  uint8_t rxPortCommand             = (uint8_t)*(args + 0);
-  cb_uwbsystem_rxport_en enRxPort 	= EN_UWB_RX_0;
-  switch (rxPortCommand)
-  {
-	case 0: enRxPort = EN_UWB_RX_0;   break;
-	case 1: enRxPort = EN_UWB_RX_1;   break;
-	case 2: enRxPort = EN_UWB_RX_2;   break;
-	case 3: enRxPort = EN_UWB_RX_ALL; break;
-	default: break;
-  }  
-  uint32_t rxTimeIntervalInMs  = *(args + 1);
-  app_uwbtrx_rx_per(enRxPort, rxTimeIntervalInMs);
-#endif
+    /* usage: unused  */ 
 }
 
-/**
- * @brief Handles UART command processing for UWB preamble scanning operation mode.
- *
- * This function processes UART commands by configuring UWB preamble scanning
- * based on the given arguments. It initializes the UWB operation mode, sets up 
- * the preamble scanning parameters, and triggers the appropriate UWB operations 
- * based on the mode (RX or TX). 
- *
- * @param[in] argc The number of arguments passed to the function. Minimum value is 1.
- * @param[in] args A pointer to the array of arguments:
- *            - args[0]: UWB operation mode (must be cast to uint8_t).
- *            - args[1]: PSR mode in case of RX
- *            - args[2]: Scan duration in case of RX
- */
 void APP_UART_Func_h(uint32_t const argc, uint32_t  *args)
 {
-	#define PREAMBLE_SCANNING_OPERATION_MODE_Suspend 0
-	
+	/* usage: unused  */ 
 }
 
-/**
- * @brief Configures the UWB system parameters via UART command.
- * 
- * This function parses the provided arguments and sets the UWB system 
- * configuration. It also retrieves and prints the updated configuration.
- *
- * @param argc Number of arguments provided.
- * @param args Pointer to the array of arguments.
- * 
- * @details Usage: `s,arg0,arg1,arg2,arg3,arg4,arg5,arg6`
- * - `arg0`: TX Power Code. Refer to the power code table.
- * - `arg1`: TX & RX Packet Mode:
- *   - 0: BPRF_0681  (m5p1)
- *   - 1: BPRF_0850  (m3p2)
- *   - 2: BPRF_0850A (m1p2) - not supported yet
- *   - 3: BPRF_0681A (m5p2) - not supported yet
- *   - 4: HPRF_6810  (m4p1)
- *   - 5: HPRF_7800  (m4p2)
- *   - 6: HPRF_27200 (m4p3)
- *   - 7: HPRF_32100 (m4p4)
- * - `arg2`: TX & RX STS Mode:
- *   - 0: SP0, 1 STS Segment
- *   - 1: SP1, 1 STS Segment
- *   - 2: SP3, 1 STS Segment
- * - `arg3`: TX & RX Preamble Code Index. Range: [9, 32]. Default: {9: BPRF}, {25: HPRF}.
- * - `arg4`: TX & RX SFD Sequence Index. Range: [0, 4]. Default: 2.
- * - `arg5`: RX Operational Mode:
- *   - 0: Sensitivity mode
- *   - 1: Coexist mode
- * - `arg6`: Antenna Index.
- *
- * Usage: ``s`` with no other arguments to view the current configurations
- */
-void APP_UART_Func_s(uint32_t const argc, uint32_t  *args){
-   /* usage: s,arg0,arg1,arg2,arg3,arg4,arg5,arg6
-  (arg0) tx power code                 refer to power code table
-  (arg1) tx&rx packet mode             0: BPRF_0681  (m5p1)
-                                       1: BPRF_0850  (m3p2)
-                                       2: BPRF_0850A (m1p2) - not supported yet
-                                       3: BPRF_0681A (m5p2) - not supported yet
-                                       4: HPRF_6810  (m4p1)
-                                       5: HPRF_7800  (m4p2)
-                                       6: HPRF_27200 (m4p3)
-                                       7: HPRF_32100 (m4p4)
-  (arg2) tx&rx sts mode                0: SP0, 1 STS Segment
-                                       1: SP1, 1 STS Segment
-                                       2: SP3, 1 STS Segment
-  (arg3) tx&rx preamble code index     [9, 32]. Default {9: BPRF}; {25: BPRF}
-  (arg4) tx&rx sfd sequence index      [0, 4]. Default 2
-  (arg5) rx operational mode           0: Sensitivity mode
-                                       1: Coexist mode
-  (arg6) antenna index
-  */  
-  
+void APP_UART_Func_s(uint32_t const argc, uint32_t  *args)
+{
+    /* usage: unused  */ 
 }
 
 /**

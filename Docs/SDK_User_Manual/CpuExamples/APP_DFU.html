@@ -44,7 +44,7 @@
             CBU5000V210
           </a>
               <div class="version">
-                2.0.0
+                2.0.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -61,7 +61,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="CpuExamples.html">CPU Examples</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">APP_DFU</a></li>
 <li class="toctree-l2"><a class="reference internal" href="APP_ADC.html">APP_ADC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="APPCRC.html">APP-CRC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_CRC.html">APP-CRC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="APP_CRYPTO.html">APP-CRYPTO</a></li>
 <li class="toctree-l2"><a class="reference internal" href="APP_DMA.html">APP-DMA</a></li>
 <li class="toctree-l2"><a class="reference internal" href="APP_Efuse.html">APP-Efuse</a></li>
@@ -110,8 +110,8 @@
 <h1>APP_DFU<a class="headerlink" href="#app-dfu" title="Link to this heading"></a></h1>
 <div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-5Lit5paH" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-5Lit5paH" name="5Lit5paH" role="tab" tabindex="0">中文</button><button aria-controls="panel-0-RW5nbGlzaA==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tab" tabindex="-1">English</button></div><div aria-labelledby="tab-0-5Lit5paH" class="sphinx-tabs-panel group-tab" id="panel-0-5Lit5paH" name="5Lit5paH" role="tabpanel" tabindex="0"><p><strong>概述</strong></p>
-<p>本文档提供了使用开发板（例如CB5000V210 Anchor开发板）验证DFU功能的指南。它涵盖了硬件连接、串行通信设置。</p>
-<p><strong>要求</strong></p>
+<p>本文档提供了使用开发板（例如CB5000V210 Anchor开发板）验证DFU功能和FTM产测功能的指南。它涵盖了硬件连接、串行通信设置、产测上位机工具使用方法。</p>
+<p><strong>DFU要求</strong></p>
 <blockquote>
 <div><ul class="simple">
 <li><dl class="simple">
@@ -123,7 +123,7 @@
 </li>
 <li><dl class="simple">
 <dt><em>软件：</em></dt><dd><ul>
-<li><p>上位机 DFU 升级软件</p></li>
+<li><p>电脑端上位机 DFU 升级工具</p></li>
 </ul>
 </dd>
 </dl>
@@ -150,15 +150,15 @@
 <ol class="arabic">
 <li><dl class="simple">
 <dt><strong>连接开发板</strong></dt><dd><ul class="simple">
-<li><p>准备一个合适的USB线，确保两端与您的计算机和开发板兼容。</p></li>
-<li><p>将USB线的一端插入计算机的USB端口，另一端插入开发板的USB端口。</p></li>
+<li><p>准备一个合适的typeC 类型的USB线，确保两端与您的计算机和开发板兼容。</p></li>
+<li><p>将typeC 类型的USB线的一端插入计算机的USB端口，另一端插入开发板的typeC 端口。</p></li>
 <li><p>打开计算机上的设备管理器，检查是否识别到新的COM端口。如果没有，请检查USB线连接并确保安装了正确的驱动程序。</p></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><strong>重置开发板</strong></dt><dd><ul class="simple">
+<dt><strong>开发板准备</strong></dt><dd><ul class="simple">
 <li><p>首先下载DFU_Bootload程序，下载完成后进行断电复位。</p></li>
 </ul>
 </dd>
@@ -166,12 +166,12 @@
 </li>
 <li><dl class="simple">
 <dt><strong>上位机升级</strong></dt><dd><ul class="simple">
-<li><p>打开上位机软件：开启 DFU 升级对应的上位机软件。</p></li>
-<li><p>端口与波特率设置：在软件中选择对应的端口，设置波特率为 921600 。</p></li>
-<li><p>检查端口：确认上位机软件检测到开发板对应的端口。</p></li>
-<li><p>选择升级文件：在软件中选中 DFU_APP 工程下的 bin 文件。</p></li>
-<li><p>开始升级：点击开始升级按钮，执行 DFU 升级操作。</p></li>
-<li><p>结果查看：升级完成后，查看固件号是否发生改变。</p></li>
+<li><p>打开上位机工具。</p></li>
+<li><p>检查端口：确认上位机工具检测到开发板对应的端口。</p></li>
+<li><p>端口与波特率设置：在工具中选择对应的端口，设置波特率为 921600 。</p></li>
+<li><p>选择升级文件：在工具中选中 DFU_APP 工程下 <code class="docutils literal notranslate"><span class="pre">\Firmware\Examples\DFU_App\Keil\BinFile\APP.bin</span></code> 的 bin 文件。</p></li>
+<li><p>开始升级：点击开始升级按钮，执行 DFU 升级操作，等待升级进度条完成。</p></li>
+<li><p>结果查看：升级完成后，点击查看固件版本号按钮，查看固件版本号是否与程序中对应的版本号对应，如果是则对应升级成功。</p></li>
 </ul>
 </dd>
 </dl>
@@ -182,10 +182,6 @@
 </dl>
 </li>
 </ol>
-<p><strong>预期输出</strong></p>
-<blockquote>
-<div><p>升级完成后，可观察到固件号发生变化，表明 DFU 升级成功。</p>
-</div></blockquote>
 <p><strong>添加DFU到其应用程序中</strong></p>
 <ol class="arabic">
 <li><p><strong>修改sct</strong></p>
@@ -200,9 +196,11 @@
 <a class="reference internal image-reference" href="../_images/dfu_library.png"><img alt="dfu_library.png" class="align-center" src="../_images/dfu_library.png" style="width: 70%;" /></a>
 </div></blockquote>
 </li>
+</ol>
+<ol class="arabic" start="3">
 <li><p><strong>添加初始化及任务</strong></p>
 <blockquote>
-<div><p>在需要实现DFU功能的应用程序中，需要添加DFU库的初始化及任务，以保持时刻等待更新的状态，程序如下图所示：</p>
+<div><p>在需要实现DFU功能的应用程序中，程序如下图所示：</p>
 </div></blockquote>
 </li>
 <li><p><strong>编写DFU任务函数</strong></p></li>
@@ -548,10 +546,187 @@ version</p></td>
 </tr>
 </tbody>
 </table>
+<p><strong>FTM产测验证</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt><em>以下开发板之一：</em></dt><dd><ul>
+<li><p>CB5000V210 Anchor开发板</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><em>软件：</em></dt><dd><ul>
+<li><p>电脑端上位机产测工具</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p><strong>用户界面</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>串口连接</strong>:</dt><dd><ul>
+<li><p>将GPIO00连接到串行接收线（RX）。</p></li>
+<li><p>将GPIO01连接到串行发送线（TX）。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><strong>确保所有连接牢固，以避免通信问题。</strong></p></li>
+</ul>
+<p><strong>测试</strong></p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><strong>连接开发板</strong></dt><dd><ul class="simple">
+<li><p>准备一个合适的typeC 类型的USB线，确保两端与您的计算机和开发板兼容。</p></li>
+<li><p>将typeC 类型的USB线的一端插入计算机的USB端口，另一端插入开发板的typeC 端口。</p></li>
+<li><p>打开计算机上的设备管理器，检查是否识别到新的COM端口。如果没有，请检查USB线连接并确保安装了正确的驱动程序。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<ol class="arabic" start="3">
+<li><dl>
+<dt><strong>产测</strong></dt><dd><ul class="simple">
+<li><p>打开产测工具。</p></li>
+<li><p>检查端口：确认产测工具检测到开发板对应的端口。</p></li>
+<li><p>端口与波特率设置：在工具中选择对应的端口，设置波特率为 921600 。</p></li>
+<li><p>点击工厂模式开关，使能产测</p></li>
+<li><p>点击相应的产测功能按钮进行相关功能测试</p></li>
+</ul>
+<a class="reference internal image-reference" href="../_images/升级开关.png"><img alt="软件包安装完成" class="align-center" src="../_images/%E5%8D%87%E7%BA%A7%E5%BC%80%E5%85%B3.png" style="width: 70%;" /></a>
+</dd>
+</dl>
+</li>
+</ol>
+<p><strong>添加FTM产测到其应用程序中</strong></p>
+<ol class="arabic" start="2">
+<li><dl>
+<dt><strong>添加FTM库</strong></dt><dd><a class="reference internal image-reference" href="../_images/FTM库文件.png"><img alt="软件包安装完成" class="align-center" src="../_images/FTM%E5%BA%93%E6%96%87%E4%BB%B6.png" style="width: 70%;" /></a>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>添加初始化产测功能</strong></dt><dd><a class="reference internal image-reference" href="../_images/FTM应用层调用.png"><img alt="软件包安装完成" class="align-center" src="../_images/FTM%E5%BA%94%E7%94%A8%E5%B1%82%E8%B0%83%E7%94%A8.png" style="width: 70%;" /></a>
+</dd>
+</dl>
+</li>
+</ol>
+<p><strong>产测命令列表</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>序号</p></th>
+<th class="head"><p>指令集</p></th>
+<th class="head"><p>功能</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0x0000</p></td>
+<td><p>产测开关</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>0x0001</p></td>
+<td><p>读取芯片ID</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>0x0010</p></td>
+<td><p>读取频偏校准值</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>0x0011</p></td>
+<td><p>写入频偏校准值</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>0x0012</p></td>
+<td><p>读取默认功率等级</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>0x0013</p></td>
+<td><p>写入默认功率等级</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>0x0014</p></td>
+<td><p>读取TOF校准值</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>0x0015</p></td>
+<td><p>写入TOF校准值</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>0x0017</p></td>
+<td><p>读取AOA校准值</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>0x0018</p></td>
+<td><p>写入AOA校准值</p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>0x0030</p></td>
+<td><p>Tx发包数量</p></td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td><p>0x0031</p></td>
+<td><p>Tx发包间隔</p></td>
+</tr>
+<tr class="row-even"><td><p>13</p></td>
+<td><p>0x0032</p></td>
+<td><p>Tx开关</p></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>0x0040</p></td>
+<td><p>Rx通道配置</p></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>0x0041</p></td>
+<td><p>Rx开关</p></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>0x0042</p></td>
+<td><p>获取Rx收包数量</p></td>
+</tr>
+<tr class="row-even"><td><p>17</p></td>
+<td><p>0x0050</p></td>
+<td><p>测距模式 同步ID 配置</p></td>
+</tr>
+<tr class="row-odd"><td><p>18</p></td>
+<td><p>0x0051</p></td>
+<td><p>读取测距模式 同步ID</p></td>
+</tr>
+<tr class="row-even"><td><p>19</p></td>
+<td><p>0x0052</p></td>
+<td><p>测距模式频率配置</p></td>
+</tr>
+<tr class="row-odd"><td><p>20</p></td>
+<td><p>0x0053</p></td>
+<td><p>读取测距模式频率</p></td>
+</tr>
+<tr class="row-even"><td><p>21</p></td>
+<td><p>0x0060</p></td>
+<td><p>测距模式Tx开关</p></td>
+</tr>
+<tr class="row-odd"><td><p>22</p></td>
+<td><p>0x0070</p></td>
+<td><p>测距模式Rx通道配置</p></td>
+</tr>
+<tr class="row-even"><td><p>23</p></td>
+<td><p>0x0071</p></td>
+<td><p>测距模式Rx开关</p></td>
+</tr>
+<tr class="row-odd"><td><p>24</p></td>
+<td><p>0x0072</p></td>
+<td><p>获取测距模式Rx数据结果</p></td>
+</tr>
+</tbody>
+</table>
 </div><div aria-labelledby="tab-0-RW5nbGlzaA==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tabpanel" tabindex="0"><blockquote>
 <div><p><strong>Overview</strong></p>
-<p>This document provides a guide for verifying the DFU (Device Firmware Upgrade) functionality using a development board (e.g., CB5000V210 Anchor development board). It covers hardware connections and serial communication settings.</p>
-<p><strong>Requirements</strong></p>
+<p>This document provides a guide for verifying the DFU (Device Firmware Upgrade) functionality and FTM production test features using a development board (e.g., CB5000V210 Anchor development board). It covers hardware connections, serial communication setup, and usage of the upper machine tools for testing.</p>
+<p><strong>DFU Requirements</strong></p>
 <blockquote>
 <div><ul class="simple">
 <li><dl class="simple">
@@ -563,7 +738,7 @@ version</p></td>
 </li>
 <li><dl class="simple">
 <dt><em>Software:</em></dt><dd><ul>
-<li><p>Upper machine DFU upgrade software</p></li>
+<li><p>Upper machine DFU upgrade tool on PC</p></li>
 </ul>
 </dd>
 </dl>
@@ -591,27 +766,27 @@ version</p></td>
 <li><dl class="simple">
 <dt><strong>Connect the Development Board</strong></dt><dd><ul class="simple">
 <li><p>Prepare a suitable USB cable, ensuring both ends are compatible with your computer and the development board.</p></li>
-<li><p>Insert one end of the USB cable into your computer’s USB port and the other end into the development board’s USB port.</p></li>
-<li><p>Open the device manager on your computer to check if a new COM port is recognized. If not, check the USB cable connection and ensure the correct drivers are installed.</p></li>
+<li><p>Insert one end of the USB cable into your computer’s USB port and the other end into the development board’s Type-C port.</p></li>
+<li><p>Open Device Manager on your computer to check if a new COM port is recognized. If not, verify the USB connection and ensure correct drivers are installed.</p></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
 <dt><strong>Reset the Development Board</strong></dt><dd><ul class="simple">
-<li><p>First, download the DFU_Bootload program. After downloading, perform a power cycle reset.</p></li>
+<li><p>First download the DFU_Bootload program, then power-cycle the board after downloading.</p></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
 <dt><strong>Upper Machine Upgrade</strong></dt><dd><ul class="simple">
-<li><p>Open the upper machine software: Launch the DFU upgrade corresponding upper machine software.</p></li>
-<li><p>Port and Baud Rate Settings: Select the corresponding port in the software and set the baud rate to 921600.</p></li>
-<li><p>Check Port: Confirm that the upper machine software detects the development board’s corresponding port.</p></li>
-<li><p>Select Upgrade File: In the software, select the bin file under the DFU_APP project.</p></li>
-<li><p>Start Upgrade: Click the start upgrade button to execute the DFU upgrade operation.</p></li>
-<li><p>Result Verification: After the upgrade is complete, check if the firmware version has changed to confirm successful DFU upgrade.</p></li>
+<li><p>Launch the upper machine software.</p></li>
+<li><p>Check port: Confirm that the software detects the corresponding port of the development board.</p></li>
+<li><p>Set the port and baud rate: Select the appropriate port in the software and set the baud rate to 921600.</p></li>
+<li><p>Select the upgrade file: Choose the <code class="docutils literal notranslate"><span class="pre">APP.bin</span></code> file located at <code class="docutils literal notranslate"><span class="pre">\Firmware\Examples\DFU_App\Keil\BinFile\</span></code>.</p></li>
+<li><p>Start the upgrade: Click the “Start Upgrade” button to perform the DFU firmware update, and wait until the progress bar completes.</p></li>
+<li><p>Verify result: After the upgrade finishes, click the “Check Firmware Version” button to confirm that the version matches the one in the program. A match indicates a successful upgrade.</p></li>
 </ul>
 </dd>
 </dl>
@@ -990,6 +1165,171 @@ version</p></td>
 <tr class="row-even"><td><p>4</p></td>
 <td><p>Version</p></td>
 <td><p>The firmware version of firmware file.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>FTM Production Test Verification</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt><em>One of the following development boards:</em></dt><dd><ul>
+<li><p>CB5000V210 Anchor development board</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><em>Software:</em></dt><dd><ul>
+<li><p>PC-based factory test tool</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p><strong>Testing</strong></p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><strong>Connect the Development Board</strong></dt><dd><ul class="simple">
+<li><p>Prepare a suitable Type-C USB cable that is compatible with both your computer and the development board.</p></li>
+<li><p>Connect one end of the USB cable to the computer’s USB port and the other end to the development board’s Type-C port.</p></li>
+<li><p>Open Device Manager on your computer and check if a new COM port is detected. If not, verify the USB connection and ensure the correct driver is installed.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<ol class="arabic" start="3">
+<li><dl>
+<dt><strong>Factory Test Mode</strong></dt><dd><ul class="simple">
+<li><p>Open the factory test tool.</p></li>
+<li><p>Check port: Confirm the tool detects the development board’s corresponding port.</p></li>
+<li><p>Port and Baud Rate Settings: Select the appropriate port in the tool and set the baud rate to 921600.</p></li>
+<li><p>Enable factory mode by clicking the factory mode switch.</p></li>
+<li><p>Click the corresponding test function buttons to perform functional tests.</p></li>
+</ul>
+<a class="reference internal image-reference" href="../_images/升级开关.png"><img alt="软件包安装完成" class="align-center" src="../_images/%E5%8D%87%E7%BA%A7%E5%BC%80%E5%85%B3.png" style="width: 70%;" /></a>
+</dd>
+</dl>
+</li>
+</ol>
+<p><strong>Adding FTM Factory Test to Your Application</strong></p>
+<ol class="arabic" start="2">
+<li><dl>
+<dt><strong>Add FTM Library</strong></dt><dd><a class="reference internal image-reference" href="../_images/FTM库文件.png"><img alt="Software package installation complete" class="align-center" src="../_images/FTM%E5%BA%93%E6%96%87%E4%BB%B6.png" style="width: 70%;" /></a>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Add Initialization for Factory Test</strong></dt><dd><a class="reference internal image-reference" href="../_images/FTM应用层调用.png"><img alt="Software package initialization" class="align-center" src="../_images/FTM%E5%BA%94%E7%94%A8%E5%B1%82%E8%B0%83%E7%94%A8.png" style="width: 70%;" /></a>
+</dd>
+</dl>
+</li>
+</ol>
+<p><strong>Production Test Command List</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>NB</p></th>
+<th class="head"><p>Command ID</p></th>
+<th class="head"><p>Name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0x0000</p></td>
+<td><p>FTM Mode Switch</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>0x0001</p></td>
+<td><p>Read Chip ID</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>0x0010</p></td>
+<td><p>Read Frequency Offset Calibration</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>0x0011</p></td>
+<td><p>Write Frequency Offset Calibration</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>0x0012</p></td>
+<td><p>Read Default Power Level</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>0x0013</p></td>
+<td><p>Write Default Power Level</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>0x0014</p></td>
+<td><p>Read TOF Calibration Value</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>0x0015</p></td>
+<td><p>Write TOF Calibration Value</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>0x0017</p></td>
+<td><p>Read AOA Calibration Value</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>0x0018</p></td>
+<td><p>Write AOA Calibration Value</p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>0x0030</p></td>
+<td><p>TX Packet Count</p></td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td><p>0x0031</p></td>
+<td><p>TX Packet Interval</p></td>
+</tr>
+<tr class="row-even"><td><p>13</p></td>
+<td><p>0x0032</p></td>
+<td><p>TX Switch</p></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>0x0040</p></td>
+<td><p>RX Channel Configuration</p></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>0x0041</p></td>
+<td><p>RX Switch</p></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>0x0042</p></td>
+<td><p>Get RX Packet Count</p></td>
+</tr>
+<tr class="row-even"><td><p>17</p></td>
+<td><p>0x0050</p></td>
+<td><p>Ranging Mode Sync ID Setup</p></td>
+</tr>
+<tr class="row-odd"><td><p>18</p></td>
+<td><p>0x0051</p></td>
+<td><p>Read Ranging Mode Sync ID</p></td>
+</tr>
+<tr class="row-even"><td><p>19</p></td>
+<td><p>0x0052</p></td>
+<td><p>Ranging Mode Frequency Setup</p></td>
+</tr>
+<tr class="row-odd"><td><p>20</p></td>
+<td><p>0x0053</p></td>
+<td><p>Read Ranging Mode Frequency</p></td>
+</tr>
+<tr class="row-even"><td><p>21</p></td>
+<td><p>0x0060</p></td>
+<td><p>Ranging Mode TX Switch</p></td>
+</tr>
+<tr class="row-odd"><td><p>22</p></td>
+<td><p>0x0070</p></td>
+<td><p>Ranging Mode RX Channel Setup</p></td>
+</tr>
+<tr class="row-even"><td><p>23</p></td>
+<td><p>0x0071</p></td>
+<td><p>Ranging Mode RX Switch</p></td>
+</tr>
+<tr class="row-odd"><td><p>24</p></td>
+<td><p>0x0072</p></td>
+<td><p>Get Ranging Mode RX Data Result</p></td>
 </tr>
 </tbody>
 </table>

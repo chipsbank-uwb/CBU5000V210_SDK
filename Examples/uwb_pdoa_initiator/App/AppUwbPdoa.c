@@ -66,7 +66,7 @@ static app_uwbpdoa_irqstatus_st       s_stIrqStatus               = {APP_FALSE};
 /* Default Tx packet configuration.*/
 static cb_uwbsystem_packetconfig_st s_stUwbPacketConfig = 
 {
-  .prfMode            = EN_PRF_MODE_BPRF,                 // PRF mode selection
+  .prfMode            = EN_PRF_MODE_BPRF_62P4,                 // PRF mode selection
   .psduDataRate       = EN_PSDU_DATA_RATE_6P81,           // PSDU data rate
   .bprfPhrDataRate    = EN_BPRF_PHR_DATA_RATE_0P85,       // BPRF PHR data rate
   .preambleCodeIndex  = EN_UWB_PREAMBLE_CODE_IDX_9,       // Preamble code index (9-32)
@@ -257,7 +257,7 @@ void app_pdoa_initiator(void)
           if (s_countOfPdoaScheduledTx <= DEF_NUMBER_OF_PDOA_REPEATED_TX)
           {
             cb_framework_uwb_configure_scheduled_trx(s_stPdoaRepeatedTxConfig);
-            cb_framework_uwb_pdoa_stage_scheduled_tx(&s_stPdoaTxIrqEnable);
+            cb_framework_uwb_tx_restart(&s_stPdoaTxIrqEnable, EN_TRX_START_DEFERRED);
           }
           else
           {

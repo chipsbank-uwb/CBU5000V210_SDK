@@ -9,9 +9,9 @@
  * @date    2024
  */
  
-/*
+/*                                                     Timer timing mode
  * Hardware connection: UART GPIO00-RX, GPIO01-TX  BPR=115200, Stop bit = 1; BitOrder = LSB, Parity = NONE
- * 											LED-GPIO02
+ * 											LED1-GPIO02
  * Program flow:
  * 			1. Initialize UART, configure UART parameters, BPR=115200, Stop bit = 1; BitOrder = LSB, Parity = NONE
  * 			2. Set timer timing to 1s, enable interrupt, and count and print in the interrupt, initialize Timer
@@ -22,12 +22,33 @@
  * 			1. Chip powers on, print power-on flag
  * 			2. UART sends print data every 1s
  * 			3. LED blinks every 1s
+ * 
+ * 
+ *                                                      Timer PWM mode
+ * Hardware connection: UART GPIO00-RX, GPIO01-TX  BPR=115200, Stop bit = 1; BitOrder = LSB, Parity = NONE
+ *                      LED1-GPIO02 (PWM output channel 1)
+ *                      LED2-GPIO04 (PWM output channel 2)
+ *
+ * Program flow:
+ *      1. Initialize UART with specified parameters (BPR=115200, Stop bit=1, LSB first, no parity)
+ *      2. Call app_pwm_init() in main() to initialize and configure PWM channels for GPIO02 and GPIO04
+ *      3. In the while(1) loop, call app_pwm_breathing_led_loop() to continuously update PWM duty cycles
+ *         and create a synchronized breathing LED effect on both LEDs
+ *
+ * Expected Output:
+ *      1. Chip powers on and prints power-on reset message via UART
+ *      2. Both LED1 and LED2 show a  "breathing" light effect using PWM fading
  */
- 
+
 //-------------------------------
 // INCLUDE SECTION
 //-------------------------------
 #include "main.h"
+
+//-------------------------------
+// DEFINE SECTION
+//-------------------------------
+#define APP_TIMER_MODE  0      //0-PWM mode,1-timing mode
 
 //-------------------------------
 // FUNCTION BODY SECTION
@@ -44,8 +65,18 @@
 **/
 int main(void)
 {  
+#if (APP_TIMER_MODE == 1)    
     //Timer demo
     app_peripheral_timer_init();
-    while(1);
+    while(1);   
+#else 
+    //PWM demo
+    app_pwm_init();
+
+    while(1)
+    {
+       app_pwm_breathing_led_loop();
+    }
+#endif
 }
 

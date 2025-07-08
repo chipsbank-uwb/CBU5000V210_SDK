@@ -404,6 +404,11 @@
               <FileType>1</FileType>
               <FilePath>..\App\app_timer.c</FilePath>
             </File>
+            <File>
+              <FileName>app_pwm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\app_pwm.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

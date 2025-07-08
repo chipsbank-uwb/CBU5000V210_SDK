@@ -13,7 +13,6 @@
 // INCLUDE SECTION
 //-------------------------------
 #include "CB_system_types.h"
-
 //-------------------------------
 // DEFINE SECTION
 //-------------------------------
@@ -27,65 +26,127 @@ typedef enum
   EN_AOA_ERROR  = 0x01,   /**< Result Error */
 } CB_AOA_STATUS;
 
-typedef enum
-{
-  EN_ANT_GEO_RightTriangle,       /**< Right Angle */
-  EN_ANT_GEO_2D,                  /**< 2D */
-  EN_ANT_GEO_IsocelesTriangle,    /**< Isoceles */
-} en_SpecificAntennaGeometry;
-
 //-------------------------------
 // STRUCT/UNION SECTION
 //-------------------------------
-
-typedef struct
-{  
-  float azimuth_bias;
-  float elevation_bias;
-} stAOA_BiasData;
 
 /**
  * @brief Structure for calculated elevation and azimuth phase differences.
  */
 typedef struct
 {  
-  float azimuth;
-  float elevation;
-  float pdResidue[3];
+  float phaseDiffRx0Rx1;
+  float phaseDiffRx0Rx2;
+  float phaseDiffRx1Rx2;
 } __attribute__((aligned(4))) stAOA_CompensatedData;
+
+/**
+ * @brief Structure for 3D antenna attributes
+ */
+typedef struct {
+    float ant_height;
+    float ant_width;
+    uint8_t ant_type;
+    uint8_t ant_pos[3];
+} st_antenna_attribute_3d;
+
+/**
+ * @brief Structure for 2D antenna attributes
+ */
+typedef struct {
+    float ant_width;
+    uint8_t ant_pos[2];
+} st_antenna_attribute_2d;
+
+/**
+ * @brief Structure for LUT attributes
+ */
+typedef struct {
+    uint8_t size_azi;
+    uint8_t size_ele;
+    uint8_t step_azi;
+    uint8_t step_ele;
+    uint8_t size_col;
+    int8_t azi_est_lower_limit;
+    int8_t azi_est_upper_limit;
+    int8_t ele_est_lower_limit;
+    int8_t ele_est_upper_limit;
+    const int16_t *lut_data;
+} cb_uwbaoa_lut_attribute_st;
+
+/**
+ * @brief Structure for LUT file header
+ */
+typedef struct
+{
+  uint32_t magic_number;  // 0xA5A5A5A5
+  uint32_t crc32;         // CRC32 checksum of the file
+  uint32_t version;       // 0x00000001
+  uint32_t lut_storage_size;      // size of total LUT in bytes
+} stPdLutFileHeader_st; 
+
+/**
+ * @brief Structure for single LUT content
+ */
+typedef struct
+{
+  cb_uwbaoa_lut_attribute_st lut_attribute;
+  int16_t *data;          //corresponding to lut data
+} stSingle_lut;
+
+/**
+ * @brief Structure for LUT file
+ */
+typedef struct
+{
+  stPdLutFileHeader_st LutFileHeader;
+  stSingle_lut lut_storage[]; 
+} stPdLutFile_st;
 
 //-------------------------------
 // GLOBAL VARIABLE SECTION
 //-------------------------------
-
 //-------------------------------
 // FUNCTION PROTOTYPE SECTION
 //-------------------------------
 /**
- * @brief Calculate the 3D Angle of Arrival (AoA) based on phase differences and receiver geometry.
- * @details This function computes the 3D angle of arrival by calculating both azimuth and elevation angles using phase differences
- *          between signals received at multiple receivers. The receiver geometry, including height and width between the receivers,
- *          is considered during the calculation.
- * @param[in] PhaseDiff_readings Pointer to a stPDOA_Data structure containing phase differences between various pairs of receivers.
- * @param[out] azi_result Pointer to a float where the calculated azimuth angle (in degrees) will be stored.
- * @param[out] ele_result Pointer to a float where the calculated elevation angle (in degrees) will be stored.
- * @return CB_AOA_STATUS Status of the AoA calculation.
- *         - EN_AOA_OK: Calculation was successful.
- *         - EN_AOA_ERROR: Error occurred during calculation.
+ * @brief   Calculate 3D Angle of Arrival (AOA) using the M2 algorithm
+ * @details This function calculates the 3D AOA by using phase differences between antenna pairs
+ *          and lookup tables (LUT) to estimate azimuth and elevation angles. The M2 algorithm 
+ *          provides improved accuracy by utilizing multiple antenna pairs.
+ *
+ * @param   AOA_PD      Pointer to structure containing compensated phase differences
+ * @param   ant_attr    Pointer to antenna attributes structure containing antenna positions and type
+ * @param   lut_attr    Pointer to LUT attributes structure containing reference data and parameters
+ * @param   azi_result  Pointer to store the calculated azimuth angle in degrees
+ * @param   ele_result  Pointer to store the calculated elevation angle in degrees
+ * @return  CB_AOA_STATUS  EN_AOA_OK on success, EN_AOA_ERROR on invalid antenna type
  */
-CB_AOA_STATUS cb_uwbaoa_antenna_0_0_3d(stAOA_CompensatedData* AOA_PD, float* azi_result, float* ele_result);
+CB_AOA_STATUS cb_uwbaoa_lut_full3d( stAOA_CompensatedData* AOA_PD, const st_antenna_attribute_3d* ant_attr, const cb_uwbaoa_lut_attribute_st* lut_attr,
+                                    float* azi_result, float* ele_result);
+/**
+ * @brief Compensate 3D AoA phase differences with antenna pair biases
+ * @details This function compensates raw 3D phase difference data using specified bias values for each antenna pair.
+ *          The biases account for systematic phase offsets between antenna pairs.
+ * @param[in] pdoa_raw Raw 3D phase difference data containing measurements between antenna pairs
+ * @param[in] pd01_bias Phase difference bias between antenna 0 and 1 (in degrees)
+ * @param[in] pd02_bias Phase difference bias between antenna 0 and 2 (in degrees)
+ * @param[in] pd12_bias Phase difference bias between antenna 1 and 2 (in degrees)
+ * @return stAOA_CompensatedData Structure containing the bias-compensated phase differences
+ */
+stAOA_CompensatedData cb_uwbaoa_pdoa_biascomp(cb_uwbsystem_pdoa_3ddata_st pdoa_raw, float pd01_bias, float pd02_bias, float pd12_bias);
 
 /**
- * @brief Compensate 3D AoA phase difference with azimuth and elevation biases.
- * @details This function compensates 3D phase difference data using specified azimuth and elevation phase difference biases.
- * @param[in] pdoa_raw Raw 3D phase difference data.
- * @param[in] azi_pd_bias The azimuth phase difference bias (in degrees).
- * @param[in] ele_pd_bias The elevation phase difference bias (in degrees).
- * @return The compensated 3D AoA data, including both azimuth and elevation angles.
+ * @brief Calculate 2D Angle of Arrival (AOA) using lookup table method
+ * @details This function calculates the 2D AOA by using phase differences and lookup tables (LUT)
+ *          to estimate azimuth angle at a given elevation angle.
+ *
+ * @param[in] pd_azi Pointer to phase difference for azimuth calculation
+ * @param[in] ele_ref Pointer to reference elevation angle in degrees
+ * @param[in] ant_attr Pointer to 2D antenna attributes structure containing antenna positions and type
+ * @param[in] lut_attr Pointer to LUT attributes structure containing reference data and parameters
+ * @param[out] azi_result Pointer to store the calculated azimuth angle in degrees
+ * @return CB_AOA_STATUS  EN_AOA_OK on success, EN_AOA_ERROR on invalid parameters
  */
-stAOA_CompensatedData cb_uwbaoa_antenna_0_0_3d_biascomp(cb_uwbsystem_pdoa_3ddata_st pdoa_raw, float azi_pd_bias, float ele_pd_bias);
-
-CB_AOA_STATUS cb_uwbaoa_antenna_2_0_3d_a(stAOA_CompensatedData* AOA_PD, float* azi_result, float* ele_result);
-stAOA_CompensatedData cb_uwbaoa_antenna_2_0_3d_biascomp(cb_uwbsystem_pdoa_3ddata_st pdoa_raw, float azi_pd_bias, float ele_pd_bias);
-
+CB_AOA_STATUS cb_uwbaoa_lut_full2d( float* pd_azi, float* ele_ref, const st_antenna_attribute_2d* ant_attr, const cb_uwbaoa_lut_attribute_st* lut_attr, float* azi_result);
 #endif /*_CB_AOA_H*/

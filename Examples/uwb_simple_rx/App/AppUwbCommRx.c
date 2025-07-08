@@ -13,7 +13,7 @@
 #include "AppUwbCommRx.h"
 #include "CB_uwbframework.h"
 #include "AppUwbTRXMemoryPool.h"
-
+#include "NonLIB_sharedUtils.h"
 //-------------------------------
 // CONFIGURATION SECTION
 //-------------------------------
@@ -28,6 +28,7 @@
 //-------------------------------
 // DEFINE SECTION
 //-------------------------------
+#define DEF_SIMPLE_RX_TIMEOUT_MS   600 
 
 //-------------------------------
 // ENUM SECTION
@@ -48,12 +49,13 @@ typedef enum{
 //-------------------------------
 // GLOBAL VARIABLE SECTION
 //-------------------------------
+static uint32_t startTime                     = 0; 
 static uint8_t s_simpleRxDoneFlag             = APP_FALSE;
 static app_uwbcomrx_state_en s_appCommRxState = EN_APP_STATE_RECEIVE;
 
 /* Default Rx packet configuration.*/
 static cb_uwbsystem_packetconfig_st Rxpacketconfig = {
-  .prfMode            = EN_PRF_MODE_BPRF,                 // PRF mode selection
+  .prfMode            = EN_PRF_MODE_BPRF_62P4,                 // PRF mode selection
   .psduDataRate       = EN_PSDU_DATA_RATE_6P81,           // PSDU data rate
   .bprfPhrDataRate    = EN_BPRF_PHR_DATA_RATE_0P85,       // BPRF PHR data rate
   .preambleCodeIndex  = EN_UWB_PREAMBLE_CODE_IDX_9,       // Preamble code index (9-32)
@@ -81,9 +83,7 @@ static cb_uwbsystem_packetconfig_st Rxpacketconfig = {
  */
 void app_commrx_qmode(void)
 {
-  cb_uwbsystem_rxport_en enRxPort        	= EN_UWB_RX_0;
-
-  app_uwb_commrx_print("APP_COMM_RX(enRxPort: %d) Quick Mode\n", enRxPort);
+  app_uwb_commrx_print("APP_COMM_RX(enRxPort: 0) Quick Mode\n");
   
   //--------------------------------
   // Configure IRQ
@@ -109,15 +109,21 @@ void app_commrx_qmode(void)
     switch(s_appCommRxState)
     {
       case EN_APP_STATE_RECEIVE:
-          cb_framework_uwb_qmode_rx_start(EN_UWB_RX_0, &Rxpacketconfig, &stRxIrqEnable); // RX START
+          cb_framework_uwb_qmode_rx_start(&Rxpacketconfig, &stRxIrqEnable); // RX START
+          startTime = cb_hal_get_tick();
           s_appCommRxState = EN_APP_STATE_WAIT_RX_DONE;
         break;
       case EN_APP_STATE_WAIT_RX_DONE:
-        if (s_simpleRxDoneFlag)
+        if (cb_hal_is_time_elapsed(startTime, DEF_SIMPLE_RX_TIMEOUT_MS) == APP_TRUE)  
+        {
+          cb_framework_uwb_qmode_rx_end();
+          s_appCommRxState = EN_APP_STATE_RECEIVE;
+        }
+        else if (s_simpleRxDoneFlag)
         {
           s_simpleRxDoneFlag = APP_FALSE;
           app_commrx_rx_payload_and_timestamp_printout();
-          cb_framework_uwb_qmode_rx_end(EN_UWB_RX_0);                  // RX END
+          cb_framework_uwb_qmode_rx_end();                  // RX END
           s_appCommRxState   = EN_APP_STATE_RECEIVE;
         }
         break;
@@ -141,9 +147,7 @@ void app_commrx_qmode(void)
  */
 void app_commrx_nmode(void)
 {
-  cb_uwbsystem_rxport_en enRxPort        	= EN_UWB_RX_0;
-
-  app_uwb_commrx_print("APP_COMM_RX(enRxPort: %d) Normal Mode\n", enRxPort);
+  app_uwb_commrx_print("APP_COMM_RX(enRxPort: 0) Normal Mode\n");
   
   //--------------------------------
   // Configure IRQ
@@ -168,10 +172,16 @@ void app_commrx_nmode(void)
     {
       case EN_APP_STATE_RECEIVE:
           cb_framework_uwb_rx_start(EN_UWB_RX_0, &Rxpacketconfig, &stRxIrqEnable, EN_TRX_START_NON_DEFERRED); // RX START
+          startTime = cb_hal_get_tick();
           s_appCommRxState = EN_APP_STATE_WAIT_RX_DONE;
         break;
       case EN_APP_STATE_WAIT_RX_DONE:
-        if (s_simpleRxDoneFlag)
+        if (cb_hal_is_time_elapsed(startTime, DEF_SIMPLE_RX_TIMEOUT_MS) == APP_TRUE)  
+        {
+          cb_framework_uwb_rx_end(EN_UWB_RX_0);
+          s_appCommRxState = EN_APP_STATE_RECEIVE;
+        }
+        else if (s_simpleRxDoneFlag)
         {
           s_simpleRxDoneFlag = APP_FALSE;
           app_commrx_rx_payload_and_timestamp_printout();

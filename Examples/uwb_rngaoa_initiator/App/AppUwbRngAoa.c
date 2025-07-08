@@ -90,7 +90,7 @@ typedef struct
 /* Default uwb packet configuration.*/
 static cb_uwbsystem_packetconfig_st s_stUwbPacketConfig = 
 {
-  .prfMode            = EN_PRF_MODE_BPRF,                 // PRF mode selection
+  .prfMode            = EN_PRF_MODE_BPRF_62P4,                 // PRF mode selection
   .psduDataRate       = EN_PSDU_DATA_RATE_6P81,           // PSDU data rate
   .bprfPhrDataRate    = EN_BPRF_PHR_DATA_RATE_0P85,       // BPRF PHR data rate
   .preambleCodeIndex  = EN_UWB_PREAMBLE_CODE_IDX_9,       // Preamble code index (9-32)
@@ -442,7 +442,7 @@ void app_rngaoa_initiator(void)
           if (s_countOfPdoaScheduledTx <= DEF_NUMBER_OF_PDOA_REPEATED_TX)
           {
             cb_framework_uwb_configure_scheduled_trx(s_stPdoaRepeatedTxConfig);
-            cb_framework_uwb_pdoa_stage_scheduled_tx(&stTxIrqEnable);
+            cb_framework_uwb_tx_restart(&stTxIrqEnable, EN_TRX_START_DEFERRED);
           }
           else
           {
@@ -635,11 +635,11 @@ void app_rngaoa_log(void)
 {
   if (!s_applicationTimeout)
   {
-    app_uwb_rngaoa_print("Cycle:%u, D:%fcm\n", s_appCycleCount++, s_measuredDistance);
+    app_uwb_rngaoa_print("Cycle:%u, D:%fcm,", s_appCycleCount++, s_measuredDistance);
 
     /*Printout*/
-    app_uwb_rngaoa_print("PD01:%f, PD02:%f, PD12:%f (in degrees)\n",(double)s_stResponderDataContainer.pdoaDataContainer.rx0_rx1,(double)s_stResponderDataContainer.pdoaDataContainer.rx0_rx2,(double)s_stResponderDataContainer.pdoaDataContainer.rx1_rx2);          
-    app_uwb_rngaoa_print("azimuth: %f degrees\nelevation: %f degrees\n", (double)s_stResponderDataContainer.pdoaDataContainer.azimuthEst,(double)s_stResponderDataContainer.pdoaDataContainer.elevationEst);         
+    app_uwb_rngaoa_print("PD01:%f, PD02:%f, PD12:%f (in degrees),",(double)s_stResponderDataContainer.pdoaDataContainer.rx0_rx1,(double)s_stResponderDataContainer.pdoaDataContainer.rx0_rx2,(double)s_stResponderDataContainer.pdoaDataContainer.rx1_rx2);          
+    app_uwb_rngaoa_print("azimuth: %f degrees,elevation: %f degrees\n", (double)s_stResponderDataContainer.pdoaDataContainer.azimuthEst,(double)s_stResponderDataContainer.pdoaDataContainer.elevationEst);         
   }
   else
   {

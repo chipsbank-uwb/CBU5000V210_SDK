@@ -79,12 +79,13 @@ void cb_system_uwb_rx_top_init(void);
 void cb_system_uwb_config_tx(cb_uwbsystem_packetconfig_st* config, cb_uwbsystem_txpayload_st* txPayload, cb_uwbsystem_tx_irqenable_st* stTxIrqEnable);
 
 /**
- * @brief Configures the UWB RX (Receiver) settings.
- * 
- * @param config Pointer to the UWB packet configuration structure.
- * @param stRxIrqEnable Pointer to the UWB RX interrupt enable structure.
+ * @brief Configures the UWB receiver with packet detection and CFO bypass settings.
+ *
+ * @param config Pointer to packet configuration structure
+ * @param stRxIrqEnable Pointer to RX IRQ enable configuration structure
+ * @param stBypass_cfo Pointer to CFO bypass configuration structure
  */
-void cb_system_uwb_config_rx(cb_uwbsystem_packetconfig_st* config, cb_uwbsystem_rx_irqenable_st* stRxIrqEnable);
+void cb_system_uwb_config_rx(cb_uwbsystem_packetconfig_st* config, cb_uwbsystem_rx_irqenable_st* stRxIrqEnable, cb_uwbsystem_rx_dbb_cfo_st* stBypass_cfo);
  
 /**
  * @brief Configures the UWB RX operation mode.
@@ -124,7 +125,7 @@ void cb_system_uwb_tx_start             (void);
 void cb_system_uwb_tx_start_prepare(void);
 
 /**
- * @brief Start the UWB communication for RX (For deferred RX)
+ * @brief Start the UWB communication for RX0 (For deferred RX)
  *
  */
 void cb_system_uwb_rx_start_prepare(void);
@@ -150,39 +151,33 @@ void cb_system_uwb_tx_stop             (void);
 /**
  * @brief Starts the UWB (Ultra-Wideband) receiver on the specified port.
  * 
- * @param enRxPort The UWB receiver port to start.
+ * This function starts the UWB receiver on the specified port with the given gain settings.
+ * It configures the receiver gain parameters and enables reception on the selected port.
+ *
+ * @param enRxPort The UWB receiver port to start.Can be a single port
+ *                 (EN_UWB_RX_0, EN_UWB_RX_1, EN_UWB_RX_2) or a combination of ports
+ *                 (EN_UWB_RX_02, EN_UWB_RX_ALL)
+ * @param stBypass_gain Pointer to structure containing gain bypass configuration parameters.
  */
-void cb_system_uwb_rx_start(cb_uwbsystem_rxport_en enRxPort);
+void cb_system_uwb_rx_start(cb_uwbsystem_rxport_en enRxPort, cb_uwbsystem_rx_dbb_gain_st* stBypass_gain);
  
 /**
  * @brief Stops the UWB (Ultra-Wideband) receiver on the specified port.
  * 
- * @param enRxPort The UWB receiver port to stop.
+ * @param enRxPort The UWB receiver port to stop. Can be a single port
+ *                 (EN_UWB_RX_0, EN_UWB_RX_1, EN_UWB_RX_2) or a combination of ports
+ *                 (EN_UWB_RX_02, EN_UWB_RX_ALL)
  */
 void cb_system_uwb_rx_stop (cb_uwbsystem_rxport_en enRxPort);
  
 /**
  * @brief Turns off the UWB (Ultra-Wideband) receiver on the specified port.
  * 
- * @param enRxPort The UWB receiver port to turn off.
+ * @param enRxPort The UWB receiver port to turn off.Can be a single port
+ *                 (EN_UWB_RX_0, EN_UWB_RX_1, EN_UWB_RX_2) or a combination of ports
+ *                 (EN_UWB_RX_02, EN_UWB_RX_ALL)
  */
 void cb_system_uwb_rx_off (cb_uwbsystem_rxport_en enRxPort);
-
-/**
- * @brief Starts the UWB PDOA (Phase Difference of Arrival) RX process for all channels.
- *
- * This function initializes and starts the reception process for UWB PDOA
- * on all channels using the specified gain index. It is typically used in
- * scenarios where precise location or angle-of-arrival measurements are required.
- *
- * @param[in] pdoaGainIdx Pointer to a variable containing the gain index to be used
- *                        for the PDOA reception process. The gain index determines
- *                        the amplification level for the received signal.
- *
- * @note Ensure that the provided pointer is valid and points to a properly
- *       initialized gain index value before calling this function.
- */
-void cb_system_uwb_pdoa_rx_all_start(uint32_t* pdoaGainIdx);
 
 /**
  * @brief Configures the UWB transmission interrupts.
@@ -615,12 +610,12 @@ cb_uwbsystem_rx_dcoc_st cb_system_uwb_get_rx_dcoc(cb_uwbsystem_rxport_en enRxPor
  *                    RSSI values from. Valid values are 
  *                    EN_UWB_RX_0, EN_UWB_RX_1, and EN_UWB_RX_2.
  *
- * @return A structure of type `cb_uwbsystem_rxall_signalinfo_st` containing the RSSI 
+ * @return A structure of type `cb_uwbsystem_rx_signalinfo_st` containing the RSSI 
  *         values, gain indices, CFO estimates, and DCOC results for 
  *         the specified RX ports.
  *
  */
-cb_uwbsystem_rxall_signalinfo_st cb_system_uwb_get_rx_rssi(uint8_t rssiRxPorts);
+cb_uwbsystem_rx_signalinfo_st cb_system_uwb_get_rx_rssi(cb_uwbsystem_rxport_en rssiRxPorts);
 
 /**
  * @brief Get the etc status logging
@@ -649,14 +644,6 @@ uint32_t cb_system_uwb_get_tx_rf_pll_lock(void);
 cb_uwbsystem_rxstatus_un cb_system_uwb_get_rx_status(void);
 
 /**
- * @brief Configures sync cfo est bypass crs value
- *
- * @param[in] val cfoEst value
- * @param[in] en enable or disable (1/0)
-*/
-void cb_system_uwb_configure_rx_sync_cfo_est_bypass_crs(uint32_t val, uint8_t en);
-
-/**
  * @brief Reads the Cir Ctl Idx value
  *
  * @return CirCtlidx value
@@ -677,6 +664,24 @@ void cb_system_uwb_rx_top_off(void);
  * @brief Turns off the UWB transmitter.
  */
 void cb_system_uwb_tx_off(void);
+
+/**
+ * @brief Freezes the UWB transmitter PLL.
+ * 
+ * This function freezes the Phase-Locked Loop (PLL) of the UWB transmitter,
+ * which can be useful for maintaining stable frequency reference during
+ * specific operations or power management scenarios.
+ */
+void cb_system_uwb_tx_freeze_pll(void);
+
+/**
+ * @brief Unfreezes the UWB transmitter PLL.
+ * 
+ * This function unfreezes the Phase-Locked Loop (PLL) of the UWB transmitter,
+ * allowing it to resume normal operation and frequency tracking after being
+ * previously frozen.
+ */
+void cb_system_uwb_tx_unfreeze_pll(void);
 
 /**
  * @brief Enables the UWB absolute timer.
@@ -738,7 +743,7 @@ void cb_system_uwb_configure_event_timestamp_mask(enUwbEventTimestampMask eventT
  * @param eventTimestampMask The mask for the event timestamp.
  * @return The value of the event timestamp.
  */
-uint32_t cb_system_uwb_get_event_timestamp_value(enUwbEventTimestampMask eventTimestampMask);
+uint32_t cb_system_uwb_get_event_timestamp_in_ns(enUwbEventTimestampMask eventTimestampMask);
 
 /**
  * @brief Clears the TSU (Timestamp Unit).
@@ -766,20 +771,37 @@ double cb_system_uwb_alg_prop_calculation(cb_uwbsystem_rangingtroundtreply_st* r
 /**
  * @brief Compensates for the 3D antenna bias in AOA (Angle of Arrival) calculations.
  * 
- * @param pdoa_raw The raw PDOA 3D data.
- * @param azi_pd_bias The azimuth phase difference bias.
- * @param ele_pd_bias The elevation phase difference bias.
- * @return The compensated AOA data.
+ * @param pdoa_raw The raw PDOA 3D data containing phase differences between antenna pairs
+ * @param pd01_bias Phase difference bias between antenna 0 and 1 (in degrees)
+ * @param pd02_bias Phase difference bias between antenna 0 and 2 (in degrees)
+ * @param pd12_bias Phase difference bias between antenna 1 and 2 (in degrees)
+ * @return stAOA_CompensatedData Structure containing the bias-compensated phase differences
  */
-stAOA_CompensatedData cb_system_uwb_aoa_antenna_3d_bias_comp(cb_uwbsystem_pdoa_3ddata_st pdoa_raw, float azi_pd_bias, float ele_pd_bias);
+stAOA_CompensatedData cb_system_uwb_aoa_biascomp(cb_uwbsystem_pdoa_3ddata_st pdoa_raw, float pd01_bias, float pd02_bias, float pd12_bias);
 
 /**
- * @brief Calculates the 3D AOA (Angle of Arrival) using compensated data.
+ * @brief Calculates the 3D AOA (Angle of Arrival) using compensated data and lookup tables.
  * 
- * @param AOA_PD The compensated AOA data.
- * @param azi_result Pointer to store the azimuth result.
- * @param ele_result Pointer to store the elevation result.
+ * @param AOA_PD Pointer to structure containing compensated phase differences
+ * @param ant_attr Pointer to antenna attributes structure containing antenna positions and type
+ * @param lut_attr Pointer to LUT attributes structure containing reference data and parameters
+ * @param azi_result Pointer to store the calculated azimuth angle in degrees
+ * @param ele_result Pointer to store the calculated elevation angle in degrees
  */
-void cb_system_uwb_aoa_antenna_3d(stAOA_CompensatedData* AOA_PD, float* azi_result, float* ele_result);
+void cb_system_uwb_aoa_lut_full3d(stAOA_CompensatedData* AOA_PD, st_antenna_attribute_3d* ant_attr, cb_uwbaoa_lut_attribute_st* lut_attr, float* azi_result, float* ele_result);
+
+/**
+ * @brief Calculates the 2D AOA (Angle of Arrival) using phase differences and lookup tables.
+ * 
+ * @param pd_azi Pointer to phase difference for azimuth calculation
+ * @param ele_ref Pointer to reference elevation angle in degrees
+ * @param ant_attr Pointer to 2D antenna attributes structure containing antenna positions and type
+ * @param lut_attr Pointer to LUT attributes structure containing reference data and parameters
+ * @param azi_result Pointer to store the calculated azimuth angle in degrees
+ * @return void
+ */
+ void cb_system_uwb_aoa_lut_full2d(float* pd_azi, float* ele_ref, st_antenna_attribute_2d* ant_attr, cb_uwbaoa_lut_attribute_st* lut_attr, float* azi_result);
+ 
+ void cb_system_uwb_config_ftm_rx(cb_uwbsystem_packetconfig_st* config, cb_uwbsystem_rx_irqenable_st* stRxIrqEnable, cb_uwbsystem_rx_dbb_cfo_st* stBypass_cfo);
 
 #endif /*__CB_SYSTEM_H*/

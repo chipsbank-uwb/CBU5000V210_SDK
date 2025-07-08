@@ -42,7 +42,7 @@
             CBU5000V210
           </a>
               <div class="version">
-                2.0.0
+                2.0.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -215,12 +215,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv434cb_framework_uwb_qmode_trx_disablev"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_qmode_trx_disable()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv431cb_framework_uwb_qmode_tx_startP28cb_uwbsystem_packetconfig_stP25cb_uwbsystem_txpayload_stP28cb_uwbsystem_tx_irqenable_st"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_qmode_tx_start()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv429cb_framework_uwb_qmode_tx_endv"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_qmode_tx_end()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv431cb_framework_uwb_qmode_rx_start22cb_uwbsystem_rxport_enP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_qmode_rx_start()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv429cb_framework_uwb_qmode_rx_end22cb_uwbsystem_rxport_en"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_qmode_rx_end()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv431cb_framework_uwb_qmode_rx_startP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_qmode_rx_start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv429cb_framework_uwb_qmode_rx_endv"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_qmode_rx_end()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv425cb_framework_uwb_tx_startP28cb_uwbsystem_packetconfig_stP25cb_uwbsystem_txpayload_stP28cb_uwbsystem_tx_irqenable_st32cb_uwbframework_trx_startmode_en"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_tx_start()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv423cb_framework_uwb_tx_endv"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_tx_end()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv427cb_framework_uwb_tx_restartP28cb_uwbsystem_tx_irqenable_st32cb_uwbframework_trx_startmode_en"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_tx_restart()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv425cb_framework_uwb_rx_start22cb_uwbsystem_rxport_enP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st32cb_uwbframework_trx_startmode_en"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_rx_start()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv423cb_framework_uwb_rx_end22cb_uwbsystem_rxport_en"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_rx_end()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv427cb_framework_uwb_rx_restart22cb_uwbsystem_rxport_enP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st32cb_uwbframework_trx_startmode_en"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_rx_restart()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv435cb_framework_uwb_get_rx_packet_sizeP28cb_uwbsystem_packetconfig_st"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_get_rx_packet_size()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv431cb_framework_uwb_get_rx_payloadP7uint8_tP8uint16_tP28cb_uwbsystem_packetconfig_st"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_get_rx_payload()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv439cb_framework_uwb_get_rx_phr_ranging_bitP28cb_uwbsystem_packetconfig_st"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_get_rx_phr_ranging_bit()</span></code></a></li>
@@ -239,14 +241,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv437cb_framework_uwb_enable_scheduled_trx38cb_uwbframework_trx_scheduledconfig_st"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_enable_scheduled_trx()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv438cb_framework_uwb_disable_scheduled_trx38cb_uwbframework_trx_scheduledconfig_st"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_disable_scheduled_trx()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv440cb_framework_uwb_configure_scheduled_trx38cb_uwbframework_trx_scheduledconfig_st"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_configure_scheduled_trx()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv429cb_framework_uwb_pdoa_rx_initP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st8uint32_t"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_pdoa_rx_init()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv430cb_framework_uwb_pdoa_rx_startP28cb_uwbsystem_rx_irqenable_st8uint32_t"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_pdoa_rx_start()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv429cb_framework_uwb_pdoa_rx_stopv"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_pdoa_rx_stop()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv428cb_framework_uwb_pdoa_rx_endv"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_pdoa_rx_end()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv440cb_framework_uwb_pdoa_stage_scheduled_txP28cb_uwbsystem_tx_irqenable_st"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_pdoa_stage_scheduled_tx()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv434cb_framework_uwb_rxconfig_cfo_gain33cb_uwbsystem_rxconfig_cfo_gain_enP29cb_uwbsystem_rx_dbb_config_st"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_rxconfig_cfo_gain()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv436cb_framework_uwb_pdoa_cir_processing16enUwbPdoaCalType7uint8_tK7uint8_tPK29cb_uwbsystem_rx_cir_iqdata_st8uint16_t"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_pdoa_cir_processing()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv438cb_framework_uwb_pdoa_calculate_resultP26cb_uwbsystem_pdoaresult_st16enUwbPdoaCalType7uint8_t"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_pdoa_calculate_result()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv435cb_framework_uwb_pdoa_calculate_aoa27cb_uwbsystem_pdoa_3ddata_stffPfPf"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_pdoa_calculate_aoa()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv435cb_framework_uwb_pdoa_calculate_aoa27cb_uwbsystem_pdoa_3ddata_stfffPfPf"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_pdoa_calculate_aoa()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv436cb_framework_uwb_pdoa_calculate_meanPd8uint32_t"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_pdoa_calculate_mean()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv435cb_framework_uwb_pdoa_qsort_comparePKvPKv"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_pdoa_qsort_compare()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv447cb_framework_uwb_pdoa_calculate_mean_and_medianPd7uint8_tPdPd"><code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_pdoa_calculate_mean_and_median()</span></code></a></li>
@@ -260,7 +258,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv417cb_system_uwb_offv"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_off()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv425cb_system_uwb_rx_top_initv"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_rx_top_init()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv423cb_system_uwb_config_txP28cb_uwbsystem_packetconfig_stP25cb_uwbsystem_txpayload_stP28cb_uwbsystem_tx_irqenable_st"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_config_tx()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv423cb_system_uwb_config_rxP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_config_rx()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv423cb_system_uwb_config_rxP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_stP26cb_uwbsystem_rx_dbb_cfo_st"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_config_rx()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv441cb_system_uwb_configure_rx_operation_mode31cb_uwbsystem_rxoperationmode_en"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_configure_rx_operation_mode()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv422cb_system_uwb_trx_initv"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_trx_init()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv421cb_system_uwb_tx_initv"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_tx_init()</span></code></a></li>
@@ -271,10 +269,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv428cb_system_uwb_stage_tx_startv"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_stage_tx_start()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv428cb_system_uwb_stage_rx_startv"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_stage_rx_start()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv421cb_system_uwb_tx_stopv"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_tx_stop()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv422cb_system_uwb_rx_start22cb_uwbsystem_rxport_en"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_rx_start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv422cb_system_uwb_rx_start22cb_uwbsystem_rxport_enP27cb_uwbsystem_rx_dbb_gain_st"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_rx_start()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv421cb_system_uwb_rx_stop22cb_uwbsystem_rxport_en"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_rx_stop()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv420cb_system_uwb_rx_off22cb_uwbsystem_rxport_en"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_rx_off()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv431cb_system_uwb_pdoa_rx_all_startP8uint32_t"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_pdoa_rx_all_start()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv430cb_system_uwb_configure_tx_irqP28cb_uwbsystem_tx_irqenable_st"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_configure_tx_irq()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv430cb_system_uwb_configure_rx_irqP28cb_uwbsystem_rx_irqenable_st"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_configure_rx_irq()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv435cb_system_uwb_get_rx_done_timestampv"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_get_rx_done_timestamp()</span></code></a></li>
@@ -315,11 +312,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv433cb_system_uwb_pdoa_cir_processing16enUwbPdoaCalType7uint8_tK7uint8_tPK29cb_uwbsystem_rx_cir_iqdata_st8uint16_t"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_pdoa_cir_processing()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv437cb_system_uwb_get_rx_cir_quality_flagv"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_get_rx_cir_quality_flag()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv425cb_system_uwb_get_rx_dcoc22cb_uwbsystem_rxport_en"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_get_rx_dcoc()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv425cb_system_uwb_get_rx_rssi7uint8_t"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_get_rx_rssi()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv425cb_system_uwb_get_rx_rssi22cb_uwbsystem_rxport_en"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_get_rx_rssi()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv440cb_system_uwb_get_rx_etc_status_registerPC37cb_uwbsystem_rx_etc_statusregister_st"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_get_rx_etc_status_register()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv432cb_system_uwb_get_tx_rf_pll_lockv"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_get_tx_rf_pll_lock()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv427cb_system_uwb_get_rx_statusv"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_get_rx_status()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv450cb_system_uwb_configure_rx_sync_cfo_est_bypass_crs8uint32_t7uint8_t"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_configure_rx_sync_cfo_est_bypass_crs()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv432cb_system_uwb_get_rx_cir_ctl_idxv"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_get_rx_cir_ctl_idx()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv421cb_system_uwb_trx_offv"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_trx_off()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv424cb_system_uwb_rx_top_offv"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_rx_top_off()</span></code></a></li>
@@ -331,12 +327,12 @@
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv449cb_system_uwb_abs_timer_configure_event_commander11enUwbEnable18enUwbAbsoluteTimer17enUwbEventControl"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_abs_timer_configure_event_commander()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv436cb_system_uwb_enable_event_timestamp11enUwbEnable"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_enable_event_timestamp()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv444cb_system_uwb_configure_event_timestamp_mask23enUwbEventTimestampMask15enUwbEventIndex"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_configure_event_timestamp_mask()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv439cb_system_uwb_get_event_timestamp_value23enUwbEventTimestampMask"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_get_event_timestamp_value()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv423cb_system_uwb_tsu_clearv"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_tsu_clear()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv433cb_system_uwb_alg_pdoa_estimationdd"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_alg_pdoa_estimation()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv434cb_system_uwb_alg_prop_calculationP35cb_uwbsystem_rangingtroundtreply_stP35cb_uwbsystem_rangingtroundtreply_st"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_alg_prop_calculation()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv438cb_system_uwb_aoa_antenna_3d_bias_comp27cb_uwbsystem_pdoa_3ddata_stff"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_aoa_antenna_3d_bias_comp()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv428cb_system_uwb_aoa_antenna_3dP21stAOA_CompensatedDataPfPf"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_aoa_antenna_3d()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv426cb_system_uwb_aoa_biascomp27cb_uwbsystem_pdoa_3ddata_stfff"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_aoa_biascomp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv428cb_system_uwb_aoa_lut_full3dP21stAOA_CompensatedDataP23st_antenna_attribute_3dP26cb_uwbaoa_lut_attribute_stPfPf"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_aoa_lut_full3d()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv428cb_system_uwb_aoa_lut_full2dPfPfP23st_antenna_attribute_2dP26cb_uwbaoa_lut_attribute_stPf"><code class="docutils literal notranslate"><span class="pre">cb_system_uwb_aoa_lut_full2d()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -1741,23 +1737,7 @@
 </section>
 <section id="uwb-framework">
 <h2>UWB-FRAMEWORK<a class="headerlink" href="#uwb-framework" title="Link to this heading"></a></h2>
-<figure class="align-center">
-<p class="plantuml">
-<img src="_images/plantuml-a7b4a76819f799be99d6920df79c4b426edbc1ec.png" alt="Title Normal Flow
-start
-:cb_framework_uwb_init;
-if () then (RX)
-    #orange:cb_framework_uwb_rx_start;
-    #orange:cb_framework_uwb_rx_end;
-else (TX)
-    #orange:cb_framework_uwb_tx_start;
-    #orange:cb_framework_uwb_tx_end;
-
-endif
-:cb_framework_uwb_off;
-stop"/>
-</p>
-</figure>
+<a class="reference internal image-reference" href="_images/uwb_framework_normalflow.png"><img alt="uwb_framework_normalflow.png" class="align-center" src="_images/uwb_framework_normalflow.png" style="width: 120%;" /></a>
 <figure class="align-center">
 <p class="plantuml">
 <img src="_images/plantuml-8f1f16f84377141a3fc90bb6ff32169919e404fc.png" alt="Title Quick Flow
@@ -1774,6 +1754,33 @@ endif
 #lightblue:cb_framework_uwb_qmode_trx_disable;
 :cb_framework_uwb_off;
 stop"/>
+</p>
+</figure>
+<figure class="align-center">
+<p class="plantuml">
+<img src="_images/plantuml-f3f1f38fd03467e7a803fd0d58d04cb3e2052ed2.png" alt="skinparam legend {
+  backgroundColor #GhostWhite
+  entrySeparator #GhostWhite
+}
+
+legend top
+  &lt;#GhostWhite,#GhostWhite&gt;|         |= __Legend__ |
+  | | |
+  |&lt;#lightgreen&gt;  | Available      |
+  |&lt;#black&gt; | Unavailable      |
+endlegend
+
+title
+&lt;#lightblue&gt;|=  Function  |=  EN_UWB_RX_0  |=  EN_UWB_RX_1  |=  EN_UWB_RX_2  |=  EN_UWB_RX_02 |= EN_UWB_RX_ALL |
+| cb_framework_uwb_qmode_rx_start | &lt;#lightgreen&gt; | &lt;#black&gt; | &lt;#black&gt; | &lt;#black&gt; | &lt;#black&gt; |
+| cb_framework_uwb_qmode_rx_end | &lt;#lightgreen&gt; | &lt;#black&gt; | &lt;#black&gt; | &lt;#black&gt; | &lt;#black&gt; |
+| cb_framework_uwb_rx_start | &lt;#lightgreen&gt; | &lt;#lightgreen&gt; | &lt;#lightgreen&gt; | &lt;#lightgreen&gt; | &lt;#lightgreen&gt; |
+| cb_framework_uwb_rx_end | &lt;#lightgreen&gt; | &lt;#lightgreen&gt; | &lt;#lightgreen&gt; | &lt;#lightgreen&gt; | &lt;#lightgreen&gt; |
+| cb_framework_uwb_rx_restart | &lt;#lightgreen&gt; | &lt;#lightgreen&gt; | &lt;#lightgreen&gt; | &lt;#lightgreen&gt; | &lt;#lightgreen&gt; |
+| cb_framework_uwb_get_rx_tsu_timestamp | &lt;#lightgreen&gt; | &lt;#lightgreen&gt; | &lt;#lightgreen&gt; | &lt;#black&gt; | &lt;#black&gt; |
+| cb_framework_uwb_store_rx_cir_register | &lt;#lightgreen&gt; | &lt;#lightgreen&gt; | &lt;#lightgreen&gt; | &lt;#black&gt; | &lt;#black&gt; |
+| cb_framework_uwb_get_rx_rssi | &lt;#lightgreen&gt; | &lt;#lightgreen&gt; | &lt;#lightgreen&gt; | &lt;#black&gt; | &lt;#black&gt; |
+end title"/>
 </p>
 </figure>
 <dl class="cpp function">
@@ -1827,14 +1834,13 @@ stop"/>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv431cb_framework_uwb_qmode_rx_start22cb_uwbsystem_rxport_enP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st">
-<span id="_CPPv331cb_framework_uwb_qmode_rx_start22cb_uwbsystem_rxport_enP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st"></span><span id="_CPPv231cb_framework_uwb_qmode_rx_start22cb_uwbsystem_rxport_enP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st"></span><span id="cb_framework_uwb_qmode_rx_start__cb_uwbsystem_rxport_en.cb_uwbsystem_packetconfig_stP.cb_uwbsystem_rx_irqenable_stP"></span><span class="target" id="_c_b__uwbframework_8h_1a818a54e5648756b9759368dc8513c90c"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_framework_uwb_qmode_rx_start</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">cb_uwbsystem_rxport_en</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">enRxPort</span></span>, <span class="n"><span class="pre">cb_uwbsystem_packetconfig_st</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">rxPacketConfig</span></span>, <span class="n"><span class="pre">cb_uwbsystem_rx_irqenable_st</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stRxIrqEnable</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv431cb_framework_uwb_qmode_rx_start22cb_uwbsystem_rxport_enP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st" title="Link to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv431cb_framework_uwb_qmode_rx_startP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st">
+<span id="_CPPv331cb_framework_uwb_qmode_rx_startP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st"></span><span id="_CPPv231cb_framework_uwb_qmode_rx_startP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st"></span><span id="cb_framework_uwb_qmode_rx_start__cb_uwbsystem_packetconfig_stP.cb_uwbsystem_rx_irqenable_stP"></span><span class="target" id="_c_b__uwbframework_8h_1ae0f5f84a4ee099e7321233dce60ee135"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_framework_uwb_qmode_rx_start</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">cb_uwbsystem_packetconfig_st</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">rxPacketConfig</span></span>, <span class="n"><span class="pre">cb_uwbsystem_rx_irqenable_st</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stRxIrqEnable</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv431cb_framework_uwb_qmode_rx_startP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st" title="Link to this definition"></a><br /></dt>
 <dd><p>Start the UWB communication receiver in quick mode. </p>
 <p>This function starts the UWB communication receiver in quick mode by performing various configuration steps. It sets up the required parameters and resources for UWB communication.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>enRxPort</strong> – The RX port to use for reception </p></li>
 <li><p><strong>rxPacketConfig</strong> – Configuration for the packet to be received </p></li>
 <li><p><strong>stRxIrqEnable</strong> – Interrupt enable configuration for reception </p></li>
 </ul>
@@ -1843,15 +1849,10 @@ stop"/>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv429cb_framework_uwb_qmode_rx_end22cb_uwbsystem_rxport_en">
-<span id="_CPPv329cb_framework_uwb_qmode_rx_end22cb_uwbsystem_rxport_en"></span><span id="_CPPv229cb_framework_uwb_qmode_rx_end22cb_uwbsystem_rxport_en"></span><span id="cb_framework_uwb_qmode_rx_end__cb_uwbsystem_rxport_en"></span><span class="target" id="_c_b__uwbframework_8h_1a84d79bb74a194b10a8fd83c06eacba53"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_framework_uwb_qmode_rx_end</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">cb_uwbsystem_rxport_en</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">enRxPort</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv429cb_framework_uwb_qmode_rx_end22cb_uwbsystem_rxport_en" title="Link to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv429cb_framework_uwb_qmode_rx_endv">
+<span id="_CPPv329cb_framework_uwb_qmode_rx_endv"></span><span id="_CPPv229cb_framework_uwb_qmode_rx_endv"></span><span id="cb_framework_uwb_qmode_rx_end__void"></span><span class="target" id="_c_b__uwbframework_8h_1a65fdb3fa19fa4a37a1ee6b05d6163bd4"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_framework_uwb_qmode_rx_end</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv429cb_framework_uwb_qmode_rx_endv" title="Link to this definition"></a><br /></dt>
 <dd><p>End the UWB communication receiver in quick mode. </p>
-<p>This function ends the UWB communication receiver in quick mode by performing various cleanup steps. It releases the allocated resources and resets the UWB communication system.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>enRxPort</strong> – The RX port to stop </p>
-</dd>
-</dl>
+<p>This function ends the UWB communication receiver in quick mode by performing various cleanup steps. It releases the allocated resources and resets the UWB communication system. </p>
 </dd></dl>
 
 <dl class="cpp function">
@@ -1879,6 +1880,21 @@ stop"/>
 </dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv427cb_framework_uwb_tx_restartP28cb_uwbsystem_tx_irqenable_st32cb_uwbframework_trx_startmode_en">
+<span id="_CPPv327cb_framework_uwb_tx_restartP28cb_uwbsystem_tx_irqenable_st32cb_uwbframework_trx_startmode_en"></span><span id="_CPPv227cb_framework_uwb_tx_restartP28cb_uwbsystem_tx_irqenable_st32cb_uwbframework_trx_startmode_en"></span><span id="cb_framework_uwb_tx_restart__cb_uwbsystem_tx_irqenable_stP.cb_uwbframework_trx_startmode_en"></span><span class="target" id="_c_b__uwbframework_8h_1a1cc29f7b3811f9e5a67d006dfbbebddb"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_framework_uwb_tx_restart</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">cb_uwbsystem_tx_irqenable_st</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stTxIrqEnable</span></span>, <span class="n"><span class="pre">cb_uwbframework_trx_startmode_en</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">trxStartMode</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427cb_framework_uwb_tx_restartP28cb_uwbsystem_tx_irqenable_st32cb_uwbframework_trx_startmode_en" title="Link to this definition"></a><br /></dt>
+<dd><p>Restart UWB transmission in normal mode. </p>
+<p>This function restarts the UWB transmission by stopping the current transmission, reconfiguring the TX interrupts, and starting a new transmission based on the specified mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stTxIrqEnable</strong> – Interrupt enable configuration for transmission </p></li>
+<li><p><strong>trxStartMode</strong> – Start mode (immediate or deferred) </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv425cb_framework_uwb_rx_start22cb_uwbsystem_rxport_enP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st32cb_uwbframework_trx_startmode_en">
 <span id="_CPPv325cb_framework_uwb_rx_start22cb_uwbsystem_rxport_enP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st32cb_uwbframework_trx_startmode_en"></span><span id="_CPPv225cb_framework_uwb_rx_start22cb_uwbsystem_rxport_enP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st32cb_uwbframework_trx_startmode_en"></span><span id="cb_framework_uwb_rx_start__cb_uwbsystem_rxport_en.cb_uwbsystem_packetconfig_stP.cb_uwbsystem_rx_irqenable_stP.cb_uwbframework_trx_startmode_en"></span><span class="target" id="_c_b__uwbframework_8h_1acc563d8a9022bcedf3e2b5dae8e93d3a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_framework_uwb_rx_start</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">cb_uwbsystem_rxport_en</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">enRxPort</span></span>, <span class="n"><span class="pre">cb_uwbsystem_packetconfig_st</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">rxPacketConfig</span></span>, <span class="n"><span class="pre">cb_uwbsystem_rx_irqenable_st</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stRxIrqEnable</span></span>, <span class="n"><span class="pre">cb_uwbframework_trx_startmode_en</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">trxStartMode</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425cb_framework_uwb_rx_start22cb_uwbsystem_rxport_enP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st32cb_uwbframework_trx_startmode_en" title="Link to this definition"></a><br /></dt>
 <dd><p>Start UWB reception in normal mode. </p>
@@ -1901,6 +1917,26 @@ stop"/>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>enRxPort</strong> – The RX port to stop </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv427cb_framework_uwb_rx_restart22cb_uwbsystem_rxport_enP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st32cb_uwbframework_trx_startmode_en">
+<span id="_CPPv327cb_framework_uwb_rx_restart22cb_uwbsystem_rxport_enP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st32cb_uwbframework_trx_startmode_en"></span><span id="_CPPv227cb_framework_uwb_rx_restart22cb_uwbsystem_rxport_enP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st32cb_uwbframework_trx_startmode_en"></span><span id="cb_framework_uwb_rx_restart__cb_uwbsystem_rxport_en.cb_uwbsystem_packetconfig_stP.cb_uwbsystem_rx_irqenable_stP.cb_uwbframework_trx_startmode_en"></span><span class="target" id="_c_b__uwbframework_8h_1a61c18bf12c3b4e9aa1224cf14fc8f1a5"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_framework_uwb_rx_restart</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">cb_uwbsystem_rxport_en</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">enRxPort</span></span>, <span class="n"><span class="pre">cb_uwbsystem_packetconfig_st</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">rxPacketConfig</span></span>, <span class="n"><span class="pre">cb_uwbsystem_rx_irqenable_st</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stRxIrqEnable</span></span>, <span class="n"><span class="pre">cb_uwbframework_trx_startmode_en</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">trxStartMode</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427cb_framework_uwb_rx_restart22cb_uwbsystem_rxport_enP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st32cb_uwbframework_trx_startmode_en" title="Link to this definition"></a><br /></dt>
+<dd><p>Restarts the UWB receiver with a new configuration. </p>
+<p>This function stops the current UWB receiver, applies the specified interrupt configuration, and restarts the receiver based on the selected start mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>enRxPort</strong> – <strong>[in]</strong> RX port to be restarted (e.g., RX0, RX1, RX2, or ALL). </p></li>
+<li><p><strong>stRxIrqEnable</strong> – <strong>[in]</strong> Pointer to the RX interrupt configuration structure. </p></li>
+<li><p><strong>trxStartMode</strong> – <strong>[in]</strong> Start mode selection:<ul>
+<li><p>EN_TRX_START_NON_DEFERRED: start immediately.</p></li>
+<li><p>EN_TRX_START_DEFERRED: prepare for later start. </p></li>
+</ul>
+</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -2003,14 +2039,14 @@ stop"/>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv428cb_framework_uwb_get_rx_rssi7uint8_t">
-<span id="_CPPv328cb_framework_uwb_get_rx_rssi7uint8_t"></span><span id="_CPPv228cb_framework_uwb_get_rx_rssi7uint8_t"></span><span id="cb_framework_uwb_get_rx_rssi__uint8_t"></span><span class="target" id="_c_b__uwbframework_8h_1a040764934322f4172b130e8cbe9be087"></span><span class="n"><span class="pre">cb_uwbsystem_rxall_signalinfo_st</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_framework_uwb_get_rx_rssi</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rssiRxPorts</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428cb_framework_uwb_get_rx_rssi7uint8_t" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv328cb_framework_uwb_get_rx_rssi7uint8_t"></span><span id="_CPPv228cb_framework_uwb_get_rx_rssi7uint8_t"></span><span id="cb_framework_uwb_get_rx_rssi__uint8_t"></span><span class="target" id="_c_b__uwbframework_8h_1ad230824ba371395e40337b70997f83d2"></span><span class="n"><span class="pre">cb_uwbsystem_rx_signalinfo_st</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_framework_uwb_get_rx_rssi</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rssiRxPorts</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428cb_framework_uwb_get_rx_rssi7uint8_t" title="Link to this definition"></a><br /></dt>
 <dd><p>Get RSSI (Received Signal Strength Indicator) for UWB reception. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>rssiRxPorts</strong> – Bitmask of RX ports to get RSSI from </p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>cb_uwbsystem_rxall_signalinfo_st RSSI results for the specified ports </p>
+<dd class="field-even"><p>cb_uwbsystem_rx_signalinfo_st RSSI results for the specified ports </p>
 </dd>
 </dl>
 </dd></dl>
@@ -2094,12 +2130,13 @@ stop"/>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv448cb_framework_uwb_configure_event_time_stamp_mask23enUwbEventTimestampMask15enUwbEventIndex">
 <span id="_CPPv348cb_framework_uwb_configure_event_time_stamp_mask23enUwbEventTimestampMask15enUwbEventIndex"></span><span id="_CPPv248cb_framework_uwb_configure_event_time_stamp_mask23enUwbEventTimestampMask15enUwbEventIndex"></span><span id="cb_framework_uwb_configure_event_time_stamp_mask__enUwbEventTimestampMask.enUwbEventIndex"></span><span class="target" id="_c_b__uwbframework_8h_1a29fe357ede5a1dada9de936ae83bc300"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_framework_uwb_configure_event_time_stamp_mask</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">enUwbEventTimestampMask</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">eventTimestampMask</span></span>, <span class="n"><span class="pre">enUwbEventIndex</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">eventIndex</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv448cb_framework_uwb_configure_event_time_stamp_mask23enUwbEventTimestampMask15enUwbEventIndex" title="Link to this definition"></a><br /></dt>
-<dd><p>Configure event timestamp mask. </p>
+<dd><p>Configure event timestamp mask for UWB events. </p>
+<p>This function configures which UWB events will generate timestamps. The timestamp mask determines which events are monitored and recorded for timing purposes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>eventTimestampMask</strong> – Event timestamp mask to configure </p></li>
-<li><p><strong>eventIndex</strong> – Event index to configure </p></li>
+<li><p><strong>eventTimestampMask</strong> – Bitmask specifying which events should generate timestamps </p></li>
+<li><p><strong>eventIndex</strong> – Index of the event to configure (0-31) </p></li>
 </ul>
 </dd>
 </dl>
@@ -2108,10 +2145,11 @@ stop"/>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv437cb_framework_uwb_enable_scheduled_trx38cb_uwbframework_trx_scheduledconfig_st">
 <span id="_CPPv337cb_framework_uwb_enable_scheduled_trx38cb_uwbframework_trx_scheduledconfig_st"></span><span id="_CPPv237cb_framework_uwb_enable_scheduled_trx38cb_uwbframework_trx_scheduledconfig_st"></span><span id="cb_framework_uwb_enable_scheduled_trx__cb_uwbframework_trx_scheduledconfig_st"></span><span class="target" id="_c_b__uwbframework_8h_1a4efb62852ebeeddd15bd79087bfdf588"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_framework_uwb_enable_scheduled_trx</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">cb_uwbframework_trx_scheduledconfig_st</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">repeatedTrxConfig</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv437cb_framework_uwb_enable_scheduled_trx38cb_uwbframework_trx_scheduledconfig_st" title="Link to this definition"></a><br /></dt>
-<dd><p>Enable scheduled UWB transactions. </p>
+<dd><p>Enable scheduled UWB transmit/receive operations. </p>
+<p>Activates scheduled UWB transactions based on the provided configuration. This allows for timed/periodic UWB operations like using absolute timer. absolute timers.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>repeatedTrxConfig</strong> – Configuration for scheduled transactions </p>
+<dd class="field-odd"><p><strong>repeatedTrxConfig</strong> – Configuration structure containing timing parameters and operation modes for the scheduled transactions </p>
 </dd>
 </dl>
 </dd></dl>
@@ -2119,10 +2157,11 @@ stop"/>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv438cb_framework_uwb_disable_scheduled_trx38cb_uwbframework_trx_scheduledconfig_st">
 <span id="_CPPv338cb_framework_uwb_disable_scheduled_trx38cb_uwbframework_trx_scheduledconfig_st"></span><span id="_CPPv238cb_framework_uwb_disable_scheduled_trx38cb_uwbframework_trx_scheduledconfig_st"></span><span id="cb_framework_uwb_disable_scheduled_trx__cb_uwbframework_trx_scheduledconfig_st"></span><span class="target" id="_c_b__uwbframework_8h_1a913aaf554c40bb5615d14af85814540f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_framework_uwb_disable_scheduled_trx</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">cb_uwbframework_trx_scheduledconfig_st</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">repeatedTrxConfig</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv438cb_framework_uwb_disable_scheduled_trx38cb_uwbframework_trx_scheduledconfig_st" title="Link to this definition"></a><br /></dt>
-<dd><p>Disable scheduled UWB transactions. </p>
+<dd><p>Disable scheduled UWB transmit/receive operations. </p>
+<p>Stops any active scheduled UWB transactions and disables the absolute timers associated with the provided configuration.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>repeatedTrxConfig</strong> – Configuration for scheduled transactions </p>
+<dd class="field-odd"><p><strong>repeatedTrxConfig</strong> – Configuration structure of the scheduled transactions to disable </p>
 </dd>
 </dl>
 </dd></dl>
@@ -2130,67 +2169,26 @@ stop"/>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv440cb_framework_uwb_configure_scheduled_trx38cb_uwbframework_trx_scheduledconfig_st">
 <span id="_CPPv340cb_framework_uwb_configure_scheduled_trx38cb_uwbframework_trx_scheduledconfig_st"></span><span id="_CPPv240cb_framework_uwb_configure_scheduled_trx38cb_uwbframework_trx_scheduledconfig_st"></span><span id="cb_framework_uwb_configure_scheduled_trx__cb_uwbframework_trx_scheduledconfig_st"></span><span class="target" id="_c_b__uwbframework_8h_1ac65465a5d609f274c9a4b1d436acf1be"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_framework_uwb_configure_scheduled_trx</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">cb_uwbframework_trx_scheduledconfig_st</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">repeatedTrxConfig</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv440cb_framework_uwb_configure_scheduled_trx38cb_uwbframework_trx_scheduledconfig_st" title="Link to this definition"></a><br /></dt>
-<dd><p>Configure scheduled UWB transactions. </p>
+<dd><p>Configure parameters for scheduled UWB transactions. </p>
+<p>Sets up the configuration for scheduled UWB transactions including timing parameters, operation modes (TX/RX), and event triggers. This function is called after a transaction completes to reconfigure the system for the next scheduled transaction in periodic operations.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>repeatedTrxConfig</strong> – Configuration for scheduled transactions </p>
+<dd class="field-odd"><p><strong>repeatedTrxConfig</strong> – Configuration structure containing all parameters for the scheduled UWB transactions </p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv429cb_framework_uwb_pdoa_rx_initP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st8uint32_t">
-<span id="_CPPv329cb_framework_uwb_pdoa_rx_initP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st8uint32_t"></span><span id="_CPPv229cb_framework_uwb_pdoa_rx_initP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st8uint32_t"></span><span id="cb_framework_uwb_pdoa_rx_init__cb_uwbsystem_packetconfig_stP.cb_uwbsystem_rx_irqenable_stP.uint32_t"></span><span class="target" id="_c_b__uwbframework_8h_1a011fe3b4fa8b62853b2cfabb0971cedd"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_framework_uwb_pdoa_rx_init</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">cb_uwbsystem_packetconfig_st</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">rxPacketConfig</span></span>, <span class="n"><span class="pre">cb_uwbsystem_rx_irqenable_st</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stRxIrqEnable</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">cfoEst</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv429cb_framework_uwb_pdoa_rx_initP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st8uint32_t" title="Link to this definition"></a><br /></dt>
-<dd><p>Initialize UWB PDoA (Phase Difference of Arrival) reception. </p>
+<dt class="sig sig-object cpp" id="_CPPv434cb_framework_uwb_rxconfig_cfo_gain33cb_uwbsystem_rxconfig_cfo_gain_enP29cb_uwbsystem_rx_dbb_config_st">
+<span id="_CPPv334cb_framework_uwb_rxconfig_cfo_gain33cb_uwbsystem_rxconfig_cfo_gain_enP29cb_uwbsystem_rx_dbb_config_st"></span><span id="_CPPv234cb_framework_uwb_rxconfig_cfo_gain33cb_uwbsystem_rxconfig_cfo_gain_enP29cb_uwbsystem_rx_dbb_config_st"></span><span id="cb_framework_uwb_rxconfig_cfo_gain__cb_uwbsystem_rxconfig_cfo_gain_en.cb_uwbsystem_rx_dbb_config_stP"></span><span class="target" id="_c_b__uwbframework_8h_1a4ee82b5f24a019e77923affc880b88ba"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_framework_uwb_rxconfig_cfo_gain</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">cb_uwbsystem_rxconfig_cfo_gain_en</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">enReset</span></span>, <span class="n"><span class="pre">cb_uwbsystem_rx_dbb_config_st</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stRxCfg_CfoGainBypass</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv434cb_framework_uwb_rxconfig_cfo_gain33cb_uwbsystem_rxconfig_cfo_gain_enP29cb_uwbsystem_rx_dbb_config_st" title="Link to this definition"></a><br /></dt>
+<dd><p>Configure CFO and gain settings for UWB receiver. </p>
+<p>This function configures the Carrier Frequency Offset (CFO) and gain settings for the UWB receiver. It either resets the settings to default values or applies custom configuration.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>rxPacketConfig</strong> – Packet configuration for reception </p></li>
-<li><p><strong>stRxIrqEnable</strong> – Interrupt enable configuration for reception </p></li>
-<li><p><strong>cfoEst</strong> – Carrier frequency offset estimation </p></li>
+<li><p><strong>enReset</strong> – Reset flag - if EN_UWB_CFO_GAIN_RESET, resets to defaults, otherwise applies custom config </p></li>
+<li><p><strong>stBypass_cfg</strong> – Pointer to custom CFO and gain configuration structure. Only used if enReset is not EN_UWB_CFO_GAIN_RESET. </p></li>
 </ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv430cb_framework_uwb_pdoa_rx_startP28cb_uwbsystem_rx_irqenable_st8uint32_t">
-<span id="_CPPv330cb_framework_uwb_pdoa_rx_startP28cb_uwbsystem_rx_irqenable_st8uint32_t"></span><span id="_CPPv230cb_framework_uwb_pdoa_rx_startP28cb_uwbsystem_rx_irqenable_st8uint32_t"></span><span id="cb_framework_uwb_pdoa_rx_start__cb_uwbsystem_rx_irqenable_stP.uint32_t"></span><span class="target" id="_c_b__uwbframework_8h_1a0d7b729446a91ae1caf54bdd1d946056"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_framework_uwb_pdoa_rx_start</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">cb_uwbsystem_rx_irqenable_st</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stRxIrqEnable</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gain</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv430cb_framework_uwb_pdoa_rx_startP28cb_uwbsystem_rx_irqenable_st8uint32_t" title="Link to this definition"></a><br /></dt>
-<dd><p>Start UWB PDoA reception. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>stRxIrqEnable</strong> – Interrupt enable configuration for reception </p></li>
-<li><p><strong>gain</strong> – Gain setting for reception </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv429cb_framework_uwb_pdoa_rx_stopv">
-<span id="_CPPv329cb_framework_uwb_pdoa_rx_stopv"></span><span id="_CPPv229cb_framework_uwb_pdoa_rx_stopv"></span><span id="cb_framework_uwb_pdoa_rx_stop__void"></span><span class="target" id="_c_b__uwbframework_8h_1a3d55cc7d86107ff1c5cd5c3f9e98f2a7"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_framework_uwb_pdoa_rx_stop</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv429cb_framework_uwb_pdoa_rx_stopv" title="Link to this definition"></a><br /></dt>
-<dd><p>Stop UWB PDoA reception. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv428cb_framework_uwb_pdoa_rx_endv">
-<span id="_CPPv328cb_framework_uwb_pdoa_rx_endv"></span><span id="_CPPv228cb_framework_uwb_pdoa_rx_endv"></span><span id="cb_framework_uwb_pdoa_rx_end__void"></span><span class="target" id="_c_b__uwbframework_8h_1af2d15d23803fc0dc360e1c1f989a5b6b"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_framework_uwb_pdoa_rx_end</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428cb_framework_uwb_pdoa_rx_endv" title="Link to this definition"></a><br /></dt>
-<dd><p>End UWB PDoA reception. </p>
-<p>This function terminates the PDoA reception by cleaning up resources and disabling related hardware features. It should be called when PDoA reception is no longer needed to ensure proper system state and resource management.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This function should be called after all PDoA processing is complete to properly release system resources. </p>
-</div>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv440cb_framework_uwb_pdoa_stage_scheduled_txP28cb_uwbsystem_tx_irqenable_st">
-<span id="_CPPv340cb_framework_uwb_pdoa_stage_scheduled_txP28cb_uwbsystem_tx_irqenable_st"></span><span id="_CPPv240cb_framework_uwb_pdoa_stage_scheduled_txP28cb_uwbsystem_tx_irqenable_st"></span><span id="cb_framework_uwb_pdoa_stage_scheduled_tx__cb_uwbsystem_tx_irqenable_stP"></span><span class="target" id="_c_b__uwbframework_8h_1a91b95dc9557e973a0984561d7975eb68"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_framework_uwb_pdoa_stage_scheduled_tx</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">cb_uwbsystem_tx_irqenable_st</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">pdoaTxIrqEnable</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv440cb_framework_uwb_pdoa_stage_scheduled_txP28cb_uwbsystem_tx_irqenable_st" title="Link to this definition"></a><br /></dt>
-<dd><p>Stage scheduled transmission for PDoA. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>pdoaTxIrqEnable</strong> – Interrupt enable configuration for transmission </p>
 </dd>
 </dl>
 </dd></dl>
@@ -2231,17 +2229,18 @@ stop"/>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv435cb_framework_uwb_pdoa_calculate_aoa27cb_uwbsystem_pdoa_3ddata_stffPfPf">
-<span id="_CPPv335cb_framework_uwb_pdoa_calculate_aoa27cb_uwbsystem_pdoa_3ddata_stffPfPf"></span><span id="_CPPv235cb_framework_uwb_pdoa_calculate_aoa27cb_uwbsystem_pdoa_3ddata_stffPfPf"></span><span id="cb_framework_uwb_pdoa_calculate_aoa__cb_uwbsystem_pdoa_3ddata_st.float.float.floatP.floatP"></span><span class="target" id="_c_b__uwbframework_8h_1aa9be0c9696c346dda62fe348b114fc0e"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_framework_uwb_pdoa_calculate_aoa</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">cb_uwbsystem_pdoa_3ddata_st</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pdoa_result</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">azi_pd_bias</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ele_pd_bias</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">azi_result</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ele_result</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv435cb_framework_uwb_pdoa_calculate_aoa27cb_uwbsystem_pdoa_3ddata_stffPfPf" title="Link to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv435cb_framework_uwb_pdoa_calculate_aoa27cb_uwbsystem_pdoa_3ddata_stfffPfPf">
+<span id="_CPPv335cb_framework_uwb_pdoa_calculate_aoa27cb_uwbsystem_pdoa_3ddata_stfffPfPf"></span><span id="_CPPv235cb_framework_uwb_pdoa_calculate_aoa27cb_uwbsystem_pdoa_3ddata_stfffPfPf"></span><span id="cb_framework_uwb_pdoa_calculate_aoa__cb_uwbsystem_pdoa_3ddata_st.float.float.float.floatP.floatP"></span><span class="target" id="_c_b__uwbframework_8h_1a363903a470a29ce7823f44574f41c6b4"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_framework_uwb_pdoa_calculate_aoa</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">cb_uwbsystem_pdoa_3ddata_st</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pdoa_result</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pd01_bias</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pd02_bias</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pd12_bias</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">azi_result</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ele_result</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv435cb_framework_uwb_pdoa_calculate_aoa27cb_uwbsystem_pdoa_3ddata_stfffPfPf" title="Link to this definition"></a><br /></dt>
 <dd><p>Calculate Angle of Arrival (AoA) from PDoA data. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pdoa_result</strong> – PDoA 3D data </p></li>
-<li><p><strong>azi_pd_bias</strong> – Azimuth phase difference bias </p></li>
-<li><p><strong>ele_pd_bias</strong> – Elevation phase difference bias </p></li>
-<li><p><strong>azi_result</strong> – Pointer to store the azimuth result </p></li>
-<li><p><strong>ele_result</strong> – Pointer to store the elevation result </p></li>
+<li><p><strong>pdoa_result</strong> – PDoA 3D data containing phase differences between antenna pairs </p></li>
+<li><p><strong>pd01_bias</strong> – Phase difference bias between antenna 0 and 1 </p></li>
+<li><p><strong>pd02_bias</strong> – Phase difference bias between antenna 0 and 2 </p></li>
+<li><p><strong>pd12_bias</strong> – Phase difference bias between antenna 1 and 2 </p></li>
+<li><p><strong>azi_result</strong> – Pointer to store the calculated azimuth angle in degrees </p></li>
+<li><p><strong>ele_result</strong> – Pointer to store the calculated elevation angle in degrees </p></li>
 </ul>
 </dd>
 </dl>
@@ -2369,14 +2368,15 @@ stop"/>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv423cb_system_uwb_config_rxP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st">
-<span id="_CPPv323cb_system_uwb_config_rxP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st"></span><span id="_CPPv223cb_system_uwb_config_rxP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st"></span><span id="cb_system_uwb_config_rx__cb_uwbsystem_packetconfig_stP.cb_uwbsystem_rx_irqenable_stP"></span><span class="target" id="_c_b__system_8h_1ac7e0098b9fa9a91e3813fafd084246e3"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_system_uwb_config_rx</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">cb_uwbsystem_packetconfig_st</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">config</span></span>, <span class="n"><span class="pre">cb_uwbsystem_rx_irqenable_st</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stRxIrqEnable</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423cb_system_uwb_config_rxP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_st" title="Link to this definition"></a><br /></dt>
-<dd><p>Configures the UWB RX (Receiver) settings. </p>
+<dt class="sig sig-object cpp" id="_CPPv423cb_system_uwb_config_rxP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_stP26cb_uwbsystem_rx_dbb_cfo_st">
+<span id="_CPPv323cb_system_uwb_config_rxP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_stP26cb_uwbsystem_rx_dbb_cfo_st"></span><span id="_CPPv223cb_system_uwb_config_rxP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_stP26cb_uwbsystem_rx_dbb_cfo_st"></span><span id="cb_system_uwb_config_rx__cb_uwbsystem_packetconfig_stP.cb_uwbsystem_rx_irqenable_stP.cb_uwbsystem_rx_dbb_cfo_stP"></span><span class="target" id="_c_b__system_8h_1a3434701b0d9113572f1213949f6dbe9b"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_system_uwb_config_rx</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">cb_uwbsystem_packetconfig_st</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">config</span></span>, <span class="n"><span class="pre">cb_uwbsystem_rx_irqenable_st</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stRxIrqEnable</span></span>, <span class="n"><span class="pre">cb_uwbsystem_rx_dbb_cfo_st</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stBypass_cfo</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423cb_system_uwb_config_rxP28cb_uwbsystem_packetconfig_stP28cb_uwbsystem_rx_irqenable_stP26cb_uwbsystem_rx_dbb_cfo_st" title="Link to this definition"></a><br /></dt>
+<dd><p>Configures the UWB receiver with packet detection and CFO bypass settings. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>config</strong> – Pointer to the UWB packet configuration structure. </p></li>
-<li><p><strong>stRxIrqEnable</strong> – Pointer to the UWB RX interrupt enable structure. </p></li>
+<li><p><strong>config</strong> – Pointer to packet configuration structure </p></li>
+<li><p><strong>stRxIrqEnable</strong> – Pointer to RX IRQ enable configuration structure </p></li>
+<li><p><strong>stBypass_cfo</strong> – Pointer to CFO bypass configuration structure </p></li>
 </ul>
 </dd>
 </dl>
@@ -2426,7 +2426,7 @@ stop"/>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv430cb_system_uwb_rx_start_preparev">
 <span id="_CPPv330cb_system_uwb_rx_start_preparev"></span><span id="_CPPv230cb_system_uwb_rx_start_preparev"></span><span id="cb_system_uwb_rx_start_prepare__void"></span><span class="target" id="_c_b__system_8h_1af53d838252ea0e37bd3f960ee9f44e66"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_system_uwb_rx_start_prepare</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv430cb_system_uwb_rx_start_preparev" title="Link to this definition"></a><br /></dt>
-<dd><p>Start the UWB communication for RX (For deferred RX) </p>
+<dd><p>Start the UWB communication for RX0 (For deferred RX) </p>
 </dd></dl>
 
 <dl class="cpp function">
@@ -2448,12 +2448,16 @@ stop"/>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv422cb_system_uwb_rx_start22cb_uwbsystem_rxport_en">
-<span id="_CPPv322cb_system_uwb_rx_start22cb_uwbsystem_rxport_en"></span><span id="_CPPv222cb_system_uwb_rx_start22cb_uwbsystem_rxport_en"></span><span id="cb_system_uwb_rx_start__cb_uwbsystem_rxport_en"></span><span class="target" id="_c_b__system_8h_1a1ad0836b9d3d756022d1ea50948f62f3"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_system_uwb_rx_start</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">cb_uwbsystem_rxport_en</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">enRxPort</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422cb_system_uwb_rx_start22cb_uwbsystem_rxport_en" title="Link to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv422cb_system_uwb_rx_start22cb_uwbsystem_rxport_enP27cb_uwbsystem_rx_dbb_gain_st">
+<span id="_CPPv322cb_system_uwb_rx_start22cb_uwbsystem_rxport_enP27cb_uwbsystem_rx_dbb_gain_st"></span><span id="_CPPv222cb_system_uwb_rx_start22cb_uwbsystem_rxport_enP27cb_uwbsystem_rx_dbb_gain_st"></span><span id="cb_system_uwb_rx_start__cb_uwbsystem_rxport_en.cb_uwbsystem_rx_dbb_gain_stP"></span><span class="target" id="_c_b__system_8h_1a6db15eabe6da6f6a3f8637941655861f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_system_uwb_rx_start</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">cb_uwbsystem_rxport_en</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">enRxPort</span></span>, <span class="n"><span class="pre">cb_uwbsystem_rx_dbb_gain_st</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stBypass_gain</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422cb_system_uwb_rx_start22cb_uwbsystem_rxport_enP27cb_uwbsystem_rx_dbb_gain_st" title="Link to this definition"></a><br /></dt>
 <dd><p>Starts the UWB (Ultra-Wideband) receiver on the specified port. </p>
+<p>This function starts the UWB receiver on the specified port with the given gain settings. It configures the receiver gain parameters and enables reception on the selected port.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>enRxPort</strong> – The UWB receiver port to start. </p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>enRxPort</strong> – The UWB receiver port to start.Can be a single port (EN_UWB_RX_0, EN_UWB_RX_1, EN_UWB_RX_2) or a combination of ports (EN_UWB_RX_02, EN_UWB_RX_ALL) </p></li>
+<li><p><strong>stBypass_gain</strong> – Pointer to structure containing gain bypass configuration parameters. </p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -2464,7 +2468,7 @@ stop"/>
 <dd><p>Stops the UWB (Ultra-Wideband) receiver on the specified port. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>enRxPort</strong> – The UWB receiver port to stop. </p>
+<dd class="field-odd"><p><strong>enRxPort</strong> – The UWB receiver port to stop. Can be a single port (EN_UWB_RX_0, EN_UWB_RX_1, EN_UWB_RX_2) or a combination of ports (EN_UWB_RX_02, EN_UWB_RX_ALL) </p>
 </dd>
 </dl>
 </dd></dl>
@@ -2475,23 +2479,7 @@ stop"/>
 <dd><p>Turns off the UWB (Ultra-Wideband) receiver on the specified port. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>enRxPort</strong> – The UWB receiver port to turn off. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv431cb_system_uwb_pdoa_rx_all_startP8uint32_t">
-<span id="_CPPv331cb_system_uwb_pdoa_rx_all_startP8uint32_t"></span><span id="_CPPv231cb_system_uwb_pdoa_rx_all_startP8uint32_t"></span><span id="cb_system_uwb_pdoa_rx_all_start__uint32_tP"></span><span class="target" id="_c_b__system_8h_1a3d560af097bf23e5db638431eba8215f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_system_uwb_pdoa_rx_all_start</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">pdoaGainIdx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv431cb_system_uwb_pdoa_rx_all_startP8uint32_t" title="Link to this definition"></a><br /></dt>
-<dd><p>Starts the UWB PDOA (Phase Difference of Arrival) RX process for all channels. </p>
-<p>This function initializes and starts the reception process for UWB PDOA on all channels using the specified gain index. It is typically used in scenarios where precise location or angle-of-arrival measurements are required.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Ensure that the provided pointer is valid and points to a properly initialized gain index value before calling this function. </p>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>pdoaGainIdx</strong> – <strong>[in]</strong> Pointer to a variable containing the gain index to be used for the PDOA reception process. The gain index determines the amplification level for the received signal.</p>
+<dd class="field-odd"><p><strong>enRxPort</strong> – The UWB receiver port to turn off.Can be a single port (EN_UWB_RX_0, EN_UWB_RX_1, EN_UWB_RX_2) or a combination of ports (EN_UWB_RX_02, EN_UWB_RX_ALL) </p>
 </dd>
 </dl>
 </dd></dl>
@@ -2984,8 +2972,8 @@ stop"/>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv425cb_system_uwb_get_rx_rssi7uint8_t">
-<span id="_CPPv325cb_system_uwb_get_rx_rssi7uint8_t"></span><span id="_CPPv225cb_system_uwb_get_rx_rssi7uint8_t"></span><span id="cb_system_uwb_get_rx_rssi__uint8_t"></span><span class="target" id="_c_b__system_8h_1a3036838147d6ce80c00097a126f961bb"></span><span class="n"><span class="pre">cb_uwbsystem_rxall_signalinfo_st</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_system_uwb_get_rx_rssi</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rssiRxPorts</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425cb_system_uwb_get_rx_rssi7uint8_t" title="Link to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv425cb_system_uwb_get_rx_rssi22cb_uwbsystem_rxport_en">
+<span id="_CPPv325cb_system_uwb_get_rx_rssi22cb_uwbsystem_rxport_en"></span><span id="_CPPv225cb_system_uwb_get_rx_rssi22cb_uwbsystem_rxport_en"></span><span id="cb_system_uwb_get_rx_rssi__cb_uwbsystem_rxport_en"></span><span class="target" id="_c_b__system_8h_1a7140ce3f7063410d6bec120bd21725b6"></span><span class="n"><span class="pre">cb_uwbsystem_rx_signalinfo_st</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_system_uwb_get_rx_rssi</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">cb_uwbsystem_rxport_en</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rssiRxPorts</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425cb_system_uwb_get_rx_rssi22cb_uwbsystem_rxport_en" title="Link to this definition"></a><br /></dt>
 <dd><p>Retrieve the RSSI (Received Signal Strength Indicator) values for specified RX ports. </p>
 <p>This function reads the RSSI values from the specified UWB RX ports and compensates for gain based on predefined compensation values. The function returns a structure containing the RSSI results for each RX port specified in the <code class="docutils literal notranslate"><span class="pre">rssiRxPorts</span></code> parameter.</p>
 <dl class="field-list simple">
@@ -2993,7 +2981,7 @@ stop"/>
 <dd class="field-odd"><p><strong>rssiRxPorts</strong> – A bitmask indicating which RX ports to retrieve RSSI values from. Valid values are EN_UWB_RX_0, EN_UWB_RX_1, and EN_UWB_RX_2.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A structure of type <code class="docutils literal notranslate"><span class="pre">cb_uwbsystem_rxall_signalinfo_st</span></code> containing the RSSI values, gain indices, CFO estimates, and DCOC results for the specified RX ports. </p>
+<dd class="field-even"><p>A structure of type <code class="docutils literal notranslate"><span class="pre">cb_uwbsystem_rx_signalinfo_st</span></code> containing the RSSI values, gain indices, CFO estimates, and DCOC results for the specified RX ports. </p>
 </dd>
 </dl>
 </dd></dl>
@@ -3029,20 +3017,6 @@ stop"/>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Status register value. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv450cb_system_uwb_configure_rx_sync_cfo_est_bypass_crs8uint32_t7uint8_t">
-<span id="_CPPv350cb_system_uwb_configure_rx_sync_cfo_est_bypass_crs8uint32_t7uint8_t"></span><span id="_CPPv250cb_system_uwb_configure_rx_sync_cfo_est_bypass_crs8uint32_t7uint8_t"></span><span id="cb_system_uwb_configure_rx_sync_cfo_est_bypass_crs__uint32_t.uint8_t"></span><span class="target" id="_c_b__system_8h_1a26eaaaa22710ccd127df06f43e19c9ba"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_system_uwb_configure_rx_sync_cfo_est_bypass_crs</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">val</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">en</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv450cb_system_uwb_configure_rx_sync_cfo_est_bypass_crs8uint32_t7uint8_t" title="Link to this definition"></a><br /></dt>
-<dd><p>Configures sync cfo est bypass crs value. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>val</strong> – <strong>[in]</strong> cfoEst value </p></li>
-<li><p><strong>en</strong> – <strong>[in]</strong> enable or disable (1/0) </p></li>
-</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -3164,20 +3138,10 @@ stop"/>
 </dl>
 </dd></dl>
 
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv439cb_system_uwb_get_event_timestamp_value23enUwbEventTimestampMask">
-<span id="_CPPv339cb_system_uwb_get_event_timestamp_value23enUwbEventTimestampMask"></span><span id="_CPPv239cb_system_uwb_get_event_timestamp_value23enUwbEventTimestampMask"></span><span id="cb_system_uwb_get_event_timestamp_value__enUwbEventTimestampMask"></span><span class="target" id="_c_b__system_8h_1a2dba1210149397e7e6877927508b55e3"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_system_uwb_get_event_timestamp_value</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">enUwbEventTimestampMask</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">eventTimestampMask</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv439cb_system_uwb_get_event_timestamp_value23enUwbEventTimestampMask" title="Link to this definition"></a><br /></dt>
-<dd><p>Retrieves the value of the event timestamp. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>eventTimestampMask</strong> – The mask for the event timestamp. </p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The value of the event timestamp. </p>
-</dd>
-</dl>
-</dd></dl>
-
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>doxygenfunction: Cannot find function “cb_system_uwb_get_event_timestamp_value” in doxygen xml output for project “CBU5000V210” from directory: C:\Users\PANGCH~1.CAI\AppData\Local\Temp\tmplb7xyd_3\xml</p>
+</div>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv423cb_system_uwb_tsu_clearv">
 <span id="_CPPv323cb_system_uwb_tsu_clearv"></span><span id="_CPPv223cb_system_uwb_tsu_clearv"></span><span id="cb_system_uwb_tsu_clear__void"></span><span class="target" id="_c_b__system_8h_1a5a84ec264ee920232b759b428d34386b"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_system_uwb_tsu_clear</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423cb_system_uwb_tsu_clearv" title="Link to this definition"></a><br /></dt>
@@ -3219,34 +3183,57 @@ stop"/>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv438cb_system_uwb_aoa_antenna_3d_bias_comp27cb_uwbsystem_pdoa_3ddata_stff">
-<span id="_CPPv338cb_system_uwb_aoa_antenna_3d_bias_comp27cb_uwbsystem_pdoa_3ddata_stff"></span><span id="_CPPv238cb_system_uwb_aoa_antenna_3d_bias_comp27cb_uwbsystem_pdoa_3ddata_stff"></span><span id="cb_system_uwb_aoa_antenna_3d_bias_comp__cb_uwbsystem_pdoa_3ddata_st.float.float"></span><span class="target" id="_c_b__system_8h_1a29debc2ec031c137aae477be0556b831"></span><span class="n"><span class="pre">stAOA_CompensatedData</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_system_uwb_aoa_antenna_3d_bias_comp</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">cb_uwbsystem_pdoa_3ddata_st</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pdoa_raw</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">azi_pd_bias</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ele_pd_bias</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv438cb_system_uwb_aoa_antenna_3d_bias_comp27cb_uwbsystem_pdoa_3ddata_stff" title="Link to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv426cb_system_uwb_aoa_biascomp27cb_uwbsystem_pdoa_3ddata_stfff">
+<span id="_CPPv326cb_system_uwb_aoa_biascomp27cb_uwbsystem_pdoa_3ddata_stfff"></span><span id="_CPPv226cb_system_uwb_aoa_biascomp27cb_uwbsystem_pdoa_3ddata_stfff"></span><span id="cb_system_uwb_aoa_biascomp__cb_uwbsystem_pdoa_3ddata_st.float.float.float"></span><span class="target" id="_c_b__system_8h_1a845fcf64a60bc255a73d30d81cafa2be"></span><span class="n"><span class="pre">stAOA_CompensatedData</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_system_uwb_aoa_biascomp</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">cb_uwbsystem_pdoa_3ddata_st</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pdoa_raw</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pd01_bias</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pd02_bias</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pd12_bias</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426cb_system_uwb_aoa_biascomp27cb_uwbsystem_pdoa_3ddata_stfff" title="Link to this definition"></a><br /></dt>
 <dd><p>Compensates for the 3D antenna bias in AOA (Angle of Arrival) calculations. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pdoa_raw</strong> – The raw PDOA 3D data. </p></li>
-<li><p><strong>azi_pd_bias</strong> – The azimuth phase difference bias. </p></li>
-<li><p><strong>ele_pd_bias</strong> – The elevation phase difference bias. </p></li>
+<li><p><strong>pdoa_raw</strong> – The raw PDOA 3D data containing phase differences between antenna pairs </p></li>
+<li><p><strong>pd01_bias</strong> – Phase difference bias between antenna 0 and 1 (in degrees) </p></li>
+<li><p><strong>pd02_bias</strong> – Phase difference bias between antenna 0 and 2 (in degrees) </p></li>
+<li><p><strong>pd12_bias</strong> – Phase difference bias between antenna 1 and 2 (in degrees) </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The compensated AOA data. </p>
+<dd class="field-even"><p>stAOA_CompensatedData Structure containing the bias-compensated phase differences </p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv428cb_system_uwb_aoa_antenna_3dP21stAOA_CompensatedDataPfPf">
-<span id="_CPPv328cb_system_uwb_aoa_antenna_3dP21stAOA_CompensatedDataPfPf"></span><span id="_CPPv228cb_system_uwb_aoa_antenna_3dP21stAOA_CompensatedDataPfPf"></span><span id="cb_system_uwb_aoa_antenna_3d__stAOA_CompensatedDataP.floatP.floatP"></span><span class="target" id="_c_b__system_8h_1a0a46191d1be4839cb087f2b9a4ad1670"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_system_uwb_aoa_antenna_3d</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">stAOA_CompensatedData</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">AOA_PD</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">azi_result</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ele_result</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428cb_system_uwb_aoa_antenna_3dP21stAOA_CompensatedDataPfPf" title="Link to this definition"></a><br /></dt>
-<dd><p>Calculates the 3D AOA (Angle of Arrival) using compensated data. </p>
+<dt class="sig sig-object cpp" id="_CPPv428cb_system_uwb_aoa_lut_full3dP21stAOA_CompensatedDataP23st_antenna_attribute_3dP26cb_uwbaoa_lut_attribute_stPfPf">
+<span id="_CPPv328cb_system_uwb_aoa_lut_full3dP21stAOA_CompensatedDataP23st_antenna_attribute_3dP26cb_uwbaoa_lut_attribute_stPfPf"></span><span id="_CPPv228cb_system_uwb_aoa_lut_full3dP21stAOA_CompensatedDataP23st_antenna_attribute_3dP26cb_uwbaoa_lut_attribute_stPfPf"></span><span id="cb_system_uwb_aoa_lut_full3d__stAOA_CompensatedDataP.st_antenna_attribute_3dP.cb_uwbaoa_lut_attribute_stP.floatP.floatP"></span><span class="target" id="_c_b__system_8h_1ac5af3068f39570f304c0dea036b41ef8"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_system_uwb_aoa_lut_full3d</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">stAOA_CompensatedData</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">AOA_PD</span></span>, <span class="n"><span class="pre">st_antenna_attribute_3d</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ant_attr</span></span>, <span class="n"><span class="pre">cb_uwbaoa_lut_attribute_st</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">lut_attr</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">azi_result</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ele_result</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428cb_system_uwb_aoa_lut_full3dP21stAOA_CompensatedDataP23st_antenna_attribute_3dP26cb_uwbaoa_lut_attribute_stPfPf" title="Link to this definition"></a><br /></dt>
+<dd><p>Calculates the 3D AOA (Angle of Arrival) using compensated data and lookup tables. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>AOA_PD</strong> – The compensated AOA data. </p></li>
-<li><p><strong>azi_result</strong> – Pointer to store the azimuth result. </p></li>
-<li><p><strong>ele_result</strong> – Pointer to store the elevation result. </p></li>
+<li><p><strong>AOA_PD</strong> – Pointer to structure containing compensated phase differences </p></li>
+<li><p><strong>ant_attr</strong> – Pointer to antenna attributes structure containing antenna positions and type </p></li>
+<li><p><strong>lut_attr</strong> – Pointer to LUT attributes structure containing reference data and parameters </p></li>
+<li><p><strong>azi_result</strong> – Pointer to store the calculated azimuth angle in degrees </p></li>
+<li><p><strong>ele_result</strong> – Pointer to store the calculated elevation angle in degrees </p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv428cb_system_uwb_aoa_lut_full2dPfPfP23st_antenna_attribute_2dP26cb_uwbaoa_lut_attribute_stPf">
+<span id="_CPPv328cb_system_uwb_aoa_lut_full2dPfPfP23st_antenna_attribute_2dP26cb_uwbaoa_lut_attribute_stPf"></span><span id="_CPPv228cb_system_uwb_aoa_lut_full2dPfPfP23st_antenna_attribute_2dP26cb_uwbaoa_lut_attribute_stPf"></span><span id="cb_system_uwb_aoa_lut_full2d__floatP.floatP.st_antenna_attribute_2dP.cb_uwbaoa_lut_attribute_stP.floatP"></span><span class="target" id="_c_b__system_8h_1a9611e39e3ae53a01c0139572bfa1c537"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_system_uwb_aoa_lut_full2d</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">pd_azi</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ele_ref</span></span>, <span class="n"><span class="pre">st_antenna_attribute_2d</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ant_attr</span></span>, <span class="n"><span class="pre">cb_uwbaoa_lut_attribute_st</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">lut_attr</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">azi_result</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428cb_system_uwb_aoa_lut_full2dPfPfP23st_antenna_attribute_2dP26cb_uwbaoa_lut_attribute_stPf" title="Link to this definition"></a><br /></dt>
+<dd><p>Calculates the 2D AOA (Angle of Arrival) using phase differences and lookup tables. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pd_azi</strong> – Pointer to phase difference for azimuth calculation </p></li>
+<li><p><strong>ele_ref</strong> – Pointer to reference elevation angle in degrees </p></li>
+<li><p><strong>ant_attr</strong> – Pointer to 2D antenna attributes structure containing antenna positions and type </p></li>
+<li><p><strong>lut_attr</strong> – Pointer to LUT attributes structure containing reference data and parameters </p></li>
+<li><p><strong>azi_result</strong> – Pointer to store the calculated azimuth angle in degrees </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>void </p>
 </dd>
 </dl>
 </dd></dl>

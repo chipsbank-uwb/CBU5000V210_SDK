@@ -43,7 +43,7 @@
             CBU5000V210
           </a>
               <div class="version">
-                2.0.0
+                2.0.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -59,13 +59,9 @@
 <li class="toctree-l1"><a class="reference internal" href="UwbExamples/UwbExamples.html">UWB Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CpuExamples/CpuExamples.html">CPU Examples</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">UWB Calibration</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#bias-setting">Bias Setting</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#azimuth-bias">Azimuth Bias</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#elevation-bias">Elevation Bias</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id1">Azimuth Bias</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ranging-bias">Ranging Bias</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#calibration-bias-setting">Calibration Bias Setting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#phase-difference-of-arrival-bias">Phase Difference of Arrival Bias</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ranging-bias">Ranging Bias</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Appendix.html">Appendix</a></li>
@@ -97,59 +93,53 @@
              
   <section id="uwb-calibration">
 <h1>UWB Calibration<a class="headerlink" href="#uwb-calibration" title="Link to this heading"></a></h1>
-<section id="bias-setting">
-<h2>Bias Setting<a class="headerlink" href="#bias-setting" title="Link to this heading"></a></h2>
-<p>Accurate calibration of the system’s azimuth and elevation is essential for ensuring precise directional measurements.</p>
-<p>In this process, the biases are determined using the antenna’s position, specifically at a 0-degree reference.</p>
-<p>Below is the procedure for calculating the RNGAOA biases when the antenna is positioned at each specific antenna position.</p>
 <hr class="docutils" />
-<a class="reference internal image-reference" href="_images/calibration_antenna1.png"><img alt="calibration_antenna.png" class="align-center" src="_images/calibration_antenna1.png" style="width: 50%;" /></a>
-<section id="azimuth-bias">
-<h3>Azimuth Bias<a class="headerlink" href="#azimuth-bias" title="Link to this heading"></a></h3>
-<p>The azimuth bias is the error in the azimuth angle measurement at the 0-degree reference, influenced by the antenna’s position. It is calculated as:</p>
-<div class="math notranslate nohighlight">
-\[\text{Azimuth Bias} = -(PD_{01} + PD_{12}) \text{ at } 0^\circ\]</div>
-<dl>
-<dt>Where:</dt><dd><p>PD01 and PD12 are the measured values from the antenna at the 0-degree azimuth reference.</p>
-<p>The negative sign indicates that the sum of PD01 and PD12 needs to be subtracted to correct the azimuth measurement.</p>
-</dd>
-</dl>
+<section id="calibration-bias-setting">
+<h2>Calibration Bias Setting<a class="headerlink" href="#calibration-bias-setting" title="Link to this heading"></a></h2>
+<p>Accurate calibration is essential for ensuring reliable angle and distance measurements in UWB systems.</p>
+<p>During calibration:</p>
+<ul class="simple">
+<li><p>Devices are tested under controlled conditions (e.g., fixed distance, level placement).</p></li>
+<li><p>At least <strong>100 measurements</strong> are collected per test condition.</p></li>
+<li><p>The <strong>median</strong> value of these samples is used as the bias input to reduce the effect of noise and outliers.</p></li>
+</ul>
 </section>
-<section id="elevation-bias">
-<h3>Elevation Bias<a class="headerlink" href="#elevation-bias" title="Link to this heading"></a></h3>
-<p>The elevation bias is the error in the elevation angle measurement at the 0-degree reference, also influenced by the antenna’s position. It is calculated as:</p>
-<div class="math notranslate nohighlight">
-\[\text{Elevation Bias} = -(PD_{01} - PD_{12}) \text{ at } 0^\circ\]</div>
-<dl>
-<dt>Where:</dt><dd><p>PD01 and PD12 are the measured values of the antenna at the 0-degree elevation reference.</p>
-<p>The negative sign indicates that any difference between PD01 and PD12 must be corrected by subtracting this value from the reported elevation.</p>
-</dd>
-</dl>
 <hr class="docutils" />
-<a class="reference internal image-reference" href="_images/calibration_antenna0.png"><img alt="calibration_antenna.png" class="align-center" src="_images/calibration_antenna0.png" style="width: 50%;" /></a>
-</section>
-<section id="id1">
-<h3>Azimuth Bias<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
-<p>The azimuth bias is the error in the azimuth angle measurement at the 0-degree reference, influenced by the antenna’s position. It is calculated as:</p>
+<section id="phase-difference-of-arrival-bias">
+<h2>Phase Difference of Arrival Bias<a class="headerlink" href="#phase-difference-of-arrival-bias" title="Link to this heading"></a></h2>
+<p>PDOA bias corrects angle estimation errors based on phase differences between antenna pairs, measured at the 0-degree reference.</p>
 <div class="math notranslate nohighlight">
-\[\text{Azimuth Bias} = -(PD_{02}) \text{ at } 0^\circ\]</div>
-<dl>
-<dt>Where:</dt><dd><p>PD02 is the measured value from the antenna at the 0-degree azimuth reference.</p>
-<p>The negative sign indicates that the PD02 needs to be subtracted to correct the azimuth measurement.</p>
-</dd>
-</dl>
+\[\begin{split}\text{PD01 Bias Input} = \text{Median PD01 at } 0^\circ \\
+\text{PD02 Bias Input} = \text{Median PD02 at } 0^\circ \\
+\text{PD12 Bias Input} = \text{Median PD12 at } 0^\circ\end{split}\]</div>
+<p><strong>Setup:</strong></p>
+<ul class="simple">
+<li><p>Devices are placed <strong>100 cm apart</strong>.</p></li>
+<li><p>Both are aligned at the <strong>same height</strong> and oriented at <strong>0° azimuth and elevation</strong>.</p></li>
+<li><p>At least <strong>100 samples</strong> are taken for each PD value, and the <strong>median</strong> is used.</p></li>
+</ul>
+<p><strong>Where:</strong></p>
+<ul class="simple">
+<li><p>Each input is the median phase difference for the specified antenna pair.</p></li>
+<li><p>These values are stored and applied by the SDK to correct azimuth and elevation angles.</p></li>
+</ul>
 </section>
 <hr class="docutils" />
 <section id="ranging-bias">
-<h3>Ranging Bias<a class="headerlink" href="#ranging-bias" title="Link to this heading"></a></h3>
-<p>Ranging bias refers to the deviation between the actual distance and the detected ranging distance. It is calculated as:</p>
+<h2>Ranging Bias<a class="headerlink" href="#ranging-bias" title="Link to this heading"></a></h2>
+<p>Ranging bias accounts for the error between the actual distance and the distance reported by the UWB system.</p>
 <div class="math notranslate nohighlight">
-\[\text{Ranging Bias} = \text{Actual Distance} - \text{Detected Ranging Distance}\]</div>
-<dl class="simple">
-<dt>Where:</dt><dd><p>The unit of ranging bias is in centimeters (cm).</p>
-</dd>
-</dl>
-</section>
+\[\text{Ranging Bias} = \text{Actual Distance} - \text{Median Detected Distance}\]</div>
+<p><strong>Setup:</strong></p>
+<ul class="simple">
+<li><p>Devices are positioned at a known reference distance (e.g., <strong>100 cm</strong>).</p></li>
+<li><p>At least <strong>100 measurements</strong> are taken to compute the <strong>median detected distance</strong>.</p></li>
+</ul>
+<p><strong>Where:</strong></p>
+<ul class="simple">
+<li><p>The unit of bias is in <strong>centimeters (cm)</strong>.</p></li>
+<li><p>The resulting bias is applied within the SDK for distance correction.</p></li>
+</ul>
 </section>
 </section>
 

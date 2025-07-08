@@ -99,7 +99,7 @@ void app_crc8_test(uint8_t *test_string)
     cb_crc_algo_config(EN_CRC8, EN_InitValZero, EN_CRCRefOut_Disable, EN_CRCRefIn_Disable, 0x07, 0x00);  /*CRC-8/SMBUS*/
 
     // Register the IRQ callback function for CRC-8 calculation
-    app_irq_deregister_irqcallback(EN_IRQENTRY_CRC_APP_IRQ, app_crc_irq_callback);
+    app_irq_register_irqcallback(EN_IRQENTRY_CRC_APP_IRQ, app_crc_irq_callback);
 
     // Perform CRC-8 calculation using interrupt method
     cb_crc_process_from_memory((uint32_t) test_string, (uint16_t) strlen((char *) test_string), EN_CRC_ReInit_Enable, EN_CRC_IRQ_Enable);
@@ -137,7 +137,7 @@ void app_crc16_test(uint8_t *test_string)
     }
 
     cb_crc_algo_config(EN_CRC16, EN_InitValZero, EN_CRCRefOut_Enable,EN_CRCRefIn_Enable, 0x8005, 0x0000);  /*CRC-16/ARC*/
-    app_irq_deregister_irqcallback(EN_IRQENTRY_CRC_APP_IRQ, app_crc_irq_callback);
+    app_irq_register_irqcallback(EN_IRQENTRY_CRC_APP_IRQ, app_crc_irq_callback);
     cb_crc_process_from_memory((uint32_t) test_string, (uint16_t) strlen((char *) test_string), EN_CRC_ReInit_Enable, EN_CRC_IRQ_Enable);
 
     while (cb_crc_check_idle() != CB_PASS);
@@ -170,7 +170,7 @@ void app_crc32_test(uint8_t *test_string)
     }
 
     cb_crc_algo_config(EN_CRC32, EN_InitValOne, EN_CRCRefOut_Enable, EN_CRCRefIn_Enable, 0x04C11DB7, 0xFFFFFFFF);  /*CRC-32/MPEG-2*/
-    app_irq_deregister_irqcallback(EN_IRQENTRY_CRC_APP_IRQ, app_crc_irq_callback);
+    app_irq_register_irqcallback(EN_IRQENTRY_CRC_APP_IRQ, app_crc_irq_callback);
     cb_crc_process_from_memory((uint32_t) test_string, (uint16_t) strlen((char *) test_string), EN_CRC_ReInit_Enable, EN_CRC_IRQ_Enable);
 
     while (cb_crc_check_idle()!= CB_PASS);

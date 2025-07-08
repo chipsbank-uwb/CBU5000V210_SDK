@@ -35,7 +35,7 @@
 //-------------------------------
 /* Default Rx packet configuration.*/
 static cb_uwbsystem_packetconfig_st Rxpacketconfig = {
-  .prfMode            = EN_PRF_MODE_BPRF,                 // PRF mode selection
+  .prfMode            = EN_PRF_MODE_BPRF_62P4,                 // PRF mode selection
   .psduDataRate       = EN_PSDU_DATA_RATE_6P81,           // PSDU data rate
   .bprfPhrDataRate    = EN_BPRF_PHR_DATA_RATE_0P85,       // BPRF PHR data rate
   .preambleCodeIndex  = EN_UWB_PREAMBLE_CODE_IDX_9,       // Preamble code index (9-32)
@@ -181,6 +181,7 @@ void per_param_init(cb_uwbsystem_rxport_en enRxPort)
       stRxIrqEnable.rx2SfdDetDone = CB_FALSE;
       break;
     
+    case EN_UWB_RX_02: //unused case
     case EN_UWB_RX_ALL:
       break;
     
@@ -269,6 +270,7 @@ void app_uwb_rxper_packet_count_logging(cb_uwbsystem_rxport_en enRxPort)
       pd_det   = statusRegister.pd2_det;
       break;
     
+    case EN_UWB_RX_02: //unused case
     case EN_UWB_RX_ALL:
       break;
     

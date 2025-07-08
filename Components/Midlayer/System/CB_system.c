@@ -53,6 +53,8 @@ extern float RC_CompensateRatio;
 //-------------------------------
 // DEFINE SECTION
 //-------------------------------
+#define DEF_ABS_TIMER_MAX_TIMEOUT_US    34359738  // Maximum timeout: 34.36 seconds (34,359,738 us)
+                                                  // 2^32 * 8ns (ABS count unit) = 34,359,738,368ns 
 
 //-------------------------------
 // STRUCT/UNION SECTION
@@ -61,6 +63,7 @@ extern float RC_CompensateRatio;
 //-------------------------------
 // GLOBAL VARIABLE SECTION
 //-------------------------------
+
 typedef struct
 {
   cb_uwbsystem_systemconfig_st CB_SystemConfigContainer;
@@ -79,7 +82,7 @@ static stUwbAllConfigContainer s_Local_UwbAllConfigContainer = {
   //.CB_SystemConfigContainer.extendedArgs;     
 
    /*Local Container - UWB Tx Config*/
-  .CB_TxConfigContainer.prfMode                 = EN_PRF_MODE_BPRF,                                       // PRF mode selection
+  .CB_TxConfigContainer.prfMode                 = EN_PRF_MODE_BPRF_62P4,                                       // PRF mode selection
   .CB_TxConfigContainer.psduDataRate            = EN_PSDU_DATA_RATE_6P81,                                 // PSDU data rate
   .CB_TxConfigContainer.bprfPhrDataRate         = EN_BPRF_PHR_DATA_RATE_0P85,                             // BPRF PHR data rate
   .CB_TxConfigContainer.preambleCodeIndex       = EN_UWB_PREAMBLE_CODE_IDX_9,                             // Preamble code index (9-32)
@@ -95,7 +98,7 @@ static stUwbAllConfigContainer s_Local_UwbAllConfigContainer = {
   .CB_TxConfigContainer.macFcsType              = EN_MAC_FCS_TYPE_CRC16,                                  // CRC16
   
    /*Local Container - UWB Rx Config*/
-  .CB_RxConfigContainer.prfMode                 = EN_PRF_MODE_BPRF,                                       // PRF mode selection
+  .CB_RxConfigContainer.prfMode                 = EN_PRF_MODE_BPRF_62P4,                                       // PRF mode selection
   .CB_RxConfigContainer.psduDataRate            = EN_PSDU_DATA_RATE_6P81,                                 // PSDU data rate
   .CB_RxConfigContainer.bprfPhrDataRate         = EN_BPRF_PHR_DATA_RATE_0P85,                             // BPRF PHR data rate
   .CB_RxConfigContainer.preambleCodeIndex       = EN_UWB_PREAMBLE_CODE_IDX_9,                             // Preamble code index (9-32)
@@ -199,18 +202,19 @@ void cb_system_uwb_trx_init(void)
  *
  * This function configures the Ultra-Wideband (UWB) transmitter by:
  * - Setting up packet type configuration including PRF mode, PSDU data rate
- * - Configuring preamble code index and SFD ID from global g_SystemUwbPacketConfig
+ * - Configuring preamble code index and SFD ID from packet config
  * - Setting preamble duration and STS parameters
  * - Configuring MAC FCS type
  * - Preparing and loading the transmission payload
  * - Configuring PHR and PSDU parameters
  *
+ * @param config Pointer to packet configuration structure containing UWB parameters
  * @param txPayload Pointer to transmission payload structure containing:
  *              - ptrAddress: Pointer to payload data buffer
  *              - payloadSize: Size of payload in bytes
+ * @param stTxIrqEnable Pointer to TX IRQ enable configuration structure
  *
  * @note This function must be called before starting a UWB transmission
- * @note Uses global g_SystemUwbPacketConfig for packet configuration parameters
  */
 void cb_system_uwb_config_tx(cb_uwbsystem_packetconfig_st* config, cb_uwbsystem_txpayload_st* txPayload, cb_uwbsystem_tx_irqenable_st* stTxIrqEnable)
 {
@@ -241,15 +245,65 @@ void cb_system_uwb_config_tx(cb_uwbsystem_packetconfig_st* config, cb_uwbsystem_
  *
  * This function configures the Ultra-Wideband (UWB) receiver by:
  * - Setting up packet type configuration including PRF mode, PSDU data rate
- * - Configuring preamble code index and SFD ID from global g_SystemUwbPacketConfig
- * - Setting preamble duration and STS parameters
+ * - Configuring preamble code index and SFD ID from packet config
+ * - Setting preamble duration and STS parameters 
  * - Configuring MAC FCS type for reception
  * - Setting up packet detection parameters
+ * - Configuring RX IRQ settings
+ * - Setting up RX timestamp capture
+ * - Configuring RX operation mode
+ * - Setting up CFO bypass parameters
+ *
+ * @param config Pointer to packet configuration structure containing UWB parameters
+ * @param stRxIrqEnable Pointer to RX IRQ enable configuration structure
+ * @param stBypass_cfo Pointer to CFO bypass configuration structure
+ *
+ * @note This function must be called before starting UWB packet reception and  enabled exclusively during Production Test Mode
+ */
+void cb_system_uwb_config_ftm_rx(cb_uwbsystem_packetconfig_st* config, cb_uwbsystem_rx_irqenable_st* stRxIrqEnable, cb_uwbsystem_rx_dbb_cfo_st* stBypass_cfo)
+{
+  /*Copy Configure Parameter to Local Data Container */
+  memcpy(&s_Local_UwbAllConfigContainer.CB_RxConfigContainer,config,sizeof (cb_uwbsystem_packetconfig_st));
+  
+  /*System Configuration*/
+// cb_system_uwb_rx_memclr(); 
+  cb_system_uwb_configure_rx_irq(stRxIrqEnable);
+  cb_uwbdriver_configure_rx_timestamp_capture();
+  cb_system_uwb_configure_rx_operation_mode(s_Local_UwbAllConfigContainer.CB_SystemConfigContainer.operationMode_rx);
+  
+  /*Packet Type Configuration*/
+  cb_uwbdriver_configure_prf_mode_psdu_data_rate(&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX); //Note: Load Up Setting Template here
+  cb_uwbdriver_configure_preamble_code_index(&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX);
+  cb_uwbdriver_configure_sfd_id(&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX);
+  cb_uwbdriver_configure_preamble_duration(&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX);
+  cb_uwbdriver_configure_sts(&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX);
+  cb_uwbdriver_configure_mac_fcs_type(&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX);
+    
+  cb_uwbdriver_configure_fixed_cfo_value(stBypass_cfo->enableBypass, stBypass_cfo->cfoValue);
+}
+
+
+/**
+ * @brief Configures the UWB receiver with packet detection settings.
+ *
+ * This function configures the Ultra-Wideband (UWB) receiver by:
+ * - Setting up packet type configuration including PRF mode, PSDU data rate
+ * - Configuring preamble code index and SFD ID from packet config
+ * - Setting preamble duration and STS parameters 
+ * - Configuring MAC FCS type for reception
+ * - Setting up packet detection parameters
+ * - Configuring RX IRQ settings
+ * - Setting up RX timestamp capture
+ * - Configuring RX operation mode
+ * - Setting up CFO bypass parameters
+ *
+ * @param config Pointer to packet configuration structure containing UWB parameters
+ * @param stRxIrqEnable Pointer to RX IRQ enable configuration structure
+ * @param stBypass_cfo Pointer to CFO bypass configuration structure
  *
  * @note This function must be called before starting UWB packet reception
- * @note Uses global g_SystemUwbPacketConfig for packet configuration parameters
  */
-void cb_system_uwb_config_rx(cb_uwbsystem_packetconfig_st* config, cb_uwbsystem_rx_irqenable_st* stRxIrqEnable)
+void cb_system_uwb_config_rx(cb_uwbsystem_packetconfig_st* config, cb_uwbsystem_rx_irqenable_st* stRxIrqEnable, cb_uwbsystem_rx_dbb_cfo_st* stBypass_cfo)
 {
   /*Copy Configure Parameter to Local Data Container */
   memcpy(&s_Local_UwbAllConfigContainer.CB_RxConfigContainer,config,sizeof (cb_uwbsystem_packetconfig_st));
@@ -267,6 +321,8 @@ void cb_system_uwb_config_rx(cb_uwbsystem_packetconfig_st* config, cb_uwbsystem_
   cb_uwbdriver_configure_preamble_duration(&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX);
   cb_uwbdriver_configure_sts(&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX);
   cb_uwbdriver_configure_mac_fcs_type(&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX);
+    
+  cb_uwbdriver_configure_fixed_cfo_value(stBypass_cfo->enableBypass, stBypass_cfo->cfoValue);
 }
 
 /**
@@ -285,79 +341,45 @@ void cb_system_uwb_configure_rx_operation_mode(cb_uwbsystem_rxoperationmode_en m
     cb_system_uwb_set_rx_threshold(0x17700BB8);
   }
 }
-
 /**
  * @brief Starts the UWB (Ultra-Wideband) receiver on the specified port.
  * 
- * @param enRxPort The UWB receiver port to start.
+ * This function starts the UWB receiver on the specified port with the given gain settings.
+ * It configures the receiver gain parameters and enables reception on the selected port.
+ *
+ * @param enRxPort The UWB receiver port to start.Can be a single port
+ *                 (EN_UWB_RX_0, EN_UWB_RX_1, EN_UWB_RX_2) or a combination of ports
+ *                 (EN_UWB_RX_02, EN_UWB_RX_ALL)
+ * @param stBypass_gain Pointer to structure containing gain bypass configuration parameters.
  */
-void cb_system_uwb_rx_start(cb_uwbsystem_rxport_en enRxPort)
+void cb_system_uwb_rx_start(cb_uwbsystem_rxport_en enRxPort, cb_uwbsystem_rx_dbb_gain_st* stBypass_gain)
 {
-  switch (enRxPort)
-  {
-    case EN_UWB_RX_0:   cb_uwbdriver_rx0_start();      break;  // RX0 START
-    case EN_UWB_RX_1:   cb_uwbdriver_rx1_start();      break;  // RX1 START
-    case EN_UWB_RX_2:   cb_uwbdriver_rx2_start();      break;  // RX2 START
-    case EN_UWB_RX_ALL: cb_uwbdriver_rx_all_start();    break;  // RXAll START
-    default:                                      break;
-  }
+    cb_uwbdriver_rx_start(enRxPort, stBypass_gain); //combine function to test
 }
 
-/**
- * @brief Starts the UWB PDOA (Phase Difference of Arrival) RX process for all channels.
- *
- * This function initializes and starts the reception process for UWB PDOA
- * on all channels using the specified gain index. It is typically used in
- * scenarios where precise location or angle-of-arrival measurements are required.
- *
- * @param[in] pdoaGainIdx Pointer to a variable containing the gain index to be used
- *                        for the PDOA reception process. The gain index determines
- *                        the amplification level for the received signal.
- *
- * @note Ensure that the provided pointer is valid and points to a properly
- *       initialized gain index value before calling this function.
- */
-void cb_system_uwb_pdoa_rx_all_start(uint32_t* pdoaGainIdx)
-{
-  cb_uwbdriver_pdoa_rx_all_start(pdoaGainIdx);
-}
 
 /**
  * @brief Stops the UWB (Ultra-Wideband) receiver on the specified port.
  * 
- * @param enRxPort The UWB receiver port to stop.
+ * @param enRxPort The UWB receiver port to stop. Can be a single port
+ *                 (EN_UWB_RX_0, EN_UWB_RX_1, EN_UWB_RX_2) or a combination of ports
+ *                 (EN_UWB_RX_02, EN_UWB_RX_ALL)
  */
 void cb_system_uwb_rx_stop(cb_uwbsystem_rxport_en enRxPort)
 {
-  switch (enRxPort)
-  {
-    case EN_UWB_RX_0:   cb_uwbdriver_rx0_stop();  break;  // RX0 STOP
-    case EN_UWB_RX_1:   cb_uwbdriver_rx1_stop();  break;  // RX1 STOP
-    case EN_UWB_RX_2:   cb_uwbdriver_rx2_stop();  break;  // RX2 STOP
-    case EN_UWB_RX_ALL: cb_uwbdriver_rx0_stop(); \
-                        cb_uwbdriver_rx1_stop(); \
-                        cb_uwbdriver_rx2_stop();  break;
-    default:                                     break;
-  }
+  cb_uwbdriver_rx_stop(enRxPort);
 }
 
 /**
  * @brief Turns off the UWB (Ultra-Wideband) receiver on the specified port.
  * 
- * @param enRxPort The UWB receiver port to turn off.
+ * @param enRxPort The UWB receiver port to turn off.Can be a single port
+ *                 (EN_UWB_RX_0, EN_UWB_RX_1, EN_UWB_RX_2) or a combination of ports
+ *                 (EN_UWB_RX_02, EN_UWB_RX_ALL)
  */
 void cb_system_uwb_rx_off(cb_uwbsystem_rxport_en enRxPort)
 {
-  switch (enRxPort)
-  {
-    case EN_UWB_RX_0:   cb_uwbdriver_rx0_off();  break;  // RX0 OFF
-    case EN_UWB_RX_1:   cb_uwbdriver_rx1_off();  break;  // RX1 OFF
-    case EN_UWB_RX_2:   cb_uwbdriver_rx2_off();  break;  // RX2 OFF
-    case EN_UWB_RX_ALL: cb_uwbdriver_rx0_off(); \
-                        cb_uwbdriver_rx1_off(); \
-                        cb_uwbdriver_rx2_off();  break;
-    default:                                    break;
-  }
+  cb_uwbdriver_rx_off(enRxPort);
 }
 
 /**
@@ -515,13 +537,14 @@ void cb_system_uwb_tx_init(void)
  */
 void cb_system_uwb_rx_init(cb_uwbsystem_rxport_en enRxPort)
 {
-  switch (enRxPort)
-  {
-    case EN_UWB_RX_0:   cb_uwbdriver_rx0_init();     break;  // RX0 INIT
-    case EN_UWB_RX_1:   cb_uwbdriver_rx1_init();     break;  // RX1 INIT
-    case EN_UWB_RX_2:   cb_uwbdriver_rx2_init();     break;  // RX2 INIT
-    case EN_UWB_RX_ALL: cb_uwbdriver_rx_all_init();   break;  // RXALL INIT
-  }
+    switch (enRxPort)
+    {
+        case EN_UWB_RX_0:   cb_uwbdriver_rx0_init();     break;   // RX0 INIT
+        case EN_UWB_RX_1:   cb_uwbdriver_rx1_init();     break;   // RX1 INIT
+        case EN_UWB_RX_2:   cb_uwbdriver_rx2_init();     break;   // RX2 INIT
+        case EN_UWB_RX_02:  cb_uwbdriver_rx02_init();     break;  // RX02 INIT
+        case EN_UWB_RX_ALL: cb_uwbdriver_rx_all_init();   break;  // RXALL INIT
+    }
 }
 
 /**
@@ -543,7 +566,7 @@ void cb_system_uwb_tx_start_prepare(void)
 }
 
 /**
- * @brief Start the UWB communication for RX (For deferred RX)
+ * @brief Start the UWB communication for RX0 (For deferred RX)
  *
  */
 void cb_system_uwb_rx_start_prepare(void)
@@ -592,6 +615,30 @@ void cb_system_uwb_rx_top_off (void)
 void cb_system_uwb_tx_off(void)
 {
   cb_uwbdriver_tx_off();
+}
+
+/**
+ * @brief Freezes the UWB transmitter PLL.
+ * 
+ * This function freezes the Phase-Locked Loop (PLL) of the UWB transmitter,
+ * which can be useful for maintaining stable frequency reference during
+ * specific operations or power management scenarios.
+ */
+void cb_system_uwb_tx_freeze_pll(void)
+{
+  cb_uwbdriver_tx_freezepll();
+}
+
+/**
+ * @brief Unfreezes the UWB transmitter PLL.
+ * 
+ * This function unfreezes the Phase-Locked Loop (PLL) of the UWB transmitter,
+ * allowing it to resume normal operation and frequency tracking after being
+ * previously frozen.
+ */
+void cb_system_uwb_tx_unfreeze_pll(void)
+{
+  cb_uwbdriver_tx_unfreezepll();
 }
 
 /**
@@ -1239,12 +1286,12 @@ cb_uwbsystem_rx_dcoc_st cb_system_uwb_get_rx_dcoc(cb_uwbsystem_rxport_en enRxPor
  *                    RSSI values from. Valid values are 
  *                    EN_UWB_RX_0, EN_UWB_RX_1, and EN_UWB_RX_2.
  *
- * @return A structure of type `cb_uwbsystem_rxall_signalinfo_st` containing the RSSI 
+ * @return A structure of type `cb_uwbsystem_rx_signalinfo_st` containing the RSSI 
  *         values, gain indices, CFO estimates, and DCOC results for 
  *         the specified RX ports.
  *
  */
-cb_uwbsystem_rxall_signalinfo_st cb_system_uwb_get_rx_rssi(uint8_t rssiRxPorts)
+cb_uwbsystem_rx_signalinfo_st cb_system_uwb_get_rx_rssi(uint8_t rssiRxPorts)
 {
   return cb_uwbdriver_get_rx_rssi(rssiRxPorts);
 }
@@ -1274,16 +1321,6 @@ cb_uwbsystem_rxstatus_un cb_system_uwb_get_rx_status(void)
   return cb_uwbdriver_get_uwb_rx_status_register();
 }
 
-/**
- * @brief Configures sync cfo est bypass crs value
- *
- * @param[in] val cfoEst value
- * @param[in] en enable or disable (1/0)
-*/
-void cb_system_uwb_configure_rx_sync_cfo_est_bypass_crs(uint32_t val, uint8_t en)
-{
-  cb_uwbdriver_configure_rx_sync_cfo_est_bypass_crs(val, en);
-}
 
 /**
  * @brief Reads the Cir Ctl Idx value
@@ -1336,7 +1373,13 @@ void cb_system_uwb_abs_timer_configure_timeout_value(enUwbAbsoluteTimer enAbsolu
 {
   uint32_t timeoutValue = 0;
   
-  timeoutValue = targetTimeoutTime*DEF_US_TO_NS / DEF_ABS_TIMER_UNIT;
+  // Validate targetTimeoutTime limit: 34,359,738 us
+  if (targetTimeoutTime > DEF_ABS_TIMER_MAX_TIMEOUT_US) {
+    targetTimeoutTime = DEF_ABS_TIMER_MAX_TIMEOUT_US;  // Clamp to maximum
+  }
+  
+  timeoutValue = (uint32_t)((uint64_t)(targetTimeoutTime) * DEF_US_TO_NS / DEF_ABS_TIMER_UNIT);
+  
   cb_uwbdriver_abs_timer_configure_timeout_value(enAbsoluteTimer, baseTime, timeoutValue);
 }
 
@@ -1379,9 +1422,9 @@ void cb_system_uwb_configure_event_timestamp_mask(enUwbEventTimestampMask eventT
  * @param eventTimestampMask The mask for the event timestamp.
  * @return The value of the event timestamp.
  */
-uint32_t cb_system_uwb_get_event_timestamp_value(enUwbEventTimestampMask eventTimestampMask)
+uint32_t cb_system_uwb_get_event_timestamp_in_ns(enUwbEventTimestampMask eventTimestampMask)
 {
-  return cb_uwbdriver_get_event_timestamp_value(eventTimestampMask);
+  return cb_uwbdriver_get_event_timestamp_in_ns(eventTimestampMask);
 }
 
 /**
@@ -1419,24 +1462,47 @@ double cb_system_uwb_alg_prop_calculation(cb_uwbsystem_rangingtroundtreply_st* r
 /**
  * @brief Compensates for the 3D antenna bias in AOA (Angle of Arrival) calculations.
  * 
- * @param pdoa_raw The raw PDOA 3D data.
- * @param azi_pd_bias The azimuth phase difference bias.
- * @param ele_pd_bias The elevation phase difference bias.
- * @return The compensated AOA data.
+ * @param pdoa_raw The raw PDOA 3D data containing phase differences between antenna pairs
+ * @param pd01_bias Phase difference bias between antenna 0 and 1 (in degrees)
+ * @param pd02_bias Phase difference bias between antenna 0 and 2 (in degrees)
+ * @param pd12_bias Phase difference bias between antenna 1 and 2 (in degrees)
+ * @return stAOA_CompensatedData Structure containing the bias-compensated phase differences
  */
-stAOA_CompensatedData cb_system_uwb_aoa_antenna_3d_bias_comp(cb_uwbsystem_pdoa_3ddata_st pdoa_raw, float azi_pd_bias, float ele_pd_bias)
+stAOA_CompensatedData cb_system_uwb_aoa_biascomp(cb_uwbsystem_pdoa_3ddata_st pdoa_raw, float pd01_bias, float pd02_bias, float pd12_bias)
 {
-  return cb_uwbaoa_antenna_0_0_3d_biascomp(pdoa_raw, azi_pd_bias, ele_pd_bias);
+  return cb_uwbaoa_pdoa_biascomp(pdoa_raw, pd01_bias, pd02_bias, pd12_bias);
+
 }
 
 /**
- * @brief Calculates the 3D AOA (Angle of Arrival) using compensated data.
- * 
- * @param AOA_PD The compensated AOA data.
- * @param azi_result Pointer to store the azimuth result.
- * @param ele_result Pointer to store the elevation result.
+ * @brief   Calculate 3D Angle of Arrival (AOA) using lookup table method
+ * @details This function calculates the 3D AOA by using phase differences between antenna pairs
+ *          and lookup tables (LUT) to estimate azimuth and elevation angles. The algorithm 
+ *          processes compensated phase difference data to determine angles in 3D space.
+ *
+ * @param   AOA_PD      Pointer to structure containing compensated phase differences (pd01, pd02, pd12)
+ * @param   ant_attr    Pointer to 3D antenna attributes structure containing
+ * @param   lut_attr    Pointer to LUT attributes structure containing reference data and parameters
+ * @param   azi_result  Pointer to store the calculated azimuth angle in degrees (-90° to +90°)
+ * @param   ele_result  Pointer to store the calculated elevation angle in degrees (-90° to +90°)
+ * @return  void
  */
-void cb_system_uwb_aoa_antenna_3d(stAOA_CompensatedData* AOA_PD, float* azi_result, float* ele_result)
+void cb_system_uwb_aoa_lut_full3d(stAOA_CompensatedData* AOA_PD, st_antenna_attribute_3d* ant_attr, cb_uwbaoa_lut_attribute_st* lut_attr, float* azi_result, float* ele_result)
 {
-  cb_uwbaoa_antenna_0_0_3d(AOA_PD, azi_result, ele_result);
+  cb_uwbaoa_lut_full3d(AOA_PD, ant_attr, lut_attr, azi_result, ele_result);
+}
+
+/**
+ * @brief Calculates the 2D AOA (Angle of Arrival) using phase differences and lookup tables.
+ * 
+ * @param pd_azi Pointer to phase difference for azimuth calculation
+ * @param ele_ref Pointer to reference elevation angle in degrees
+ * @param ant_attr Pointer to 2D antenna attributes structure containing antenna positions and type
+ * @param lut_attr Pointer to LUT attributes structure containing reference data and parameters
+ * @param azi_result Pointer to store the calculated azimuth angle in degrees
+ * @return void
+ */
+void cb_system_uwb_aoa_lut_full2d(float* pd_azi, float* ele_ref, st_antenna_attribute_2d* ant_attr, cb_uwbaoa_lut_attribute_st* lut_attr, float* azi_result)
+{
+  cb_uwbaoa_lut_full2d(pd_azi, ele_ref, ant_attr, lut_attr, azi_result);
 }

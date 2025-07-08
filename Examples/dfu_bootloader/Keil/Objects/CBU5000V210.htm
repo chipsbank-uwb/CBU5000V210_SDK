@@ -1,0 +1,1090 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html><head>
+<title>Static Call Graph - [.\Objects\CBU5000V210.axf]</title></head>
+<body><HR>
+<H1>Static Call Graph for image .\Objects\CBU5000V210.axf</H1><HR>
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6220000: Last Updated: Mon Jun  9 15:17:29 2025
+<BR><P>
+<H3>Maximum Stack Usage =       1044 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
+Call chain for Maximum Stack Depth:</H3>
+__rt_entry_main &rArr; main &rArr; dfu_boot_startup &rArr; boot_move_backup_to_app &rArr; dfu_firmware_crc_check &rArr; cb_flash_read_page &rArr; cb_qspi_read_data_with_addr
+<P>
+<H3>
+Mutually Recursive functions
+</H3> <LI><a href="#[4]">BusFault_Handler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[4]">BusFault_Handler</a><BR>
+ <LI><a href="#[2]">HardFault_Handler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[2]">HardFault_Handler</a><BR>
+ <LI><a href="#[e]">cb_crypto_irqhandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[e]">cb_crypto_irqhandler</a><BR>
+ <LI><a href="#[d]">cb_dma_irqhandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[d]">cb_dma_irqhandler</a><BR>
+ <LI><a href="#[16]">cb_i2c_irqhandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[16]">cb_i2c_irqhandler</a><BR>
+ <LI><a href="#[f]">cb_pka_irqhandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[f]">cb_pka_irqhandler</a><BR>
+ <LI><a href="#[13]">cb_spi_irqhandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[13]">cb_spi_irqhandler</a><BR>
+ <LI><a href="#[17]">cb_timer_0_irqhandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[17]">cb_timer_0_irqhandler</a><BR>
+ <LI><a href="#[18]">cb_timer_1_irqhandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[18]">cb_timer_1_irqhandler</a><BR>
+ <LI><a href="#[19]">cb_timer_2_irqhandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[19]">cb_timer_2_irqhandler</a><BR>
+ <LI><a href="#[1a]">cb_timer_3_irqhandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1a]">cb_timer_3_irqhandler</a><BR>
+ <LI><a href="#[10]">cb_trng_irqhandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[10]">cb_trng_irqhandler</a><BR>
+ <LI><a href="#[20]">cb_uwb_rx0_done_irqhandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[20]">cb_uwb_rx0_done_irqhandler</a><BR>
+ <LI><a href="#[21]">cb_uwb_rx0_preamble_detected_irqhandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[21]">cb_uwb_rx0_preamble_detected_irqhandler</a><BR>
+ <LI><a href="#[22]">cb_uwb_rx0_sfd_detected_irqhandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[22]">cb_uwb_rx0_sfd_detected_irqhandler</a><BR>
+ <LI><a href="#[23]">cb_uwb_rx1_done_irqhandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[23]">cb_uwb_rx1_done_irqhandler</a><BR>
+ <LI><a href="#[24]">cb_uwb_rx1_preamble_detected_irqhandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[24]">cb_uwb_rx1_preamble_detected_irqhandler</a><BR>
+ <LI><a href="#[25]">cb_uwb_rx1_sfd_detected_irqhandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[25]">cb_uwb_rx1_sfd_detected_irqhandler</a><BR>
+ <LI><a href="#[26]">cb_uwb_rx2_done_irqhandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[26]">cb_uwb_rx2_done_irqhandler</a><BR>
+ <LI><a href="#[27]">cb_uwb_rx2_preamble_detected_irqhandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[27]">cb_uwb_rx2_preamble_detected_irqhandler</a><BR>
+ <LI><a href="#[28]">cb_uwb_rx2_sfd_detected_irqhandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[28]">cb_uwb_rx2_sfd_detected_irqhandler</a><BR>
+ <LI><a href="#[2b]">cb_uwb_rx_done_irqhandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[2b]">cb_uwb_rx_done_irqhandler</a><BR>
+ <LI><a href="#[2a]">cb_uwb_rx_phr_detected_irqhandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[2a]">cb_uwb_rx_phr_detected_irqhandler</a><BR>
+ <LI><a href="#[29]">cb_uwb_rx_sts_cir_end_irqhandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[29]">cb_uwb_rx_sts_cir_end_irqhandler</a><BR>
+ <LI><a href="#[2c]">cb_uwb_tx_done_irqhandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[2c]">cb_uwb_tx_done_irqhandler</a><BR>
+ <LI><a href="#[2d]">cb_uwb_tx_sfd_mark_irqhandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[2d]">cb_uwb_tx_sfd_mark_irqhandler</a><BR>
+</UL>
+<P>
+<H3>
+Function Pointers
+</H3><UL>
+ <LI><a href="#[4]">BusFault_Handler</a> from startup_armcm33.o(.text.Default_Handler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[8]">DebugMon_Handler</a> from startup_armcm33.o(.text.Default_Handler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[2]">HardFault_Handler</a> from startup_armcm33.o(.text.HardFault_Handler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[b]">Interrupt0_Handler</a> from startup_armcm33.o(.text.Default_Handler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[1b]">Interrupt16_Handler</a> from startup_armcm33.o(.text.Default_Handler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[1c]">Interrupt17_Handler</a> from startup_armcm33.o(.text.Default_Handler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[1d]">Interrupt18_Handler</a> from startup_armcm33.o(.text.Default_Handler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[1e]">Interrupt19_Handler</a> from startup_armcm33.o(.text.Default_Handler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[c]">Interrupt1_Handler</a> from startup_armcm33.o(.text.Default_Handler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[1f]">Interrupt20_Handler</a> from startup_armcm33.o(.text.Default_Handler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[2e]">Interrupt35_Handler</a> from startup_armcm33.o(.text.Default_Handler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[2f]">Interrupt36_Handler</a> from startup_armcm33.o(.text.Default_Handler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[30]">Interrupt37_Handler</a> from startup_armcm33.o(.text.Default_Handler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[31]">Interrupt38_Handler</a> from startup_armcm33.o(.text.Default_Handler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[3]">MemManage_Handler</a> from startup_armcm33.o(.text.Default_Handler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[1]">NMI_Handler</a> from cb_wdt.o(.text.NMI_Handler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[9]">PendSV_Handler</a> from startup_armcm33.o(.text.Default_Handler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[0]">Reset_Handler</a> from startup_armcm33.o(.text.Reset_Handler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[7]">SVC_Handler</a> from startup_armcm33.o(.text.Default_Handler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[6]">SecureFault_Handler</a> from startup_armcm33.o(.text.Default_Handler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[a]">SysTick_Handler</a> from startup_armcm33.o(.text.SysTick_Handler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[5]">UsageFault_Handler</a> from startup_armcm33.o(.text.Default_Handler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[11]">cb_crc_irqhandler</a> from cb_crc.o(.text.cb_crc_irqhandler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[e]">cb_crypto_irqhandler</a> from startup_armcm33.o(.text.cb_crypto_irqhandler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[d]">cb_dma_irqhandler</a> from startup_armcm33.o(.text.cb_dma_irqhandler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[12]">cb_gpio_irqhandler</a> from cb_gpio.o(.text.cb_gpio_irqhandler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[16]">cb_i2c_irqhandler</a> from startup_armcm33.o(.text.cb_i2c_irqhandler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[f]">cb_pka_irqhandler</a> from startup_armcm33.o(.text.cb_pka_irqhandler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[13]">cb_spi_irqhandler</a> from startup_armcm33.o(.text.cb_spi_irqhandler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[17]">cb_timer_0_irqhandler</a> from startup_armcm33.o(.text.cb_timer_0_irqhandler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[18]">cb_timer_1_irqhandler</a> from startup_armcm33.o(.text.cb_timer_1_irqhandler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[19]">cb_timer_2_irqhandler</a> from startup_armcm33.o(.text.cb_timer_2_irqhandler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[1a]">cb_timer_3_irqhandler</a> from startup_armcm33.o(.text.cb_timer_3_irqhandler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[10]">cb_trng_irqhandler</a> from startup_armcm33.o(.text.cb_trng_irqhandler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[14]">cb_uart_0_irqhandler</a> from cb_uart.o(.text.cb_uart_0_irqhandler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[15]">cb_uart_1_irqhandler</a> from cb_uart.o(.text.cb_uart_1_irqhandler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[20]">cb_uwb_rx0_done_irqhandler</a> from startup_armcm33.o(.text.cb_uwb_rx0_done_irqhandler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[21]">cb_uwb_rx0_preamble_detected_irqhandler</a> from startup_armcm33.o(.text.cb_uwb_rx0_preamble_detected_irqhandler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[22]">cb_uwb_rx0_sfd_detected_irqhandler</a> from startup_armcm33.o(.text.cb_uwb_rx0_sfd_detected_irqhandler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[23]">cb_uwb_rx1_done_irqhandler</a> from startup_armcm33.o(.text.cb_uwb_rx1_done_irqhandler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[24]">cb_uwb_rx1_preamble_detected_irqhandler</a> from startup_armcm33.o(.text.cb_uwb_rx1_preamble_detected_irqhandler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[25]">cb_uwb_rx1_sfd_detected_irqhandler</a> from startup_armcm33.o(.text.cb_uwb_rx1_sfd_detected_irqhandler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[26]">cb_uwb_rx2_done_irqhandler</a> from startup_armcm33.o(.text.cb_uwb_rx2_done_irqhandler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[27]">cb_uwb_rx2_preamble_detected_irqhandler</a> from startup_armcm33.o(.text.cb_uwb_rx2_preamble_detected_irqhandler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[28]">cb_uwb_rx2_sfd_detected_irqhandler</a> from startup_armcm33.o(.text.cb_uwb_rx2_sfd_detected_irqhandler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[2b]">cb_uwb_rx_done_irqhandler</a> from startup_armcm33.o(.text.cb_uwb_rx_done_irqhandler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[2a]">cb_uwb_rx_phr_detected_irqhandler</a> from startup_armcm33.o(.text.cb_uwb_rx_phr_detected_irqhandler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[29]">cb_uwb_rx_sts_cir_end_irqhandler</a> from startup_armcm33.o(.text.cb_uwb_rx_sts_cir_end_irqhandler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[2c]">cb_uwb_tx_done_irqhandler</a> from startup_armcm33.o(.text.cb_uwb_tx_done_irqhandler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[2d]">cb_uwb_tx_sfd_mark_irqhandler</a> from startup_armcm33.o(.text.cb_uwb_tx_sfd_mark_irqhandler) referenced from startup_armcm33.o(RESET)
+ <LI><a href="#[37]">dfu_jump_application</a> from dfu_handler.o(.text.dfu_jump_application) referenced from dfu_handler.o(.rodata.commandTable)
+ <LI><a href="#[34]">dfu_read_fw_version</a> from dfu_handler.o(.text.dfu_read_fw_version) referenced from dfu_handler.o(.rodata.commandTable)
+ <LI><a href="#[35]">dfu_reset_chip</a> from dfu_handler.o(.text.dfu_reset_chip) referenced from dfu_handler.o(.rodata.commandTable)
+ <LI><a href="#[33]">dfu_uart_deinit</a> from dfu_uart.o(.text.dfu_uart_deinit) referenced 2 times from dfu_uart.o(.text.dfu_uart_init)
+ <LI><a href="#[32]">dfu_uart_responder</a> from dfu_uart.o(.text.dfu_uart_responder) referenced 2 times from dfu_uart.o(.text.dfu_uart_init)
+ <LI><a href="#[32]">dfu_uart_responder</a> from dfu_uart.o(.text.dfu_uart_responder) referenced 2 times from dfu_uart.o(.text.dfu_uart_polling)
+ <LI><a href="#[3a]">dfu_upgrade_finish</a> from dfu_handler.o(.text.dfu_upgrade_finish) referenced from dfu_handler.o(.rodata.otaCommand)
+ <LI><a href="#[38]">dfu_upgrade_pack</a> from dfu_handler.o(.text.dfu_upgrade_pack) referenced from dfu_handler.o(.rodata.otaCommand)
+ <LI><a href="#[36]">dfu_upgrade_start</a> from dfu_handler.o(.text.dfu_upgrade_start) referenced from dfu_handler.o(.rodata.commandTable)
+ <LI><a href="#[39]">dfu_upgrade_verify</a> from dfu_handler.o(.text.dfu_upgrade_verify) referenced from dfu_handler.o(.rodata.otaCommand)
+</UL>
+<P>
+<H3>
+Global Symbols
+</H3>
+<P><STRONG><a name="[3b]"></a>__main</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, __main.o(!!!main))
+<BR><BR>[Calls]<UL><LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry
+<LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
+</UL>
+<BR>[Called By]<UL><LI><a href="#[0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Reset_Handler
+</UL>
+
+<P><STRONG><a name="[3c]"></a>__scatterload</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __scatter.o(!!!scatter))
+<BR><BR>[Called By]<UL><LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__main
+</UL>
+
+<P><STRONG><a name="[3e]"></a>__scatterload_rt2</STRONG> (Thumb, 84 bytes, Stack size unknown bytes, __scatter.o(!!!scatter), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry
+</UL>
+
+<P><STRONG><a name="[82]"></a>__scatterload_rt2_thumb_only</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __scatter.o(!!!scatter), UNUSED)
+
+<P><STRONG><a name="[83]"></a>__scatterload_loop</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __scatter.o(!!!scatter), UNUSED)
+
+<P><STRONG><a name="[84]"></a>__decompress</STRONG> (Thumb, 58 bytes, Stack size unknown bytes, __dczerorl.o(!!dczerorl), UNUSED)
+
+<P><STRONG><a name="[85]"></a>__decompress0</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __dczerorl.o(!!dczerorl), UNUSED)
+
+<P><STRONG><a name="[3f]"></a>__scatterload_copy</STRONG> (Thumb, 26 bytes, Stack size unknown bytes, __scatter_copy.o(!!handler_copy), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload_copy
+</UL>
+<BR>[Called By]<UL><LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload_copy
+</UL>
+
+<P><STRONG><a name="[86]"></a>__scatterload_null</STRONG> (Thumb, 2 bytes, Stack size unknown bytes, __scatter.o(!!handler_null), UNUSED)
+
+<P><STRONG><a name="[87]"></a>__scatterload_zeroinit</STRONG> (Thumb, 28 bytes, Stack size unknown bytes, __scatter_zi.o(!!handler_zi), UNUSED)
+
+<P><STRONG><a name="[43]"></a>__rt_lib_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit.o(.ARM.Collect$$libinit$$00000000))
+<BR><BR>[Called By]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_li
+</UL>
+
+<P><STRONG><a name="[40]"></a>__rt_lib_init_fp_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000001))
+<BR><BR>[Calls]<UL><LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_init
+</UL>
+
+<P><STRONG><a name="[88]"></a>__rt_lib_init_alloca_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000030))
+
+<P><STRONG><a name="[89]"></a>__rt_lib_init_argv_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000002E))
+
+<P><STRONG><a name="[8a]"></a>__rt_lib_init_atexit_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000001D))
+
+<P><STRONG><a name="[8b]"></a>__rt_lib_init_clock_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000023))
+
+<P><STRONG><a name="[8c]"></a>__rt_lib_init_cpp_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000034))
+
+<P><STRONG><a name="[8d]"></a>__rt_lib_init_exceptions_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000032))
+
+<P><STRONG><a name="[8e]"></a>__rt_lib_init_fp_trap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000021))
+
+<P><STRONG><a name="[8f]"></a>__rt_lib_init_getenv_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000025))
+
+<P><STRONG><a name="[90]"></a>__rt_lib_init_heap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000000C))
+
+<P><STRONG><a name="[91]"></a>__rt_lib_init_lc_collate_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000013))
+
+<P><STRONG><a name="[92]"></a>__rt_lib_init_lc_ctype_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000015))
+
+<P><STRONG><a name="[93]"></a>__rt_lib_init_lc_monetary_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000017))
+
+<P><STRONG><a name="[94]"></a>__rt_lib_init_lc_numeric_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000019))
+
+<P><STRONG><a name="[95]"></a>__rt_lib_init_lc_time_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000001B))
+
+<P><STRONG><a name="[96]"></a>__rt_lib_init_preinit_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000006))
+
+<P><STRONG><a name="[97]"></a>__rt_lib_init_rand_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000010))
+
+<P><STRONG><a name="[98]"></a>__rt_lib_init_relocate_pie_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000004))
+
+<P><STRONG><a name="[99]"></a>__rt_lib_init_return</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000035))
+
+<P><STRONG><a name="[9a]"></a>__rt_lib_init_signal_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000001F))
+
+<P><STRONG><a name="[9b]"></a>__rt_lib_init_stdio_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000027))
+
+<P><STRONG><a name="[9c]"></a>__rt_lib_init_user_alloc_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000000E))
+
+<P><STRONG><a name="[48]"></a>__rt_lib_shutdown</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown.o(.ARM.Collect$$libshutdown$$00000000))
+<BR><BR>[Called By]<UL><LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_exit_ls
+</UL>
+
+<P><STRONG><a name="[9d]"></a>__rt_lib_shutdown_cpp_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000002))
+
+<P><STRONG><a name="[9e]"></a>__rt_lib_shutdown_fp_trap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000007))
+
+<P><STRONG><a name="[9f]"></a>__rt_lib_shutdown_heap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$0000000F))
+
+<P><STRONG><a name="[a0]"></a>__rt_lib_shutdown_return</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000010))
+
+<P><STRONG><a name="[a1]"></a>__rt_lib_shutdown_signal_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$0000000A))
+
+<P><STRONG><a name="[a2]"></a>__rt_lib_shutdown_stdio_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000004))
+
+<P><STRONG><a name="[a3]"></a>__rt_lib_shutdown_user_alloc_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$0000000C))
+
+<P><STRONG><a name="[3d]"></a>__rt_entry</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry.o(.ARM.Collect$$rtentry$$00000000))
+<BR><BR>[Called By]<UL><LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__main
+<LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload_rt2
+</UL>
+
+<P><STRONG><a name="[a4]"></a>__rt_entry_presh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000002))
+
+<P><STRONG><a name="[a5]"></a>__rt_entry_sh</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry7.o(.ARM.Collect$$rtentry$$00000007))
+
+<P><STRONG><a name="[42]"></a>__rt_entry_li</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000A))
+<BR><BR>[Calls]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_init
+</UL>
+
+<P><STRONG><a name="[a6]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000009))
+
+<P><STRONG><a name="[44]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
+<BR><BR>[Stack]<UL><LI>Max Depth = 1044 + Unknown Stack Size
+<LI>Call Chain = __rt_entry_main &rArr; main &rArr; dfu_boot_startup &rArr; boot_move_backup_to_app &rArr; dfu_firmware_crc_check &rArr; cb_flash_read_page &rArr; cb_qspi_read_data_with_addr
+</UL>
+<BR>[Calls]<UL><LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
+</UL>
+
+<P><STRONG><a name="[a7]"></a>__rt_entry_postli_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000C))
+
+<P><STRONG><a name="[4d]"></a>__rt_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit.o(.ARM.Collect$$rtexit$$00000000))
+<BR><BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
+</UL>
+
+<P><STRONG><a name="[47]"></a>__rt_exit_ls</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit2.o(.ARM.Collect$$rtexit$$00000003))
+<BR><BR>[Calls]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_shutdown
+</UL>
+
+<P><STRONG><a name="[a8]"></a>__rt_exit_prels_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit2.o(.ARM.Collect$$rtexit$$00000002))
+
+<P><STRONG><a name="[49]"></a>__rt_exit_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit2.o(.ARM.Collect$$rtexit$$00000004))
+<BR><BR>[Calls]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_exit
+</UL>
+
+<P><STRONG><a name="[6c]"></a>__aeabi_memcpy</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memcpy_v6.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_uart_responder
+<LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uart_transmit
+</UL>
+
+<P><STRONG><a name="[4b]"></a>__rt_memcpy</STRONG> (Thumb, 138 bytes, Stack size 0 bytes, rt_memcpy_v6.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
+</UL>
+
+<P><STRONG><a name="[a9]"></a>_memcpy_lastbytes</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rt_memcpy_v6.o(.text), UNUSED)
+
+<P><STRONG><a name="[73]"></a>__aeabi_memclr4</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rt_memclr_w.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_bootsetting_read
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_uart_polling
+</UL>
+
+<P><STRONG><a name="[aa]"></a>__aeabi_memclr8</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rt_memclr_w.o(.text), UNUSED)
+
+<P><STRONG><a name="[ab]"></a>__rt_memclr_w</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rt_memclr_w.o(.text), UNUSED)
+
+<P><STRONG><a name="[ac]"></a>_memset_w</STRONG> (Thumb, 74 bytes, Stack size 4 bytes, rt_memclr_w.o(.text), UNUSED)
+
+<P><STRONG><a name="[4c]"></a>__aeabi_memcpy4</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, rt_memcpy_w.o(.text), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_memcpy
+</UL>
+
+<P><STRONG><a name="[ad]"></a>__aeabi_memcpy8</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, rt_memcpy_w.o(.text), UNUSED)
+
+<P><STRONG><a name="[ae]"></a>__rt_memcpy_w</STRONG> (Thumb, 100 bytes, Stack size 8 bytes, rt_memcpy_w.o(.text), UNUSED)
+
+<P><STRONG><a name="[af]"></a>_memcpy_lastbytes_aligned</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rt_memcpy_w.o(.text), UNUSED)
+
+<P><STRONG><a name="[46]"></a>exit</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, exit.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
+<LI>Call Chain = exit
+</UL>
+<BR>[Calls]<UL><LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_exit
+</UL>
+<BR>[Called By]<UL><LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
+</UL>
+
+<P><STRONG><a name="[b0]"></a>__I$use$semihosting</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, use_no_semi.o(.text), UNUSED)
+
+<P><STRONG><a name="[b1]"></a>__use_no_semihosting_swi</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, use_no_semi.o(.text), UNUSED)
+
+<P><STRONG><a name="[b2]"></a>__semihosting_library_function</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, indicate_semi.o(.text), UNUSED)
+
+<P><STRONG><a name="[4a]"></a>_sys_exit</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, sys_exit.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_exit_exit
+</UL>
+
+<P><STRONG><a name="[4]"></a>BusFault_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler))
+<BR><BR>[Calls]<UL><LI><a href="#[4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BusFault_Handler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BusFault_Handler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[8]"></a>DebugMon_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[b3]"></a>Default_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler), UNUSED)
+
+<P><STRONG><a name="[b]"></a>Interrupt0_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[b4]"></a>Interrupt10_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler), UNUSED)
+
+<P><STRONG><a name="[b5]"></a>Interrupt11_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler), UNUSED)
+
+<P><STRONG><a name="[b6]"></a>Interrupt12_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler), UNUSED)
+
+<P><STRONG><a name="[b7]"></a>Interrupt13_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler), UNUSED)
+
+<P><STRONG><a name="[b8]"></a>Interrupt14_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler), UNUSED)
+
+<P><STRONG><a name="[b9]"></a>Interrupt15_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler), UNUSED)
+
+<P><STRONG><a name="[1b]"></a>Interrupt16_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[1c]"></a>Interrupt17_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[1d]"></a>Interrupt18_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[1e]"></a>Interrupt19_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[c]"></a>Interrupt1_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[1f]"></a>Interrupt20_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[ba]"></a>Interrupt21_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler), UNUSED)
+
+<P><STRONG><a name="[bb]"></a>Interrupt22_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler), UNUSED)
+
+<P><STRONG><a name="[bc]"></a>Interrupt23_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler), UNUSED)
+
+<P><STRONG><a name="[bd]"></a>Interrupt24_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler), UNUSED)
+
+<P><STRONG><a name="[be]"></a>Interrupt25_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler), UNUSED)
+
+<P><STRONG><a name="[bf]"></a>Interrupt26_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler), UNUSED)
+
+<P><STRONG><a name="[c0]"></a>Interrupt27_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler), UNUSED)
+
+<P><STRONG><a name="[c1]"></a>Interrupt28_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler), UNUSED)
+
+<P><STRONG><a name="[c2]"></a>Interrupt29_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler), UNUSED)
+
+<P><STRONG><a name="[c3]"></a>Interrupt2_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler), UNUSED)
+
+<P><STRONG><a name="[c4]"></a>Interrupt30_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler), UNUSED)
+
+<P><STRONG><a name="[c5]"></a>Interrupt31_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler), UNUSED)
+
+<P><STRONG><a name="[c6]"></a>Interrupt32_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler), UNUSED)
+
+<P><STRONG><a name="[c7]"></a>Interrupt33_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler), UNUSED)
+
+<P><STRONG><a name="[c8]"></a>Interrupt34_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler), UNUSED)
+
+<P><STRONG><a name="[2e]"></a>Interrupt35_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[2f]"></a>Interrupt36_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[30]"></a>Interrupt37_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[31]"></a>Interrupt38_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[c9]"></a>Interrupt3_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler), UNUSED)
+
+<P><STRONG><a name="[ca]"></a>Interrupt4_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler), UNUSED)
+
+<P><STRONG><a name="[cb]"></a>Interrupt5_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler), UNUSED)
+
+<P><STRONG><a name="[cc]"></a>Interrupt6_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler), UNUSED)
+
+<P><STRONG><a name="[cd]"></a>Interrupt7_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler), UNUSED)
+
+<P><STRONG><a name="[ce]"></a>Interrupt8_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler), UNUSED)
+
+<P><STRONG><a name="[cf]"></a>Interrupt9_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler), UNUSED)
+
+<P><STRONG><a name="[3]"></a>MemManage_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[9]"></a>PendSV_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[7]"></a>SVC_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[6]"></a>SecureFault_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[5]"></a>UsageFault_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Default_Handler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[2]"></a>HardFault_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.HardFault_Handler))
+<BR><BR>[Calls]<UL><LI><a href="#[2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HardFault_Handler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HardFault_Handler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[1]"></a>NMI_Handler</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, cb_wdt.o(.text.NMI_Handler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = NMI_Handler
+</UL>
+<BR>[Calls]<UL><LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_wdt_nmi_app_irq_callback
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[0]"></a>Reset_Handler</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, startup_armcm33.o(.text.Reset_Handler))
+<BR><BR>[Calls]<UL><LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__main
+<LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Init
+<LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemInit
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[a]"></a>SysTick_Handler</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, startup_armcm33.o(.text.SysTick_Handler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[50]"></a>SysTick_Init</STRONG> (Thumb, 70 bytes, Stack size 0 bytes, startup_armcm33.o(.text.SysTick_Init))
+<BR><BR>[Called By]<UL><LI><a href="#[0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Reset_Handler
+</UL>
+
+<P><STRONG><a name="[4f]"></a>SystemInit</STRONG> (Thumb, 48 bytes, Stack size 0 bytes, system_armcm33.o(.text.SystemInit))
+<BR><BR>[Called By]<UL><LI><a href="#[0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Reset_Handler
+</UL>
+
+<P><STRONG><a name="[53]"></a>boot_move_backup_to_app</STRONG> (Thumb, 248 bytes, Stack size 304 bytes, dfu_handler.o(.text.boot_move_backup_to_app))
+<BR><BR>[Stack]<UL><LI>Max Depth = 692<LI>Call Chain = boot_move_backup_to_app &rArr; dfu_firmware_crc_check &rArr; cb_flash_read_page &rArr; cb_qspi_read_data_with_addr
+</UL>
+<BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_firmware_crc_check
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_bootsetting_write
+<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_deep_sleep_control
+<LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_flash_read_page
+<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_flash_program_by_addr
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_flash_erase_sector
+</UL>
+<BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_boot_startup
+</UL>
+
+<P><STRONG><a name="[70]"></a>cb_crc_algo_config</STRONG> (Thumb, 88 bytes, Stack size 8 bytes, cb_crc.o(.text.cb_crc_algo_config))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = cb_crc_algo_config
+</UL>
+<BR>[Called By]<UL><LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_upgrade_pack
+<LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_firmware_crc_check
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_bootsetting_write
+<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_bootsetting_read
+</UL>
+
+<P><STRONG><a name="[5c]"></a>cb_crc_app_irq_callback</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, cb_crc.o(.text.cb_crc_app_irq_callback))
+<BR><BR>[Called By]<UL><LI><a href="#[11]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_crc_irqhandler
+</UL>
+
+<P><STRONG><a name="[72]"></a>cb_crc_get_crc_result</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, cb_crc.o(.text.cb_crc_get_crc_result))
+<BR><BR>[Called By]<UL><LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_upgrade_pack
+<LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_firmware_crc_check
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_bootsetting_write
+<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_bootsetting_read
+</UL>
+
+<P><STRONG><a name="[5a]"></a>cb_crc_init</STRONG> (Thumb, 36 bytes, Stack size 8 bytes, cb_crc.o(.text.cb_crc_init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = cb_crc_init
+</UL>
+<BR>[Calls]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_scr_crc_module_on
+</UL>
+<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_halder_init
+</UL>
+
+<P><STRONG><a name="[11]"></a>cb_crc_irqhandler</STRONG> (Thumb, 70 bytes, Stack size 0 bytes, cb_crc.o(.text.cb_crc_irqhandler))
+<BR><BR>[Calls]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_crc_app_irq_callback
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[71]"></a>cb_crc_process_from_input_data</STRONG> (Thumb, 482 bytes, Stack size 28 bytes, cb_crc.o(.text.cb_crc_process_from_input_data))
+<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = cb_crc_process_from_input_data
+</UL>
+<BR>[Called By]<UL><LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_upgrade_pack
+<LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_firmware_crc_check
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_bootsetting_write
+<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_bootsetting_read
+</UL>
+
+<P><STRONG><a name="[e]"></a>cb_crypto_irqhandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.cb_crypto_irqhandler))
+<BR><BR>[Calls]<UL><LI><a href="#[e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_crypto_irqhandler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_crypto_irqhandler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[59]"></a>cb_deep_sleep_control</STRONG> (Thumb, 176 bytes, Stack size 16 bytes, cb_sleepdeepsleep.o(.text.cb_deep_sleep_control))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = cb_deep_sleep_control &rArr; cb_hal_delay_in_us
+</UL>
+<BR>[Calls]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_hal_delay_in_us
+</UL>
+<BR>[Called By]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;boot_move_backup_to_app
+</UL>
+
+<P><STRONG><a name="[d]"></a>cb_dma_irqhandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.cb_dma_irqhandler))
+<BR><BR>[Calls]<UL><LI><a href="#[d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_dma_irqhandler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_dma_irqhandler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[5e]"></a>cb_flash_block_protect</STRONG> (Thumb, 678 bytes, Stack size 80 bytes, cb_flash.o(.text.cb_flash_block_protect))
+<BR><BR>[Stack]<UL><LI>Max Depth = 116<LI>Call Chain = cb_flash_block_protect &rArr; cb_qspi_read_data_without_addr
+</UL>
+<BR>[Calls]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_qspi_write_command_with_param
+<LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_qspi_write_single_command
+<LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_qspi_read_data_without_addr
+</UL>
+<BR>[Called By]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_flash_program_by_addr
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_flash_erase_sector
+</UL>
+
+<P><STRONG><a name="[55]"></a>cb_flash_erase_sector</STRONG> (Thumb, 580 bytes, Stack size 80 bytes, cb_flash.o(.text.cb_flash_erase_sector))
+<BR><BR>[Stack]<UL><LI>Max Depth = 196<LI>Call Chain = cb_flash_erase_sector &rArr; cb_flash_block_protect &rArr; cb_qspi_read_data_without_addr
+</UL>
+<BR>[Calls]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_qspi_write_command_and_addr
+<LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_qspi_write_single_command
+<LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_flash_block_protect
+<LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_qspi_read_data_without_addr
+</UL>
+<BR>[Called By]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;boot_move_backup_to_app
+<LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_upgrade_pack
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_bootsetting_write
+</UL>
+
+<P><STRONG><a name="[63]"></a>cb_flash_init</STRONG> (Thumb, 586 bytes, Stack size 40 bytes, cb_flash.o(.text.cb_flash_init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = cb_flash_init &rArr; cb_qspi_read_data_without_addr
+</UL>
+<BR>[Calls]<UL><LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_qspi_read_data_without_addr
+</UL>
+<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_halder_init
+</UL>
+
+<P><STRONG><a name="[56]"></a>cb_flash_program_by_addr</STRONG> (Thumb, 640 bytes, Stack size 96 bytes, cb_flash.o(.text.cb_flash_program_by_addr))
+<BR><BR>[Stack]<UL><LI>Max Depth = 212<LI>Call Chain = cb_flash_program_by_addr &rArr; cb_flash_block_protect &rArr; cb_qspi_read_data_without_addr
+</UL>
+<BR>[Calls]<UL><LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_qspi_write_data_with_addr
+<LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_qspi_write_single_command
+<LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_flash_block_protect
+<LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_qspi_read_data_without_addr
+</UL>
+<BR>[Called By]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;boot_move_backup_to_app
+<LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_upgrade_pack
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_bootsetting_write
+</UL>
+
+<P><STRONG><a name="[57]"></a>cb_flash_read_page</STRONG> (Thumb, 206 bytes, Stack size 48 bytes, cb_flash.o(.text.cb_flash_read_page))
+<BR><BR>[Stack]<UL><LI>Max Depth = 84<LI>Call Chain = cb_flash_read_page &rArr; cb_qspi_read_data_with_addr
+</UL>
+<BR>[Calls]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_qspi_read_data_with_addr
+</UL>
+<BR>[Called By]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;boot_move_backup_to_app
+<LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_firmware_crc_check
+<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_bootsetting_read
+</UL>
+
+<P><STRONG><a name="[66]"></a>cb_gpio_app_irq_callback</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, cb_gpio.o(.text.cb_gpio_app_irq_callback))
+<BR><BR>[Called By]<UL><LI><a href="#[12]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_gpio_irqhandler
+</UL>
+
+<P><STRONG><a name="[12]"></a>cb_gpio_irqhandler</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, cb_gpio.o(.text.cb_gpio_irqhandler))
+<BR><BR>[Calls]<UL><LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_gpio_app_irq_callback
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[5d]"></a>cb_hal_delay_in_us</STRONG> (Thumb, 114 bytes, Stack size 8 bytes, nonlib_sharedutils.o(.text.cb_hal_delay_in_us))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = cb_hal_delay_in_us
+</UL>
+<BR>[Called By]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_deep_sleep_control
+</UL>
+
+<P><STRONG><a name="[16]"></a>cb_i2c_irqhandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.cb_i2c_irqhandler))
+<BR><BR>[Calls]<UL><LI><a href="#[16]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_i2c_irqhandler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[16]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_i2c_irqhandler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[79]"></a>cb_iomux_config</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, cb_iomux.o(.text.cb_iomux_config))
+<BR><BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_uart_init
+</UL>
+
+<P><STRONG><a name="[f]"></a>cb_pka_irqhandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.cb_pka_irqhandler))
+<BR><BR>[Calls]<UL><LI><a href="#[f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_pka_irqhandler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_pka_irqhandler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[65]"></a>cb_qspi_read_data_with_addr</STRONG> (Thumb, 632 bytes, Stack size 36 bytes, cb_qspi.o(.text.cb_qspi_read_data_with_addr))
+<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = cb_qspi_read_data_with_addr
+</UL>
+<BR>[Called By]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_flash_read_page
+</UL>
+
+<P><STRONG><a name="[60]"></a>cb_qspi_read_data_without_addr</STRONG> (Thumb, 558 bytes, Stack size 36 bytes, cb_qspi.o(.text.cb_qspi_read_data_without_addr))
+<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = cb_qspi_read_data_without_addr
+</UL>
+<BR>[Called By]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_flash_program_by_addr
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_flash_erase_sector
+<LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_flash_block_protect
+<LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_flash_init
+</UL>
+
+<P><STRONG><a name="[62]"></a>cb_qspi_write_command_and_addr</STRONG> (Thumb, 420 bytes, Stack size 16 bytes, cb_qspi.o(.text.cb_qspi_write_command_and_addr))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = cb_qspi_write_command_and_addr
+</UL>
+<BR>[Called By]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_flash_erase_sector
+</UL>
+
+<P><STRONG><a name="[61]"></a>cb_qspi_write_command_with_param</STRONG> (Thumb, 240 bytes, Stack size 8 bytes, cb_qspi.o(.text.cb_qspi_write_command_with_param))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = cb_qspi_write_command_with_param
+</UL>
+<BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_flash_block_protect
+</UL>
+
+<P><STRONG><a name="[64]"></a>cb_qspi_write_data_with_addr</STRONG> (Thumb, 950 bytes, Stack size 56 bytes, cb_qspi.o(.text.cb_qspi_write_data_with_addr))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = cb_qspi_write_data_with_addr
+</UL>
+<BR>[Called By]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_flash_program_by_addr
+</UL>
+
+<P><STRONG><a name="[5f]"></a>cb_qspi_write_single_command</STRONG> (Thumb, 246 bytes, Stack size 8 bytes, cb_qspi.o(.text.cb_qspi_write_single_command))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = cb_qspi_write_single_command
+</UL>
+<BR>[Called By]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_flash_program_by_addr
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_flash_erase_sector
+<LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_flash_block_protect
+</UL>
+
+<P><STRONG><a name="[5b]"></a>cb_scr_crc_module_on</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, cb_scr.o(.text.cb_scr_crc_module_on))
+<BR><BR>[Called By]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_crc_init
+</UL>
+
+<P><STRONG><a name="[75]"></a>cb_scr_uart0_module_off</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, cb_scr.o(.text.cb_scr_uart0_module_off))
+<BR><BR>[Called By]<UL><LI><a href="#[33]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_uart_deinit
+<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_uart_init
+</UL>
+
+<P><STRONG><a name="[78]"></a>cb_scr_uart0_module_on</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, cb_scr.o(.text.cb_scr_uart0_module_on))
+<BR><BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_uart_init
+</UL>
+
+<P><STRONG><a name="[77]"></a>cb_scr_uwb_module_on</STRONG> (Thumb, 50 bytes, Stack size 0 bytes, cb_scr.o(.text.cb_scr_uwb_module_on))
+<BR><BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_uart_init
+</UL>
+
+<P><STRONG><a name="[13]"></a>cb_spi_irqhandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.cb_spi_irqhandler))
+<BR><BR>[Calls]<UL><LI><a href="#[13]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_spi_irqhandler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[13]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_spi_irqhandler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[17]"></a>cb_timer_0_irqhandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.cb_timer_0_irqhandler))
+<BR><BR>[Calls]<UL><LI><a href="#[17]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_timer_0_irqhandler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[17]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_timer_0_irqhandler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[18]"></a>cb_timer_1_irqhandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.cb_timer_1_irqhandler))
+<BR><BR>[Calls]<UL><LI><a href="#[18]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_timer_1_irqhandler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[18]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_timer_1_irqhandler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[19]"></a>cb_timer_2_irqhandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.cb_timer_2_irqhandler))
+<BR><BR>[Calls]<UL><LI><a href="#[19]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_timer_2_irqhandler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[19]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_timer_2_irqhandler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[1a]"></a>cb_timer_3_irqhandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.cb_timer_3_irqhandler))
+<BR><BR>[Calls]<UL><LI><a href="#[1a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_timer_3_irqhandler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[1a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_timer_3_irqhandler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[10]"></a>cb_trng_irqhandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.cb_trng_irqhandler))
+<BR><BR>[Calls]<UL><LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_trng_irqhandler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_trng_irqhandler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[14]"></a>cb_uart_0_irqhandler</STRONG> (Thumb, 52 bytes, Stack size 8 bytes, cb_uart.o(.text.cb_uart_0_irqhandler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = cb_uart_0_irqhandler
+</UL>
+<BR>[Calls]<UL><LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uart_0_txb_empty_app_irq_callback
+<LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uart_0_rxb_full_app_irq_callback
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[67]"></a>cb_uart_0_rxb_full_app_irq_callback</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, cb_uart.o(.text.cb_uart_0_rxb_full_app_irq_callback))
+<BR><BR>[Called By]<UL><LI><a href="#[14]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uart_0_irqhandler
+</UL>
+
+<P><STRONG><a name="[68]"></a>cb_uart_0_txb_empty_app_irq_callback</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, cb_uart.o(.text.cb_uart_0_txb_empty_app_irq_callback))
+<BR><BR>[Called By]<UL><LI><a href="#[14]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uart_0_irqhandler
+</UL>
+
+<P><STRONG><a name="[15]"></a>cb_uart_1_irqhandler</STRONG> (Thumb, 52 bytes, Stack size 8 bytes, cb_uart.o(.text.cb_uart_1_irqhandler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = cb_uart_1_irqhandler
+</UL>
+<BR>[Calls]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uart_1_txb_empty_app_irq_callback
+<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uart_1_rxb_full_app_irq_callback
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[69]"></a>cb_uart_1_rxb_full_app_irq_callback</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, cb_uart.o(.text.cb_uart_1_rxb_full_app_irq_callback))
+<BR><BR>[Called By]<UL><LI><a href="#[15]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uart_1_irqhandler
+</UL>
+
+<P><STRONG><a name="[6a]"></a>cb_uart_1_txb_empty_app_irq_callback</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, cb_uart.o(.text.cb_uart_1_txb_empty_app_irq_callback))
+<BR><BR>[Called By]<UL><LI><a href="#[15]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uart_1_irqhandler
+</UL>
+
+<P><STRONG><a name="[7c]"></a>cb_uart_check_num_received_bytes</STRONG> (Thumb, 30 bytes, Stack size 0 bytes, cb_uart.o(.text.cb_uart_check_num_received_bytes))
+<BR><BR>[Called By]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_uart_polling
+</UL>
+
+<P><STRONG><a name="[7d]"></a>cb_uart_get_rx_buffer</STRONG> (Thumb, 144 bytes, Stack size 20 bytes, cb_uart.o(.text.cb_uart_get_rx_buffer))
+<BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = cb_uart_get_rx_buffer
+</UL>
+<BR>[Called By]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_uart_polling
+</UL>
+
+<P><STRONG><a name="[7a]"></a>cb_uart_init</STRONG> (Thumb, 420 bytes, Stack size 20 bytes, cb_uart.o(.text.cb_uart_init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = cb_uart_init
+</UL>
+<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_uart_init
+</UL>
+
+<P><STRONG><a name="[81]"></a>cb_uart_is_tx_busy</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, cb_uart.o(.text.cb_uart_is_tx_busy))
+<BR><BR>[Called By]<UL><LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_uart_responder
+</UL>
+
+<P><STRONG><a name="[7e]"></a>cb_uart_rx_restart</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, cb_uart.o(.text.cb_uart_rx_restart))
+<BR><BR>[Called By]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_uart_polling
+</UL>
+
+<P><STRONG><a name="[7f]"></a>cb_uart_rx_stop</STRONG> (Thumb, 30 bytes, Stack size 0 bytes, cb_uart.o(.text.cb_uart_rx_stop))
+<BR><BR>[Called By]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_uart_polling
+</UL>
+
+<P><STRONG><a name="[6b]"></a>cb_uart_transmit</STRONG> (Thumb, 380 bytes, Stack size 16 bytes, cb_uart.o(.text.cb_uart_transmit))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = cb_uart_transmit
+</UL>
+<BR>[Calls]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
+</UL>
+<BR>[Called By]<UL><LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_uart_responder
+</UL>
+
+<P><STRONG><a name="[20]"></a>cb_uwb_rx0_done_irqhandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.cb_uwb_rx0_done_irqhandler))
+<BR><BR>[Calls]<UL><LI><a href="#[20]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uwb_rx0_done_irqhandler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[20]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uwb_rx0_done_irqhandler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[21]"></a>cb_uwb_rx0_preamble_detected_irqhandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.cb_uwb_rx0_preamble_detected_irqhandler))
+<BR><BR>[Calls]<UL><LI><a href="#[21]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uwb_rx0_preamble_detected_irqhandler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[21]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uwb_rx0_preamble_detected_irqhandler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[22]"></a>cb_uwb_rx0_sfd_detected_irqhandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.cb_uwb_rx0_sfd_detected_irqhandler))
+<BR><BR>[Calls]<UL><LI><a href="#[22]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uwb_rx0_sfd_detected_irqhandler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[22]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uwb_rx0_sfd_detected_irqhandler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[23]"></a>cb_uwb_rx1_done_irqhandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.cb_uwb_rx1_done_irqhandler))
+<BR><BR>[Calls]<UL><LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uwb_rx1_done_irqhandler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uwb_rx1_done_irqhandler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[24]"></a>cb_uwb_rx1_preamble_detected_irqhandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.cb_uwb_rx1_preamble_detected_irqhandler))
+<BR><BR>[Calls]<UL><LI><a href="#[24]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uwb_rx1_preamble_detected_irqhandler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[24]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uwb_rx1_preamble_detected_irqhandler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[25]"></a>cb_uwb_rx1_sfd_detected_irqhandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.cb_uwb_rx1_sfd_detected_irqhandler))
+<BR><BR>[Calls]<UL><LI><a href="#[25]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uwb_rx1_sfd_detected_irqhandler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[25]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uwb_rx1_sfd_detected_irqhandler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[26]"></a>cb_uwb_rx2_done_irqhandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.cb_uwb_rx2_done_irqhandler))
+<BR><BR>[Calls]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uwb_rx2_done_irqhandler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uwb_rx2_done_irqhandler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[27]"></a>cb_uwb_rx2_preamble_detected_irqhandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.cb_uwb_rx2_preamble_detected_irqhandler))
+<BR><BR>[Calls]<UL><LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uwb_rx2_preamble_detected_irqhandler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uwb_rx2_preamble_detected_irqhandler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[28]"></a>cb_uwb_rx2_sfd_detected_irqhandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.cb_uwb_rx2_sfd_detected_irqhandler))
+<BR><BR>[Calls]<UL><LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uwb_rx2_sfd_detected_irqhandler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uwb_rx2_sfd_detected_irqhandler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[2b]"></a>cb_uwb_rx_done_irqhandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.cb_uwb_rx_done_irqhandler))
+<BR><BR>[Calls]<UL><LI><a href="#[2b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uwb_rx_done_irqhandler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[2b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uwb_rx_done_irqhandler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[2a]"></a>cb_uwb_rx_phr_detected_irqhandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.cb_uwb_rx_phr_detected_irqhandler))
+<BR><BR>[Calls]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uwb_rx_phr_detected_irqhandler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uwb_rx_phr_detected_irqhandler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[29]"></a>cb_uwb_rx_sts_cir_end_irqhandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.cb_uwb_rx_sts_cir_end_irqhandler))
+<BR><BR>[Calls]<UL><LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uwb_rx_sts_cir_end_irqhandler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uwb_rx_sts_cir_end_irqhandler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[2c]"></a>cb_uwb_tx_done_irqhandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.cb_uwb_tx_done_irqhandler))
+<BR><BR>[Calls]<UL><LI><a href="#[2c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uwb_tx_done_irqhandler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[2c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uwb_tx_done_irqhandler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[2d]"></a>cb_uwb_tx_sfd_mark_irqhandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_armcm33.o(.text.cb_uwb_tx_sfd_mark_irqhandler))
+<BR><BR>[Calls]<UL><LI><a href="#[2d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uwb_tx_sfd_mark_irqhandler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[2d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uwb_tx_sfd_mark_irqhandler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_armcm33.o(RESET)
+</UL>
+<P><STRONG><a name="[4e]"></a>cb_wdt_nmi_app_irq_callback</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, cb_wdt.o(.text.cb_wdt_nmi_app_irq_callback))
+<BR><BR>[Called By]<UL><LI><a href="#[1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NMI_Handler
+</UL>
+
+<P><STRONG><a name="[6d]"></a>dfu_boot_startup</STRONG> (Thumb, 124 bytes, Stack size 352 bytes, dfu_handler.o(.text.dfu_boot_startup))
+<BR><BR>[Stack]<UL><LI>Max Depth = 1044 + Unknown Stack Size
+<LI>Call Chain = dfu_boot_startup &rArr; boot_move_backup_to_app &rArr; dfu_firmware_crc_check &rArr; cb_flash_read_page &rArr; cb_qspi_read_data_with_addr
+</UL>
+<BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;boot_move_backup_to_app
+<LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_firmware_crc_check
+<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_bootsetting_read
+<LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;boot_jumpAddress
+<LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_SystemReset
+</UL>
+<BR>[Called By]<UL><LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[6e]"></a>dfu_bootsetting_read</STRONG> (Thumb, 210 bytes, Stack size 32 bytes, dfu_handler.o(.text.dfu_bootsetting_read))
+<BR><BR>[Stack]<UL><LI>Max Depth = 268 + Unknown Stack Size
+<LI>Call Chain = dfu_bootsetting_read &rArr; dfu_bootsetting_write &rArr; cb_flash_program_by_addr &rArr; cb_flash_block_protect &rArr; cb_qspi_read_data_without_addr
+</UL>
+<BR>[Calls]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_bootsetting_write
+<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_crc_get_crc_result
+<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_crc_process_from_input_data
+<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_crc_algo_config
+<LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_flash_read_page
+</UL>
+<BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_upgrade_verify
+<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_boot_startup
+</UL>
+
+<P><STRONG><a name="[58]"></a>dfu_bootsetting_write</STRONG> (Thumb, 114 bytes, Stack size 24 bytes, dfu_handler.o(.text.dfu_bootsetting_write))
+<BR><BR>[Stack]<UL><LI>Max Depth = 236<LI>Call Chain = dfu_bootsetting_write &rArr; cb_flash_program_by_addr &rArr; cb_flash_block_protect &rArr; cb_qspi_read_data_without_addr
+</UL>
+<BR>[Calls]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_crc_get_crc_result
+<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_crc_process_from_input_data
+<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_crc_algo_config
+<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_flash_program_by_addr
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_flash_erase_sector
+</UL>
+<BR>[Called By]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;boot_move_backup_to_app
+<LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_upgrade_verify
+<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_bootsetting_read
+</UL>
+
+<P><STRONG><a name="[54]"></a>dfu_firmware_crc_check</STRONG> (Thumb, 158 bytes, Stack size 304 bytes, dfu_handler.o(.text.dfu_firmware_crc_check))
+<BR><BR>[Stack]<UL><LI>Max Depth = 388<LI>Call Chain = dfu_firmware_crc_check &rArr; cb_flash_read_page &rArr; cb_qspi_read_data_with_addr
+</UL>
+<BR>[Calls]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_crc_get_crc_result
+<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_crc_process_from_input_data
+<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_crc_algo_config
+<LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_flash_read_page
+</UL>
+<BR>[Called By]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;boot_move_backup_to_app
+<LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_upgrade_verify
+<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_boot_startup
+</UL>
+
+<P><STRONG><a name="[74]"></a>dfu_halder_init</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, dfu_handler.o(.text.dfu_halder_init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 84<LI>Call Chain = dfu_halder_init &rArr; cb_flash_init &rArr; cb_qspi_read_data_without_addr
+</UL>
+<BR>[Calls]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_crc_init
+<LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_flash_init
+</UL>
+<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_uart_init
+</UL>
+
+<P><STRONG><a name="[80]"></a>dfu_halder_polling</STRONG> (Thumb, 124 bytes, Stack size 8 bytes, dfu_handler.o(.text.dfu_halder_polling))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = dfu_halder_polling
+</UL>
+<BR>[Called By]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_uart_polling
+</UL>
+
+<P><STRONG><a name="[37]"></a>dfu_jump_application</STRONG> (Thumb, 58 bytes, Stack size 24 bytes, dfu_handler.o(.text.dfu_jump_application))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = dfu_jump_application &rArr; boot_jumpAddress &rArr; boot_enterApp
+</UL>
+<BR>[Calls]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;boot_jumpAddress
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> dfu_handler.o(.rodata.commandTable)
+</UL>
+<P><STRONG><a name="[34]"></a>dfu_read_fw_version</STRONG> (Thumb, 34 bytes, Stack size 16 bytes, dfu_handler.o(.text.dfu_read_fw_version))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = dfu_read_fw_version
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> dfu_handler.o(.rodata.commandTable)
+</UL>
+<P><STRONG><a name="[35]"></a>dfu_reset_chip</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, dfu_handler.o(.text.dfu_reset_chip))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = dfu_reset_chip
+</UL>
+<BR>[Calls]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_SystemReset
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> dfu_handler.o(.rodata.commandTable)
+</UL>
+<P><STRONG><a name="[76]"></a>dfu_uart_init</STRONG> (Thumb, 144 bytes, Stack size 24 bytes, dfu_uart.o(.text.dfu_uart_init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 108<LI>Call Chain = dfu_uart_init &rArr; dfu_halder_init &rArr; cb_flash_init &rArr; cb_qspi_read_data_without_addr
+</UL>
+<BR>[Calls]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_halder_init
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uart_init
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_scr_uwb_module_on
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_scr_uart0_module_off
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_scr_uart0_module_on
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_iomux_config
+</UL>
+<BR>[Called By]<UL><LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[7b]"></a>dfu_uart_polling</STRONG> (Thumb, 302 bytes, Stack size 32 bytes, dfu_uart.o(.text.dfu_uart_polling))
+<BR><BR>[Stack]<UL><LI>Max Depth = 52 + Unknown Stack Size
+<LI>Call Chain = dfu_uart_polling &rArr; cb_uart_get_rx_buffer
+</UL>
+<BR>[Calls]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_halder_polling
+<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uart_rx_restart
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uart_rx_stop
+<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uart_check_num_received_bytes
+<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uart_get_rx_buffer
+</UL>
+<BR>[Called By]<UL><LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[3a]"></a>dfu_upgrade_finish</STRONG> (Thumb, 46 bytes, Stack size 16 bytes, dfu_handler.o(.text.dfu_upgrade_finish))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = dfu_upgrade_finish
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> dfu_handler.o(.rodata.otaCommand)
+</UL>
+<P><STRONG><a name="[38]"></a>dfu_upgrade_pack</STRONG> (Thumb, 246 bytes, Stack size 48 bytes, dfu_handler.o(.text.dfu_upgrade_pack))
+<BR><BR>[Stack]<UL><LI>Max Depth = 260<LI>Call Chain = dfu_upgrade_pack &rArr; cb_flash_program_by_addr &rArr; cb_flash_block_protect &rArr; cb_qspi_read_data_without_addr
+</UL>
+<BR>[Calls]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_crc_get_crc_result
+<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_crc_process_from_input_data
+<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_crc_algo_config
+<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_flash_program_by_addr
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_flash_erase_sector
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> dfu_handler.o(.rodata.otaCommand)
+</UL>
+<P><STRONG><a name="[36]"></a>dfu_upgrade_start</STRONG> (Thumb, 74 bytes, Stack size 16 bytes, dfu_handler.o(.text.dfu_upgrade_start))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = dfu_upgrade_start
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> dfu_handler.o(.rodata.commandTable)
+</UL>
+<P><STRONG><a name="[39]"></a>dfu_upgrade_verify</STRONG> (Thumb, 128 bytes, Stack size 384 bytes, dfu_handler.o(.text.dfu_upgrade_verify))
+<BR><BR>[Stack]<UL><LI>Max Depth = 772 + Unknown Stack Size
+<LI>Call Chain = dfu_upgrade_verify &rArr; dfu_firmware_crc_check &rArr; cb_flash_read_page &rArr; cb_qspi_read_data_with_addr
+</UL>
+<BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_firmware_crc_check
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_bootsetting_write
+<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_bootsetting_read
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> dfu_handler.o(.rodata.otaCommand)
+</UL>
+<P><STRONG><a name="[45]"></a>main</STRONG> (Thumb, 58 bytes, Stack size 0 bytes, main.o(.text.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 1044 + Unknown Stack Size
+<LI>Call Chain = main &rArr; dfu_boot_startup &rArr; boot_move_backup_to_app &rArr; dfu_firmware_crc_check &rArr; cb_flash_read_page &rArr; cb_qspi_read_data_with_addr
+</UL>
+<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_uart_polling
+<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_boot_startup
+<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_uart_init
+</UL>
+<BR>[Called By]<UL><LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
+</UL>
+
+<P><STRONG><a name="[41]"></a>_fp_init</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, fpinit.o(x$fpl$fpinit))
+<BR><BR>[Called By]<UL><LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_init_fp_1
+</UL>
+
+<P><STRONG><a name="[d0]"></a>__fplib_config_fpu_vfp</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, fpinit.o(x$fpl$fpinit), UNUSED)
+
+<P><STRONG><a name="[d1]"></a>__fplib_config_pureend_doubles</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, fpinit.o(x$fpl$fpinit), UNUSED)
+<P>
+<H3>
+Local Symbols
+</H3>
+<P><STRONG><a name="[6f]"></a>__NVIC_SystemReset</STRONG> (Thumb, 42 bytes, Stack size 0 bytes, dfu_handler.o(.text.__NVIC_SystemReset))
+<BR><BR>[Called By]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_reset_chip
+<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_boot_startup
+</UL>
+
+<P><STRONG><a name="[51]"></a>boot_jumpAddress</STRONG> (Thumb, 66 bytes, Stack size 24 bytes, dfu_handler.o(.text.boot_jumpAddress))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = boot_jumpAddress &rArr; boot_enterApp
+</UL>
+<BR>[Calls]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;boot_enterApp
+</UL>
+<BR>[Called By]<UL><LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_jump_application
+<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dfu_boot_startup
+</UL>
+
+<P><STRONG><a name="[52]"></a>boot_enterApp</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, dfu_handler.o(.text.boot_enterApp))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = boot_enterApp
+</UL>
+<BR>[Called By]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;boot_jumpAddress
+</UL>
+
+<P><STRONG><a name="[32]"></a>dfu_uart_responder</STRONG> (Thumb, 162 bytes, Stack size 32 bytes, dfu_uart.o(.text.dfu_uart_responder))
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = dfu_uart_responder &rArr; cb_uart_transmit
+</UL>
+<BR>[Calls]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
+<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uart_is_tx_busy
+<LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_uart_transmit
+</UL>
+<BR>[Address Reference Count : 2]<UL><LI> dfu_uart.o(.text.dfu_uart_polling)
+<LI> dfu_uart.o(.text.dfu_uart_init)
+</UL>
+<P><STRONG><a name="[33]"></a>dfu_uart_deinit</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, dfu_uart.o(.text.dfu_uart_deinit))
+<BR><BR>[Calls]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cb_scr_uart0_module_off
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> dfu_uart.o(.text.dfu_uart_init)
+</UL><P>
+<H3>
+Undefined Global Symbols
+</H3><HR></body></html>

@@ -41,7 +41,7 @@
             CBU5000V210
           </a>
               <div class="version">
-                2.0.0
+                2.0.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -59,47 +59,51 @@
 <li class="toctree-l1"><a class="reference internal" href="Calibration.html">UWB Calibration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Appendix.html">Appendix</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Version History</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#v2-0-0">V2.0.0</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#v2-0-1">V2.0.1</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#new-features">New Features</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#v1-4-11">V1.4.11</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#v2-0-0">V2.0.0</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1">New Features</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#v1-4-10">V1.4.10</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#v1-4-11">V1.4.11</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id2">New Features</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#v1-4-9">V1.4.9</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#v1-4-10">V1.4.10</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id3">New Features</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#v1-4-8">V1.4.8</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#v1-4-9">V1.4.9</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id4">New Features</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#v1-4-7">V1.4.7</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#v1-4-8">V1.4.8</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id5">New Features</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#v1-4-6">V1.4.6</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#v1-4-7">V1.4.7</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id6">New Features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-4-6">V1.4.6</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">New Features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#bug-fixes-minor-changes">Bug Fixes &amp; Minor Changes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#v1-4-3">V1.4.3</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id7">New Features</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id8">Bug Fixes &amp; Minor Changes</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#v1-4-2">V1.4.2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">New Features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id9">Bug Fixes &amp; Minor Changes</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-4-2">V1.4.2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id10">Bug Fixes &amp; Minor Changes</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#v1-4-1">V1.4.1</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id10">New Features</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id11">Bug Fixes &amp; Minor Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">New Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">Bug Fixes &amp; Minor Changes</a></li>
 </ul>
 </li>
 </ul>
@@ -131,10 +135,22 @@
              
   <section id="version-history">
 <h1>Version History<a class="headerlink" href="#version-history" title="Link to this heading"></a></h1>
-<section id="v2-0-0">
-<h2>V2.0.0<a class="headerlink" href="#v2-0-0" title="Link to this heading"></a></h2>
+<section id="v2-0-1">
+<h2>V2.0.1<a class="headerlink" href="#v2-0-1" title="Link to this heading"></a></h2>
 <section id="new-features">
 <h3>New Features<a class="headerlink" href="#new-features" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>[UWB]</strong> RF FLow 2.6: General-purpose rx_start, replaced PDOA-specific APIs with added rx_restart, and tx_restart functions.</p></li>
+<li><p><strong>[UWB]</strong> Fix Rx status retention issue.</p></li>
+<li><p><strong>[UWB]</strong> Updated power control to disable changing to LDO_DIG usage after calibration.</p></li>
+<li><p><strong>[UWB]</strong> Replaced AOA functions with a new LUT-based model.</p></li>
+</ol>
+</section>
+</section>
+<section id="v2-0-0">
+<h2>V2.0.0<a class="headerlink" href="#v2-0-0" title="Link to this heading"></a></h2>
+<section id="id1">
+<h3>New Features<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>[SDK]</strong> SDK Restructure</p></li>
 </ol>
@@ -142,8 +158,8 @@
 </section>
 <section id="v1-4-11">
 <h2>V1.4.11<a class="headerlink" href="#v1-4-11" title="Link to this heading"></a></h2>
-<section id="id1">
-<h3>New Features<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<section id="id2">
+<h3>New Features<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>[UWB]</strong>  RF FLow 2.5: Using new logic of setBits functions, fix packet format(SP1)</p></li>
 <li><p><strong>[UWB]</strong>  DSTWR: Using absolute timer</p></li>
@@ -152,8 +168,8 @@
 </section>
 <section id="v1-4-10">
 <h2>V1.4.10<a class="headerlink" href="#v1-4-10" title="Link to this heading"></a></h2>
-<section id="id2">
-<h3>New Features<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<section id="id3">
+<h3>New Features<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>[UWB]</strong>  Implement frequency with 50Hz (single sided AOA) (Update driver, flow optimization, reduce printing time, log format for single sided rngaoa)</p></li>
 <li><p><strong>[UWB]</strong>  Add the leading edge index for every RX chain after PDOA</p></li>
@@ -164,8 +180,8 @@
 </section>
 <section id="v1-4-9">
 <h2>V1.4.9<a class="headerlink" href="#v1-4-9" title="Link to this heading"></a></h2>
-<section id="id3">
-<h3>New Features<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<section id="id4">
+<h3>New Features<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>[CPU]</strong> Optimize UART IRQ to speedup processing</p></li>
 <li><p><strong>[CPU]</strong> Release SCR, Sleep, DeepSleep library as source code.</p></li>
@@ -188,8 +204,8 @@
 </section>
 <section id="v1-4-8">
 <h2>V1.4.8<a class="headerlink" href="#v1-4-8" title="Link to this heading"></a></h2>
-<section id="id4">
-<h3>New Features<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<section id="id5">
+<h3>New Features<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>[UWB]</strong> Refine self adaptive model for AOA for Antenna ID EN_ANTENNA_2_0_3D_A</p></li>
 <li><p><strong>[UWB]</strong> Data log format change in RNGAOA APP, Fills in -10000 if nothing</p></li>
@@ -199,8 +215,8 @@
 </section>
 <section id="v1-4-7">
 <h2>V1.4.7<a class="headerlink" href="#v1-4-7" title="Link to this heading"></a></h2>
-<section id="id5">
-<h3>New Features<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<section id="id6">
+<h3>New Features<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>[UWB]</strong> Added self adaptive model for AOA</p></li>
 </ol>
@@ -208,8 +224,8 @@
 </section>
 <section id="v1-4-6">
 <h2>V1.4.6<a class="headerlink" href="#v1-4-6" title="Link to this heading"></a></h2>
-<section id="id6">
-<h3>New Features<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<section id="id7">
+<h3>New Features<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>[UWB]</strong> Configuration of parameters through function call or <code class="docutils literal notranslate"><span class="pre">s</span></code> command</p></li>
 <li><p><strong>[UWB]</strong> Option to perform Double-sided PDOA in <code class="docutils literal notranslate"><span class="pre">APP-UWB-RNGAOA</span></code></p></li>
@@ -225,20 +241,20 @@
 </section>
 <section id="v1-4-3">
 <h2>V1.4.3<a class="headerlink" href="#v1-4-3" title="Link to this heading"></a></h2>
-<section id="id7">
-<h3>New Features<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<section id="id8">
+<h3>New Features<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>[UWB]</strong> RF Flow V2.1</p></li>
 </ol>
 </section>
-<section id="id8">
-<h3>Bug Fixes &amp; Minor Changes<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<section id="id9">
+<h3>Bug Fixes &amp; Minor Changes<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
 </section>
 </section>
 <section id="v1-4-2">
 <h2>V1.4.2<a class="headerlink" href="#v1-4-2" title="Link to this heading"></a></h2>
-<section id="id9">
-<h3>Bug Fixes &amp; Minor Changes<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<section id="id10">
+<h3>Bug Fixes &amp; Minor Changes<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>[BLE]</strong> Fix Host/Nimble - Memory misalign Issue</p></li>
 </ol>
@@ -246,14 +262,14 @@
 </section>
 <section id="v1-4-1">
 <h2>V1.4.1<a class="headerlink" href="#v1-4-1" title="Link to this heading"></a></h2>
-<section id="id10">
-<h3>New Features<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<section id="id11">
+<h3>New Features<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>[UWB]</strong> RF Flow V2</p></li>
 </ol>
 </section>
-<section id="id11">
-<h3>Bug Fixes &amp; Minor Changes<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<section id="id12">
+<h3>Bug Fixes &amp; Minor Changes<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><strong>[UWB]</strong> Configurable PDOA cycles</p></li>
 <li><p><strong>[UWB]</strong> Temperature info. in RNGAOA log.</p></li>

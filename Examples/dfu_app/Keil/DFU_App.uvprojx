@@ -340,7 +340,7 @@
               <MiscControls>-Wno-padded -Wno-declaration-after-statement -Wno-covered-switch-default -Wno-c11-extensions -Wno-format-nonliteral -Wno-gnu-binary-literal -Wno-overlength-strings -Wno-incompatible-pointer-types-discards-qualifiers -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-cast-qual -Wno-missing-variable-declarations -Wno-strict-prototypes -Wno-undef -Wno-missing-noreturn -Wno-implicit-float-conversion -Wno-missing-prototypes -Wno-zero-length-array -Wno-extra-semi -Wno-variadic-macros -Wno-extra-semi-stmt -Wno-macro-redefined -Wno-infinite-recursion -Wno-sign-conversion -Wno-implicit-int-conversion -Wno-unsafe-buffer-usage</MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>..\App;..\..\..\External\FreeRTOS\Source\include;..\..\..\External\FreeRTOS\Source\portable\GCC\ARM_CM33_NTZ\non_secure;..\..\..\External\LibCRC\include;..\..\..\Components\SharedUtils;..\..\..\Components\DriverCpu\Inc;..\..\..\Components\ArmCore\CMSIS_5.8.0\Core\Include;..\..\..\Components\ArmCore;..\..\..\Components\DriverUwb\driver_uwb_V2.5\Inc;..\..\..\Components\DriverUwb;..\..\..\Components\Configuration;..\..\..\Components\Midlayer\Flash;..\..\..\Components\Midlayer\SleepDeepSleep;..\..\..\Components\Midlayer\Commtrx;..\..\..\Components\Midlayer\FlashValidation;..\..\..\Components\Midlayer\Aoa;..\..\..\Components\Midlayer\Pdoa;..\..\..\Components\Midlayer\Dstwr;..\..\..\Components\Midlayer\System;..\..\..\Components\Security;..\..\..\Components\Algorithm;..\..\..\Components\Application;..\..\..\..\APP\code\include\application;..\..\..\Components\BleController\driver_ble_controller\Inc;..\..\..\Components\Midlayer\Ble;..\..\..\Components\Midlayer\Dfu;..\..\..\External\BLE_Host\include;..\..\..\External\BLE_Host\include\nimble;..\..\..\Components\DriverUwb\uwb_drivers</IncludePath>
+              <IncludePath>..\App;..\..\..\External\FreeRTOS\Source\include;..\..\..\External\FreeRTOS\Source\portable\GCC\ARM_CM33_NTZ\non_secure;..\..\..\External\LibCRC\include;..\..\..\Components\SharedUtils;..\..\..\Components\DriverCpu\Inc;..\..\..\Components\ArmCore\CMSIS_5.8.0\Core\Include;..\..\..\Components\ArmCore;..\..\..\Components\DriverUwb\driver_uwb_V2.5\Inc;..\..\..\Components\DriverUwb;..\..\..\Components\Configuration;..\..\..\Components\Midlayer\Flash;..\..\..\Components\Midlayer\SleepDeepSleep;..\..\..\Components\Midlayer\Commtrx;..\..\..\Components\Midlayer\FlashValidation;..\..\..\Components\Midlayer\Aoa;..\..\..\Components\Midlayer\Pdoa;..\..\..\Components\Midlayer\Dstwr;..\..\..\Components\Midlayer\System;..\..\..\Components\Security;..\..\..\Components\Algorithm;..\..\..\Components\Application;..\..\..\..\APP\code\include\application;..\..\..\Components\BleController\driver_ble_controller\Inc;..\..\..\Components\Midlayer\Ble;..\..\..\Components\Midlayer\Dfu;..\..\..\External\BLE_Host\include;..\..\..\External\BLE_Host\include\nimble;..\..\..\Components\DriverUwb\uwb_drivers;..\..\..\Components\Cmdparser;..\..\..\Components\Midlayer\Ftm;..\..\..\Components\Midlayer\UwbFramework</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -413,6 +413,11 @@
               <FileName>dfu_uart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\Components\Midlayer\Dfu\dfu_uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>cmd_parser_uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Components\Cmdparser\cmd_parser_uart.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -952,6 +957,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\Components\Midlayer\Flash\CB_flash.c</FilePath>
             </File>
+            <File>
+              <FileName>CB_uwbframework.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Components\Midlayer\UwbFramework\CB_uwbframework.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1064,6 +1074,36 @@
             </File>
           </Files>
         </Group>
+        <Group>
+          <GroupName>ftm</GroupName>
+          <Files>
+            <File>
+              <FileName>ftm_uwb_cal.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Components\Midlayer\Ftm\ftm_uwb_cal.c</FilePath>
+            </File>
+            <File>
+              <FileName>ftm_handler.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Components\Midlayer\Ftm\ftm_handler.c</FilePath>
+            </File>
+            <File>
+              <FileName>ftm_cal_nvm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Components\Midlayer\Ftm\ftm_cal_nvm.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>bin</GroupName>
+          <Files>
+            <File>
+              <FileName>lut_bin.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\..\..\Components\Lut\lut_bin.s</FilePath>
+            </File>
+          </Files>
+        </Group>
       </Groups>
     </Target>
   </Targets>
@@ -1088,14 +1128,14 @@
           <targetInfo name="Target 1"/>
         </targetInfos>
       </package>
+      <package name="CBU5000V210_DFP" vendor="Keil">
+        <targetInfos>
+          <targetInfo name="Target 1"/>
+        </targetInfos>
+      </package>
       <package name="CBU5000V210_DFP" vendor="Keil" version="1.0.0">
         <targetInfos>
           <targetInfo name="Target 1" versionMatchMode="fixed"/>
-        </targetInfos>
-      </package>
-      <package name="CUB5000V210_DFP" vendor="Keil">
-        <targetInfos>
-          <targetInfo name="Target 1"/>
         </targetInfos>
       </package>
     </packages>

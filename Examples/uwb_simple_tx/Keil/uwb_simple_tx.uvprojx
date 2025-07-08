@@ -776,6 +776,16 @@
             </File>
           </Files>
         </Group>
+        <Group>
+          <GroupName>Bin</GroupName>
+          <Files>
+            <File>
+              <FileName>lut_bin.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\..\..\Components\Lut\lut_bin.s</FilePath>
+            </File>
+          </Files>
+        </Group>
       </Groups>
     </Target>
   </Targets>

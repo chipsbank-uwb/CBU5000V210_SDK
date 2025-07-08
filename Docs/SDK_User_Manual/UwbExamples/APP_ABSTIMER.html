@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>APP-AbsTimer &mdash; CBU5000V210 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=29a6c3e3"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/design-tabs.js?v=f930bc37"></script>
+        <script src="../_static/tabs.js?v=3030b3cb"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="APP_CLI" href="APP_CLI.html" />
+    <link rel="prev" title="APP-PSR" href="APP_PSR.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CBU5000V210
+          </a>
+              <div class="version">
+                2.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../CBU5000V210SDK/CBU5000V210SDK.html">CBU5000V210 SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ApiReference.html">API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="UwbExamples.html">UWB Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="APP_COMMTRX.html">APP-COMMTRX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_DSTWR.html">APP-DSTWR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_PDOA.html">APP-PDOA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_RNGAOA.html">APP-RNGAOA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_PeriodicTRX.html">APP-PeriodicTRX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_RXPER.html">APP-RXPER</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_PSR.html">APP-PSR</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">APP-AbsTimer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_CLI.html">APP_CLI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../CpuExamples/CpuExamples.html">CPU Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calibration.html">UWB Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Appendix.html">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../VersionHistory.html">Version History</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CBU5000V210</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="UwbExamples.html">UWB Examples</a></li>
+      <li class="breadcrumb-item active">APP-AbsTimer</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="app-abstimer">
+<h1>APP-AbsTimer<a class="headerlink" href="#app-abstimer" title="Link to this heading"></a></h1>
+<p>The following diagrams illustrate how the absolute timer is used to schedule periodic transmit and receive operations in the UWB Absolute Timer application.</p>
+<p><strong>Case A (TX to TX transitions)</strong></p>
+<a class="reference internal image-reference" href="../_images/uwb_abstimer_caseA.png"><img alt="uwb_abstimer_caseA.png" class="align-center" src="../_images/uwb_abstimer_caseA.png" style="width: 100%;" /></a>
+<p><strong>Case B (RX to RX transitions)</strong></p>
+<a class="reference internal image-reference" href="../_images/uwb_abstimer_caseB.png"><img alt="uwb_abstimer_caseB.png" class="align-center" src="../_images/uwb_abstimer_caseB.png" style="width: 100%;" /></a>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-5Lit5paH" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-5Lit5paH" name="5Lit5paH" role="tab" tabindex="0">中文</button><button aria-controls="panel-0-RW5nbGlzaA==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tab" tabindex="-1">English</button></div><div aria-labelledby="tab-0-5Lit5paH" class="sphinx-tabs-panel group-tab" id="panel-0-5Lit5paH" name="5Lit5paH" role="tabpanel" tabindex="0"><p><strong>概述</strong></p>
+<dl class="simple">
+<dt>本文档提供了有关UWB绝对定时器功能的指南。此示例演示了如何使用UWB绝对定时器功能来安排定时的UWB收发操作，包括三种不同的实现案例：</dt><dd><ul class="simple">
+<li><p>案例A: TX到TX转换 - 定时的发射器操作</p></li>
+<li><p>案例B: RX到RX转换 - 定时的接收器操作</p></li>
+<li><p>案例C: TX-&gt;RX-&gt;TX循环 - 定时的发射和接收循环</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>要求</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>开发板：</dt><dd><ul>
+<li><p>CB5000V210 Anchor开发板</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>软件：</dt><dd><ul>
+<li><p>串行终端工具（例如PuTTY、SSCOM）</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>用户界面</strong></p>
+<ul class="simple">
+<li><p>在开发板上找到GPIO00引脚，并将其连接到串行接收线（RX）。</p></li>
+<li><p>在开发板上找到GPIO01引脚，并将其连接到串行发送线（TX）。</p></li>
+<li><p>确保连接牢固，以避免通信问题。</p></li>
+</ul>
+<p><strong>构建和运行</strong></p>
+<ul class="simple">
+<li><p>该示例可以在ChipsBank Connect SDK文件夹结构中的”Firmware\Examples\uwb_abstimer”找到。</p></li>
+</ul>
+<p><strong>功能说明</strong></p>
+<p>UWB绝对定时器示例包含以下三种案例：</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><strong>案例A (TX到TX)</strong>:</dt><dd><ul class="simple">
+<li><p>使用绝对定时器来安排周期性TX操作</p></li>
+<li><p>每次TX完成后，定时器自动触发下一次TX</p></li>
+<li><p>捕获TX完成事件，使用EN_UWBEVENT_28_TX_DONE</p></li>
+<li><p>使用绝对定时器0进行计时</p></li>
+<li><p>超时值设为1秒（可配置）</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>案例B (RX到RX)</strong>:</dt><dd><ul class="simple">
+<li><p>使用绝对定时器进行连续RX操作</p></li>
+<li><p>定时器在当前RX结束后安排下一个RX</p></li>
+<li><p>捕获RX SFD检测事件，使用EN_UWBEVENT_17_RX0_SFD_DET</p></li>
+<li><p>使用绝对定时器0进行计时</p></li>
+<li><p>超时值设为1秒（可配置）</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>案例C (TX-&gt;RX-&gt;TX)</strong>:</dt><dd><ul class="simple">
+<li><p>演示使用两个绝对定时器创建TX/RX循环</p></li>
+<li><p>TX完成触发RX开始，RX完成触发下一个TX</p></li>
+<li><dl class="simple">
+<dt>使用两个事件捕获：</dt><dd><ul>
+<li><p>TX完成事件 (EN_UWBEVENT_28_TX_DONE) 通过定时器0触发RX</p></li>
+<li><p>RX SFD检测 (EN_UWBEVENT_17_RX0_SFD_DET) 通过定时器1触发TX</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>每个定时器超时值设为1秒（可配置）</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<p><strong>使用方法</strong></p>
+<dl class="simple">
+<dt>用户可以通过更改源代码中的s_selected_case变量来选择要运行的案例。选择值可为：</dt><dd><ul class="simple">
+<li><p>DEF_UWB_ABSTIMER_CASE_A (1): TX到TX转换</p></li>
+<li><p>DEF_UWB_ABSTIMER_CASE_B (2): RX到RX转换</p></li>
+<li><p>DEF_UWB_ABSTIMER_CASE_C (3): TX-&gt;RX-&gt;TX循环</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>测试</strong></p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><strong>连接开发板</strong></dt><dd><ul class="simple">
+<li><p>准备合适的USB线，确保两端与您的计算机和开发板兼容。</p></li>
+<li><p>将USB线的一端插入计算机的USB端口，另一端插入开发板的USB端口。</p></li>
+<li><p>打开计算机上的设备管理器，检查是否识别到新的COM端口。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>配置串行终端</strong></dt><dd><ul class="simple">
+<li><p>在计算机上打开串行终端工具，例如PuTTY或SSCOM。</p></li>
+<li><p>选择识别到的COM端口。</p></li>
+<li><p>将波特率设置为115200，停止位设置为1，数据位顺序设置为LSB，奇偶校验设置为NONE。</p></li>
+<li><p>点击连接按钮以建立与开发板的串行通信。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>重置开发板</strong></dt><dd><ul class="simple">
+<li><p>在开发板上找到复位按钮。</p></li>
+<li><p>按下并释放复位按钮以重启开发板。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>执行测试操作</strong></dt><dd><ul class="simple">
+<li><p>重置后，观察串行终端工具中的输出。</p></li>
+<li><dl class="simple">
+<dt>根据所选的案例（A、B或C），程序会自动开始执行相应的UWB绝对定时器操作：</dt><dd><ol class="arabic simple">
+<li><p>显示当前运行的案例（例如”UWB Absolute Timer Case A: TX-&gt;TX transitions”）</p></li>
+<li><dl class="simple">
+<dt>启动由绝对定时器调度和控制的UWB操作：</dt><dd><ul>
+<li><p>案例A：每1秒周期性TX操作</p></li>
+<li><p>案例B：每1秒周期性RX操作</p></li>
+<li><p>案例C：每1秒交替进行TX和RX操作</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>显示各种时间戳和事件信息</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p>对于不同的案例，您将看到不同的操作模式和时间戳信息。</p></li>
+<li><p>每个案例都会按照预定义的间隔（默认为1秒）重复执行其操作周期。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<p><strong>预期输出 - 案例A (TX到TX)</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ABS TIMER v1.0
+UWB Absolute Timer Case A: TX-&gt;TX transitions
+&gt; txStart  - 4276ns
+&gt; txDone   - 108156ns
+&gt; txStart  - 1000108316ns
+&gt; txDone   - 1000212196ns
+&gt; txStart  - 2000212348ns
+&gt; txDone   - 2000316228ns
+...
+</pre></div>
+</div>
+<p><strong>预期输出 - 案例B (RX到RX)</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ABS TIMER v1.0
+UWB Absolute Timer Case B: RX-&gt;RX transitions
+&gt; rxTsu - 1800819119.852239ns
+&gt; rxTsu - 2800926030.267018ns
+&gt; rxTsu - 3801032968.338361ns
+...
+</pre></div>
+</div>
+<p><strong>预期输出 - 案例C (TX-&gt;RX-&gt;TX)</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ABS TIMER v1.0
+UWB Absolute Timer Case C: TX-&gt;RX-&gt;TX cycle
+&gt; txStart  - 419061748ns
+&gt; txDone   - 419165628ns
+TX -&gt; RX transition
+&gt; rxTsu - 1419275168.446347ns
+RX -&gt; TX transition
+&gt; txStart  - 2419275332ns
+&gt; txDone   - 2419379212ns
+TX -&gt; RX transition
+&gt; rxTsu - 3419488953.297885ns
+RX -&gt; TX transition
+...
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-RW5nbGlzaA==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tabpanel" tabindex="0"><p><strong>Overview</strong></p>
+<dl class="simple">
+<dt>This document provides a guide to the UWB Absolute Timer functionality. The example demonstrates how to use UWB absolute timer functionality for scheduled UWB transactions with three different implementation cases:</dt><dd><ul class="simple">
+<li><p>Case A: TX to TX transitions - timed transmitter operations</p></li>
+<li><p>Case B: RX to RX transitions - timed receiver operations</p></li>
+<li><p>Case C: TX-&gt;RX-&gt;TX cycle - timed transmission and reception cycle</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Requirements</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Development board:</dt><dd><ul>
+<li><p>CB5000V210 Anchor development board</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Software:</dt><dd><ul>
+<li><p>Serial terminal tool (e.g., PuTTY, SSCOM)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>User interface</strong></p>
+<ul class="simple">
+<li><p>Locate the GPIO00 pin on the development board and connect it to the serial receive line (RX).</p></li>
+<li><p>Locate the GPIO01 pin on the development board and connect it to the serial transmit line (TX).</p></li>
+<li><p>Ensure the connections are secure to avoid communication issues.</p></li>
+</ul>
+<p><strong>Building and running</strong></p>
+<p>This sample can be found under “Firmware\Examples\uwb_abstimer” in the ChipsBank Connect SDK folder structure.</p>
+<p><strong>Functionality Description</strong></p>
+<p>The UWB Absolute Timer example contains the following three cases:</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><strong>Case A (TX to TX)</strong>:</dt><dd><ul class="simple">
+<li><p>Uses absolute timer to schedule periodic TX operations</p></li>
+<li><p>After each TX completes, timer automatically triggers next TX</p></li>
+<li><p>Captures TX done event using EN_UWBEVENT_28_TX_DONE</p></li>
+<li><p>Uses absolute timer 0 for timing</p></li>
+<li><p>Timeout value is set to 1 second (configurable)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Case B (RX to RX)</strong>:</dt><dd><ul class="simple">
+<li><p>Uses absolute timer for continuous RX operations</p></li>
+<li><p>Timer schedules next RX after current RX finishes</p></li>
+<li><p>Captures RX SFD detection event using EN_UWBEVENT_17_RX0_SFD_DET</p></li>
+<li><p>Uses absolute timer 0 for timing</p></li>
+<li><p>Timeout value is set to 1 second (configurable)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Case C (TX-&gt;RX-&gt;TX)</strong>:</dt><dd><ul class="simple">
+<li><p>Demonstrates TX/RX cycle using two absolute timers</p></li>
+<li><p>TX completion triggers RX start, RX completion triggers next TX</p></li>
+<li><dl class="simple">
+<dt>Uses two event captures:</dt><dd><ul>
+<li><p>TX done event (EN_UWBEVENT_28_TX_DONE) for triggering RX through timer 0</p></li>
+<li><p>RX SFD detection (EN_UWBEVENT_17_RX0_SFD_DET) for triggering TX through timer 1</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Each timer timeout value is set to 1 second (configurable)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<p><strong>Usage</strong></p>
+<dl class="simple">
+<dt>Users can select which case to run by changing the s_selected_case variable in the source code. The selection values are:</dt><dd><ul class="simple">
+<li><p>DEF_UWB_ABSTIMER_CASE_A (1): TX to TX transitions</p></li>
+<li><p>DEF_UWB_ABSTIMER_CASE_B (2): RX to RX transitions</p></li>
+<li><p>DEF_UWB_ABSTIMER_CASE_C (3): TX-&gt;RX-&gt;TX cycle</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Testing</strong></p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><strong>Connect the Development Board</strong></dt><dd><ul class="simple">
+<li><p>Prepare a suitable USB cable, ensuring both ends are compatible with your computer and development board.</p></li>
+<li><p>Insert one end of the USB cable into a USB port on your computer and the other end into the USB port on the development board.</p></li>
+<li><p>Open the Device Manager on your computer to check if a new COM port has been recognized.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Configure the Serial Terminal</strong></dt><dd><ul class="simple">
+<li><p>Open a serial terminal tool on your computer, such as PuTTY or SSCOM.</p></li>
+<li><p>Select the recognized COM port.</p></li>
+<li><p>Set the baud rate to 115200, stop bits to 1, data bits order to LSB, and parity to NONE.</p></li>
+<li><p>Click the connect button to establish serial communication with the development board.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Reset the Development Board</strong></dt><dd><ul class="simple">
+<li><p>Locate the reset button on the development board.</p></li>
+<li><p>Press and release the reset button to restart the development board.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Execute Test Operations</strong></dt><dd><ul class="simple">
+<li><p>After resetting, observe the output in the serial terminal tool.</p></li>
+<li><dl class="simple">
+<dt>Based on the selected case (A, B, or C), the program will automatically begin executing the corresponding UWB absolute timer operations:</dt><dd><ol class="arabic simple">
+<li><p>Displaying the currently running case (e.g., “UWB Absolute Timer Case A: TX-&gt;TX transitions”)</p></li>
+<li><dl class="simple">
+<dt>Starting the UWB operations that are scheduled and controlled by the absolute timer:</dt><dd><ul>
+<li><p>For Case A: Periodic TX operations every 1 second</p></li>
+<li><p>For Case B: Periodic RX operations every 1 second</p></li>
+<li><p>For Case C: Alternating TX and RX operations every 1 second</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Showing various timestamps and event information</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p>Depending on the selected case, you will see different modes of operation and timestamp information.</p></li>
+<li><p>Each case will repeat its operation cycle at predefined intervals (default is 1 second).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<p><strong>Expected Output - Case A (TX to TX)</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ABS TIMER v1.0
+UWB Absolute Timer Case A: TX-&gt;TX transitions
+&gt; txStart  - 42760ns
+&gt; txDone   - 100156ns
+&gt; txStart  - 1000108308ns
+&gt; txDone   - 1000212188ns
+&gt; txStart  - 2000212148ns
+&gt; txDone   - 2000316228ns
+...
+</pre></div>
+</div>
+<p><strong>Expected Output - Case B (RX to RX)</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ABS TIMER v1.0
+UWB Absolute Timer Case B: RX-&gt;RX transitions
+&gt; rxTsu - 1800819119.852239ns
+&gt; rxTsu - 2800926030.267018ns
+&gt; rxTsu - 3801032968.338361ns
+...
+</pre></div>
+</div>
+<p><strong>Expected Output - Case C (TX-&gt;RX-&gt;TX)</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ABS TIMER v1.0
+UWB Absolute Timer Case C: TX-&gt;RX-&gt;TX cycle
+&gt; txStart  - 419061748ns
+&gt; txDone   - 419165628ns
+TX -&gt; RX transition
+&gt; rxTsu - 1419275168.446347ns
+RX -&gt; TX transition
+&gt; txStart  - 2419275332ns
+&gt; txDone   - 2419379212ns
+TX -&gt; RX transition
+&gt; rxTsu - 3419488953.297885ns
+RX -&gt; TX transition
+...
+</pre></div>
+</div>
+</div></div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="APP_PSR.html" class="btn btn-neutral float-left" title="APP-PSR" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="APP_CLI.html" class="btn btn-neutral float-right" title="APP_CLI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Chipsbank.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

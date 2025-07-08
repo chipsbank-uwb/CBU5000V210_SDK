@@ -20,10 +20,25 @@
 #include "CB_system_types.h"
 #include "CB_UwbDrivers.h"
 #include "CB_Algorithm.h"
+#include "CB_aoa.h"
 
 //-------------------------------
 // DEFINE SECTION
 //-------------------------------
+#define DEF_ANTENNA_TYPE_TRIANGLE_UP     0
+#define DEF_ANTENNA_TYPE_LSHAPE_UP       1
+#define DEF_ANTENNA_TYPE_TRIANGLE_DOWN   2
+#define DEF_ANTENNA_TYPE_LSHAPE_DOWN     3
+#define DEF_ANTENNA_TYPE_TRIANGLE_RIGHT  4
+#define DEF_ANTENNA_TYPE_TRIANGLE_LEFT   5
+
+#define DEF_ANTENNA_POSITION_A  0
+#define DEF_ANTENNA_POSITION_B  1
+#define DEF_ANTENNA_POSITION_C  2
+
+#define DEF_ANTENNA_PORT_RX0  0
+#define DEF_ANTENNA_PORT_RX1  1
+#define DEF_ANTENNA_PORT_RX2  2
 
 //-------------------------------
 // ENUM SECTION
@@ -170,21 +185,18 @@ void cb_framework_uwb_qmode_tx_end         (void);
  * This function starts the UWB communication receiver in quick mode by performing various configuration steps.
  * It sets up the required parameters and resources for UWB communication.
  * 
- * @param enRxPort The RX port to use for reception
  * @param rxPacketConfig Configuration for the packet to be received
  * @param stRxIrqEnable Interrupt enable configuration for reception
  */
-void cb_framework_uwb_qmode_rx_start       (cb_uwbsystem_rxport_en enRxPort,cb_uwbsystem_packetconfig_st* rxPacketConfig, cb_uwbsystem_rx_irqenable_st* stRxIrqEnable);
-
+void cb_framework_uwb_qmode_rx_start(cb_uwbsystem_packetconfig_st* rxPacketConfig, cb_uwbsystem_rx_irqenable_st* stRxIrqEnable);
 /**
  * @brief End the UWB communication receiver in quick mode.
  *
  * This function ends the UWB communication receiver in quick mode by performing various cleanup steps.
  * It releases the allocated resources and resets the UWB communication system.
  * 
- * @param enRxPort The RX port to stop
  */
-void cb_framework_uwb_qmode_rx_end         (cb_uwbsystem_rxport_en enRxPort);
+void cb_framework_uwb_qmode_rx_end         (void);
 
 //----------------------------------------------------------------//
 //                 COMM-TRX NORMAL MODE API                       //
@@ -212,6 +224,17 @@ void cb_framework_uwb_tx_start  (cb_uwbsystem_packetconfig_st* txPacketConfig, c
 void cb_framework_uwb_tx_end    (void);
 
 /**
+ * @brief Restart UWB transmission in normal mode
+ * 
+ * This function restarts the UWB transmission by stopping the current transmission,
+ * reconfiguring the TX interrupts, and starting a new transmission based on the specified mode.
+ * 
+ * @param stTxIrqEnable Interrupt enable configuration for transmission
+ * @param trxStartMode Start mode (immediate or deferred)
+ */
+void cb_framework_uwb_tx_restart(cb_uwbsystem_tx_irqenable_st* stTxIrqEnable, cb_uwbframework_trx_startmode_en trxStartMode);
+
+/**
  * @brief Start UWB reception in normal mode
  * 
  * @param enRxPort The RX port to use for reception
@@ -219,7 +242,7 @@ void cb_framework_uwb_tx_end    (void);
  * @param stRxIrqEnable Interrupt enable configuration for reception
  * @param trxStartMode Start mode (immediate or deferred)
  */
-void cb_framework_uwb_rx_start  (cb_uwbsystem_rxport_en enRxPort, cb_uwbsystem_packetconfig_st* rxPacketConfig, cb_uwbsystem_rx_irqenable_st* stRxIrqEnable, cb_uwbframework_trx_startmode_en trxStartMode);
+void cb_framework_uwb_rx_start(cb_uwbsystem_rxport_en enRxPort, cb_uwbsystem_packetconfig_st* rxPacketConfig, cb_uwbsystem_rx_irqenable_st* stRxIrqEnable, cb_uwbframework_trx_startmode_en trxStartMode);
 
 /**
  * @brief End UWB reception in normal mode
@@ -227,6 +250,20 @@ void cb_framework_uwb_rx_start  (cb_uwbsystem_rxport_en enRxPort, cb_uwbsystem_p
  * @param enRxPort The RX port to stop
  */
 void cb_framework_uwb_rx_end    (cb_uwbsystem_rxport_en enRxPort);
+
+/**
+ * @brief Restarts the UWB receiver with a new configuration.
+ *
+ * This function stops the current UWB receiver, applies the specified interrupt
+ * configuration, and restarts the receiver based on the selected start mode.
+ * 
+ * @param[in] enRxPort      RX port to be restarted (e.g., RX0, RX1, RX2, or ALL).
+ * @param[in] stRxIrqEnable Pointer to the RX interrupt configuration structure.
+ * @param[in] trxStartMode  Start mode selection:
+ *                           - EN_TRX_START_NON_DEFERRED: start immediately.
+ *                           - EN_TRX_START_DEFERRED: prepare for later start.
+ */
+void cb_framework_uwb_rx_restart(cb_uwbsystem_rxport_en enRxPort, cb_uwbsystem_packetconfig_st* rxPacketConfig, cb_uwbsystem_rx_irqenable_st* stRxIrqEnable, cb_uwbframework_trx_startmode_en trxStartMode);
 
 //----------------------------------------------------------------//
 //                 TX & RX payload API                            //
@@ -317,9 +354,9 @@ void cb_framework_uwb_tsu_clear(void);
  * @brief Get RSSI (Received Signal Strength Indicator) for UWB reception
  * 
  * @param rssiRxPorts Bitmask of RX ports to get RSSI from
- * @return cb_uwbsystem_rxall_signalinfo_st RSSI results for the specified ports
+ * @return cb_uwbsystem_rx_signalinfo_st RSSI results for the specified ports
  */
-cb_uwbsystem_rxall_signalinfo_st cb_framework_uwb_get_rx_rssi(uint8_t rssiRxPorts);
+cb_uwbsystem_rx_signalinfo_st cb_framework_uwb_get_rx_rssi(uint8_t rssiRxPorts);
 
 /**
  * @brief Get ETC status register for UWB reception
@@ -374,78 +411,56 @@ void cb_framework_uwb_calculate_responder_tround_treply(cb_uwbframework_rangingd
 //                 Scheduled TRX with abs timer API               //
 //----------------------------------------------------------------//
 /**
- * @brief Configure event timestamp mask
+ * @brief Configure event timestamp mask for UWB events
  * 
- * @param eventTimestampMask Event timestamp mask to configure
- * @param eventIndex Event index to configure
+ * This function configures which UWB events will generate timestamps. The timestamp mask 
+ * determines which events are monitored and recorded for timing purposes.
+ * 
+ * @param eventTimestampMask Bitmask specifying which events should generate timestamps
+ * @param eventIndex Index of the event to configure (0-31)
  */
 void cb_framework_uwb_configure_event_time_stamp_mask(enUwbEventTimestampMask eventTimestampMask, enUwbEventIndex eventIndex);
 
 /**
- * @brief Enable scheduled UWB transactions
+ * @brief Enable scheduled UWB transmit/receive operations
  * 
- * @param repeatedTrxConfig Configuration for scheduled transactions
+ * Activates scheduled UWB transactions based on the provided configuration. This allows
+ * for timed/periodic UWB operations like using absolute timer.
+ * absolute timers.
+ * 
+ * @param repeatedTrxConfig Configuration structure containing timing parameters and 
+ *                         operation modes for the scheduled transactions
  */
 void cb_framework_uwb_enable_scheduled_trx     (cb_uwbframework_trx_scheduledconfig_st repeatedTrxConfig);
 
 /**
- * @brief Disable scheduled UWB transactions
+ * @brief Disable scheduled UWB transmit/receive operations
  * 
- * @param repeatedTrxConfig Configuration for scheduled transactions
+ * Stops any active scheduled UWB transactions and disables the absolute timers
+ * associated with the provided configuration.
+ * 
+ * @param repeatedTrxConfig Configuration structure of the scheduled transactions
+ *                         to disable
  */
 void cb_framework_uwb_disable_scheduled_trx    (cb_uwbframework_trx_scheduledconfig_st repeatedTrxConfig);
 
 /**
- * @brief Configure scheduled UWB transactions
+ * @brief Configure parameters for scheduled UWB transactions
  * 
- * @param repeatedTrxConfig Configuration for scheduled transactions
+ * Sets up the configuration for scheduled UWB transactions including timing parameters,
+ * operation modes (TX/RX), and event triggers. This function is called
+ * after a transaction completes to reconfigure the system for the next scheduled
+ * transaction in periodic operations.
+ * 
+ * @param repeatedTrxConfig Configuration structure containing all parameters for
+ *                         the scheduled UWB transactions
  */
 void cb_framework_uwb_configure_scheduled_trx  (cb_uwbframework_trx_scheduledconfig_st repeatedTrxConfig);
 
 //----------------------------------------------------------------//
 //                             PDOA API                           //
 //----------------------------------------------------------------//
-/**
- * @brief Initialize UWB PDoA (Phase Difference of Arrival) reception
- * 
- * @param rxPacketConfig Packet configuration for reception
- * @param stRxIrqEnable Interrupt enable configuration for reception
- * @param cfoEst Carrier frequency offset estimation
- */
-void cb_framework_uwb_pdoa_rx_init(cb_uwbsystem_packetconfig_st* rxPacketConfig, cb_uwbsystem_rx_irqenable_st* stRxIrqEnable , uint32_t cfoEst);
 
-/**
- * @brief Start UWB PDoA reception
- * 
- * @param stRxIrqEnable Interrupt enable configuration for reception
- * @param gain Gain setting for reception
- */
-void cb_framework_uwb_pdoa_rx_start(cb_uwbsystem_rx_irqenable_st* stRxIrqEnable, uint32_t gain);
-
-/**
- * @brief Stop UWB PDoA reception
- */
-void cb_framework_uwb_pdoa_rx_stop(void);
-
-/**
- * @brief End UWB PDoA reception
- * 
- * This function terminates the PDoA reception by cleaning up resources and
- * disabling related hardware features. It should be called when PDoA reception
- * is no longer needed to ensure proper system state and resource management.
- * 
- * @note This function should be called after all PDoA processing is complete
- *       to properly release system resources.
- * 
- */
-void cb_framework_uwb_pdoa_rx_end(void);
-
-/**
- * @brief Stage scheduled transmission for PDoA
- * 
- * @param pdoaTxIrqEnable Interrupt enable configuration for transmission
- */
-void cb_framework_uwb_pdoa_stage_scheduled_tx(cb_uwbsystem_tx_irqenable_st *pdoaTxIrqEnable);
 
 /**
  * @brief Process CIR data for PDoA
@@ -471,14 +486,14 @@ void cb_framework_uwb_pdoa_calculate_result(cb_uwbsystem_pdoaresult_st *s_stPdoa
 /**
  * @brief Calculate Angle of Arrival (AoA) from PDoA data
  * 
- * @param pdoa_result PDoA 3D data
- * @param azi_pd_bias Azimuth phase difference bias
- * @param ele_pd_bias Elevation phase difference bias
- * @param azi_result Pointer to store the azimuth result
- * @param ele_result Pointer to store the elevation result
+ * @param pdoa_result PDoA 3D data containing phase differences between antenna pairs
+ * @param pd01_bias Phase difference bias between antenna 0 and 1
+ * @param pd02_bias Phase difference bias between antenna 0 and 2  
+ * @param pd12_bias Phase difference bias between antenna 1 and 2
+ * @param azi_result Pointer to store the calculated azimuth angle in degrees
+ * @param ele_result Pointer to store the calculated elevation angle in degrees
  */
-void cb_framework_uwb_pdoa_calculate_aoa(cb_uwbsystem_pdoa_3ddata_st pdoa_result, float azi_pd_bias, float ele_pd_bias, float* azi_result, float* ele_result);
-
+void cb_framework_uwb_pdoa_calculate_aoa(cb_uwbsystem_pdoa_3ddata_st pdoa_result, float pd01_bias, float pd02_bias, float pd12_bias, float* azi_result, float* ele_result);
 /**
  * @brief Calculate mean of an array of doubles
  * 
@@ -508,6 +523,20 @@ int cb_framework_uwb_pdoa_qsort_compare (const void * a, const void * b);
 void cb_framework_uwb_pdoa_calculate_mean_and_median(double *s_pdoaEstimated, uint8_t NumOfPackage, double *mean, double *median);
 
 /**
+ * @brief Configure the Antenna attribute structure
+ * 
+ * @param p_ant_attr Pointer to the Antenna attribute structure
+ */
+void cb_framework_uwb_pdoa_configure_ant(st_antenna_attribute_3d* p_ant_attr);
+
+/**
+ * @brief Configure the LUT (Look-Up Table) attribute structure
+ * 
+ * @param p_lut_attr Pointer to the LUT attribute structure
+ */
+void cb_framework_uwb_pdoa_configure_lut(cb_uwbaoa_lut_attribute_st* p_lut_attr);
+
+/**
  * @brief Reset CIR data container for PDoA
  */
 void cb_framework_uwb_pdoa_reset_cir_data_container(void);
@@ -518,5 +547,25 @@ void cb_framework_uwb_pdoa_reset_cir_data_container(void);
  * @param countOfPdoaScheduledRx Count of scheduled PDoA receptions
  */
 void cb_framework_uwb_pdoa_store_cir_data(uint8_t countOfPdoaScheduledRx);
+
+void cb_framework_ftm_uwb_rx_restart(cb_uwbsystem_rxport_en enRxPort, cb_uwbsystem_packetconfig_st* rxPacketConfig, cb_uwbsystem_rx_irqenable_st* stRxIrqEnable, cb_uwbframework_trx_startmode_en trxStartMode);
+
+//----------------------------------------------------------------//
+//                    RX DBB CONFIG BYPASS                        //
+//----------------------------------------------------------------//
+
+/**
+ * @brief Configure CFO and gain settings for UWB receiver
+ *
+ * This function configures the Carrier Frequency Offset (CFO) and gain settings
+ * for the UWB receiver. It either resets the settings to default values or
+ * applies custom configuration.
+ *
+ * @param enReset Reset flag - if EN_UWB_CFO_GAIN_RESET, resets to defaults,
+ *                otherwise applies custom config
+ * @param stBypass_cfg Pointer to custom CFO and gain configuration structure.
+ *                     Only used if enReset is not EN_UWB_CFO_GAIN_RESET.
+ */
+void cb_framework_uwb_rxconfig_cfo_gain(cb_uwbsystem_rxconfig_cfo_gain_en enReset, cb_uwbsystem_rx_dbb_config_st* stRxCfg_CfoGainBypass);
 
 #endif /*__CB_UWB_FRAMEWORK_H*/

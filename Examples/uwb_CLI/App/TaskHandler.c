@@ -16,12 +16,7 @@
 #include "AppUwbDstwr.h"
 #include "AppUwbPdoa.h"
 #include "AppUwbRngAoa.h"
-#if (APP_DEMO_ENABLE == APP_TRUE)
-#include "App/AppDemo.h"
-#endif
-#if (APP_UWB_RADAR_ENABLE == APP_TRUE)
-#include "AppUwbRadar.h"
-#endif
+
 #include <string.h>
 
 //-------------------------------
@@ -175,30 +170,24 @@ void TaskHandler(void)
   //------------------------  
   if(g_task_e_execute == APP_TRUE) 
   {
-		taskhandler_print("[APP_UWB_PERIODIC_TRX]\n");
+
   }
-  
-#if (APP_UWB_RADAR_ENABLE == APP_TRUE)
-  
+
   //------------------------
   // Task 'f' execute
   //------------------------
   if(g_task_f_execute == APP_TRUE) 
   {
-    APP_RadarStart();
-    g_task_f_execute = APP_FALSE;
+
   }
-#endif
+
 	//------------------------
   // Task 'g' execute
   //------------------------
   if(g_task_g_execute == APP_TRUE) 
   {
-    taskhandler_print("[APP_UWB_PSR]\n");
+
   }  
 
-#if (APP_DEMO_ENABLE == APP_TRUE)
-  APP_DEMO_Run();
-#endif
 }
 

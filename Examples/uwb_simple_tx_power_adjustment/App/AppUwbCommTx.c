@@ -56,7 +56,7 @@ static app_uwbcomtx_state_en s_appCommTxState = EN_APP_STATE_IDLE;
 
 /* Default Rx packet configuration.*/
 static cb_uwbsystem_packetconfig_st Txpacketconfig = {
-  .prfMode            = EN_PRF_MODE_BPRF,                 // PRF mode selection
+  .prfMode            = EN_PRF_MODE_BPRF_62P4,                 // PRF mode selection
   .psduDataRate       = EN_PSDU_DATA_RATE_6P81,           // PSDU data rate
   .bprfPhrDataRate    = EN_BPRF_PHR_DATA_RATE_0P85,       // BPRF PHR data rate
   .preambleCodeIndex  = EN_UWB_PREAMBLE_CODE_IDX_9,       // Preamble code index (9-32)
@@ -95,7 +95,7 @@ void app_commtx_qmode(void)
   //--------------------------------
   cb_uwbsystem_txpayload_st txPayload = {0};
   
-  if (Txpacketconfig.prfMode == EN_PRF_MODE_BPRF || Txpacketconfig.prfMode == EN_PRF_MODE_LG4A_0P85)
+  if (Txpacketconfig.prfMode == EN_PRF_MODE_BPRF_62P4 || Txpacketconfig.prfMode == EN_PRF_MODE_LG4A_62P4)
   {
     static uint8_t bprf_payload[16] = {0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x0A,0x0B,0x0C,0x0D,0x0E,0x0F};
     txPayload.ptrAddress = &bprf_payload[0];
@@ -181,7 +181,7 @@ void app_commtx_nmode(void)
   //--------------------------------
   cb_uwbsystem_txpayload_st txPayload = {0};
   
-  if (Txpacketconfig.prfMode == EN_PRF_MODE_BPRF || Txpacketconfig.prfMode == EN_PRF_MODE_LG4A_0P85)
+  if (Txpacketconfig.prfMode == EN_PRF_MODE_BPRF_62P4 || Txpacketconfig.prfMode == EN_PRF_MODE_LG4A_62P4)
   {
     static uint8_t bprf_payload[16] = {0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x0A,0x0B,0x0C,0x0D,0x0E,0x0F};
     txPayload.ptrAddress = &bprf_payload[0];

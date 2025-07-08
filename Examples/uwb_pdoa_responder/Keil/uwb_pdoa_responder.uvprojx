@@ -340,7 +340,7 @@
               <MiscControls>-Wno-padded -Wno-declaration-after-statement -Wno-covered-switch-default -Wno-c11-extensions -Wno-format-nonliteral -Wno-gnu-binary-literal -Wno-overlength-strings -Wno-incompatible-pointer-types-discards-qualifiers -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-cast-qual -Wno-missing-variable-declarations -Wno-strict-prototypes -Wno-undef -Wno-missing-noreturn -Wno-implicit-float-conversion -Wno-missing-prototypes -Wno-zero-length-array -Wno-extra-semi -Wno-variadic-macros -Wno-extra-semi-stmt -Wno-macro-redefined</MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\..\External\FreeRTOS\Source\include;..\..\..\External\FreeRTOS\Source\portable\GCC\ARM_CM33_NTZ\non_secure;..\..\..\External\LibCRC\include;..\..\..\Components\SharedUtils;..\..\..\Components\DriverCpu\Inc;..\..\..\Components\ArmCore\CMSIS_5.8.0\Core\Include;..\..\..\Components\ArmCore;..\..\..\Components\DriverUwb\driver_uwb_V2.5\Inc;..\..\..\Components\DriverUwb\uwb_drivers;..\..\..\Components\DriverUwb;..\..\..\Components\Configuration;..\..\..\Components\Midlayer\SleepDeepSleep;..\..\..\Components\Midlayer\Aoa;..\..\..\Components\Midlayer\System;..\..\..\Components\Midlayer\UwbFramework;..\..\..\Components\Security;..\..\..\Components\Algorithm;..\..\..\Components\Application;..\..\..\..\APP\code\include\application</IncludePath>
+              <IncludePath>..\..\..\External\FreeRTOS\Source\include;..\..\..\External\FreeRTOS\Source\portable\GCC\ARM_CM33_NTZ\non_secure;..\..\..\External\LibCRC\include;..\..\..\Components\SharedUtils;..\..\..\Components\DriverCpu\Inc;..\..\..\Components\ArmCore\CMSIS_5.8.0\Core\Include;..\..\..\Components\ArmCore;..\..\..\Components\DriverUwb\driver_uwb_V2.5\Inc;..\..\..\Components\DriverUwb\uwb_drivers;..\..\..\Components\DriverUwb;..\..\..\Components\Configuration;..\..\..\Components\Midlayer\SleepDeepSleep;..\..\..\Components\Midlayer\Aoa;..\..\..\Components\Midlayer\System;..\..\..\Components\Midlayer\UwbFramework;..\..\..\Components\Security;..\..\..\Components\Algorithm;..\..\..\Components\Application;..\..\..\..\APP\code\include\application;..\..\..\Components\Lut</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -652,6 +652,16 @@
               <FileName>system_ARMCM33.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\Components\ArmCore\Device\ARMCM33_DSP_FP\system_ARMCM33.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Bin</GroupName>
+          <Files>
+            <File>
+              <FileName>lut_bin.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\..\..\Components\Lut\lut_bin.s</FilePath>
             </File>
           </Files>
         </Group>

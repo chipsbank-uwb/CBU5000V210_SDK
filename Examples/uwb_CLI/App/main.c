@@ -96,10 +96,6 @@ int main(void)
   APP_UART_PrintAppName();
   
   cb_system_uwb_ram_init(&g_UWB_TXBANKMEMORY,&g_UWB_RXBANKMEMORY,sizeof (g_UWB_TXBANKMEMORY), sizeof (g_UWB_RXBANKMEMORY)); //Initializes only once upon start-up. 
-  
-#if (APP_DEMO_ENABLE == APP_TRUE)
-  APP_DEMO_Init();
-#endif
 
 #if (APP_FREERTOS_ENABLE == APP_TRUE)
   // Init uwb task

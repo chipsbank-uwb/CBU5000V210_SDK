@@ -30,6 +30,7 @@
 //-------------------------------
 // DEFINE SECTION
 //-------------------------------
+#define TIMER_LED1_PIN      EN_GPIO_PIN_2  // Example GPIO pin for an LED
 
 //-------------------------------
 // ENUM SECTION
@@ -138,7 +139,7 @@ void app_peripheral_timer_init(void)
     
     stGPIO_InitTypeDef LED;         // Define a GPIO initialization structure for the LED
     LED.Mode = EN_GPIO_MODE_OUTPUT; // Set the GPIO mode to output
-    LED.Pin = EN_GPIO_PIN_2;        // Set the GPIO pin to pin 2
+    LED.Pin = TIMER_LED1_PIN;        // Set the GPIO pin to pin 2
     LED.Pull = EN_GPIO_PULLUP;      // Set the pull-up resistor
     cb_gpio_init(&LED);             // Initialize the GPIO with the specified settings
     

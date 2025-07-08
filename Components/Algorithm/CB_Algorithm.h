@@ -63,7 +63,7 @@ typedef enum {
  * @return     The computed receiver timestamp as a `cb_uwbsystem_rx_tsutimestamp_st` value. This timestamp represents the time 
  *             when the receiver detected the signal, adjusted by the provided CIR data and synchronization indices.
  */
-cb_uwbsystem_rx_tsutimestamp_st cb_uwbalg_ge_trx_tsu(cb_uwbsystem_rx_tsustatus_st* p_rxTsuStatus, cb_uwbsystem_rx_cir_iqdata_st* p_cirRegisterData, uint16_t cirCtlIdx);
+cb_uwbsystem_rx_tsutimestamp_st cb_uwbalg_get_trx_tsu(cb_uwbsystem_rx_tsustatus_st* p_rxTsuStatus, cb_uwbsystem_rx_cir_iqdata_st* p_cirRegisterData, uint16_t cirCtlIdx);
 
 /**
  * @brief Calculates a specific property based on two sets of ranging results.

@@ -84,6 +84,8 @@ int main(void)
   
   cb_system_uwb_set_system_config(&uwbSystemConfig);
   
+  cb_system_uwb_ram_init(&UWB_TXBANKMEMORY,&UWB_RXBANKMEMORY,sizeof (UWB_TXBANKMEMORY), sizeof (UWB_RXBANKMEMORY)); //Initializes only once upon start-up. 
+  
   APP_DEMO_Init();
 
 }

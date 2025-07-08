@@ -63,7 +63,7 @@ static app_uwbcomtrx_state_en s_appCommRxState = EN_APP_STATE_RECEIVE;
 /* Default Tx packet configuration.*/
 static cb_uwbsystem_packetconfig_st Txpacketconfig = 
 {
-  .prfMode            = EN_PRF_MODE_BPRF,                 // PRF mode selection
+  .prfMode            = EN_PRF_MODE_BPRF_62P4,                 // PRF mode selection
   .psduDataRate       = EN_PSDU_DATA_RATE_6P81,           // PSDU data rate
   .bprfPhrDataRate    = EN_BPRF_PHR_DATA_RATE_0P85,       // BPRF PHR data rate
   .preambleCodeIndex  = EN_UWB_PREAMBLE_CODE_IDX_9,       // Preamble code index (9-32)
@@ -82,7 +82,7 @@ static cb_uwbsystem_packetconfig_st Txpacketconfig =
 /* Default Rx packet configuration.*/
 static cb_uwbsystem_packetconfig_st Rxpacketconfig = 
 {
-  .prfMode            = EN_PRF_MODE_BPRF,                 // PRF mode selection
+  .prfMode            = EN_PRF_MODE_BPRF_62P4,                 // PRF mode selection
   .psduDataRate       = EN_PSDU_DATA_RATE_6P81,           // PSDU data rate
   .bprfPhrDataRate    = EN_BPRF_PHR_DATA_RATE_0P85,       // BPRF PHR data rate
   .preambleCodeIndex  = EN_UWB_PREAMBLE_CODE_IDX_9,       // Preamble code index (9-32)
@@ -119,7 +119,7 @@ void app_uwb_commtx_main(void)
   //--------------------------------
   cb_uwbsystem_txpayload_st txPayload = {0};
   
-  if (Txpacketconfig.prfMode == EN_PRF_MODE_BPRF || Txpacketconfig.prfMode == EN_PRF_MODE_LG4A_0P85)
+  if (Txpacketconfig.prfMode == EN_PRF_MODE_BPRF_62P4 || Txpacketconfig.prfMode == EN_PRF_MODE_LG4A_62P4)
   {
     static uint8_t bprf_payload[16] = {0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x0A,0x0B,0x0C,0x0D,0x0E,0x0F};
     txPayload.ptrAddress = &bprf_payload[0];
@@ -268,7 +268,7 @@ void app_uwb_commrx_main(void)
     switch(s_appCommRxState)
     {
       case EN_APP_STATE_RECEIVE:
-          cb_framework_uwb_qmode_rx_start(EN_UWB_RX_0, &Rxpacketconfig, &stRxIrqEnable); // RX START
+          cb_framework_uwb_qmode_rx_start(&Rxpacketconfig, &stRxIrqEnable); // RX START
           s_appCommRxState = EN_APP_STATE_WAIT_RX_DONE;
         break;
       case EN_APP_STATE_WAIT_RX_DONE:
@@ -276,7 +276,7 @@ void app_uwb_commrx_main(void)
         {
           s_simpleRxDoneFlag = APP_FALSE;
           app_commtrx_rx_payload_and_timestamp_printout();
-          cb_framework_uwb_qmode_rx_end(EN_UWB_RX_0);                  // RX END
+          cb_framework_uwb_qmode_rx_end();                  // RX END
           s_appCommRxState   = EN_APP_STATE_RECEIVE;
           appCommRxOnceDone = APP_TRUE;
         }

@@ -11,9 +11,6 @@
 #define __APP_COMIPLIE_OPTION_H
 #include "APP_common.h"
 
-#define APP_UWB_RADAR_ENABLE          APP_FALSE
-#define APP_UWB_RX_PER_ENABLE         APP_FALSE
-#define APP_DEMO_ENABLE               APP_FALSE
 #define APP_FREERTOS_ENABLE           APP_FALSE
 #define APP_COMMTRX_Qmode             APP_TRUE
 

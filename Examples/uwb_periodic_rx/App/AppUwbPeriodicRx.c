@@ -63,7 +63,7 @@ static volatile stLogSettings logSettings;
 /* Default Rx packet configuration.*/
 static cb_uwbsystem_packetconfig_st Rxpacketconfig = 
 {
-  .prfMode            = EN_PRF_MODE_BPRF,                 // PRF mode selection
+  .prfMode            = EN_PRF_MODE_BPRF_62P4,                 // PRF mode selection
   .psduDataRate       = EN_PSDU_DATA_RATE_6P81,           // PSDU data rate
   .bprfPhrDataRate    = EN_BPRF_PHR_DATA_RATE_0P85,       // BPRF PHR data rate
   .preambleCodeIndex  = EN_UWB_PREAMBLE_CODE_IDX_9,       // Preamble code index (9-32)
@@ -118,6 +118,7 @@ void app_uwb_periodicrx_receive_packet(const stUwbPeriodicRxPacketConfig *const 
     case EN_UWB_RX_0:   { stRxIrqEnable.rx0Done = APP_TRUE; break; }
     case EN_UWB_RX_1:   { stRxIrqEnable.rx1Done = APP_TRUE; break; }
     case EN_UWB_RX_2:   { stRxIrqEnable.rx2Done = APP_TRUE; break; }
+    case EN_UWB_RX_02:  { break; }
     case EN_UWB_RX_ALL: { break; }
     default: { break; }
   }
@@ -211,6 +212,7 @@ static void app_uwb_periodicrx_log(stLogSettings* const LogSettings)
       rxPortNum = 2;
       break;
     
+    case EN_UWB_RX_02: //unused case
     case EN_UWB_RX_ALL:
       break;
     

@@ -17,6 +17,7 @@
 #include "APP_CompileOption.h"
 #include "APP_common.h"
 #include "app_timer.h"
+#include "app_pwm.h"
 
 //-------------------------------
 // FUNCTION PROTOTYPE SECTION

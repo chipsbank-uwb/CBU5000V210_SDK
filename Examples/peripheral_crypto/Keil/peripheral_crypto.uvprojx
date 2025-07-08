@@ -521,16 +521,6 @@
                 </FileArmAds>
               </FileOption>
             </File>
-            <File>
-              <FileName>CB_uwbframework.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\Components\Midlayer\UwbFramework\CB_uwbframework.c</FilePath>
-            </File>
-            <File>
-              <FileName>CB_UwbDrivers.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\..\Components\DriverUwb\uwb_drivers\CB_UwbDrivers.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>

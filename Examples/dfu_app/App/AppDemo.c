@@ -27,7 +27,9 @@
 #include "services/gap/ble_svc_gap.h"
 #include "services/gatt/ble_svc_gatt.h"
 #include "ble_hs_id_priv.h"
-
+#include "cmd_parser_uart.h"
+#include "ftm_handler.h"
+#include "ftm_uwb_cal.h"
 #define APP_DEMO_LOG_ENABLE APP_FALSE
 #if (APP_DEMO_LOG_ENABLE == APP_TRUE)
   #include "app_uart.h"
@@ -319,10 +321,29 @@ void app_ble_task_host(void *pvParameters)
 
 void app_task_uart_dfu(void *pvParameters)
 {
-    dfu_uart_init();
+    cmd_parser_uart_init();
+    dfu_cfg_t uart_cfg = {0};
+    uart_cfg.responder = cmd_parser_uart_responder;
+    uart_cfg.reinit = cmd_parser_uart_deinit;
+    dfu_halder_init(&uart_cfg);
+    
+    ftm_handler_init();
     while (1)
     {
-        dfu_uart_polling();
+        uint8_t app_cmd_ready_flag = cmd_parser_uart_pooling_cmd();
+        if(app_cmd_ready_flag)
+        {
+                 
+            uint16_t received_length = cmd_parser_uart_received_length(); 
+            uint8_t* received_buffer = cmd_parser_uart_received_buffer();
+            //command ready to send
+            cmd_parser_uart_process_buffer(received_buffer,received_length,dfu_halder_polling);
+            cmd_parser_uart_process_buffer(received_buffer,received_length,ftm_halder_polling);
+            // Reset buffer 
+            memset(received_buffer, 0, received_length);
+            cmd_parser_uart_rx_restart();
+        }
+    
     }
 }
 
@@ -330,6 +351,8 @@ void app_task_uart_dfu(void *pvParameters)
 void APP_DEMO_Init(void)
 {
     BaseType_t rt;
+  
+#ifdef DFU_BLE_ENABLE
     // Init BLE Controller
     CB_BLE_Init();
 
@@ -358,6 +381,7 @@ void APP_DEMO_Init(void)
     {
         LOG("xTaskCreate fail \n")
     }
+ #endif
     // application
     rt = xTaskCreate((TaskFunction_t)app_task_uart_dfu, "Task: BLE Application", 1024, NULL, 1, NULL);
     if(rt != pdPASS)
