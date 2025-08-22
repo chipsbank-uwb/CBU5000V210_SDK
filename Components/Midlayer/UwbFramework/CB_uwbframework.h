@@ -51,6 +51,15 @@ typedef enum {
   EN_TRX_START_DEFERRED      /**< Deferred start */
 } cb_uwbframework_trx_startmode_en;
 
+/**
+ * @brief Enumeration for FOV (Field of View) detection results
+ */
+typedef enum {
+  EN_FOV_WITHIN,              /**< Angle is within the defined FOV */
+  EN_FOV_OUTSIDE,             /**< Angle is outside the defined FOV */
+  EN_FOV_ANTENNA_UNSUPPORTED  /**< Antenna type does not support FOV detection */
+} cb_uwbframework_fov_result_en;
+
 //-------------------------------
 // STRUCT/UNION SECTION
 //-------------------------------
@@ -279,11 +288,10 @@ uint16_t cb_framework_uwb_get_rx_packet_size  (cb_uwbsystem_packetconfig_st* con
 /**
  * @brief Get the payload of a received UWB packet
  * 
- * @param pRxpayloadAddress Pointer to store the received payload
- * @param SizeInByte Pointer to store the size of the payload in bytes
- * @param config Packet configuration
+ * @param pRxpayloadAddress Pointer to the buffer where the received payload will be stored
+ * @param NumOfByte Number of bytes to extract from the received payload
  */
-void cb_framework_uwb_get_rx_payload(uint8_t* pRxpayloadAddress, uint16_t* SizeInByte, cb_uwbsystem_packetconfig_st* config);
+void cb_framework_uwb_get_rx_payload(uint8_t* pRxpayloadAddress, uint16_t NumOfByte);
 
 /**
  * @brief Get the ranging bit from the PHR of a received packet
@@ -492,8 +500,31 @@ void cb_framework_uwb_pdoa_calculate_result(cb_uwbsystem_pdoaresult_st *s_stPdoa
  * @param pd12_bias Phase difference bias between antenna 1 and 2
  * @param azi_result Pointer to store the calculated azimuth angle in degrees
  * @param ele_result Pointer to store the calculated elevation angle in degrees
+ * @param oofov_flag Pointer to store the out of FOV flag
  */
 void cb_framework_uwb_pdoa_calculate_aoa(cb_uwbsystem_pdoa_3ddata_st pdoa_result, float pd01_bias, float pd02_bias, float pd12_bias, float* azi_result, float* ele_result);
+
+/**
+ * @brief Detects if angle inversion has occurred in AOA calculations
+ *
+ * @details This function determines if the calculated Angle of Arrival (AOA) falls outside the 
+ *          defined Field of View (FOV) by comparing the compensated phase differences against 
+ *          the FOV boundaries defined in the lookup tables. Only works for antenna type 0 
+ *          (A at top, B and C at bottom) and type 2 (A and C at top, B at bottom). All other 
+ *          antenna types are treated as not supported.
+ *
+ *          Type 0:            Type 2:
+ *             A               A     C
+ *          B     C               B
+ *
+ * @param pdoa_result PDoA 3D data containing phase differences between antenna pairs
+ * @param pd01_bias Phase difference bias between antenna 0 and 1 (in degrees)
+ * @param pd02_bias Phase difference bias between antenna 0 and 2 (in degrees)
+ * @param pd12_bias Phase difference bias between antenna 1 and 2 (in degrees)
+ * @return cb_uwbframework_fov_result_en FOV detection result enum
+ */
+cb_uwbframework_fov_result_en cb_framework_uwb_pdoa_detect_angle_inversion(cb_uwbsystem_pdoa_3ddata_st pdoa_result, float pd01_bias, float pd02_bias, float pd12_bias);
+    
 /**
  * @brief Calculate mean of an array of doubles
  * 
@@ -567,5 +598,72 @@ void cb_framework_ftm_uwb_rx_restart(cb_uwbsystem_rxport_en enRxPort, cb_uwbsyst
  *                     Only used if enReset is not EN_UWB_CFO_GAIN_RESET.
  */
 void cb_framework_uwb_rxconfig_cfo_gain(cb_uwbsystem_rxconfig_cfo_gain_en enReset, cb_uwbsystem_rx_dbb_config_st* stRxCfg_CfoGainBypass);
+
+//----------------------------------------------------------------//
+//                         Radar API                              //
+//----------------------------------------------------------------//
+
+/**
+ * @brief Configures the radar system with specified parameters.
+ *
+ * This function initializes the radar subsystem components including TX, RX modules,
+ * and sets the power amplifier and scaling parameters.
+ * @param pa        The power amplifier setting (5-bit value, 0-31 range)
+ * @param scale_bit The scaling factor for radar signal (3-bit value, 0-7 range)
+ */
+void cb_framework_radar_config(uint32_t pa, uint32_t scale_bit);
+
+/**
+ * @brief Start radar TX and RX operations based on gain index
+ *
+ * This function initializes and starts radar transmission and reception 
+ * operations. It configures the UWB transceivers, setting up TX and RX timing,
+ * configuring timing registers, and setting the receive gain index based on
+ * the current radar library configuration.
+ *
+ * @param gain_idx The gain index for the receiver (3-bit value, 0-7 range)
+ */
+void cb_framework_radar_start(uint32_t gain_idx);
+
+/**
+ * @brief Retrieve Channel Impulse Response (CIR) data for radar applications
+ *
+ * This function provides a high-level interface to retrieve CIR data from the
+ * specified UWB receiver port for radar signal processing. The CIR data contains
+ * I/Q (in-phase and quadrature) samples that represent the channel impulse response,
+ * which is essential for radar range and velocity calculations. This framework-level
+ * function delegates to the system layer for actual data retrieval.
+ *
+ * @param destArray Pointer to destination array of cb_uwbsystem_rx_cir_iqdata_st structures
+ *                  to store the retrieved CIR I/Q data
+ * @param enRxPort  The UWB receiver port to retrieve CIR data from (EN_UWB_RX_0, EN_UWB_RX_1, EN_UWB_RX_2)
+ * @param NumCirSample Number of CIR samples to retrieve (typically matching range bins)
+ */
+void cb_framework_radar_getcir(cb_uwbsystem_rx_cir_iqdata_st* destArray,cb_uwbsystem_rxport_en enRxPort,uint32_t NumCirSample);
+
+/**
+ * @brief Stop radar TX and RX operations
+ */
+void cb_framework_radar_stop(void);
+
+/**
+ * @brief Deinitializes and powers down the radar system.
+ *
+ * This function turns off all radar-related modules.
+ */
+void cb_framework_radar_off(void);
+
+/**
+ * @brief Perform FFT processing on radar data.
+ *
+ * This function performs Fast Fourier Transform (FFT) processing on the provided data.
+ * It supports different FFT lengths and can perform both forward and inverse FFT operations.
+ *
+ * @param fft_len The FFT length
+ * @param pSrc Pointer to the source data array
+ * @param ifftFlag Flag to indicate inverse FFT (1) or forward FFT (0)
+ * @param doBitReverse Flag to indicate if bit reversal should be performed
+ */
+void cb_framework_fft(cb_uwbradar_en fft_len, float* pSrc, uint8_t ifftFlag, uint8_t doBitReverse);
 
 #endif /*__CB_UWB_FRAMEWORK_H*/

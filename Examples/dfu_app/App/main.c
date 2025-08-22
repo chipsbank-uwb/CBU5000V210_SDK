@@ -79,7 +79,6 @@ int main(void)
     .bbpllFreqOffest_rf   = 127,
     .powerCode_tx         = 28,
     .operationMode_rx     = EN_UWB_RX_OPERATION_MODE_COEXIST,
-    .antennaID            = EN_ANTENNA_0_0_3D, 
   };
   
   cb_system_uwb_set_system_config(&uwbSystemConfig);

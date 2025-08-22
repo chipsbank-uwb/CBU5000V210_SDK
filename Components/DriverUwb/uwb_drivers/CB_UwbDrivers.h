@@ -561,6 +561,24 @@ void cb_uwbdriver_configure_event_timestamp_mask(enUwbEventTimestampMask eventTi
 uint32_t cb_uwbdriver_get_event_timestamp_in_ns(enUwbEventTimestampMask eventTimestampMask);
 
 /**
+ * @brief Inserts a UWB event into the APB event register.
+ *
+ * This function maps a given UWB event index to its corresponding
+ * event mask definition and writes it to the UWB APB event register
+ *
+ * The function is typically used to signal hardware about a specific
+ * UWB event (e.g., delta timer, absolute timer, RX/TX status).
+ *
+ * @param[in] uwbEventIndex
+ *
+ * @note If the event index does not match any case, no event mask
+ *       is written (uwbEventMask remains 0).
+ *
+ * @return None.
+ */
+void cb_uwbdriver_insert_apb_event(enUwbEventIndex uwbEventIndex);
+
+/**
  * @brief Clears the TSU module.
  */
 void cb_uwbdriver_tsu_clear(void);
@@ -738,5 +756,120 @@ void cb_uwbdriver_get_tx_raw_timestamp(cb_uwbsystem_tx_timestamp_st* txTimestamp
  *
  */
 void cb_uwbdriver_tsu_clear(void);
+
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+/*XXXXX                         Radar driver                             XXXXXXXXXXXXXXXX*/
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+/**
+ * @brief Configures the radar system with specified parameters.
+ *
+ * This function initializes the radar subsystem components including TX, RX modules,
+ * and sets the power amplifier and scaling parameters.
+ * @param pa        The power amplifier setting (5-bit value, 0-31 range)
+ * @param scale_bit The scaling factor for radar signal (3-bit value, 0-7 range)
+ */
+void cb_uwbdriver_radar_config(uint32_t pa, uint32_t scale_bit);
+/**
+ * @brief Starts the radar system with specified gain settings.
+ *
+ * This function initiates the radar operation by starting TX and RX modules,
+ * configuring timing registers, and setting the receive gain index based on
+ * the current radar library configuration.
+ *
+ * @param gain_idx The gain index for the receiver (3-bit value, 0-7 range)
+ */
+void cb_uwbdriver_radar_start(uint32_t gain_idx);
+/**
+ * @brief Retrieves the timestamp difference between TX and RX for radar operations
+ *
+ * This function reads the hardware timestamp registers and calculates the
+ * difference between the TX and RX timestamps.
+ *
+ * @return Timestamp difference in nanoseconds
+ */
+uint32_t cb_uwbdriver_radar_get_timestamp_diff(cb_uwbsystem_rxport_en enRxPort);
+
+/**
+ * @brief Driver-level function to retrieve Channel Impulse Response (CIR) data for radar
+ *
+ * This function implements the low-level driver functionality to retrieve CIR data
+ * from the specified UWB receiver port for radar applications. 
+ * @param destArray Pointer to destination array of cb_uwbsystem_rx_cir_iqdata_st structures
+ *                  to store the retrieved CIR I/Q data from hardware registers
+ * @param enRxPort  The UWB receiver port to retrieve CIR data from (EN_UWB_RX_0, EN_UWB_RX_1, EN_UWB_RX_2)
+ * @param NumCirSample Number of CIR samples to retrieve from the hardware registers
+ */
+void cb_uwbdriver_radar_getcir(cb_uwbsystem_rx_cir_iqdata_st* destArray,cb_uwbsystem_rxport_en enRxPort,uint32_t NumCirSample);
+/**
+ * @brief Stop radar TX and RX operations
+ */
+void cb_uwbdriver_radar_stop(void);
+/**
+ * @brief Deinitializes and powers down the radar system.
+ *
+ * This function turns off all radar-related modules.
+ */
+void cb_uwbdriver_radar_off(void);
+
+/**
+ * @brief Perform FFT processing on radar data.
+ *
+ * This function performs Fast Fourier Transform (FFT) processing on the provided data.
+ * It supports different FFT lengths and can perform both forward and inverse FFT operations.
+ *
+ * @param fft_len The FFT length
+ * @param pSrc Pointer to the source data array
+ * @param ifftFlag Flag to indicate inverse FFT (1) or forward FFT (0)
+ * @param doBitReverse Flag to indicate if bit reversal should be performed
+ */
+void cb_uwbdriver_fft(cb_uwbradar_en fft_len, float* pSrc, uint8_t ifftFlag, uint8_t doBitReverse);
+/**
+ * @brief Performs ADC testing with specified gain stage.
+ * 
+ * This function reads the auxiliary ADC voltage value using the specified gain stage.
+ * The function includes input validation to ensure the gain stage is within
+ * the valid range.
+ * 
+ * Gain Stage Voltage Ranges:
+ * | Gain Stage | Voltage Range (V) |
+ * |------------|-------------------|
+ * |     0      |   0.0 to 3.3      |
+ * |     1      |   0.0 to 2.5      |
+ * |     2      |   0.0 to 1.8      |
+ * |     3      |   0.0 to 1.5      |
+ * |     4      |   0.0 to 1.2      |
+ * |     5      |   0.0 to 0.9      |
+ * 
+ * @param gain_stage ADC gain stage setting (valid range: 0-5).
+ *                   Invalid values (>5) will cause the function to return 0.
+ * 
+ * @return float The ADC voltage reading value. Returns 0.0 for invalid gain_stage.
+ * 
+ * @note If an invalid gain_stage (>5) is provided, the function will return 0.0
+ *       without performing any ADC operation.
+ */
+float cb_adc_read_AIN_voltage(uint8_t gain_stage);
+/**
+ * @brief Read ADC input and return a 10-bit scaled code value.
+ *
+ * This function reads the ADC voltage for the specified gain stage using
+ * cb_adc_read_AIN_voltage(), then scales the result to a 10-bit range
+ * (0 to 1024 inclusive) based on the full-scale voltage for that gain stage.
+ *
+ * Full-scale voltages per gain stage:
+ * | Gain Stage | Full-Scale Voltage (V) |
+ * |------------|------------------------|
+ * |     0      | 3.3                    |
+ * |     1      | 2.5                    |
+ * |     2      | 1.8                    |
+ * |     3      | 1.5                    |
+ * |     4      | 1.2                    |
+ * |     5      | 0.9                    |
+ *
+ * @param gain_stage ADC gain stage (0-5). Values >5 are invalid.
+ * @return uint16_t Scaled ADC code in the range 0-1024.
+ *         Returns 0 if gain_stage is invalid.
+ */
+uint16_t adc_read_AIN_10bit_code(uint8_t gain_stage);
 
 #endif // __CB_UWB_DRIVER_H

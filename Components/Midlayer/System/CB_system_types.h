@@ -71,12 +71,6 @@ typedef struct
   uint8_t stRxstatus;  
 }cb_uwbsystem_pdoaresult_st;
 
-typedef enum {
-  EN_ANTENNA_0_0_2D   = 0,
-  EN_ANTENNA_0_0_3D   = 1,
-  EN_ANTENNA_2_0_3D_A = 2,
-}cb_uwbsystem_rxantenna_en;
-
 typedef enum 
 {
   EN_PRF_MODE_BPRF_62P4   = 0, // Fira3.0 UCI definition
@@ -223,7 +217,6 @@ typedef struct
   uint8_t bbpllFreqOffest_rf;                              /**< @brief Baseband Frequency Offset Rf (default 127)  */
   uint8_t powerCode_tx;                                    /**< @brief Transmission Power Code                     */  
   cb_uwbsystem_rxoperationmode_en operationMode_rx;        /**< @brief Operation Mode (RX)                         */
-  cb_uwbsystem_rxantenna_en antennaID;                     /**< @brief Antenna ID                                  */
   /* Reserved */
   //stUwbSystemConfigExtended extendedArgs; /**< @brief Vendor Specific*/
 }__attribute__((aligned(4))) cb_uwbsystem_systemconfig_st;
@@ -263,6 +256,28 @@ typedef struct
   int16_t DC_q;
   int16_t DC_i;
 }__attribute__((aligned(4))) cb_uwbsystem_rx_dcoc_st;
+
+typedef struct
+{
+  float real;
+  float imag;
+} stRadarCIR_IQ_Complex_t;
+
+/**
+ * @brief Enumeration for supported FFT sizes.
+ */
+typedef enum
+{
+  EN_FFT_LEN16   = 0, /**<   16-point FFT */
+  EN_FFT_LEN32   = 1, /**<   32-point FFT */
+  EN_FFT_LEN64   = 2, /**<   64-point FFT */
+  EN_FFT_LEN128  = 3, /**<  128-point FFT */
+  EN_FFT_LEN256  = 4, /**<  256-point FFT */
+  EN_FFT_LEN512  = 5, /**<  512-point FFT */
+  EN_FFT_LEN1024 = 6, /**< 1024-point FFT */
+  EN_FFT_LEN2048 = 7, /**< 2048-point FFT */
+  EN_FFT_LEN4096 = 8  /**< 4096-point FFT */
+} cb_uwbradar_en;
 
 /**
  * @brief Structure that contains rssi, cfo, dcoc and gain

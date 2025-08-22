@@ -166,7 +166,6 @@ void ftm_uwb_cal_periodic_tx(void)
     .bbpllFreqOffest_rf   = freqoffsetcalcode,
     .powerCode_tx         = powercode,
     .operationMode_rx     = EN_UWB_RX_OPERATION_MODE_COEXIST,
-    .antennaID            = EN_ANTENNA_0_0_3D, 
   };   
     
   cb_system_uwb_set_system_config(&uwbSystemConfig);
@@ -267,7 +266,6 @@ void ftm_uwb_cal_comm_rx(void)
     .bbpllFreqOffest_rf   = freqoffsetcalcode,
     .powerCode_tx         = powercode,
     .operationMode_rx     = EN_UWB_RX_OPERATION_MODE_COEXIST,
-    .antennaID            = EN_ANTENNA_0_0_3D, 
     };   
     
     cb_system_uwb_set_system_config(&uwbSystemConfig);
@@ -956,10 +954,14 @@ void ftm_uwb_cal_rngaoa_tx_sequence(void)
         if (s_stIrqStatus.Rx0Done == APP_TRUE)
         {        
           s_stIrqStatus.Rx0Done = APP_FALSE;
-          uint16_t rxPayloadSize = 0;
-          cb_framework_uwb_get_rx_payload                           ((uint8_t*)(&s_stResponderDataContainer), &rxPayloadSize, &s_stUwbPacketConfig);
-          cb_framework_uwb_calculate_initiator_tround_treply        (&s_stInitiatorDataContainer, s_stTxTsuTimestamp0, s_stTxTsuTimestamp1, s_stRxTsuTimestamp0);
-          s_measuredDistance = cb_framework_uwb_calculate_distance  (s_stInitiatorDataContainer, s_stResponderDataContainer.rangingDataContainer);
+          cb_uwbsystem_rxstatus_un rxStatus = cb_framework_uwb_get_rx_status(); 
+          if (rxStatus.rx0_ok == CB_TRUE)
+          {  
+            uint16_t rxPayloadSize = cb_framework_uwb_get_rx_packet_size(&s_stUwbPacketConfig);
+            cb_framework_uwb_get_rx_payload                           ((uint8_t*)(&s_stResponderDataContainer), rxPayloadSize);
+            cb_framework_uwb_calculate_initiator_tround_treply        (&s_stInitiatorDataContainer, s_stTxTsuTimestamp0, s_stTxTsuTimestamp1, s_stRxTsuTimestamp0);
+            s_measuredDistance = cb_framework_uwb_calculate_distance  (s_stInitiatorDataContainer, s_stResponderDataContainer.rangingDataContainer);
+          }
           cb_framework_uwb_rx_end(EN_UWB_RX_0);
           s_enAppRngaoaState = EN_APP_STATE_DISTANCE_WAIT_TX_DONE;
         }
@@ -1437,11 +1439,16 @@ void ftm_uwb_cal_rngaoa_rx_sequence(void)
       case EN_APP_STATE_DISTANCE_WAIT_RX_DONE:
         if(s_stIrqStatus.Rx0Done == APP_TRUE)  
         {  
-           uint8_t payload[10];
-           uint16_t rxPayloadSize = 0;
-           s_stIrqStatus.Rx0Done = APP_FALSE;
-           cb_framework_uwb_get_rx_payload(&payload[0], &rxPayloadSize, &s_stUwbPacketConfig);
-           distance = payload[0] << 24 | payload[1] << 16 | payload[2]<< 8| payload[3];
+           cb_uwbsystem_rxstatus_un rxStatus = cb_framework_uwb_get_rx_status(); 
+           if (rxStatus.rx0_ok == CB_TRUE)
+           {
+               uint8_t payload[10];
+               s_stIrqStatus.Rx0Done = APP_FALSE;
+               uint16_t rxPayloadSize = cb_framework_uwb_get_rx_packet_size(&s_stUwbPacketConfig);
+               cb_framework_uwb_get_rx_payload(payload, rxPayloadSize);
+               distance = payload[0] << 24 | payload[1] << 16 | payload[2]<< 8| payload[3];
+               
+           }
            cb_framework_uwb_rx_end(EN_UWB_RX_0);
            s_enAppRngaoaState = EN_APP_STATE_TERMINATE;
         
@@ -1526,7 +1533,6 @@ enCALReturnCode ftm_uwb_cal_set_rngaoa_tx_onoff(enSwtich status)
       .bbpllFreqOffest_rf   = freqoffsetcalcode,
       .powerCode_tx         = powercode,
       .operationMode_rx     = EN_UWB_RX_OPERATION_MODE_COEXIST,
-      .antennaID            = EN_ANTENNA_0_0_3D, 
     };   
     
     cb_system_uwb_set_system_config(&uwbSystemConfig);
@@ -1600,23 +1606,13 @@ enCALReturnCode ftm_uwb_cal_set_rngaoa_rx_onoff(enSwtich status)
     { 
        rangaoa_rx_freq = 50 - 4; 
     }
-    
-    cb_uwbsystem_rxantenna_en antenna_cfg;   
-    if (rngaoa_rx_channel == enDualAntenna1_3_RX) 
-    {
-      antenna_cfg = EN_ANTENNA_0_0_2D;
-    } else //if (rngaoa_rx_channel == enTripleAntenna1_2_3_RX) 
-    {
-      antenna_cfg = EN_ANTENNA_0_0_3D;
-    }
-
+ 
     cb_uwbsystem_systemconfig_st uwbSystemConfig =
     {   
       .channelNum           = EN_UWB_Channel_9,
       .bbpllFreqOffest_rf   = freqoffsetcalcode,
       .powerCode_tx         = powercode,
       .operationMode_rx     = EN_UWB_RX_OPERATION_MODE_COEXIST,
-      .antennaID            = antenna_cfg, 
     };   
     
     cb_system_uwb_set_system_config(&uwbSystemConfig);
@@ -1667,7 +1663,7 @@ uint8_t app_rngaoa_validate_sync_ack_payload(void)
           
   if (rxStatus.rx0_ok   == CB_TRUE)
   {  
-    cb_framework_uwb_get_rx_payload(&syncAckPayloadReceived[0], &rxPayloadSize, &s_stUwbPacketConfig);
+    cb_framework_uwb_get_rx_payload(&syncAckPayloadReceived[0], DEF_SYNC_ACK_RX_PAYLOAD_SIZE);
     for (uint16_t i = 0; i < DEF_SYNC_ACK_RX_PAYLOAD_SIZE; i++)
     {
       if (syncAckPayloadReceived[i] != s_syncAckPayload[i])
@@ -1791,7 +1787,7 @@ uint8_t app_rngaoa_validate_sync_payload(void)
           
   if (rxStatus.rx0_ok   == CB_TRUE)
   {
-    cb_framework_uwb_get_rx_payload(&syncRxPayload[0], &rxPayloadSize, &s_stUwbPacketConfig);
+    cb_framework_uwb_get_rx_payload(&syncRxPayload[0],DEF_SYNC_RX_PAYLOAD_SIZE);
     for (uint16_t i = 0; i < DEF_SYNC_RX_PAYLOAD_SIZE; i++)
     {
       if (syncRxPayload[i] != s_syncExpectedRxPayload[i])

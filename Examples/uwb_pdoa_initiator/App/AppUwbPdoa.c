@@ -31,6 +31,9 @@
 #define DEF_SYNC_TX_PAYLOAD_SIZE        4
 #define DEF_SYNC_ACK_RX_PAYLOAD_SIZE    3
 
+// PDOA Mode Configuration:
+#define APP_PDOA_HIGH_ACCURACY_MODE   APP_FALSE // PDOA High Accuracy Mode: End then restart for better accuracy
+
 typedef enum{
   // IDLE STATE  
   EN_APP_STATE_IDLE = 0,                        // IDLE
@@ -66,7 +69,7 @@ static app_uwbpdoa_irqstatus_st       s_stIrqStatus               = {APP_FALSE};
 /* Default Tx packet configuration.*/
 static cb_uwbsystem_packetconfig_st s_stUwbPacketConfig = 
 {
-  .prfMode            = EN_PRF_MODE_BPRF_62P4,                 // PRF mode selection
+  .prfMode            = EN_PRF_MODE_BPRF_62P4,            // PRF mode selection
   .psduDataRate       = EN_PSDU_DATA_RATE_6P81,           // PSDU data rate
   .bprfPhrDataRate    = EN_BPRF_PHR_DATA_RATE_0P85,       // BPRF PHR data rate
   .preambleCodeIndex  = EN_UWB_PREAMBLE_CODE_IDX_9,       // Preamble code index (9-32)
@@ -165,10 +168,14 @@ void app_pdoa_initiator(void)
   .eventTimestampMask   = EN_UWBEVENT_TIMESTAMP_MASK_0, // mask 0   :: (Timestamp) Select timestamp mask to be used
   .eventIndex           = EN_UWBEVENT_28_TX_DONE,       // tx_done  :: (Timestamp) Select event to for timestamp capture
   .absTimer             = EN_UWB_ABSOLUTE_TIMER_0,      // abs0     :: (ABS timer) Select absolute timer
+#if (APP_PDOA_HIGH_ACCURACY_MODE == APP_TRUE)
+  .timeoutValue         = 800,                          // Minimum 800us for high accuracy mode
+#else
   .timeoutValue         = 250,                          // 250us    :: (ABS timer) absolute timer timeout value, unit - us
+#endif
   .eventCtrlMask        = EN_UWBCTRL_TX_START_MASK,     // tx start :: (action)    select action upon abs timeout 
   };
-    
+
   s_enAppPdoaInitiatorState = EN_APP_STATE_SYNC_TRANSMIT;
 
   while(1)
@@ -286,14 +293,13 @@ void app_pdoa_initiator(void)
 uint8_t app_pdoa_validate_sync_ack_payload(void)
 {
   uint8_t  result = APP_TRUE;
-  uint16_t rxPayloadSize = 0;
   uint8_t  syncAckPayloadReceived[DEF_SYNC_ACK_RX_PAYLOAD_SIZE];
   
   cb_uwbsystem_rxstatus_un unRxStatus = cb_framework_uwb_get_rx_status();
   
   if (unRxStatus.rx0_ok == CB_TRUE)
   { 
-    cb_framework_uwb_get_rx_payload(&syncAckPayloadReceived[0], &rxPayloadSize, &s_stUwbPacketConfig);
+    cb_framework_uwb_get_rx_payload(&syncAckPayloadReceived[0], DEF_SYNC_ACK_RX_PAYLOAD_SIZE);
     for (uint16_t i = 0; i < DEF_SYNC_ACK_RX_PAYLOAD_SIZE; i++)
     {
       if (syncAckPayloadReceived[i] != s_syncAckPayload[i])

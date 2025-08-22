@@ -477,14 +477,13 @@ void app_dstwr_timer_init(uint16_t timeoutMs)
 uint8_t app_dstwr_validate_sync_payload(void)
 {
   uint8_t  result                                     = APP_TRUE;
-  uint16_t rxPayloadSize                              = 0;
   uint8_t  syncRxPayload[DEF_SYNC_RX_PAYLOAD_SIZE]    = {0};
   
   cb_uwbsystem_rxstatus_un rxStatus = cb_framework_uwb_get_rx_status();
           
   if (rxStatus.rx0_ok == CB_TRUE)
   {
-    cb_framework_uwb_get_rx_payload(&syncRxPayload[0], &rxPayloadSize, &s_stUwbPacketConfig);
+    cb_framework_uwb_get_rx_payload(&syncRxPayload[0], DEF_SYNC_RX_PAYLOAD_SIZE);
     for (uint16_t i = 0; i < DEF_SYNC_RX_PAYLOAD_SIZE; i++)
     {
       if (syncRxPayload[i] != s_syncExpectedRxPayload[i])

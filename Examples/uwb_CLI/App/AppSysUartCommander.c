@@ -67,11 +67,7 @@ static app_uart_cmd_st commandTable[] =
     {'b', APP_UART_Func_b},  // DSTWR
     {'c', APP_UART_Func_c},  // PDOA
     {'d', APP_UART_Func_d},  // RNGAOA
-    {'e', APP_UART_Func_e},  // TRX-Periodic
-    {'f', APP_UART_Func_f},  // Radar
-    {'g', APP_UART_Func_g},  // RXPER
-    {'h', APP_UART_Func_h},  // UWB Scanning
-    {'s', APP_UART_Func_s},  // General Configuration Setting
+    {'e', APP_UART_Func_e},  // unused
     // Add more commands and handlers as needed
 };
 extern uint8_t CB_GetCBLibMajorVersion(void);
@@ -390,27 +386,6 @@ void APP_UART_Func_d(uint32_t const argc, uint32_t *args)
 void APP_UART_Func_e(uint32_t const argc, uint32_t *args)
 {
     /* usage: unused  */  
-}
-
-
-void APP_UART_Func_f(uint32_t const argc, uint32_t *args) 
-{
-    /* usage: unused  */  
-}
-
-void APP_UART_Func_g(uint32_t const argc, uint32_t *args) 
-{
-    /* usage: unused  */ 
-}
-
-void APP_UART_Func_h(uint32_t const argc, uint32_t  *args)
-{
-	/* usage: unused  */ 
-}
-
-void APP_UART_Func_s(uint32_t const argc, uint32_t  *args)
-{
-    /* usage: unused  */ 
 }
 
 /**

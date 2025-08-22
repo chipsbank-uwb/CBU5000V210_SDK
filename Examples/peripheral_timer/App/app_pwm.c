@@ -75,8 +75,18 @@ void app_pwm_breathing_led_loop(void)
     // LED fade-in (0us ~ 1000us)
     for (uint16_t i = 0; i < 100; i++) 
     {
-        // Set PWM duty cycle based on i value, multiplied by 10 to reach up to 1000us
-        cb_set_timeout_expiration(EN_TIMER_1, EN_TIMER_TIMEOUT_EVENT_0, i * 10);
+        if(i == 0)
+        {
+            // When the value is 0, the duty cycle is 100%, but the output is a high level. Therefore, 
+            //it is necessary to set it to the opposite - when the duty cycle is 0, the output is a low level.
+          cb_set_timeout_expiration(EN_TIMER_1, EN_TIMER_TIMEOUT_EVENT_0, 1000);        
+        }
+        else
+        {
+          // Set PWM duty cycle based on i value, multiplied by 10 to reach up to 1000us
+          cb_set_timeout_expiration(EN_TIMER_1, EN_TIMER_TIMEOUT_EVENT_0, i * 10);
+        }
+
         // Delay between each step to control fade speed
         cb_hal_delay_in_ms(20);
     }
@@ -84,8 +94,16 @@ void app_pwm_breathing_led_loop(void)
     // LED fade-out (1000us ~ 0us)
     for (uint16_t i = 100; i > 0; i--) 
     {
-        // Decrease PWM duty cycle gradually
-        cb_set_timeout_expiration(EN_TIMER_1, EN_TIMER_TIMEOUT_EVENT_0, i * 10);
+      if(i == 100)
+      {
+          cb_set_timeout_expiration(EN_TIMER_1, EN_TIMER_TIMEOUT_EVENT_0, 0);
+      }
+      else
+      {
+          // Decrease PWM duty cycle gradually
+          cb_set_timeout_expiration(EN_TIMER_1, EN_TIMER_TIMEOUT_EVENT_0, i * 10);
+      }
+
         // Delay between each step
         cb_hal_delay_in_ms(20);
     }

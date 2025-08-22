@@ -46,6 +46,9 @@
 #define DEF_PDOA_PD02_BIAS              (40.0f) // 2D,3D
 #define DEF_PDOA_PD12_BIAS              (10.0f) // 3D
 
+// PDOA Mode Configuration:
+#define APP_PDOA_HIGH_ACCURACY_MODE   APP_FALSE // PDOA High Accuracy Mode: RX end then start again for better accuracy
+
 //-------------------------------
 // ENUM SECTION
 //-------------------------------
@@ -166,9 +169,9 @@ app_rngaoa_responderdatacontainer_st s_stResponderDataContainer =
 //     Idle                                Idle
 //       |---------1. SYNC ----------------->|
 //       |<------- 2. ACK  ------------------|
-//     a |---------3. RNGAOA(POLL) --------->| d
-//     b |<--------4. RNGAOA(RESPONSE) ------| e
-//     c |---------5. RNGAOA(FINAL) -------->| f
+//     a |---------3. DSTWR (POLL) --------->| d
+//     b |<--------4. DSTWR (RESPONSE) ------| e
+//     c |---------5. DSTWR (FINAL) -------->| f
 //       |---------6. PDOA (n cycles) ------>| 
 //       |<--------7. RESULT ----------------|
 //     Terminate                         Terminate  
@@ -176,8 +179,8 @@ app_rngaoa_responderdatacontainer_st s_stResponderDataContainer =
 // DEF_RNGAOA_OVERALL_PROCESS_TIMEOUT_MS : 3 + 4 + 5 + 6
 // DEF_RNGAOA_SYNC_RX_RESTART_TIMEOUT_MS : 1
 // DEF_RNGAOA_APP_CYCLE_TIME_MS          : Idle 
-// DEF_RNGAOA_RESPONSE_WAIT_TIME_MS      : 4 
-// DEF_RNGAOA_FINAL_WAIT_TIME_MS         : 5 
+// DEF_DSTWR_RESPONSE_WAIT_TIME_MS       : 4 
+// DEF_DSTWR_FINAL_WAIT_TIME_MS          : 5 
 // DEF_NUMBER_OF_PDOA_REPEATED_RX        : 6 (n cycles)
 // DEF_RNGAOA_RESULT_WAIT_TIME_MS        : 7
 //
@@ -456,7 +459,12 @@ void app_rngaoa_responder(void)
           s_countOfPdoaScheduledRx++;
           if (s_countOfPdoaScheduledRx < DEF_NUMBER_OF_PDOA_REPEATED_RX)
           {
+#if (APP_PDOA_HIGH_ACCURACY_MODE == APP_TRUE)
+            cb_framework_uwb_rx_end(EN_UWB_RX_ALL);
+            cb_framework_uwb_rx_start(EN_UWB_RX_ALL, &s_stUwbPacketConfig, &stPdoaRxIrqEnable, EN_TRX_START_NON_DEFERRED);
+#else
             cb_framework_uwb_rx_restart(EN_UWB_RX_ALL, &s_stUwbPacketConfig, &stPdoaRxIrqEnable, EN_TRX_START_NON_DEFERRED);
+#endif
           }
           else 
           {
@@ -554,6 +562,7 @@ void app_rngaoa_reset(void)
   cb_framework_uwb_tx_end();            // ensure propoer TX end upon abnormal condition
   cb_framework_uwb_rx_end(EN_UWB_RX_0); // ensure propoer RX end upon abnormal condition
   cb_framework_uwb_rxconfig_cfo_gain(EN_UWB_CFO_GAIN_RESET, NULL); // ensure CFO and gain settings are reset upon abnormal condition
+  s_countOfPdoaScheduledRx = 0;
 }
 
 /**
@@ -596,14 +605,13 @@ void app_rngaoa_timer_init(uint16_t timeoutMs)
 uint8_t app_rngaoa_validate_sync_payload(void)
 {
   uint8_t  result = APP_TRUE;
-  uint16_t rxPayloadSize = 0;
   uint8_t  syncRxPayload[DEF_SYNC_RX_PAYLOAD_SIZE] = {0};
   
   cb_uwbsystem_rxstatus_un rxStatus = cb_framework_uwb_get_rx_status();
           
   if (rxStatus.rx0_ok   == CB_TRUE)
   {
-    cb_framework_uwb_get_rx_payload(&syncRxPayload[0], &rxPayloadSize, &s_stUwbPacketConfig);
+    cb_framework_uwb_get_rx_payload(&syncRxPayload[0], DEF_SYNC_RX_PAYLOAD_SIZE);
     for (uint16_t i = 0; i < DEF_SYNC_RX_PAYLOAD_SIZE; i++)
     {
       if (syncRxPayload[i] != s_syncExpectedRxPayload[i])
@@ -696,7 +704,7 @@ void app_rngaoa_log(void)
 {
   if (!s_applicationTimeout)
   {
-    app_uwb_rngaoa_print("Cycle:%u , Ranging Successful:1,", s_appCycleCount++);
+    app_uwb_rngaoa_print("Cycle:%u, Ranging Successful:1,", s_appCycleCount++);
     
     /*Printout*/
     app_uwb_rngaoa_print("PD01:%f, PD02:%f, PD12:%f (in degrees),",s_stPdoaOutputResult.median.rx0_rx1,s_stPdoaOutputResult.median.rx0_rx2,s_stPdoaOutputResult.median.rx1_rx2);          

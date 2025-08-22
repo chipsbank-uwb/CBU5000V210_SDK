@@ -19,9 +19,7 @@
 //-------------------------------
 // DEFINE SECTION
 //-------------------------------
-#define OFF_CMD (0u)
-#define PERIODIC_RX_CMD (1u)
-#define PERIODIC_TX_CMD (2u)
+
 
 //-------------------------------
 // ENUM SECTION

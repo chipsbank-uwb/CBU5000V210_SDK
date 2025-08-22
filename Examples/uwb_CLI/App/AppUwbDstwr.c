@@ -478,10 +478,15 @@ void app_dstwr_initiator(void)
         if (s_stIrqStatus.Rx0Done == APP_TRUE)
         {        
           s_stIrqStatus.Rx0Done = APP_FALSE;
-          uint16_t rxPayloadSize = 0;
-          cb_framework_uwb_get_rx_payload                          ((uint8_t*)(&s_stIniResponderDataContainer), &rxPayloadSize, &s_stUwbPacketConfig);
-          cb_framework_uwb_calculate_initiator_tround_treply        (&s_stInitiatorDataContainer, s_stIniTxTsuTimestamp0, s_stIniTxTsuTimestamp1, s_stIniRxTsuTimestamp0);
-          s_measuredDistance = cb_framework_uwb_calculate_distance  (s_stInitiatorDataContainer, s_stIniResponderDataContainer);
+          
+          cb_uwbsystem_rxstatus_un rxStatus = cb_framework_uwb_get_rx_status();    
+          if (rxStatus.rx0_ok == CB_TRUE)
+          {  
+            uint16_t rxPayloadSize = cb_framework_uwb_get_rx_packet_size(&s_stUwbPacketConfig);
+            cb_framework_uwb_get_rx_payload                          ((uint8_t*)(&s_stIniResponderDataContainer), rxPayloadSize);
+            cb_framework_uwb_calculate_initiator_tround_treply        (&s_stInitiatorDataContainer, s_stIniTxTsuTimestamp0, s_stIniTxTsuTimestamp1, s_stIniRxTsuTimestamp0);
+            s_measuredDistance = cb_framework_uwb_calculate_distance  (s_stInitiatorDataContainer, s_stIniResponderDataContainer);
+          }
           cb_framework_uwb_rx_end(EN_UWB_RX_0);
           s_enAppDstwrInitiatorState = EN_APP_INI_STATE_TERMINATE;
         }
@@ -872,14 +877,13 @@ void app_dstwr_timer_off(void)
 uint8_t app_dstwr_initiator_validate_sync_ack_payload(void)
 {
   uint8_t  result = APP_TRUE;
-  uint16_t rxPayloadSize = 0;
   uint8_t  syncAckPayloadReceived[DEF_SYNC_ACK_RX_PAYLOAD_SIZE] = {0};
   
   cb_uwbsystem_rxstatus_un rxStatus = cb_framework_uwb_get_rx_status();
           
   if (rxStatus.rx0_ok   == CB_TRUE)
   {  
-    cb_framework_uwb_get_rx_payload(&syncAckPayloadReceived[0], &rxPayloadSize, &s_stUwbPacketConfig);
+    cb_framework_uwb_get_rx_payload(&syncAckPayloadReceived[0], DEF_SYNC_ACK_RX_PAYLOAD_SIZE);
     for (uint16_t i = 0; i < DEF_SYNC_ACK_RX_PAYLOAD_SIZE; i++)
     {
       if (syncAckPayloadReceived[i] != s_syncAckRxPayload[i])
@@ -896,14 +900,13 @@ uint8_t app_dstwr_initiator_validate_sync_ack_payload(void)
 uint8_t app_dstwr_responder_validate_sync_payload(void)
 {
   uint8_t  result = APP_TRUE;
-  uint16_t rxPayloadSize = 0;
   uint8_t  syncRxPayload[DEF_SYNC_RX_PAYLOAD_SIZE] = {0};
   
   cb_uwbsystem_rxstatus_un rxStatus = cb_framework_uwb_get_rx_status();
           
   if (rxStatus.rx0_ok   == CB_TRUE)
   {
-    cb_framework_uwb_get_rx_payload(&syncRxPayload[0], &rxPayloadSize, &s_stUwbPacketConfig);
+    cb_framework_uwb_get_rx_payload(&syncRxPayload[0], DEF_SYNC_RX_PAYLOAD_SIZE);
     for (uint16_t i = 0; i < DEF_SYNC_RX_PAYLOAD_SIZE; i++)
     {
       if (syncRxPayload[i] != s_syncExpectedRxPayload[i])
