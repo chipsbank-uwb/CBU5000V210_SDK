@@ -57,6 +57,8 @@ typedef enum{
 #define DEF_PDOA_PD02_BIAS            (40.0f)  // 2D,3D
 #define DEF_PDOA_PD12_BIAS            (10.0f)  // 3D
 
+// PDOA Mode Configuration:
+#define APP_PDOA_HIGH_ACCURACY_MODE   APP_FALSE // PDOA High Accuracy Mode: End then restart for better accuracy
 
 typedef enum{
   // IDLE STATE
@@ -242,10 +244,14 @@ void app_pdoa_initiator(void)
   .eventTimestampMask   = EN_UWBEVENT_TIMESTAMP_MASK_0, // mask 0   :: (Timestamp) Select timestamp mask to be used
   .eventIndex           = EN_UWBEVENT_28_TX_DONE,       // tx_done  :: (Timestamp) Select event to for timestamp capture
   .absTimer             = EN_UWB_ABSOLUTE_TIMER_0,      // abs0     :: (ABS timer) Select absolute timer
+#if (APP_PDOA_HIGH_ACCURACY_MODE == APP_TRUE)
+  .timeoutValue         = 800,                          // Minimum 800us for high accuracy mode
+#else
   .timeoutValue         = 250,                          // 250us    :: (ABS timer) absolute timer timeout value, unit - us
+#endif
   .eventCtrlMask        = EN_UWBCTRL_TX_START_MASK,     // tx start :: (action)    select action upon abs timeout 
 };
-    
+  
   s_enAppPdoaInitiatorState = EN_APP_INI_STATE_SYNC_TRANSMIT;
 
   while(s_pdoaRunningFlag == APP_TRUE)
@@ -366,14 +372,13 @@ void app_pdoa_initiator(void)
 uint8_t app_pdoa_initiator_validate_sync_ack_payload(void)
 {
   uint8_t  result = APP_TRUE;
-  uint16_t rxPayloadSize = 0;
-  uint8_t  syncAckPayloadReceived[DEF_SYNC_ACK_RX_PAYLOAD_SIZE];
+  uint8_t  syncAckPayloadReceived[DEF_SYNC_ACK_RX_PAYLOAD_SIZE] = {0};
   
   cb_uwbsystem_rxstatus_un rxStatus = cb_framework_uwb_get_rx_status();
   
   if (rxStatus.rx0_ok   == CB_TRUE)
   { 
-    cb_framework_uwb_get_rx_payload(&syncAckPayloadReceived[0], &rxPayloadSize, &s_stUwbPacketConfig);
+    cb_framework_uwb_get_rx_payload(&syncAckPayloadReceived[0], DEF_SYNC_ACK_RX_PAYLOAD_SIZE);
     for (uint16_t i = 0; i < DEF_SYNC_ACK_RX_PAYLOAD_SIZE; i++)
     {
       if (syncAckPayloadReceived[i] != s_syncAckRxPayload[i])
@@ -521,7 +526,12 @@ void app_pdoa_responder(void)
           s_countOfPdoaScheduledRx++;
           if (s_countOfPdoaScheduledRx < DEF_NUMBER_OF_PDOA_REPEATED_RX)
           {
+#if (APP_PDOA_HIGH_ACCURACY_MODE == APP_TRUE)
+            cb_framework_uwb_rx_end(EN_UWB_RX_ALL);
+            cb_framework_uwb_rx_start(EN_UWB_RX_ALL, &s_stUwbPacketConfig, &stPdoaRxIrqEnable, EN_TRX_START_NON_DEFERRED);
+#else
             cb_framework_uwb_rx_restart(EN_UWB_RX_ALL, &s_stUwbPacketConfig, &stPdoaRxIrqEnable, EN_TRX_START_NON_DEFERRED);
+#endif
           }
           else 
           {
@@ -576,14 +586,13 @@ void app_pdoa_reset(void)
 uint8_t app_pdoa_responder_validate_sync_ack_payload(void)
 {
   uint8_t  result = APP_TRUE;
-  uint16_t rxPayloadSize = 0;
   uint8_t  syncRxPayload[DEF_SYNC_RX_PAYLOAD_SIZE] = {0};
   
   cb_uwbsystem_rxstatus_un rxStatus = cb_framework_uwb_get_rx_status();
   
   if (rxStatus.rx0_ok == CB_TRUE)
   {
-    cb_framework_uwb_get_rx_payload(&syncRxPayload[0], &rxPayloadSize, &s_stUwbPacketConfig);
+    cb_framework_uwb_get_rx_payload(&syncRxPayload[0], DEF_SYNC_RX_PAYLOAD_SIZE);
     for (uint16_t i = 0; i < DEF_SYNC_RX_PAYLOAD_SIZE; i++)
     {
       if (syncRxPayload[i] != s_syncExpectedRxPayload[i])

@@ -32,7 +32,7 @@
 #define LOG(...)   
 #endif
 
-#define FACTORY_CMD_START_BYTE 0x5A
+#define FACTORY_CMD_START_BYTE 0x9B
 #define FACTORY_CMD_STOP_BYTE  0x5B
 
 
@@ -102,7 +102,7 @@ static uint8_t ft_active =APP_FALSE;
 static ftCmd user_command_table[] = 
 {
     //Greneral commmand
-    {0x0000, ftm_on_0ff},
+    {0x7525, ftm_on_0ff},
 
 };
 

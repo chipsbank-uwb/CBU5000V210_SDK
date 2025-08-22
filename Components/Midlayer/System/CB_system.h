@@ -244,7 +244,7 @@ void cb_system_uwb_tx_prepare_payload(uint8_t* pTxpayloadAddress,uint16_t SizeIn
 /**
  * @brief Read UWB Rx Payload/PSDU Content
  */
-void cb_system_uwb_rx_get_payload(uint8_t* pRxpayloadAddress,uint16_t* SizeInByte);
+void cb_system_uwb_rx_get_payload(uint8_t* pRxpayloadAddress,uint16_t SizeInByte);
 
 /**
  * @brief Clear UWB Rx PSDU Memory
@@ -334,6 +334,33 @@ void cb_system_uwb_set_gain_rx_init(uint32_t gainRxInit);
 float cb_system_get_chip_temperature(void);
 
 /**
+ * @brief Reads ADC voltage with specified gain stage.
+ * 
+ * This function reads the auxiliary ADC voltage value using the specified gain stage.
+ * The function includes input validation to ensure the gain stage is within
+ * the valid range.
+ * 
+ * Gain Stage Voltage Ranges:
+ * | Gain Stage | Voltage Range (V) |
+ * |------------|-------------------|
+ * |     0      |   0.0 to 3.3      |
+ * |     1      |   0.0 to 2.5      |
+ * |     2      |   0.0 to 1.8      |
+ * |     3      |   0.0 to 1.5      |
+ * |     4      |   0.0 to 1.2      |
+ * |     5      |   0.0 to 0.9      |
+ * 
+ * @param gain_stage ADC gain stage setting (valid range: 0-5).
+ *                   Invalid values (>5) will cause the function to return 0.
+ * 
+ * @return float The ADC voltage reading value. Returns 0.0 for invalid gain_stage.
+ * 
+ * @note If an invalid gain_stage (>5) is provided, the function will return 0.0
+ *       without performing any ADC operation.
+ */
+float cb_system_adc_read_AIN_voltage(uint8_t gain_stage);
+
+/**
  * @brief Perform a one-time calibration of the RC clock.
  *
  * This function calibrates the drift time of the RC clock
@@ -399,20 +426,6 @@ cb_uwbsystem_rxoperationmode_en cb_system_uwb_get_rx_opmode(void);
  * @param RxOperationMode The receiver operation mode to be set, as an cb_uwbsystem_rxoperationmode_en enum.
  */
 void cb_system_uwb_set_rx_opmode(cb_uwbsystem_rxoperationmode_en RxOperationMode);
-
-/**
- * @brief Retrieves the current UWB antenna ID.
- * 
- * @return The current UWB antenna ID as an cb_uwbsystem_rxantenna_en enum.
- */
-cb_uwbsystem_rxantenna_en cb_system_uwb_get_antenna_id(void);
-
-/**
- * @brief Sets the UWB antenna ID.
- * 
- * @param antennaIdx The antenna ID to be set, as an cb_uwbsystem_rxantenna_en enum.
- */
-void cb_system_uwb_set_antenna_id(cb_uwbsystem_rxantenna_en antennaIdx);
 
 /**
  * @brief Retrieves the current UWB system configuration.
@@ -789,7 +802,25 @@ stAOA_CompensatedData cb_system_uwb_aoa_biascomp(cb_uwbsystem_pdoa_3ddata_st pdo
  * @param ele_result Pointer to store the calculated elevation angle in degrees
  */
 void cb_system_uwb_aoa_lut_full3d(stAOA_CompensatedData* AOA_PD, st_antenna_attribute_3d* ant_attr, cb_uwbaoa_lut_attribute_st* lut_attr, float* azi_result, float* ele_result);
-
+/**
+ * @brief Detects angle inversion in AOA (Angle of Arrival) calculations
+ * 
+ * @details This function analyzes the field of view angles and phase differences to detect
+ * if angle inversion has occurred during AOA calculations. It uses the antenna
+ * attributes and FOV parameters to determine if the calculated angles need to be
+ * inverted. Only works for antenna type 0 (A at top, B and C at bottom) and type 2 (A and C at top, B at bottom).
+ * All other antenna types are treated as out-of-FOV.
+ *          Type 0:            Type 2:
+ *             A               A     C
+ *          B     C               B
+ *
+ * @param fov_list Pointer to array containing field of view angles
+ * @param ant_attr Pointer to 3D antenna attributes structure containing antenna positions and type
+ * @param FOV_attr Pointer to FOV attributes structure containing reference data and parameters
+ * @param AOA_PD Pointer to structure containing compensated phase differences
+ * @return uint8_t Returns 1 if angle inversion is detected, 0 otherwise
+ */
+uint8_t cb_system_uwb_detect_angle_inversion(float* fov_list, st_antenna_attribute_3d* ant_attr, cb_uwbaoa_fov_attribute_st* FOV_attr, stAOA_CompensatedData* AOA_PD);
 /**
  * @brief Calculates the 2D AOA (Angle of Arrival) using phase differences and lookup tables.
  * 
@@ -803,5 +834,73 @@ void cb_system_uwb_aoa_lut_full3d(stAOA_CompensatedData* AOA_PD, st_antenna_attr
  void cb_system_uwb_aoa_lut_full2d(float* pd_azi, float* ele_ref, st_antenna_attribute_2d* ant_attr, cb_uwbaoa_lut_attribute_st* lut_attr, float* azi_result);
  
  void cb_system_uwb_config_ftm_rx(cb_uwbsystem_packetconfig_st* config, cb_uwbsystem_rx_irqenable_st* stRxIrqEnable, cb_uwbsystem_rx_dbb_cfo_st* stBypass_cfo);
+
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+/*XXXXX                         Radar Wrapper Functions                   XXXXXXXXXXXXXXXX*/
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+
+/**
+ * @brief Configures the radar system with specified parameters.
+ *
+ * This function initializes the radar subsystem components including TX, RX modules,
+ * and sets the power amplifier and scaling parameters.
+ * @param pa        The power amplifier setting (5-bit value, 0-31 range)
+ * @param scale_bit The scaling factor for radar signal (3-bit value, 0-7 range)
+ */
+void cb_system_radar_config(uint32_t pa, uint32_t scale_bit);
+
+/**
+ * @brief Start radar TX and RX operations based on gain index
+ *
+ * This function initializes and starts radar transmission and reception 
+ * operations. It configures the UWB transceivers, setting up TX and RX timing,
+ * configuring timing registers, and setting the receive gain index based on
+ * the current radar library configuration.
+ *
+ * @param gain_idx The gain index for the receiver (3-bit value, 0-7 range)
+ */
+void cb_system_radar_start(uint32_t gain_idx);
+
+/**
+ * @brief System-level interface to retrieve Channel Impulse Response (CIR) data for radar
+ *
+ * This function serves as the system-level interface for retrieving CIR data from
+ * UWB receiver ports for radar applications. It acts as a bridge between the
+ * framework layer and the low-level driver, forwarding the CIR data retrieval
+ * request to the UWB driver layer. The CIR data contains I/Q samples representing
+ * the channel impulse response, which is used for radar signal processing including
+ * range and velocity estimation.
+ *
+ * @param destArray Pointer to destination array of cb_uwbsystem_rx_cir_iqdata_st structures
+ *                  to store the retrieved CIR I/Q data
+ * @param enRxPort  The UWB receiver port to retrieve CIR data from (EN_UWB_RX_0, EN_UWB_RX_1, EN_UWB_RX_2)
+ * @param NumCirSample Number of CIR samples to retrieve
+ */
+void cb_system_radar_getcir(cb_uwbsystem_rx_cir_iqdata_st* destArray,cb_uwbsystem_rxport_en enRxPort,uint32_t NumCirSample);
+
+/**
+ * @brief Stop radar TX and RX operations
+ */
+void cb_system_radar_stop(void);
+
+/**
+ * @brief Deinitializes and powers down the radar system.
+ *
+ * This function turns off all radar-related modules.
+ */
+void cb_system_radar_off(void);
+
+/**
+ * @brief Perform FFT processing on radar data.
+ *
+ * This function performs Fast Fourier Transform (FFT) processing on the provided data.
+ * It supports different FFT lengths and can perform both forward and inverse FFT operations.
+ *
+ * @param fft_len The FFT length
+ * @param pSrc Pointer to the source data array
+ * @param ifftFlag Flag to indicate inverse FFT (1) or forward FFT (0)
+ * @param doBitReverse Flag to indicate if bit reversal should be performed
+ */
+void cb_system_fft(cb_uwbradar_en fft_len, float* pSrc, uint8_t ifftFlag, uint8_t doBitReverse);
 
 #endif /*__CB_SYSTEM_H*/

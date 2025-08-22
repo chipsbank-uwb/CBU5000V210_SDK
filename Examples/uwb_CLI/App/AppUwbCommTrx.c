@@ -335,24 +335,27 @@ void app_commtrx_rx_payload_and_timestamp_printout(void)
   
   cb_uwbsystem_rxstatus_un rxStatus = cb_framework_uwb_get_rx_status();
   
-  if ((rxStatus.rx0_ok     == CB_TRUE) &&   \
-      (rxStatus.sfd0_det   == CB_TRUE) &&  \
-     ( rxStatus.pd0_det    == CB_TRUE))  {  app_uwb_commtrx_print("- status register: OK\n");     }
-  else                                   { app_uwb_commtrx_print("- status register: NOT OK\n"); }  
-  
-  app_uwb_commtrx_print("--- Payload: ---\n");
-  uint16_t rxPayloadSize = 0;
-  cb_framework_uwb_get_rx_payload(&g_UWB_RXBANKMEMORY[0], &rxPayloadSize, &Rxpacketconfig);
-  
-  app_uwb_commtrx_print("payload size - %d\n", rxPayloadSize);
-  app_uwb_commtrx_print("payload content - : ");
-  
-  for (uint16_t i=0; i < rxPayloadSize; i++)
-  {
-    app_uwb_commtrx_print("%x", g_UWB_RXBANKMEMORY[i]);
+  if ((rxStatus.rx0_ok == CB_TRUE) && (rxStatus.sfd0_det == CB_TRUE) && ( rxStatus.pd0_det == CB_TRUE))  
+  {  
+    app_uwb_commtrx_print("- status register: OK\n");
+    app_uwb_commtrx_print("--- Payload: ---\n");
+    uint16_t rxPayloadSize = cb_framework_uwb_get_rx_packet_size(&Rxpacketconfig);
+    cb_framework_uwb_get_rx_payload(&g_UWB_RXBANKMEMORY[0], rxPayloadSize);
+    
+    app_uwb_commtrx_print("payload size - %d\n", rxPayloadSize);
+    app_uwb_commtrx_print("payload content - : ");
+    
+    for (uint16_t i=0; i < rxPayloadSize; i++)
+    {
+      app_uwb_commtrx_print("%x", g_UWB_RXBANKMEMORY[i]);
+    }
+    app_uwb_commtrx_print("\n");
+   
   }
-  app_uwb_commtrx_print("\n");
-  
+  else
+  { 
+    app_uwb_commtrx_print("- status register: NOT OK\n");
+  }  
   
   app_uwb_commtrx_print("--- RX Timestamp: ---\n");
   cb_uwbsystem_rx_tsutimestamp_st rxTsuTimestamp;

@@ -75,6 +75,14 @@ typedef struct {
 } cb_uwbaoa_lut_attribute_st;
 
 /**
+ * @brief Structure for fov attributes
+ */
+typedef struct {
+    uint8_t step_ele;
+    int8_t ele_est_lower_limit;
+    int8_t ele_est_upper_limit;
+} cb_uwbaoa_fov_attribute_st;
+/**
  * @brief Structure for LUT file header
  */
 typedef struct
@@ -106,6 +114,7 @@ typedef struct
 //-------------------------------
 // GLOBAL VARIABLE SECTION
 //-------------------------------
+
 //-------------------------------
 // FUNCTION PROTOTYPE SECTION
 //-------------------------------
@@ -149,4 +158,23 @@ stAOA_CompensatedData cb_uwbaoa_pdoa_biascomp(cb_uwbsystem_pdoa_3ddata_st pdoa_r
  * @return CB_AOA_STATUS  EN_AOA_OK on success, EN_AOA_ERROR on invalid parameters
  */
 CB_AOA_STATUS cb_uwbaoa_lut_full2d( float* pd_azi, float* ele_ref, const st_antenna_attribute_2d* ant_attr, const cb_uwbaoa_lut_attribute_st* lut_attr, float* azi_result);
+/**
+ * @brief Judge if the AOA is out of FOV (Field of View)
+ * @details This function determines if the calculated Angle of Arrival (AOA) falls outside the 
+ *          defined Field of View (FOV) by comparing the compensated phase differences against 
+ *          the FOV boundaries defined in the lookup tables. Only works for antenna type 0 
+ *          (A at top, B and C at bottom) and type 2 (A and C at top, B at bottom). All other 
+ *          antenna types are treated as out-of-FOV.
+ *
+ *          Type 0:            Type 2:
+ *             A               A     C
+ *          B     C               B
+ *
+ * @param[in] fov_list Pointer to array containing FOV boundary definitions
+ * @param[in] ant_attr Pointer to antenna attributes structure containing antenna positions and type
+ * @param[in] LUT_attr Pointer to LUT attributes structure containing reference data and parameters
+ * @param[in] AOA_PD Pointer to structure containing compensated phase differences between antenna pairs
+ * @return uint8_t Returns 1 if AOA is outside FOV or unsupported antenna type, 0 if within FOV
+ */
+uint8_t cb_uwbaoa_detect_angle_inversion(const float* fov_list, const st_antenna_attribute_3d* ant_attr, const cb_uwbaoa_fov_attribute_st* FOV_attr, stAOA_CompensatedData* AOA_PD);
 #endif /*_CB_AOA_H*/

@@ -70,11 +70,16 @@ extern const uint8_t lut_binary_data_start[];
   *          A   C                                          A   C
   *            B                                            B
   *
+  *     4: DEF_ANTENNA_TYPE_TRIANGLE_RIGHT                5: DEF_ANTENNA_TYPE_TRIANGLE_LEFT 
+  *          A                                                A
+  *            C                                            B
+  *          B                                                C
+  *
   * (3) g_ant_attr.ant_pos = [A, B, C]
   */
   
 st_antenna_attribute_3d g_stAntAttr = {
-    .ant_height = 0.99f,
+    .ant_height = 1.628f,
     .ant_width  = 1.88f,
     .ant_type   = DEF_ANTENNA_TYPE_TRIANGLE_UP,
     .ant_pos[DEF_ANTENNA_POSITION_A] = DEF_ANTENNA_PORT_RX1,
@@ -83,7 +88,7 @@ st_antenna_attribute_3d g_stAntAttr = {
 };
 
 cb_uwbaoa_lut_attribute_st g_stLutAttr;
-
+cb_uwbaoa_fov_attribute_st g_stFovAttr;
 //-------------------------------
 // ENUM SECTION
 //-------------------------------
@@ -384,14 +389,12 @@ uint16_t cb_framework_uwb_get_rx_packet_size(cb_uwbsystem_packetconfig_st* confi
 /**
  * @brief Get the payload of a received UWB packet
  * 
- * @param pRxpayloadAddress Pointer to store the received payload
- * @param SizeInByte Pointer to store the size of the payload in bytes
- * @param config Packet configuration
+ * @param pRxpayloadAddress Pointer to the buffer where the received payload will be stored
+ * @param NumOfByte Number of bytes to extract from the received payload
  */
-void cb_framework_uwb_get_rx_payload(uint8_t* pRxpayloadAddress, uint16_t* SizeInByte, cb_uwbsystem_packetconfig_st* config)
+void cb_framework_uwb_get_rx_payload(uint8_t* pRxpayloadAddress, uint16_t NumOfByte)
 {
-  *SizeInByte = cb_system_uwb_get_rx_packet_size(config);
-  cb_system_uwb_rx_get_payload(pRxpayloadAddress, SizeInByte);
+  cb_system_uwb_rx_get_payload(pRxpayloadAddress, NumOfByte);
 }
 
 /**
@@ -560,8 +563,6 @@ double cb_framework_uwb_calculate_distance(cb_uwbframework_rangingdatacontainer_
 {
   double DS_TWR_T_Prop = cb_system_uwb_alg_prop_calculation(&s_stInitiatorDataContainer.dstwrTroundTreply, 
                                                          &s_stResponderDataContainer.dstwrTroundTreply);
-  int32_t initiatorRangingBias = s_stInitiatorDataContainer.dstwrRangingBias;
-  int32_t responderRangingBias = s_stResponderDataContainer.dstwrRangingBias;
   
   return ((DS_TWR_T_Prop * 30) - 18617 + (double)s_stInitiatorDataContainer.dstwrRangingBias + (double)s_stResponderDataContainer.dstwrRangingBias);
 }
@@ -780,7 +781,46 @@ void cb_framework_uwb_pdoa_calculate_aoa(cb_uwbsystem_pdoa_3ddata_st pdoa_result
     stAoaPd = cb_system_uwb_aoa_biascomp(pdoa_result, pd01_bias, pd02_bias, pd12_bias);
     cb_system_uwb_aoa_lut_full3d(&stAoaPd, &g_stAntAttr, &g_stLutAttr, azi_result, ele_result);
 }
+/**
+ * @brief Detects if angle inversion has occurred in AOA calculations
+ *
+ * @details This function determines if the calculated Angle of Arrival (AOA) falls outside the 
+ *          defined Field of View (FOV) by comparing the compensated phase differences against 
+ *          the FOV boundaries defined in the lookup tables. Only works for antenna type 0 
+ *          (A at top, B and C at bottom) and type 2 (A and C at top, B at bottom). All other 
+ *          antenna types are treated as not supported.
+ *
+ *          Type 0:            Type 2:
+ *             A               A     C
+ *          B     C               B
+ *
+ * @param pdoa_result PDoA 3D data containing phase differences between antenna pairs
+ * @param pd01_bias Phase difference bias between antenna 0 and 1 (in degrees)
+ * @param pd02_bias Phase difference bias between antenna 0 and 2 (in degrees)
+ * @param pd12_bias Phase difference bias between antenna 1 and 2 (in degrees)
+ * @return cb_uwbframework_fov_result_en FOV detection result enum
+ */
+cb_uwbframework_fov_result_en cb_framework_uwb_pdoa_detect_angle_inversion(cb_uwbsystem_pdoa_3ddata_st pdoa_result, float pd01_bias, float pd02_bias, float pd12_bias)
+{
+    // Performance check: Validate antenna type before processing
+    if (g_stAntAttr.ant_type != DEF_ANTENNA_TYPE_TRIANGLE_UP && 
+        g_stAntAttr.ant_type != DEF_ANTENNA_TYPE_TRIANGLE_DOWN)
+    {
+        return EN_FOV_ANTENNA_UNSUPPORTED;
+    }
+    
+    stAOA_CompensatedData stPD = {0};
+    stPD = cb_system_uwb_aoa_biascomp(pdoa_result, pd01_bias, pd02_bias, pd12_bias);
+    
+    g_stFovAttr.ele_est_upper_limit = 30;
+    g_stFovAttr.ele_est_lower_limit = -30;
+    g_stFovAttr.step_ele = 5;
+    const float fov_list[13] = {83.79f, 71.33f, 65.3f, 53.43f, 44.8f, 16.14f, 0.0f, -23.14f, -38.09f, -46.43f, -41.87f, -78.88f, -91.14f};
 
+    uint8_t oofov_result = cb_system_uwb_detect_angle_inversion(fov_list, &g_stAntAttr, &g_stFovAttr, &stPD);
+    
+    return (oofov_result == 0) ? EN_FOV_WITHIN : EN_FOV_OUTSIDE;
+}
 /**
  * @brief Calculate mean of an array of doubles
  * 
@@ -877,5 +917,74 @@ void cb_framework_uwb_pdoa_configure_lut(cb_uwbaoa_lut_attribute_st* p_lut_attr)
     {
         g_stLutAttr = *p_lut_attr;
     }
+}
+
+//----------------------------------------------------------------//
+//                         Radar API                              //
+//----------------------------------------------------------------//
+
+/**
+ * @brief Configures the radar system with specified parameters.
+ *
+ * This function initializes the radar subsystem components including TX, RX modules,
+ * and sets the power amplifier and scaling parameters.
+ * @param pa        The power amplifier setting (5-bit value, 0-31 range)
+ * @param scale_bit The scaling factor for radar signal (3-bit value, 0-7 range)
+ */
+void cb_framework_radar_config(uint32_t pa, uint32_t scale_bit)
+{
+  cb_system_radar_config(pa, scale_bit);
+}
+
+/**
+ * @brief Starts the radar system with specified gain settings.
+ *
+ * This function initiates the radar operation by starting TX and RX modules,
+ * configuring timing registers, and setting the receive gain index based on
+ * the current radar library configuration.
+ *
+ * @param gain_idx The gain index for the receiver (3-bit value, 0-7 range)
+ */
+void cb_framework_radar_start(uint32_t gain_idx)
+{
+  cb_system_radar_start(gain_idx);
+}
+
+void cb_framework_radar_getcir(cb_uwbsystem_rx_cir_iqdata_st* destArray,cb_uwbsystem_rxport_en enRxPort,uint32_t NumCirSample)
+{
+  cb_system_radar_getcir(destArray,enRxPort,NumCirSample);
+}
+/**
+ * @brief Stop radar TX and RX operations
+ */
+void cb_framework_radar_stop(void)
+{
+  cb_system_radar_stop();
+}
+
+/**
+ * @brief Deinitializes and powers down the radar system.
+ *
+ * This function turns off all radar-related modules.
+ */
+void cb_framework_radar_off(void)
+{
+  cb_system_radar_off();
+}
+
+/**
+ * @brief Perform FFT processing on radar data.
+ *
+ * This function performs Fast Fourier Transform (FFT) processing on the provided data.
+ * It supports different FFT lengths and can perform both forward and inverse FFT operations.
+ *
+ * @param fft_len The FFT length
+ * @param pSrc Pointer to the source data array
+ * @param ifftFlag Flag to indicate inverse FFT (1) or forward FFT (0)
+ * @param doBitReverse Flag to indicate if bit reversal should be performed
+ */
+void cb_framework_fft(cb_uwbradar_en fft_len, float* pSrc, uint8_t ifftFlag, uint8_t doBitReverse)
+{
+  cb_system_fft(fft_len, pSrc, ifftFlag, doBitReverse);
 }
 

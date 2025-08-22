@@ -1,10 +1,9 @@
 #ifndef INC_ADC_H_
 #define INC_ADC_H_
 
-#include "CB_scr.h"
+#include <stdint.h>
 
-float cb_eadc_measure_ain_voltage(void);
-
-uint16_t cb_eadc_get_original_value(enEADCGain gain);
+float app_adc_get_adc_voltage(void);
+uint16_t app_adc_get_10bit(void); 
 
 #endif

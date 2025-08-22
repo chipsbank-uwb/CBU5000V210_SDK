@@ -49,6 +49,9 @@
 #define DEF_PDOA_PD02_BIAS              (40.0f) // 2D,3D
 #define DEF_PDOA_PD12_BIAS              (10.0f) // 3D
 
+// PDOA Mode Configuration:
+#define APP_PDOA_HIGH_ACCURACY_MODE   APP_FALSE // PDOA High Accuracy Mode: End then restart for better accuracy
+
 //-------------------------------
 // ENUM SECTION
 //-------------------------------
@@ -190,9 +193,9 @@ static uint8_t  s_countOfPdoaScheduledTx  = 0;
 //     Idle                                Idle
 //       |---------1. SYNC ----------------->|
 //       |<------- 2. ACK  ------------------|
-//     a |---------3. RNGAOA(POLL) --------->| d
-//     b |<--------4. RNGAOA(RESPONSE) ------| e
-//     c |---------5. RNGAOA(FINAL) -------->| f
+//     a |---------3. DSTWR(POLL) --------->| d
+//     b |<--------4. DSTWR(RESPONSE) ------| e
+//     c |---------5. DSTWR(FINAL) -------->| f
 //       |---------6. PDOA (n cycles) ------>| 
 //       |<--------7. RESULT ----------------|
 //     Terminate                         Terminate  
@@ -223,8 +226,6 @@ static uint8_t  s_countOfPdoaScheduledTx  = 0;
 #define DEF_DSTWR_INI_FINAL_WAIT_TIME_MS             1  
 #define DEF_NUMBER_OF_PDOA_REPEATED_TX               5
 #define DEF_PDOA_TX_START_WAIT_TIME_MS               2
-
-
 
 static app_uwbrngaoa_responderstate_en appRngaoaResponderState    = EN_APP_RESP_STATE_IDLE;
 static app_uwbrngaoa_responderstate_en appFailureResponderState   = EN_APP_RESP_STATE_IDLE;
@@ -268,9 +269,9 @@ app_rngaoa_responderdatacontainer_st s_stRespResponderDataContainer = {
 //     Idle                                Idle
 //       |---------1. SYNC ----------------->|
 //       |<------- 2. ACK  ------------------|
-//     a |---------3. RNGAOA(POLL) --------->| d
-//     b |<--------4. RNGAOA(RESPONSE) ------| e
-//     c |---------5. RNGAOA(FINAL) -------->| f
+//     a |---------3. DSTWR (POLL) --------->| d
+//     b |<--------4. DSTWR (RESPONSE) ------| e
+//     c |---------5. DSTWR (FINAL) -------->| f
 //       |---------6. PDOA (n cycles) ------>| 
 //       |<--------7. RESULT ----------------|
 //     Terminate                         Terminate  
@@ -383,7 +384,11 @@ void app_rngaoa_initiator(void)
   .eventTimestampMask   = EN_UWBEVENT_TIMESTAMP_MASK_0, // mask 0   :: (Timestamp) Select timestamp mask to be used
   .eventIndex           = EN_UWBEVENT_28_TX_DONE,       // tx_done  :: (Timestamp) Select event to for timestamp capture
   .absTimer             = EN_UWB_ABSOLUTE_TIMER_0,      // abs0     :: (ABS timer) Select absolute timer
+#if (APP_PDOA_HIGH_ACCURACY_MODE == APP_TRUE)
+  .timeoutValue         = 800,                          // Minimum 800us for high accuracy mode
+#else
   .timeoutValue         = 250,                          // 250us    :: (ABS timer) absolute timer timeout value, unit - us
+#endif
   .eventCtrlMask        = EN_UWBCTRL_TX_START_MASK,     // tx start :: (action)    select action upon abs timeout 
   };  
   
@@ -589,10 +594,15 @@ void app_rngaoa_initiator(void)
         if (s_stIrqStatus.Rx0Done == APP_TRUE)
         {        
           s_stIrqStatus.Rx0Done = APP_FALSE;
-          uint16_t rxPayloadSize = 0;
-          cb_framework_uwb_get_rx_payload                          ((uint8_t*)(&s_stIniResponderDataContainer), &rxPayloadSize, &s_stUwbPacketConfig);
-          cb_framework_uwb_calculate_initiator_tround_treply        (&s_stInitiatorDataContainer, s_stIniTxTsuTimestamp0, s_stIniTxTsuTimestamp1, s_stIniRxTsuTimestamp0);
-          s_measuredDistance = cb_framework_uwb_calculate_distance  (s_stInitiatorDataContainer, s_stIniResponderDataContainer.rangingDataContainer);
+
+          cb_uwbsystem_rxstatus_un rxStatus = cb_framework_uwb_get_rx_status();    
+          if (rxStatus.rx0_ok == CB_TRUE)
+          {  
+            uint16_t rxPayloadSize = cb_framework_uwb_get_rx_packet_size(&s_stUwbPacketConfig);
+            cb_framework_uwb_get_rx_payload                           ((uint8_t*)(&s_stIniResponderDataContainer), rxPayloadSize);
+            cb_framework_uwb_calculate_initiator_tround_treply        (&s_stInitiatorDataContainer, s_stIniTxTsuTimestamp0, s_stIniTxTsuTimestamp1, s_stIniRxTsuTimestamp0);
+            s_measuredDistance = cb_framework_uwb_calculate_distance  (s_stInitiatorDataContainer, s_stIniResponderDataContainer.rangingDataContainer);
+          }
           cb_framework_uwb_rx_end(EN_UWB_RX_0);
           s_enAppRngAoaInitiatorState = EN_APP_INI_STATE_TERMINATE;
         }
@@ -627,14 +637,13 @@ void app_rngaoa_initiator(void)
 uint8_t app_rngaoa_initiator_validate_sync_ack_payload(void)
 {
   uint8_t  result = APP_TRUE;
-  uint16_t rxPayloadSize = 0;
   uint8_t  syncAckPayloadReceived[DEF_SYNC_ACK_RX_PAYLOAD_SIZE] = {0};
   
   cb_uwbsystem_rxstatus_un rxStatus = cb_framework_uwb_get_rx_status();
           
   if (rxStatus.rx0_ok   == CB_TRUE)
   {  
-    cb_framework_uwb_get_rx_payload(&syncAckPayloadReceived[0], &rxPayloadSize, &s_stUwbPacketConfig);
+    cb_framework_uwb_get_rx_payload(&syncAckPayloadReceived[0], DEF_SYNC_ACK_RX_PAYLOAD_SIZE);
     for (uint16_t i = 0; i < DEF_SYNC_ACK_RX_PAYLOAD_SIZE; i++)
     {
       if (syncAckPayloadReceived[i] != s_syncAckRxPayload[i])
@@ -918,7 +927,12 @@ void app_rngaoa_responder(void)
           s_countOfPdoaScheduledRx++;
           if (s_countOfPdoaScheduledRx < DEF_NUMBER_OF_PDOA_REPEATED_RX)
           {
+#if (APP_PDOA_HIGH_ACCURACY_MODE == APP_TRUE)
+            cb_framework_uwb_rx_end(EN_UWB_RX_ALL);
+            cb_framework_uwb_rx_start(EN_UWB_RX_ALL, &s_stUwbPacketConfig, &stPdoaRxIrqEnable, EN_TRX_START_NON_DEFERRED);
+#else
             cb_framework_uwb_rx_restart(EN_UWB_RX_ALL, &s_stUwbPacketConfig, &stPdoaRxIrqEnable, EN_TRX_START_NON_DEFERRED);
+#endif
           }
           else 
           {
@@ -1004,14 +1018,13 @@ void app_rngaoa_responder(void)
 uint8_t app_rngaoa_responder_validate_sync_payload(void)
 {
   uint8_t  result = APP_TRUE;
-  uint16_t rxPayloadSize = 0;
   uint8_t  syncRxPayload[DEF_SYNC_RX_PAYLOAD_SIZE] = {0};
   
   cb_uwbsystem_rxstatus_un rxStatus = cb_framework_uwb_get_rx_status();
           
   if (rxStatus.rx0_ok   == CB_TRUE)
   {
-    cb_framework_uwb_get_rx_payload(&syncRxPayload[0], &rxPayloadSize, &s_stUwbPacketConfig);
+    cb_framework_uwb_get_rx_payload(&syncRxPayload[0], DEF_SYNC_RX_PAYLOAD_SIZE);
     for (uint16_t i = 0; i < DEF_SYNC_RX_PAYLOAD_SIZE; i++)
     {
       if (syncRxPayload[i] != s_syncExpectedRxPayload[i])
@@ -1051,11 +1064,8 @@ void app_rngaoa_responder_reset(void)
   cb_framework_uwb_tx_end();            // ensure propoer TX end upon abnormal condition
   cb_framework_uwb_rx_end(EN_UWB_RX_0); // ensure propoer RX end upon abnormal condition
   cb_framework_uwb_rxconfig_cfo_gain(EN_UWB_CFO_GAIN_RESET, NULL); // ensure CFO and gain settings are reset upon abnormal condition
-
+  s_countOfPdoaScheduledRx = 0;
 }
-
-
-
 
 void app_rngaoa_suspend(void)
 {

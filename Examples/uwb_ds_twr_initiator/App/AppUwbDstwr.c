@@ -385,10 +385,14 @@ void app_dstwr_initiator(void)
         if (s_stIrqStatus.Rx0Done == APP_TRUE)
         {        
           s_stIrqStatus.Rx0Done = APP_FALSE;
-          uint16_t rxPayloadSize = 0;
-          cb_framework_uwb_get_rx_payload                          ((uint8_t*)(&s_stResponderDataContainer), &rxPayloadSize, &s_stUwbPacketConfig);
-          cb_framework_uwb_calculate_initiator_tround_treply        (&s_stInitiatorDataContainer, s_stTxTsuTimestamp0, s_stTxTsuTimestamp1, s_stRxTsuTimestamp0);
-          s_measuredDistance = cb_framework_uwb_calculate_distance  (s_stInitiatorDataContainer, s_stResponderDataContainer);
+          cb_uwbsystem_rxstatus_un rxStatus = cb_framework_uwb_get_rx_status();    
+          if (rxStatus.rx0_ok == CB_TRUE)
+          {  
+            uint16_t rxPayloadSize = cb_framework_uwb_get_rx_packet_size(&s_stUwbPacketConfig);
+            cb_framework_uwb_get_rx_payload                           ((uint8_t*)(&s_stResponderDataContainer), rxPayloadSize);
+            cb_framework_uwb_calculate_initiator_tround_treply        (&s_stInitiatorDataContainer, s_stTxTsuTimestamp0, s_stTxTsuTimestamp1, s_stRxTsuTimestamp0);
+            s_measuredDistance = cb_framework_uwb_calculate_distance  (s_stInitiatorDataContainer, s_stResponderDataContainer);
+          }
           cb_framework_uwb_rx_end(EN_UWB_RX_0);
           s_enAppDstwrState = EN_APP_STATE_TERMINATE;
         }
@@ -471,14 +475,13 @@ void app_dstwr_timer_init(uint16_t timeoutMs)
 uint8_t app_dstwr_validate_sync_ack_payload(void)
 {
   uint8_t  result = APP_TRUE;
-  uint16_t rxPayloadSize = 0;
   uint8_t  syncAckPayloadReceived[DEF_SYNC_ACK_RX_PAYLOAD_SIZE] = {0};
   
   cb_uwbsystem_rxstatus_un rxStatus = cb_framework_uwb_get_rx_status();
           
   if (rxStatus.rx0_ok   == CB_TRUE)
   {  
-    cb_framework_uwb_get_rx_payload(&syncAckPayloadReceived[0], &rxPayloadSize, &s_stUwbPacketConfig);
+    cb_framework_uwb_get_rx_payload(&syncAckPayloadReceived[0], DEF_SYNC_ACK_RX_PAYLOAD_SIZE);
     for (uint16_t i = 0; i < DEF_SYNC_ACK_RX_PAYLOAD_SIZE; i++)
     {
       if (syncAckPayloadReceived[i] != s_syncAckPayload[i])

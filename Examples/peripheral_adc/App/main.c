@@ -67,6 +67,7 @@ int main(void)
     while(1)
     {
       //ADC_demo_loop
-      app_adc_test_original_value(3);  //Measure the voltage from the AIN pin using gain setting 3
+      app_adc_demo_loop();      
+
     }
 }

@@ -38,6 +38,9 @@
 #define DEF_PDOA_PD02_BIAS              (40.0f) // 2D,3D
 #define DEF_PDOA_PD12_BIAS              (10.0f) // 3D
 
+// PDOA Mode Configuration:
+#define APP_PDOA_HIGH_ACCURACY_MODE   APP_FALSE // PDOA High Accuracy Mode: End then restart for better accuracy
+
 typedef enum {
   // IDLE STATE
   EN_APP_STATE_IDLE = 0,
@@ -101,7 +104,7 @@ static uint8_t s_syncExpectedRxPayload[DEF_SYNC_RX_PAYLOAD_SIZE]   = {0x53,0x59,
 static uint8_t s_syncAckPayload[DEF_SYNC_ACK_TX_PAYLOAD_SIZE]      = {0x41,0x43,0x4B};
 
 static uint8_t                          s_countOfPdoaScheduledRx   = 0;
-static cb_uwbsystem_rx_signalinfo_st  s_stRssiResults            = {0};
+static cb_uwbsystem_rx_signalinfo_st    s_stRssiResults            = {0};
 static cb_uwbsystem_pdoaresult_st       s_stPdoaOutputResult       = {0};
 static float                            s_pd01Bias                 = DEF_PDOA_PD01_BIAS;
 static float                            s_pd02Bias                 = DEF_PDOA_PD02_BIAS;
@@ -273,7 +276,12 @@ void app_pdoa_responder(void)
           s_countOfPdoaScheduledRx++;
           if (s_countOfPdoaScheduledRx < DEF_NUMBER_OF_PDOA_REPEATED_RX)
           {
+#if (APP_PDOA_HIGH_ACCURACY_MODE == APP_TRUE)
+            cb_framework_uwb_rx_end(EN_UWB_RX_ALL);
+            cb_framework_uwb_rx_start(EN_UWB_RX_ALL, &s_stUwbPacketConfig, &stPdoaRxIrqEnable, EN_TRX_START_NON_DEFERRED);
+#else
             cb_framework_uwb_rx_restart(EN_UWB_RX_ALL, &s_stUwbPacketConfig, &stPdoaRxIrqEnable, EN_TRX_START_NON_DEFERRED);
+#endif
           }
           else 
           {
@@ -292,8 +300,13 @@ void app_pdoa_responder(void)
         
         // AOA
         cb_framework_uwb_pdoa_calculate_aoa(s_stPdoaOutputResult.median, s_pd01Bias, s_pd02Bias, s_pd12Bias, &s_aziResult, &s_eleResult);
-        app_uwb_pdoa_print("azimuth: %f degrees\nelevation: %f degrees\n", (double)s_aziResult,(double)s_eleResult);    
-        
+        app_uwb_pdoa_print("azimuth: %f degrees\nelevation: %f degrees\n", (double)s_aziResult,(double)s_eleResult);  
+              
+        //FOV
+        cb_uwbframework_fov_result_en oofov_flag; 
+        oofov_flag = cb_framework_uwb_pdoa_detect_angle_inversion(s_stPdoaOutputResult.median, s_pd01Bias, s_pd02Bias, s_pd12Bias);
+        app_uwb_pdoa_print("FOV Status: %d\n", (int)oofov_flag);  
+      
         s_enAppPdoaResponderState = EN_APP_STATE_TERMINATE;
         break;
       case EN_APP_STATE_TERMINATE:
@@ -369,14 +382,13 @@ void app_pdoa_timer_off(void)
 uint8_t app_pdoa_validate_sync_ack_payload(void)
 {
   uint8_t  result = APP_TRUE;
-  uint16_t rxPayloadSize = 0;
   uint8_t  syncRxPayload[DEF_SYNC_RX_PAYLOAD_SIZE] = {0};
   
   cb_uwbsystem_rxstatus_un unRxStatus = cb_framework_uwb_get_rx_status();
   
   if (unRxStatus.rx0_ok == CB_TRUE)
   {
-    cb_framework_uwb_get_rx_payload(&syncRxPayload[0], &rxPayloadSize, &s_stUwbPacketConfig);
+    cb_framework_uwb_get_rx_payload(&syncRxPayload[0], DEF_SYNC_RX_PAYLOAD_SIZE);
     for (uint16_t i = 0; i < DEF_SYNC_RX_PAYLOAD_SIZE; i++)
     {
       if (syncRxPayload[i] != s_syncExpectedRxPayload[i])
