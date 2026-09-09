@@ -88,7 +88,7 @@ static void app_uwb_print_rx_timestamp(cb_uwbsystem_rxport_en enRxPort);
 // GLOBAL VARIABLE SECTION
 //-------------------------------
 // Case selection - Set DEF_UWB_ABSTIMER_CASE_SEL to one of the case values
-static uint8_t s_selected_case = DEF_UWB_ABSTIMER_CASE_C;
+static uint8_t s_selected_case = DEF_UWB_ABSTIMER_CASE_B;
 
 // State variables for each case
 static app_uwb_abstimer_case_a_state_en s_casea_state = EN_APP_A_STATE_INIT;
@@ -98,7 +98,8 @@ static app_uwb_abstimer_case_c_state_en s_casec_state = EN_APP_C_STATE_INIT;
 // Interrupt flags
 static uint8_t s_tx_done_flag = APP_FALSE;
 static uint8_t s_rx0_sfd_flag = APP_FALSE;
-
+static uint8_t s_rx1_sfd_flag = APP_FALSE;
+static uint8_t s_rx2_sfd_flag = APP_FALSE;
 /**
  * @brief UWB Packet Configuration 
  * 
@@ -270,40 +271,48 @@ static void app_uwb_abstimer_case_b(void)
     // Configuration
     //--------------------------------
     // RX absolute timer configuration
-    cb_uwbframework_trx_scheduledconfig_st rx_abs_timer_config = {
+    cb_uwbframework_trx_scheduledconfig_st rx_abs_timer_config_rx0 = {
         .eventTimestampMask = EN_UWBEVENT_TIMESTAMP_MASK_0,   // Use timestamp mask 0
         .eventIndex         = EN_UWBEVENT_17_RX0_SFD_DET,     // Capture RX SFD event
         .absTimer           = EN_UWB_ABSOLUTE_TIMER_0,        // Use absolute timer 0
         .timeoutValue       = DEF_ABSTIMER_TIMEOUT_MS * 1000, // Convert to microseconds
-        .eventCtrlMask      = EN_UWBCTRL_RX0_START_MASK,      // Start RX0 on timeout
+        .eventCtrlMask      = EN_UWBCTRL_RX_ALL_START_MASK,   // Start RX0|RX1|RX2 on timeout
     };
 
     // RX IRQ configuration
     cb_uwbsystem_rx_irqenable_st rx_irq_config = { CB_FALSE };
     rx_irq_config.rx0SfdDetDone = CB_TRUE;
-
+    rx_irq_config.rx1SfdDetDone = CB_TRUE;
+    rx_irq_config.rx2SfdDetDone = CB_TRUE;
+    
     // Initialize state machine
     s_caseb_state = EN_APP_B_STATE_INIT;
     
     // Clear flags to ensure clean state
     s_rx0_sfd_flag = APP_FALSE;
-
+    s_rx1_sfd_flag = APP_FALSE;
+    s_rx2_sfd_flag = APP_FALSE;
+    
     while(1)
     {
         switch (s_caseb_state)
         {
         case EN_APP_B_STATE_INIT:
             // Enable the absolute timer and start first RX
-            cb_framework_uwb_enable_scheduled_trx(rx_abs_timer_config);
-            cb_framework_uwb_rx_start(EN_UWB_RX_0, &s_uwb_packet_config, &rx_irq_config, EN_TRX_START_NON_DEFERRED);
+            cb_framework_uwb_enable_scheduled_trx(rx_abs_timer_config_rx0);
+        
+            cb_framework_uwb_rx_start(EN_UWB_RX_ALL, &s_uwb_packet_config, &rx_irq_config, EN_TRX_START_NON_DEFERRED);
+  
             s_caseb_state = EN_APP_B_STATE_WAIT;
             break;
 
         case EN_APP_B_STATE_WAIT:
             // Wait for RX completion
-            if (s_rx0_sfd_flag)
+            if (s_rx0_sfd_flag && s_rx1_sfd_flag && s_rx2_sfd_flag)
             {
                 s_rx0_sfd_flag = APP_FALSE;
+                s_rx1_sfd_flag = APP_FALSE;
+                s_rx2_sfd_flag = APP_FALSE;                
                 s_caseb_state = EN_APP_B_STATE_TRIGGERED;
             }
             break;
@@ -311,12 +320,16 @@ static void app_uwb_abstimer_case_b(void)
         case EN_APP_B_STATE_TRIGGERED:
             // RX completed - print timestamp and prepare for next RX
             app_uwb_print_rx_timestamp(EN_UWB_RX_0);
+            app_uwb_print_rx_timestamp(EN_UWB_RX_1);
+            app_uwb_print_rx_timestamp(EN_UWB_RX_2);
         
-            cb_framework_uwb_rx_end(EN_UWB_RX_0);
+            cb_framework_uwb_rx_end(EN_UWB_RX_ALL);
         
             // Reconfigure timer for next trigger
-            cb_framework_uwb_configure_scheduled_trx(rx_abs_timer_config);
-            cb_framework_uwb_rx_start(EN_UWB_RX_0, &s_uwb_packet_config, &rx_irq_config, EN_TRX_START_DEFERRED);
+            cb_framework_uwb_configure_scheduled_trx(rx_abs_timer_config_rx0);
+        
+            cb_framework_uwb_rx_start(EN_UWB_RX_ALL, &s_uwb_packet_config, &rx_irq_config, EN_TRX_START_DEFERRED);
+ 
             s_caseb_state = EN_APP_B_STATE_WAIT;
             break;
 
@@ -349,6 +362,7 @@ static void app_uwb_abstimer_case_c(void)
         .eventIndex         = EN_UWBEVENT_28_TX_DONE,         // Capture TX done event
         .absTimer           = EN_UWB_ABSOLUTE_TIMER_0,        // Use absolute timer 0
         .timeoutValue       = DEF_ABSTIMER_TIMEOUT_MS * 1000, // Convert to microseconds
+        .eventCtrlMask      = EN_UWBCTRL_RX0_START_MASK,      // Start RX0 on timeout
     };
 
     // RX->TX absolute timer configuration (RX SFD triggers TX start)
@@ -467,7 +481,7 @@ static void app_uwb_print_tx_timestamp(void)
 static void app_uwb_print_rx_timestamp(cb_uwbsystem_rxport_en enRxPort)
 {
     cb_uwbsystem_rx_tsutimestamp_st rx_timestamp = { 0 };
-    cb_framework_uwb_get_rx_tsu_timestamp(&rx_timestamp, EN_UWB_RX_0);
+    cb_framework_uwb_get_rx_tsu_timestamp(&rx_timestamp, enRxPort);
     
     app_uwb_abstimer_print(" > rxTsu - %fns\r\n", rx_timestamp.rxTsu);
 }
@@ -495,4 +509,21 @@ void cb_uwbapp_rx0_sfd_detected_irqcb(void)
 {
     s_rx0_sfd_flag = APP_TRUE;
 }
-
+/**
+ * @brief RX1 SFD detected interrupt handler
+ * 
+ * Called when SFD is detected on RX1 port.
+ */
+void cb_uwbapp_rx1_sfd_detected_irqcb(void)
+{
+    s_rx1_sfd_flag = APP_TRUE;
+}
+/**
+ * @brief RX2 SFD detected interrupt handler
+ * 
+ * Called when SFD is detected on RX2 port.
+ */
+void cb_uwbapp_rx2_sfd_detected_irqcb(void)
+{
+    s_rx2_sfd_flag = APP_TRUE;
+}

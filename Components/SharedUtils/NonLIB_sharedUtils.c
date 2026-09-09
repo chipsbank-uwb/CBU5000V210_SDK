@@ -94,7 +94,7 @@ void cb_hal_delay_in_ms(uint32_t milliseconds)
  * @brief Get current tick value
  * @return Current tick value in milliseconds
  */
-uint32_t cb_hal_get_tick(void) 
+uint32_t cb_hal_get_time_ms(void) 
 {
   return sysTickCounter;
 }
@@ -104,7 +104,7 @@ uint32_t cb_hal_get_tick(void)
  * @param timeout_ms Timeout period in milliseconds
  * @return CB_STATUS The status of the operation (CB_PASS or CB_FAIL).
  */
-CB_STATUS cb_hal_is_time_elapsed(uint32_t start_tick, uint32_t timeout_ms) 
+CB_STATUS cb_hal_is_time_elapsed_ms(uint32_t start_tick, uint32_t timeout_ms) 
 {
   if ((sysTickCounter - start_tick) >= timeout_ms)
   {
@@ -113,6 +113,53 @@ CB_STATUS cb_hal_is_time_elapsed(uint32_t start_tick, uint32_t timeout_ms)
   return CB_FAIL;
 }
 
+/**
+ * @brief Returns system time in microseconds.
+ *
+ * Takes a stable SysTick snapshot to avoid inconsistent reads.
+ * Timestamp is 32-bit and wraps every ~1.19 hours.
+ *
+ * @return Current time in microseconds.
+ */
+uint32_t cb_hal_get_time_us(void)
+{
+  uint32_t ms1, val1, ms2, val2;
+  const uint32_t load = SysTick->LOAD + 1U;
+  const uint32_t f_hz = (SysTick->CTRL & SysTick_CTRL_CLKSOURCE_Msk)
+                        ? SystemCoreClock
+                        : (SystemCoreClock / 8U);
+
+  // Take a stable snapshot
+  val1 = SysTick->VAL;  ms1 = sysTickCounter;
+  val2 = SysTick->VAL;  ms2 = sysTickCounter;
+  if (val2 > val1) { ms1 = ms2; val1 = val2; }
+
+  const uint32_t sub_cycles = load - val1;
+
+  // --- compute microseconds using scaled arithmetic (no 64-bit math) ---
+  // (sub_cycles / f_hz) * 1e6  ==  (sub_cycles * 1000) / (f_hz / 1000)
+  const uint32_t f_khz       = f_hz / 1000U;          // 64MHz ? 64000 kHz
+  const uint32_t sub_us      = (sub_cycles * 1000U) / f_khz;
+  const uint32_t us_per_tick = (load       * 1000U) / f_khz;
+
+  return ms1 * us_per_tick + sub_us;
+}
+
+/**
+ * @brief Checks if a timeout has elapsed.
+ *
+ * Uses unsigned subtraction, which safely handles 32-bit wraparound.
+ *
+ * @param start_us   Start timestamp.
+ * @param timeout_us Timeout duration in microseconds.
+ *
+ * @return CB_PASS if elapsed >= timeout_us, else CB_FAIL.
+ */
+CB_STATUS cb_hal_is_time_elapsed_us(uint32_t start_us, uint32_t timeout_us)
+{
+  // Unsigned subtraction automatically handles wraparound
+  return ((cb_hal_get_time_us() - start_us) >= timeout_us) ? CB_PASS : CB_FAIL;
+}
 
 /**
  * @brief Convert a value to its two's complement representation.

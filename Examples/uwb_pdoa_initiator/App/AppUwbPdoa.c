@@ -104,16 +104,16 @@ static uint8_t        s_pdoaTxPayload                                   = 0x01;
 //       |---------3. PDOA (n cycles) ------>| 
 //     Terminate                         Terminate  
 //
-// DEF_DSTWR_SYNC_ACK_TIMEOUT_MS       : 1 + 2
-// DEF_DSTWR_APP_CYCLE_TIME_MS         : Idle
+// DEF_PDOA_SYNC_ACK_TIMEOUT_US       : 1 + 2
+// DEF_PDOA_APP_CYCLE_TIME_US         : Idle
 // DEF_NUMBER_OF_PDOA_REPEATED_TX      : 3 (n cycles)
-// DEF_PDOA_TX_START_WAIT_TIME_MS      : 3 (wait responder enter rx)
+// DEF_PDOA_TX_START_WAIT_TIME_US      : 3 (wait responder enter rx)
 //
 //-------------------------------------------------------
-#define DEF_PDOA_SYNC_ACK_TIMEOUT_MS        2 
-#define DEF_PDOA_APP_CYCLE_TIME_MS          500
+#define DEF_PDOA_SYNC_ACK_TIMEOUT_US        MS_TO_US(2) 
+#define DEF_PDOA_APP_CYCLE_TIME_US          MS_TO_US(500)
 #define DEF_NUMBER_OF_PDOA_REPEATED_TX      5
-#define DEF_PDOA_TX_START_WAIT_TIME_MS      4
+#define DEF_PDOA_TX_START_WAIT_TIME_US      MS_TO_US(4)
 
 //-------------------------------
 // FUNCTION PROTOTYPE SECTION
@@ -187,7 +187,7 @@ void app_pdoa_initiator(void)
       //-------------------------------------      
       case EN_APP_STATE_IDLE:
         // Wait for next cycle
-        if(cb_hal_is_time_elapsed(iterationTime, DEF_PDOA_APP_CYCLE_TIME_MS) == CB_PASS)
+        if(cb_hal_is_time_elapsed_us(iterationTime, DEF_PDOA_APP_CYCLE_TIME_US) == CB_PASS)
         {
           s_enAppPdoaInitiatorState = EN_APP_STATE_SYNC_TRANSMIT;
         }
@@ -215,10 +215,10 @@ void app_pdoa_initiator(void)
       case EN_APP_STATE_SYNC_RECEIVE:  
           cb_framework_uwb_rx_start(EN_UWB_RX_0, &s_stUwbPacketConfig, &s_stSyncRxIrqEnable, EN_TRX_START_NON_DEFERRED);
           s_enAppPdoaInitiatorState = EN_APP_STATE_SYNC_WAIT_RX_DONE;
-          startTime = cb_hal_get_tick();
+          startTime = cb_hal_get_time_us();
         break;
       case EN_APP_STATE_SYNC_WAIT_RX_DONE:
-        if (cb_hal_is_time_elapsed(startTime, DEF_PDOA_SYNC_ACK_TIMEOUT_MS) == CB_PASS)
+        if (cb_hal_is_time_elapsed_us(startTime, DEF_PDOA_SYNC_ACK_TIMEOUT_US) == CB_PASS)
         {
           // if SYNC-ACK not received from Responder within 10ms, send SYNC again.
           cb_framework_uwb_rx_end(EN_UWB_RX_0);
@@ -232,7 +232,7 @@ void app_pdoa_initiator(void)
           if (ackValidateResult == APP_TRUE)
           {
             s_enAppPdoaInitiatorState = EN_APP_STATE_WAIT_RESPONDER_READY;
-            startTime = cb_hal_get_tick();
+            startTime = cb_hal_get_time_us();
           }
           else
           {
@@ -246,7 +246,7 @@ void app_pdoa_initiator(void)
       // PDOA-TX
       //-------------------------------------
       case EN_APP_STATE_WAIT_RESPONDER_READY:
-        if(cb_hal_is_time_elapsed(startTime, DEF_PDOA_TX_START_WAIT_TIME_MS) == CB_PASS)
+        if(cb_hal_is_time_elapsed_us(startTime, DEF_PDOA_TX_START_WAIT_TIME_US) == CB_PASS)
         {
           s_enAppPdoaInitiatorState = EN_APP_STATE_PDOA_TRANSMIT;
         }
@@ -261,7 +261,7 @@ void app_pdoa_initiator(void)
         {
           s_stIrqStatus.TxDone = APP_FALSE;  
           s_countOfPdoaScheduledTx++;          
-          if (s_countOfPdoaScheduledTx <= DEF_NUMBER_OF_PDOA_REPEATED_TX)
+          if (s_countOfPdoaScheduledTx < DEF_NUMBER_OF_PDOA_REPEATED_TX)
           {
             cb_framework_uwb_configure_scheduled_trx(s_stPdoaRepeatedTxConfig);
             cb_framework_uwb_tx_restart(&s_stPdoaTxIrqEnable, EN_TRX_START_DEFERRED);
@@ -271,7 +271,7 @@ void app_pdoa_initiator(void)
             cb_framework_uwb_disable_scheduled_trx(s_stPdoaRepeatedTxConfig);
             cb_framework_uwb_tx_end();
             s_countOfPdoaScheduledTx  = 0;  
-            startTime               = cb_hal_get_tick();
+            startTime               = cb_hal_get_time_us();
             s_enAppPdoaInitiatorState   = EN_APP_STATE_TERMINATE;  
           }
         }
@@ -281,7 +281,7 @@ void app_pdoa_initiator(void)
       //-------------------------------------       
       case EN_APP_STATE_TERMINATE:     
         app_uwb_pdoa_print("[PDOA TX Done]\n");
-        iterationTime = cb_hal_get_tick();
+        iterationTime = cb_hal_get_time_us();
         s_enAppPdoaInitiatorState = EN_APP_STATE_IDLE;
         break;
       default:
@@ -295,9 +295,9 @@ uint8_t app_pdoa_validate_sync_ack_payload(void)
   uint8_t  result = APP_TRUE;
   uint8_t  syncAckPayloadReceived[DEF_SYNC_ACK_RX_PAYLOAD_SIZE];
   
-  cb_uwbsystem_rxstatus_un unRxStatus = cb_framework_uwb_get_rx_status();
+  cb_uwbsystem_rxstatus_un rxStatus = cb_framework_uwb_get_rx_status();
   
-  if (unRxStatus.rx0_ok == CB_TRUE)
+  if ((rxStatus.rx0_ok == CB_TRUE) && (rxStatus.crc_fail == CB_FALSE))
   { 
     cb_framework_uwb_get_rx_payload(&syncAckPayloadReceived[0], DEF_SYNC_ACK_RX_PAYLOAD_SIZE);
     for (uint16_t i = 0; i < DEF_SYNC_ACK_RX_PAYLOAD_SIZE; i++)

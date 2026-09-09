@@ -17,7 +17,6 @@
 #include "CB_scr.h"
 #include "NonLIB_sharedUtils.h"
 #include "CB_uwbframework.h"
-#include "CB_aoa.h"
 
 //-------------------------------
 // CONFIGURATION SECTION
@@ -42,9 +41,9 @@
 #define DEF_SYNC_ACK_TX_PAYLOAD_SIZE   3
 
 // PDOA Defines
-#define DEF_PDOA_PD01_BIAS              (170.0f)// 3D
-#define DEF_PDOA_PD02_BIAS              (40.0f) // 2D,3D
-#define DEF_PDOA_PD12_BIAS              (10.0f) // 3D
+#define DEF_PDOA_PD01_BIAS              (-86.0f)// 3D
+#define DEF_PDOA_PD02_BIAS              (-155.0f) // 2D,3D
+#define DEF_PDOA_PD12_BIAS              (-70.0f) // 3D
 
 // PDOA Mode Configuration:
 #define APP_PDOA_HIGH_ACCURACY_MODE   APP_FALSE // PDOA High Accuracy Mode: RX end then start again for better accuracy
@@ -177,12 +176,12 @@ app_rngaoa_responderdatacontainer_st s_stResponderDataContainer =
 //     Terminate                         Terminate  
 //
 // DEF_RNGAOA_OVERALL_PROCESS_TIMEOUT_MS : 3 + 4 + 5 + 6
-// DEF_RNGAOA_SYNC_RX_RESTART_TIMEOUT_MS : 1
-// DEF_RNGAOA_APP_CYCLE_TIME_MS          : Idle 
-// DEF_DSTWR_RESPONSE_WAIT_TIME_MS       : 4 
-// DEF_DSTWR_FINAL_WAIT_TIME_MS          : 5 
+// DEF_RNGAOA_SYNC_RX_RESTART_TIMEOUT_US : 1
+// DEF_RNGAOA_APP_CYCLE_TIME_US          : Idle 
+// DEF_DSTWR_RESPONSE_WAIT_TIME_US       : 4 
+// DEF_DSTWR_FINAL_WAIT_TIME_US          : 5 
 // DEF_NUMBER_OF_PDOA_REPEATED_RX        : 6 (n cycles)
-// DEF_RNGAOA_RESULT_WAIT_TIME_MS        : 7
+// DEF_RNGAOA_RESULT_WAIT_TIME_US        : 7
 //
 // Initiator: Tround_1 = b - a
 //            Treply_2 = c - d     
@@ -194,12 +193,12 @@ app_rngaoa_responderdatacontainer_st s_stResponderDataContainer =
 //  c: -        f: rxTsuTimestamp1
 //-------------------------------------------------------
 #define DEF_RNGAOA_OVERALL_PROCESS_TIMEOUT_MS    10
-#define DEF_RNGAOA_SYNC_RX_RESTART_TIMEOUT_MS    4
-#define DEF_RNGAOA_APP_CYCLE_TIME_MS             498
-#define DEF_DSTWR_RESPONSE_WAIT_TIME_MS          1
-#define DEF_DSTWR_FINAL_WAIT_TIME_MS             0
+#define DEF_RNGAOA_SYNC_RX_RESTART_TIMEOUT_US    MS_TO_US(4)
+#define DEF_RNGAOA_APP_CYCLE_TIME_US             MS_TO_US(498)
+#define DEF_DSTWR_RESPONSE_WAIT_TIME_US          MS_TO_US(1)
+#define DEF_DSTWR_FINAL_WAIT_TIME_US             MS_TO_US(0)
 #define DEF_NUMBER_OF_PDOA_REPEATED_RX           DEF_PDOA_NUMPKT_SUPERFRAME_MAX
-#define DEF_RNGAOA_RESULT_WAIT_TIME_MS           1
+#define DEF_RNGAOA_RESULT_WAIT_TIME_US           MS_TO_US(1)
   
 //-------------------------------
 // FUNCTION PROTOTYPE SECTION
@@ -283,7 +282,7 @@ void app_rngaoa_responder(void)
       // IDLE
       //-------------------------------------         
         // Wait for next cycle
-        if (cb_hal_is_time_elapsed(iterationTime, DEF_RNGAOA_APP_CYCLE_TIME_MS))
+        if (cb_hal_is_time_elapsed_us(iterationTime, DEF_RNGAOA_APP_CYCLE_TIME_US) == CB_PASS)
         {
           s_enAppRngaoaState = EN_APP_STATE_SYNC_RECEIVE;
         }
@@ -294,10 +293,10 @@ void app_rngaoa_responder(void)
       case EN_APP_STATE_SYNC_RECEIVE:
         cb_framework_uwb_rx_start(EN_UWB_RX_0, &s_stUwbPacketConfig, &stRxIrqEnable, EN_TRX_START_NON_DEFERRED);
         s_enAppRngaoaState = EN_APP_STATE_SYNC_WAIT_RX_DONE;
-        startTime = cb_hal_get_tick();
+        startTime = cb_hal_get_time_us();
         break;
       case EN_APP_STATE_SYNC_WAIT_RX_DONE:
-        if (cb_hal_is_time_elapsed(startTime, DEF_RNGAOA_SYNC_RX_RESTART_TIMEOUT_MS))
+        if (cb_hal_is_time_elapsed_us(startTime, DEF_RNGAOA_SYNC_RX_RESTART_TIMEOUT_US) == CB_PASS)
         {
           s_enAppRngaoaState = EN_APP_STATE_SYNC_RECEIVE;
           cb_framework_uwb_rx_end(EN_UWB_RX_0);
@@ -356,7 +355,7 @@ void app_rngaoa_responder(void)
           cb_framework_uwb_get_rx_tsu_timestamp(&s_stRxTsuTimestamp0, EN_UWB_RX_0);
           cb_framework_uwb_rx_end(EN_UWB_RX_0);
           s_enAppRngaoaState = EN_APP_STATE_DSTWR_TRANSMIT_RESPONSE;
-          startTime = cb_hal_get_tick();
+          startTime = cb_hal_get_time_us();
         }
         break;
       //-------------------------------------
@@ -370,7 +369,7 @@ void app_rngaoa_responder(void)
           cb_framework_uwb_tx_start(&s_stUwbPacketConfig, &stDstwrTxPayloadPack, &stTxIrqEnable, EN_TRX_START_DEFERRED);
           s_enAppRngaoaState = EN_APP_STATE_DSTWR_TRANSMIT_RESPONSE_WAIT_TX_DONE;
         #else
-        if (cb_hal_is_time_elapsed(startTime, DEF_DSTWR_RESPONSE_WAIT_TIME_MS))
+        if (cb_hal_is_time_elapsed_us(startTime, DEF_DSTWR_RESPONSE_WAIT_TIME_US) == CB_PASS)
         {
           cb_framework_uwb_tx_start(&s_stUwbPacketConfig, &stDstwrTxPayloadPack, &stTxIrqEnable, EN_TRX_START_NON_DEFERRED);
           s_enAppRngaoaState = EN_APP_STATE_DSTWR_TRANSMIT_RESPONSE_WAIT_TX_DONE;
@@ -389,7 +388,7 @@ void app_rngaoa_responder(void)
           cb_framework_uwb_get_tx_tsu_timestamp(&s_stTxTsuTimestamp0);
           cb_framework_uwb_tx_end();
           s_enAppRngaoaState = EN_APP_STATE_DSTWR_RECEIVE_FINAL;
-          startTime = cb_hal_get_tick();
+          startTime = cb_hal_get_time_us();
         }
         break;
       //-------------------------------------
@@ -401,7 +400,7 @@ void app_rngaoa_responder(void)
           cb_framework_uwb_rx_start(EN_UWB_RX_0, &s_stUwbPacketConfig, &stRxIrqEnable, EN_TRX_START_DEFERRED);
           s_enAppRngaoaState = EN_APP_STATE_DSTWR_RECEIVE_FINAL_WAIT_RX_DONE;
         #else
-        if (cb_hal_is_time_elapsed(startTime, DEF_DSTWR_FINAL_WAIT_TIME_MS))
+        if (cb_hal_is_time_elapsed_us(startTime, DEF_DSTWR_FINAL_WAIT_TIME_US) == CB_PASS)
         {
           cb_framework_uwb_rx_start(EN_UWB_RX_0, &s_stUwbPacketConfig, &stRxIrqEnable, EN_TRX_START_NON_DEFERRED);
           s_enAppRngaoaState = EN_APP_STATE_DSTWR_RECEIVE_FINAL_WAIT_RX_DONE;
@@ -484,7 +483,7 @@ void app_rngaoa_responder(void)
         cb_framework_uwb_pdoa_calculate_aoa(s_stPdoaOutputResult.median, s_pd01Bias, s_pd02Bias, s_pd12Bias, &s_aziResult, &s_eleResult);
         
         s_enAppRngaoaState = EN_APP_STATE_RESULT_TRANSMIT;
-        startTime = cb_hal_get_tick();
+        startTime = cb_hal_get_time_us();
         break;
       }      
       //-------------------------------------
@@ -492,7 +491,7 @@ void app_rngaoa_responder(void)
       //-------------------------------------  
       case EN_APP_STATE_RESULT_TRANSMIT:
       {
-        if (cb_hal_is_time_elapsed(startTime, DEF_RNGAOA_RESULT_WAIT_TIME_MS))
+        if (cb_hal_is_time_elapsed_us(startTime, DEF_RNGAOA_RESULT_WAIT_TIME_US) == CB_PASS)
         {
           cb_framework_uwb_calculate_responder_tround_treply(&s_stResponderDataContainer.rangingDataContainer, s_stTxTsuTimestamp0, s_stRxTsuTimestamp0, rxTsuTimestamp1);
           s_stResponderDataContainer.pdoaDataContainer.rx0_rx1      = s_stPdoaOutputResult.median.rx0_rx1;
@@ -531,7 +530,7 @@ void app_rngaoa_responder(void)
         #endif
         app_rngaoa_timer_off();
         app_rngaoa_reset();
-        iterationTime = cb_hal_get_tick();
+        iterationTime = cb_hal_get_time_us();
         s_enAppRngaoaState = EN_APP_STATE_IDLE;
         break;
       }
@@ -550,9 +549,9 @@ void app_rngaoa_reset(void)
   s_stIrqStatus.Rx0Done        = APP_FALSE;
   s_stIrqStatus.Rx1SfdDetected = APP_FALSE;
   s_stIrqStatus.Rx2SfdDetected = APP_FALSE;
-  s_applicationTimeout       = APP_FALSE;
+  s_applicationTimeout         = APP_FALSE;
   s_enAppRngAoaFailureState          = EN_APP_STATE_IDLE;
-  memset(&s_stResponderDataContainer, 0, sizeof(cb_uwbframework_rangingdatacontainer_st));
+  memset(&s_stResponderDataContainer, 0, sizeof(s_stResponderDataContainer));
   s_stResponderDataContainer.rangingDataContainer.dstwrRangingBias = DEF_RESPONDER_RANGING_BIAS;
   s_aziResult = 0.0f;
   s_eleResult = 0.0f;
@@ -609,7 +608,7 @@ uint8_t app_rngaoa_validate_sync_payload(void)
   
   cb_uwbsystem_rxstatus_un rxStatus = cb_framework_uwb_get_rx_status();
           
-  if (rxStatus.rx0_ok   == CB_TRUE)
+  if ((rxStatus.rx0_ok == CB_TRUE) && (rxStatus.crc_fail == CB_FALSE))  
   {
     cb_framework_uwb_get_rx_payload(&syncRxPayload[0], DEF_SYNC_RX_PAYLOAD_SIZE);
     for (uint16_t i = 0; i < DEF_SYNC_RX_PAYLOAD_SIZE; i++)

@@ -958,3 +958,40 @@ CB_STATUS cb_qspi_send_read_mode_command(enBurstReadAction BurstReadAction, stQS
 
     return CB_PASS;
 }
+
+/**
+ * @brief  Enable AES encryption/decryption for QSPI transactions.
+ * @param  hqspi            Pointer to QSPI handle
+ * @param  aes_en_reg_sel   AES enable register source selection
+ *         - EN_AES_SELECT_AES_EN_REG: Use register to control AES
+ * @param  aes_en           AES enable
+ *         - EN_AES_ENABLE: Enable AES
+ * @return CB_STATUS        Return status (CB_PASS/CB_FAIL)
+ * @note   Only needs to be called once! The hardware will automatically
+ *         encrypt/decrypt data for all subsequent read/write operations.
+ */
+CB_STATUS cb_qspi_enable_aes(stQSPI_HandleTypeDef *hqspi, enAesEnRegSel aes_en_reg_sel, enAesEn aes_en)
+{
+    uint32_t tempbuf = 0x00000000UL;
+    if (hqspi == NULL) 
+    {
+        return CB_FAIL;
+    }
+
+    /* Configure AES Enable */
+    if (aes_en == EN_AES_ENABLE)
+    {   
+        tempbuf |= QSPI_AES_ENABLE;  // bit 4
+    }
+    
+    /* Configure AES Select */
+    if (aes_en_reg_sel == EN_AES_SELECT_AES_EN_REG)
+    {   
+        tempbuf |= QSPI_AESSELECT_AES_EN_REG;  // bit 5
+    }
+    
+    /* Write to QSPI_SETTINGS (preserve other settings) */
+    hqspi->QSPI_SETTINGS |= tempbuf;
+    
+    return CB_PASS;
+}

@@ -12,10 +12,8 @@
 //-------------------------------
 #include <stdint.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-#include <stdarg.h>
 #include "CB_iomux.h"
 #include "CB_scr.h"
 #include "CB_system.h"
@@ -35,7 +33,7 @@
 #include "FreeRTOS.h"
 #endif
 #ifndef APP_DFU_LOG_ENABLE
-#define APP_DFU_LOG_ENABLE APP_TRUE
+#define APP_DFU_LOG_ENABLE APP_FALSE
 #endif
 
 #if (APP_DFU_LOG_ENABLE == APP_TRUE)
@@ -104,16 +102,16 @@ static void cmd_parser_uart_configer(uint8_t tx_pin, uint8_t rx_pin)
 {
   
     cb_scr_uwb_module_on();
-    cb_scr_uart0_module_off();
-    cb_scr_uart0_module_on();
+    cb_scr_uart1_module_off();
+    cb_scr_uart1_module_on();
 
  
-    cb_iomux_config(rx_pin,&(stIomuxGpioMode){EN_IOMUX_GPIO_MODE_SOC_PERIPHERALS,(uint8_t)EN_IOMUX_GPIO_AF_UART0_RXD});
-    cb_iomux_config(tx_pin,&(stIomuxGpioMode){EN_IOMUX_GPIO_MODE_SOC_PERIPHERALS,(uint8_t)EN_IOMUX_GPIO_AF_UART0_TXD});
+    cb_iomux_config(rx_pin,&(stIomuxGpioMode){EN_IOMUX_GPIO_MODE_SOC_PERIPHERALS,(uint8_t)EN_IOMUX_GPIO_AF_UART1_RXD});
+    cb_iomux_config(tx_pin,&(stIomuxGpioMode){EN_IOMUX_GPIO_MODE_SOC_PERIPHERALS,(uint8_t)EN_IOMUX_GPIO_AF_UART1_TXD});
 
-     NVIC_EnableIRQ(UART0_IRQn); // Enable UART0 interrupt   
+    NVIC_EnableIRQ(UART1_IRQn); // Enable UART1 interrupt   
 
-    uart_config.uartChannel        = EN_UART_0;
+    uart_config.uartChannel        = EN_UART_1;
     uart_config.uartMode           = EN_UART_MODE_SDMA;
     uart_config.uartBaudrate       = EN_UART_BAUDRATE_921600;
     uart_config.uartRxMaxBytes   = 200;
@@ -162,12 +160,12 @@ static void cmd_parser_uart_send_port(uint8_t *prtData, uint16_t len)
 /**
  * @brief Deinitializes the UART driver.
  *
- * This function turns off the UART0 module, effectively deinitializing
+ * This function turns off the UART1 module, effectively deinitializing
  * the UART driver and freeing any associated resources.
  */
 void cmd_parser_uart_deinit(void)
 {
-   cb_scr_uart0_module_off();
+   cb_scr_uart1_module_off();
 }
 
 /**
@@ -187,11 +185,11 @@ uint8_t cmd_parser_uart_pooling_cmd(void)
 
     while (cmd_ready_flag != APP_TRUE)
     {
-        received_len = cb_uart_check_num_received_bytes(EN_UART_0);
+        received_len = cb_uart_check_num_received_bytes(EN_UART_1);
        
         if (received_len >= expected_len )
         {
-            cb_uart_get_rx_buffer(EN_UART_0,&cmd_parser_uart_rxbuf[0],expected_len); //updating the Buffer
+            cb_uart_get_rx_buffer(EN_UART_1,&cmd_parser_uart_rxbuf[0],expected_len); //updating the Buffer
             switch (cmd_parser_uart_state)
             {
                 case EN_UartRxWAITING:
@@ -204,7 +202,7 @@ uint8_t cmd_parser_uart_pooling_cmd(void)
                     else
                     {
                         //Marker Mismtached
-                        cb_uart_rx_restart(EN_UART_0);
+                        cb_uart_rx_restart(EN_UART_1);
                     }
                 break;
                 case EN_UartRxMARKER_DONE:
@@ -221,11 +219,11 @@ uint8_t cmd_parser_uart_pooling_cmd(void)
                     }
 
                     //Marker Mismtached
-                    cb_uart_rx_restart(EN_UART_0);
+                    cb_uart_rx_restart(EN_UART_1);
                 break;
 
                 case EN_UartRxHEADER_DONE:
-                    cb_uart_rx_stop(EN_UART_0); //Terminate the UART Rx.
+                    cb_uart_rx_stop(EN_UART_1); //Terminate the UART Rx.
                     checksum_pos = DEF_DL_POS+DEF_DL_SIZE;
                     checksum_pos += cmd_parser_uart_rxbuf[DEF_DL_POS];
                     uint8_t checksun = 0;
@@ -240,12 +238,12 @@ uint8_t cmd_parser_uart_pooling_cmd(void)
                     else{
                         expected_len = DEF_RXMARKER_SIZE;
                         cmd_parser_uart_state = EN_UartRxWAITING;
-                        cb_uart_rx_restart(EN_UART_0);
+                        cb_uart_rx_restart(EN_UART_1);
                     }
                 break;
                 case EN_UartRxCHECKSUM_DONE:
                 default: //unexpected behaviour
-                   cb_uart_rx_restart(EN_UART_0);
+                   cb_uart_rx_restart(EN_UART_1);
                 break;
             }
         }
@@ -287,7 +285,6 @@ void cmd_parser_uart_process_buffer(uint8_t *ptr_buffer, uint16_t len, halder_po
         }
         else
         { 
-        
            LOG("right command\r\n");
         }
         uint8_t cb_done = APP_FALSE;
@@ -329,7 +326,7 @@ void cmd_parser_uart_responder(uint16_t command, uint8_t *buf, uint8_t len)
 
 uint16_t cmd_parser_uart_received_length(void)
 {
-    uint16_t received_length = cb_uart_check_num_received_bytes(EN_UART_0); 
+    uint16_t received_length = cb_uart_check_num_received_bytes(EN_UART_1); 
     return received_length;
 }
 uint8_t* cmd_parser_uart_received_buffer(void)
@@ -339,7 +336,7 @@ uint8_t* cmd_parser_uart_received_buffer(void)
 
 void cmd_parser_uart_rx_restart(void)
 {
-    cb_uart_rx_restart(EN_UART_0);
+    cb_uart_rx_restart(EN_UART_1);
 }
 /**
  * @brief Initializes the UART driver.
@@ -352,24 +349,4 @@ void cmd_parser_uart_rx_restart(void)
 void cmd_parser_uart_init(void)
 {
     cmd_parser_uart_configer(EVK_UART_TX_PIN, EVK_UART_RX_PIN);
-}
-
-
-void app_uart_printf(const char *format, ...)
-{
-    va_list args;
-    va_start(args, format);
-    
-    char transmitDataBuffer[256]; // Choose an appropriate buffer size
-    vsnprintf((char *)transmitDataBuffer, sizeof(transmitDataBuffer), format, args);
-
-    // make sure TX is available
-    while ((cb_uart_is_tx_busy(uart_config)));
-
-    // Transmit each character from the buffer
-    size_t len = strlen(transmitDataBuffer);
-
-    while ((cb_uart_is_tx_busy(uart_config) == CB_TRUE));
-    cb_uart_transmit(uart_config, (uint8_t *) transmitDataBuffer, (uint16_t) len);
-    va_end(args);
 }

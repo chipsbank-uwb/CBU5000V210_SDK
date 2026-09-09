@@ -5,7 +5,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>APP_DFU &mdash; CBU5000V210 1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -28,7 +28,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="APP_ADC" href="APP_ADC.html" />
+    <link rel="next" title="APP-RNGAOA-FTM-DFU" href="APP_RNGAOA_FTM_DFU.html" />
     <link rel="prev" title="CPU Examples" href="CpuExamples.html" /> 
 </head>
 
@@ -60,11 +60,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../UwbExamples/UwbExamples.html">UWB Examples</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="CpuExamples.html">CPU Examples</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">APP_DFU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_RNGAOA_FTM_DFU.html">APP-RNGAOA-FTM-DFU</a></li>
 <li class="toctree-l2"><a class="reference internal" href="APP_ADC.html">APP_ADC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="APP_CRC.html">APP-CRC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="APP_CRYPTO.html">APP-CRYPTO</a></li>
 <li class="toctree-l2"><a class="reference internal" href="APP_DMA.html">APP-DMA</a></li>
 <li class="toctree-l2"><a class="reference internal" href="APP_Efuse.html">APP-Efuse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_Flash.html">APP-Flash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_FlashEncryption.html">APP-FlashEncryption</a></li>
 <li class="toctree-l2"><a class="reference internal" href="APP_Gpio.html">APP-Gpio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="APP_I2C.html">APP-I2C</a></li>
 <li class="toctree-l2"><a class="reference internal" href="APP_PKA.html">APP-PKA</a></li>
@@ -177,7 +180,7 @@
 </dl>
 </li>
 <li><dl>
-<dt><strong>上位机显示如下</strong></dt><dd><a class="reference internal image-reference" href="../_images/DFU.png"><img alt="DFU.png" class="align-center" src="../_images/DFU.png" style="width: 70%;" /></a>
+<dt><strong>上位机显示如下</strong></dt><dd><a class="reference internal image-reference" href="../_images/RNGAOA_DFU_upgrade.png"><img alt="DFU.png" class="align-center" src="../_images/RNGAOA_DFU_upgrade.png" style="width: 70%;" /></a>
 </dd>
 </dl>
 </li>
@@ -354,7 +357,7 @@ Backup bank info + ECC Public Key)</p></td>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>0x9B</p></td>
+<tr class="row-even"><td><p>0x5A</p></td>
 <td></td>
 <td></td>
 <td><p>0</p></td>
@@ -377,7 +380,7 @@ Backup bank info + ECC Public Key)</p></td>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>0x9B</p></td>
+<tr class="row-even"><td><p>0x5A</p></td>
 <td></td>
 <td></td>
 <td><p>1</p></td>
@@ -598,7 +601,7 @@ version</p></td>
 <li><p>点击工厂模式开关，使能产测</p></li>
 <li><p>点击相应的产测功能按钮进行相关功能测试</p></li>
 </ul>
-<a class="reference internal image-reference" href="../_images/升级开关.png"><img alt="软件包安装完成" class="align-center" src="../_images/%E5%8D%87%E7%BA%A7%E5%BC%80%E5%85%B3.png" style="width: 70%;" /></a>
+<a class="reference internal image-reference" href="../_images/RNGAOA_FTM_factory_mode.png"><img alt="软件包安装完成" class="align-center" src="../_images/RNGAOA_FTM_factory_mode.png" style="width: 70%;" /></a>
 </dd>
 </dl>
 </li>
@@ -626,7 +629,7 @@ version</p></td>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>1</p></td>
-<td><p>0x7525</p></td>
+<td><p>0x0000</p></td>
 <td><p>产测开关</p></td>
 </tr>
 <tr class="row-odd"><td><p>2</p></td>
@@ -792,7 +795,7 @@ version</p></td>
 </dl>
 </li>
 <li><dl>
-<dt><strong>Upper Machine Display</strong></dt><dd><a class="reference internal image-reference" href="../_images/DFU.png"><img alt="DFU.png" class="align-center" src="../_images/DFU.png" style="width: 70%;" /></a>
+<dt><strong>Upper Machine Display</strong></dt><dd><a class="reference internal image-reference" href="../_images/RNGAOA_DFU_upgrade.png"><img alt="DFU.png" class="align-center" src="../_images/RNGAOA_DFU_upgrade.png" style="width: 70%;" /></a>
 </dd>
 </dl>
 </li>
@@ -1208,7 +1211,7 @@ version</p></td>
 <li><p>Enable factory mode by clicking the factory mode switch.</p></li>
 <li><p>Click the corresponding test function buttons to perform functional tests.</p></li>
 </ul>
-<a class="reference internal image-reference" href="../_images/升级开关.png"><img alt="软件包安装完成" class="align-center" src="../_images/%E5%8D%87%E7%BA%A7%E5%BC%80%E5%85%B3.png" style="width: 70%;" /></a>
+<a class="reference internal image-reference" href="../_images/RNGAOA_FTM_factory_mode.png"><img alt="软件包安装完成" class="align-center" src="../_images/RNGAOA_FTM_factory_mode.png" style="width: 70%;" /></a>
 </dd>
 </dl>
 </li>
@@ -1343,7 +1346,7 @@ version</p></td>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="CpuExamples.html" class="btn btn-neutral float-left" title="CPU Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="APP_ADC.html" class="btn btn-neutral float-right" title="APP_ADC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="APP_RNGAOA_FTM_DFU.html" class="btn btn-neutral float-right" title="APP-RNGAOA-FTM-DFU" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

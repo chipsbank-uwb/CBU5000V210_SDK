@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>APP-TDOA &mdash; CBU5000V210 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=29a6c3e3"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/design-tabs.js?v=f930bc37"></script>
+        <script src="../_static/tabs.js?v=3030b3cb"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="CPU Examples" href="../CpuExamples/CpuExamples.html" />
+    <link rel="prev" title="UART Commander" href="../UartCommander.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CBU5000V210
+          </a>
+              <div class="version">
+                2.0.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../CBU5000V210SDK/CBU5000V210SDK.html">CBU5000V210 SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ApiReference.html">API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="UwbExamples.html">UWB Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="APP_COMMTRX.html">APP-COMMTRX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_DSTWR.html">APP-DSTWR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_DSTWR_1TO5.html">APP-DSTWR-1TO5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_PDOA.html">APP-PDOA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_RNGAOA.html">APP-RNGAOA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_PeriodicTRX.html">APP-PeriodicTRX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_RXPER.html">APP-RXPER</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_PSR.html">APP-PSR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_ABSTIMER.html">APP-AbsTimer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_CLI.html">APP_CLI</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">APP-TDOA</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../CpuExamples/CpuExamples.html">CPU Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calibration.html">UWB Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Appendix.html">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../VersionHistory.html">Version History</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CBU5000V210</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="UwbExamples.html">UWB Examples</a></li>
+      <li class="breadcrumb-item active">APP-TDOA</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="app-tdoa">
+<h1>APP-TDOA<a class="headerlink" href="#app-tdoa" title="Link to this heading"></a></h1>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-5Lit5paH" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-5Lit5paH" name="5Lit5paH" role="tab" tabindex="0">中文</button><button aria-controls="panel-0-RW5nbGlzaA==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tab" tabindex="-1">English</button></div><div aria-labelledby="tab-0-5Lit5paH" class="sphinx-tabs-panel group-tab" id="panel-0-5Lit5paH" name="5Lit5paH" role="tabpanel" tabindex="0"><p><strong>概述</strong></p>
+<p>本文档提供了验证UWB到达时间差（TDOA）二维定位功能的指南。例程由一个Anchor Initiator、三个Anchor Responder和一个Tag组成。Initiator周期性发送Poll-DTM，Responder在各自时隙发送Resp-DTM，Tag接收四个基站的数据并计算三组距离差，随后向Initiator发送Tag-Report，由Initiator计算并输出Tag的二维坐标。</p>
+<p><strong>要求</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>需要五块CBU5000V210开发板：</dt><dd><ul>
+<li><p>一块作为Anchor Initiator（设备ID 0，时隙0）</p></li>
+<li><p>三块作为Anchor Responder（设备ID/时隙分别为1、2、3）</p></li>
+<li><p>一块作为Tag（设备ID 4）</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>软件：</dt><dd><ul>
+<li><p>Keil MDK，用于编译和烧录三个TDOA工程</p></li>
+<li><p>串行终端工具（例如PuTTY、SSCOM）</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>测试空间：</dt><dd><ul>
+<li><p>四个Anchor应布置在同一二维平面，并尽量保持无遮挡视距（LOS）</p></li>
+<li><p>Tag应放置在四个Anchor围成的有效定位区域内</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>用户界面</strong></p>
+<ul class="simple">
+<li><p>在需要观察日志的开发板上，将GPIO00连接到串口接收线（RX），GPIO01连接到串口发送线（TX）。</p></li>
+<li><p>Anchor Initiator串口参数设置为115200波特率、8个数据位、1个停止位、无奇偶校验。</p></li>
+<li><p>三个Anchor Responder和Tag串口参数设置为921600波特率、8个数据位、1个停止位、无奇偶校验。</p></li>
+<li><p>至少应观察Anchor Initiator串口；调试安装和标定问题时，建议同时观察三个Responder和Tag串口。</p></li>
+</ul>
+<p><strong>构建和运行</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>例程位于ChipsBank Connect SDK的以下目录：</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Firmware\\Examples\\uwb_tdoa_anchor_initiator</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Firmware\\Examples\\uwb_tdoa_anchor_responder</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Firmware\\Examples\\uwb_tdoa_tag</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>分别编译并烧录Initiator、Responder和Tag工程。</p></li>
+<li><dl class="simple">
+<dt>三块Responder使用同一个工程。编译每块Responder固件前，应在 <code class="docutils literal notranslate"><span class="pre">AppUwbTdoaResponder.c</span></code> 的 <code class="docutils literal notranslate"><span class="pre">tdoa_role_apply_default_config()</span></code> 中分别配置设备ID和时隙：</dt><dd><ul>
+<li><p>Responder 1：<code class="docutils literal notranslate"><span class="pre">TDOA_DEFAULT_RESPONDER1_ID</span></code>、<code class="docutils literal notranslate"><span class="pre">APP_TDOA_RESPONDER1_SLOT</span></code></p></li>
+<li><p>Responder 2：<code class="docutils literal notranslate"><span class="pre">TDOA_DEFAULT_RESPONDER2_ID</span></code>、<code class="docutils literal notranslate"><span class="pre">APP_TDOA_RESPONDER2_SLOT</span></code></p></li>
+<li><p>Responder 3：<code class="docutils literal notranslate"><span class="pre">TDOA_DEFAULT_RESPONDER3_ID</span></code>、<code class="docutils literal notranslate"><span class="pre">APP_TDOA_RESPONDER3_SLOT</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>不同Responder的设备ID和时隙不得重复，否则会发生响应碰撞并导致Tag缺失基站数据。</p></li>
+</ul>
+<p><strong>配置说明</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>默认配置使用四个Anchor，坐标单位为米，基站编号与数组下标一致：</dt><dd><ul>
+<li><p>Anchor 0（Initiator）：<code class="docutils literal notranslate"><span class="pre">(0.0,</span> <span class="pre">0.0)</span></code></p></li>
+<li><p>Anchor 1（Responder 1）：<code class="docutils literal notranslate"><span class="pre">(0.0,</span> <span class="pre">1.0)</span></code></p></li>
+<li><p>Anchor 2（Responder 2）：<code class="docutils literal notranslate"><span class="pre">(1.0,</span> <span class="pre">0.0)</span></code></p></li>
+<li><p>Anchor 3（Responder 3）：<code class="docutils literal notranslate"><span class="pre">(1.0,</span> <span class="pre">1.0)</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>若实际基站位置与默认布局不同，必须同步修改 <code class="docutils literal notranslate"><span class="pre">Firmware\\Components\\TdoaCommon\\tdoa_config.c</span></code> 中的 <code class="docutils literal notranslate"><span class="pre">g_tdoa_config.anchor_x[]</span></code>、<code class="docutils literal notranslate"><span class="pre">g_tdoa_config.anchor_y[]</span></code> 配置；若基站数量发生变化，还需同步检查 <code class="docutils literal notranslate"><span class="pre">g_tdoa_config.anchor_count</span></code>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">anchor_x[]</span></code> 和 <code class="docutils literal notranslate"><span class="pre">anchor_y[]</span></code> 的单位为米。数组下标必须与设备ID对应，并确保Anchor Initiator最终使用的坐标配置与现场基站位置完全一致，否则计算出的Tag坐标会产生系统性偏差。</p></li>
+<li><p>修改公共配置后，应重新编译并烧录所有受影响的TDOA工程，避免不同设备使用不一致的配置。</p></li>
+</ul>
+<p><strong>测试</strong></p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><strong>布置和连接开发板</strong></dt><dd><ul class="simple">
+<li><p>按 <code class="docutils literal notranslate"><span class="pre">tdoa_config.c</span></code> 中配置的坐标布置四个Anchor，并记录每块板对应的设备ID。</p></li>
+<li><p>将Tag放置在基站区域内的已知位置，便于对比定位结果。</p></li>
+<li><p>连接USB和串口，确认各开发板均能正常上电并输出日志。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>启动Anchor Initiator</strong></dt><dd><ul class="simple">
+<li><p>烧录并复位Anchor Initiator。</p></li>
+<li><p>串口应显示 <code class="docutils literal notranslate"><span class="pre">TDOA</span> <span class="pre">Initiator</span> <span class="pre">v1.0</span></code>、配置加载信息和 <code class="docutils literal notranslate"><span class="pre">Initiator</span> <span class="pre">ready</span></code>。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>依次启动三个Anchor Responder</strong></dt><dd><ul class="simple">
+<li><p>建议依次复位Responder 1、Responder 2和Responder 3，并等待当前Responder完成启动标定后再启动下一块。</p></li>
+<li><p>每个Responder启动后会与Initiator执行约3秒的DS-TWR采样标定，并锁定传播时间偏差参数。</p></li>
+<li><p>确认串口显示的Responder设备ID和时隙与计划一致，并出现 <code class="docutils literal notranslate"><span class="pre">boot</span> <span class="pre">calib</span> <span class="pre">done</span></code>。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>启动Tag并观察定位结果</strong></dt><dd><ul class="simple">
+<li><p>烧录并复位Tag，确认出现 <code class="docutils literal notranslate"><span class="pre">TDOA</span> <span class="pre">Tag</span> <span class="pre">v1.0</span></code> 和 <code class="docutils literal notranslate"><span class="pre">RX</span> <span class="pre">started</span></code>。</p></li>
+<li><p>Initiator每10ms启动一轮TDOA过程。Tag接收Poll-DTM及三个Resp-DTM，计算DIS01、DIS02、DIS03并发送Tag-Report。</p></li>
+<li><p>Initiator接收Tag-Report后运行位置解算，并输出 <code class="docutils literal notranslate"><span class="pre">POS_CALC</span> <span class="pre">POS:(x,</span> <span class="pre">y)</span></code>。</p></li>
+<li><p>移动Tag到不同已知位置，观察Anchor Initiator串口打印的坐标是否随位置变化且保持稳定。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<p><strong>预期输出</strong></p>
+<ul class="simple">
+<li><p>Anchor Initiator串口输出示例（距离差和坐标值随实际位置变化）：</p></li>
+</ul>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>TDOA Initiator v1.0
+TDOA: config loaded from defaults (id=0 slot=0)
+[INIT] Initiator ready, Timer0=10ms
+[INIT] boot calib done, resume TDOA
+[R:125] DIS01: 12.345 cm,DIS02: -8.210 cm,DIS03: 4.876 cm | POS_CALC POS:(0.420, 0.580) ITER:3
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Tag串口输出示例：</p></li>
+</ul>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[TAG] TDOA Tag v1.0
+TDOA: config loaded from defaults (id=4 slot=0)
+[TAG] init, RX started
+[R:125] DIS01:12.345cm,DIS02:-8.210cm,DIS03:4.876cm RATIO:1.00000000 STAT:ok=125,lost=0
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Responder串口输出示例：</p></li>
+</ul>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[RESP] TDOA Responder v1.0
+TDOA: config loaded from defaults (id=1 slot=1)
+[RESP] init, id=1 slot=1, boot calib started
+[CALIB RESP] locked tp_bias_cm=100.00 sample=128
+[RESP] boot calib done, tp_bias_cm=100.00
+</pre></div>
+</div>
+<p><strong>故障排查</strong></p>
+<ul class="simple">
+<li><p>Anchor Initiator端持续输出 <code class="docutils literal notranslate"><span class="pre">NO</span> <span class="pre">TAG</span> <span class="pre">REPORT!</span></code>：检查Tag是否已启动、UWB参数是否一致，以及Tag是否处于有效接收范围内。</p></li>
+<li><p>Anchor Initiator端输出 <code class="docutils literal notranslate"><span class="pre">LACK_ANCHOR</span></code>、<code class="docutils literal notranslate"><span class="pre">TAG_DBG</span></code>，或Tag端的 <code class="docutils literal notranslate"><span class="pre">lost</span></code> 计数持续增加：检查三个Responder的设备ID/时隙是否唯一，并检查天线遮挡、供电和基站间距。</p></li>
+<li><p>Anchor Responder端反复出现标定超时：先确认软件配置和启动顺序，再检查Initiator是否正常运行、串口日志所示ID是否正确，最后排查天线连接和射频环境。</p></li>
+<li><p>Anchor Initiator端输出的坐标稳定但存在固定偏差：优先核对 <code class="docutils literal notranslate"><span class="pre">tdoa_config.c</span></code> 中的基站坐标、坐标单位、基站编号和现场位置是否一致。</p></li>
+</ul>
+</div><div aria-labelledby="tab-0-RW5nbGlzaA==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tabpanel" tabindex="0"><p><strong>Overview</strong></p>
+<p>This document provides a guide to verify two-dimensional Time Difference of Arrival (TDOA) positioning with UWB. The example consists of one Anchor Initiator, three Anchor Responders, and one Tag. The Initiator periodically transmits Poll-DTM frames, the Responders transmit Resp-DTM frames in their assigned slots, and the Tag receives all four anchor frames and calculates three distance differences. The Tag then sends a Tag-Report to the Initiator, which calculates and prints the two-dimensional Tag position.</p>
+<p><strong>Requirements</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Five CBU5000V210 development boards:</dt><dd><ul>
+<li><p>One Anchor Initiator (device ID 0, slot 0)</p></li>
+<li><p>Three Anchor Responders (device IDs and slots 1, 2, and 3)</p></li>
+<li><p>One Tag (device ID 4)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Software:</dt><dd><ul>
+<li><p>Keil MDK for building and programming the three TDOA projects</p></li>
+<li><p>Serial terminal tool (e.g., PuTTY or SSCOM)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Test area:</dt><dd><ul>
+<li><p>Place the four Anchors on the same two-dimensional plane with a clear line of sight (LOS) whenever possible</p></li>
+<li><p>Place the Tag inside the effective positioning area enclosed by the Anchors</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>User interface</strong></p>
+<ul class="simple">
+<li><p>On each board whose logs need to be monitored, connect GPIO00 to the serial receive line (RX) and GPIO01 to the serial transmit line (TX).</p></li>
+<li><p>Configure the Anchor Initiator serial port for 115200 baud, 8 data bits, 1 stop bit, and no parity.</p></li>
+<li><p>Configure the three Anchor Responder and Tag serial ports for 921600 baud, 8 data bits, 1 stop bit, and no parity.</p></li>
+<li><p>Monitor at least the Anchor Initiator serial output. Monitoring all three Responders and the Tag is recommended when debugging installation or calibration problems.</p></li>
+</ul>
+<p><strong>Building and running</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>The examples are located in the following ChipsBank Connect SDK directories:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Firmware\\Examples\\uwb_tdoa_anchor_initiator</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Firmware\\Examples\\uwb_tdoa_anchor_responder</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Firmware\\Examples\\uwb_tdoa_tag</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Build and program the Initiator, Responder, and Tag projects separately.</p></li>
+<li><dl class="simple">
+<dt>All three Responder boards use the same project. Before building the firmware for each Responder, configure its device ID and slot in <code class="docutils literal notranslate"><span class="pre">tdoa_role_apply_default_config()</span></code> in <code class="docutils literal notranslate"><span class="pre">AppUwbTdoaResponder.c</span></code>:</dt><dd><ul>
+<li><p>Responder 1: <code class="docutils literal notranslate"><span class="pre">TDOA_DEFAULT_RESPONDER1_ID</span></code> and <code class="docutils literal notranslate"><span class="pre">APP_TDOA_RESPONDER1_SLOT</span></code></p></li>
+<li><p>Responder 2: <code class="docutils literal notranslate"><span class="pre">TDOA_DEFAULT_RESPONDER2_ID</span></code> and <code class="docutils literal notranslate"><span class="pre">APP_TDOA_RESPONDER2_SLOT</span></code></p></li>
+<li><p>Responder 3: <code class="docutils literal notranslate"><span class="pre">TDOA_DEFAULT_RESPONDER3_ID</span></code> and <code class="docutils literal notranslate"><span class="pre">APP_TDOA_RESPONDER3_SLOT</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Responder device IDs and slots must be unique. Duplicated values cause response collisions and missing-anchor data at the Tag.</p></li>
+</ul>
+<p><strong>Configuration</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>The default configuration uses four Anchors. Coordinates are in metres and each Anchor number matches its array index:</dt><dd><ul>
+<li><p>Anchor 0 (Initiator): <code class="docutils literal notranslate"><span class="pre">(0.0,</span> <span class="pre">0.0)</span></code></p></li>
+<li><p>Anchor 1 (Responder 1): <code class="docutils literal notranslate"><span class="pre">(0.0,</span> <span class="pre">1.0)</span></code></p></li>
+<li><p>Anchor 2 (Responder 2): <code class="docutils literal notranslate"><span class="pre">(1.0,</span> <span class="pre">0.0)</span></code></p></li>
+<li><p>Anchor 3 (Responder 3): <code class="docutils literal notranslate"><span class="pre">(1.0,</span> <span class="pre">1.0)</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>If the physical Anchor positions differ from the default layout, update <code class="docutils literal notranslate"><span class="pre">g_tdoa_config.anchor_x[]</span></code> and <code class="docutils literal notranslate"><span class="pre">g_tdoa_config.anchor_y[]</span></code> in <code class="docutils literal notranslate"><span class="pre">Firmware\\Components\\TdoaCommon\\tdoa_config.c</span></code>. If the number of Anchors changes, also verify <code class="docutils literal notranslate"><span class="pre">g_tdoa_config.anchor_count</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">anchor_x[]</span></code> and <code class="docutils literal notranslate"><span class="pre">anchor_y[]</span></code> values are expressed in metres. Each array index must match the corresponding device ID, and the final coordinate configuration used by the Anchor Initiator must exactly match the physical Anchor layout. Otherwise, the calculated Tag position will contain a systematic error.</p></li>
+<li><p>After changing the common configuration, rebuild and reprogram every affected TDOA project so that devices do not operate with inconsistent settings.</p></li>
+</ul>
+<p><strong>Testing</strong></p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><strong>Place and Connect the Boards</strong></dt><dd><ul class="simple">
+<li><p>Place the four Anchors according to the coordinates configured in <code class="docutils literal notranslate"><span class="pre">tdoa_config.c</span></code> and record the device ID assigned to each board.</p></li>
+<li><p>Place the Tag at a known point inside the Anchor area so the calculated position can be compared with the physical position.</p></li>
+<li><p>Connect USB and serial cables, then confirm that every board powers on and prints logs.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Start the Anchor Initiator</strong></dt><dd><ul class="simple">
+<li><p>Program and reset the Anchor Initiator.</p></li>
+<li><p>The serial terminal should display <code class="docutils literal notranslate"><span class="pre">TDOA</span> <span class="pre">Initiator</span> <span class="pre">v1.0</span></code>, the loaded configuration, and <code class="docutils literal notranslate"><span class="pre">Initiator</span> <span class="pre">ready</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Start the Three Anchor Responders in Sequence</strong></dt><dd><ul class="simple">
+<li><p>Reset Responder 1, Responder 2, and Responder 3 in sequence. It is recommended to wait until the current Responder completes boot calibration before starting the next one.</p></li>
+<li><p>At startup, each Responder performs an approximately three-second DS-TWR sampling calibration with the Initiator and locks its propagation-time bias parameter.</p></li>
+<li><p>Verify that the device ID and slot printed by each Responder match the intended values and that <code class="docutils literal notranslate"><span class="pre">boot</span> <span class="pre">calib</span> <span class="pre">done</span></code> is displayed.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Start the Tag and Observe Positioning Results</strong></dt><dd><ul class="simple">
+<li><p>Program and reset the Tag. Verify that <code class="docutils literal notranslate"><span class="pre">TDOA</span> <span class="pre">Tag</span> <span class="pre">v1.0</span></code> and <code class="docutils literal notranslate"><span class="pre">RX</span> <span class="pre">started</span></code> are displayed.</p></li>
+<li><p>The Initiator starts a TDOA round every 10 ms. The Tag receives the Poll-DTM and three Resp-DTM frames, calculates DIS01, DIS02, and DIS03, and transmits a Tag-Report.</p></li>
+<li><p>After receiving the Tag-Report, the Initiator runs the position solver and prints <code class="docutils literal notranslate"><span class="pre">POS_CALC</span> <span class="pre">POS:(x,</span> <span class="pre">y)</span></code>.</p></li>
+<li><p>Move the Tag to different known positions and observe the coordinates printed by the Anchor Initiator serial terminal. Verify that they change accordingly and remain stable.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<p><strong>Expected output</strong></p>
+<ul class="simple">
+<li><p>Example Anchor Initiator output (distance differences and coordinates vary with the physical position):</p></li>
+</ul>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>TDOA Initiator v1.0
+TDOA: config loaded from defaults (id=0 slot=0)
+[INIT] Initiator ready, Timer0=10ms
+[INIT] boot calib done, resume TDOA
+[R:125] DIS01: 12.345 cm,DIS02: -8.210 cm,DIS03: 4.876 cm | POS_CALC POS:(0.420, 0.580) ITER:3
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Example Tag output:</p></li>
+</ul>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[TAG] TDOA Tag v1.0
+TDOA: config loaded from defaults (id=4 slot=0)
+[TAG] init, RX started
+[R:125] DIS01:12.345cm,DIS02:-8.210cm,DIS03:4.876cm RATIO:1.00000000 STAT:ok=125,lost=0
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Example Responder output:</p></li>
+</ul>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[RESP] TDOA Responder v1.0
+TDOA: config loaded from defaults (id=1 slot=1)
+[RESP] init, id=1 slot=1, boot calib started
+[CALIB RESP] locked tp_bias_cm=100.00 sample=128
+[RESP] boot calib done, tp_bias_cm=100.00
+</pre></div>
+</div>
+<p><strong>Troubleshooting</strong></p>
+<ul class="simple">
+<li><p>If the Anchor Initiator continuously prints <code class="docutils literal notranslate"><span class="pre">NO</span> <span class="pre">TAG</span> <span class="pre">REPORT!</span></code>, verify that the Tag is running, all devices use matching UWB parameters, and the Tag is within reception range.</p></li>
+<li><p>If the Anchor Initiator prints <code class="docutils literal notranslate"><span class="pre">LACK_ANCHOR</span></code> or <code class="docutils literal notranslate"><span class="pre">TAG_DBG</span></code>, or the Tag-side <code class="docutils literal notranslate"><span class="pre">lost</span></code> counter keeps increasing, verify that all Responder device IDs and slots are unique, then check antenna obstruction, power, and Anchor spacing.</p></li>
+<li><p>If an Anchor Responder repeatedly reports calibration timeouts, first verify the software configuration and startup order, then confirm that the Initiator is running and the printed device ID is correct. Check antenna connections and the RF environment last.</p></li>
+<li><p>If the coordinates printed by the Anchor Initiator are stable but contain a fixed offset, first verify that the Anchor coordinates, units, device mapping, and physical layout match the settings in <code class="docutils literal notranslate"><span class="pre">tdoa_config.c</span></code>.</p></li>
+</ul>
+</div></div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../UartCommander.html" class="btn btn-neutral float-left" title="UART Commander" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../CpuExamples/CpuExamples.html" class="btn btn-neutral float-right" title="CPU Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Chipsbank.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

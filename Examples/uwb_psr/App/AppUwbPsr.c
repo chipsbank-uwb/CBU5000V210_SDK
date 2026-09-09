@@ -107,7 +107,7 @@ void app_psr_start(void)
   {
     case EN_PSR_RX:
 		preambleScanningParams.psrMode = EN_PSR_FULL_MODE;
-	    preambleScanningParams.scanDuration = 200;
+	    preambleScanningParams.scanDuration = 200000; //us
 		app_uwb_psr_init(preambleScanningParams); 
 		app_uwb_psr_deal();
         break;
@@ -130,7 +130,7 @@ void app_psr_start(void)
  * 
  * - `trxMode`: The TRX mode used for the scanning. Can be either `EN_PSR_RX` (Receiver mode) or `EN_PSR_TX` (Transmitter mode).
  * - `psrMode`: The scanning mode, either `EN_PSR_SINGLE_MODE` for a single scan or `EN_PSR_CONTINUOUS_MODE` for continuous scanning.
- * - `scanDuration`: The duration (in ms) for which the scanning should be performed in a single cycle.
+ * - `scanDuration`: The duration (in us) for which the scanning should be performed in a single cycle.
  * - `uwbPacketConfig`: A structure containing UWB packet configuration details, including extended arguments for the receiver configuration.
  * 
  * @note This function should be called before the main application logic to ensure that the scanning configuration is properly set up before any scanning operations are performed.
@@ -197,7 +197,7 @@ cb_uwbsystem_preamblecodeidx_en app_uwb_psr_sequence(void)
 	 for(uint8_t i = PREAMBLE_CODE_IDX_MIN; i <= PREAMBLE_CODE_IDX_MAX; ++i)
 	 {
 		cb_system_set_preamble_index(i);
-		uint32_t  startTime = cb_hal_get_tick();		    
+		uint32_t  startTime = cb_hal_get_time_us();		    
 		cb_framework_uwb_rx_start(EN_UWB_RX_0, &Rxpacketconfig, &stRxIrqEnable, EN_TRX_START_NON_DEFERRED); // RX START		
 		while(1)
 		{
@@ -216,7 +216,7 @@ cb_uwbsystem_preamblecodeidx_en app_uwb_psr_sequence(void)
                         s_IrqStatus.Rx0Done = APP_FALSE;
                    }
                 }	
-				if((cb_hal_is_time_elapsed(startTime,s_PreambleScanningParams.scanDuration) == CB_PASS)) // 200ms
+				if((cb_hal_is_time_elapsed_us(startTime,s_PreambleScanningParams.scanDuration) == CB_PASS)) // 200,000us
 				{
 				   if(s_PreambleScanningParams.psrMode == EN_PSR_SINGLE_MODE)
 				   {
@@ -238,7 +238,7 @@ cb_uwbsystem_preamblecodeidx_en app_uwb_psr_sequence(void)
 			if(((phrStatus.phrSec == APP_TRUE) || (phrStatus.phrDed == APP_TRUE) || (phrStatus.rx0Ok == APP_FALSE)) ||\
                (cb_framework_uwb_is_rx_phr_empty()))
 			{
-               if((cb_hal_is_time_elapsed(startTime,s_PreambleScanningParams.scanDuration) == CB_PASS)) // 200ms
+               if((cb_hal_is_time_elapsed_us(startTime,s_PreambleScanningParams.scanDuration) == CB_PASS)) // 200,000us
                {
                   break;
                }	              

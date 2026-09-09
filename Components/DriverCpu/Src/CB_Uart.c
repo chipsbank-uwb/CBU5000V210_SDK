@@ -27,7 +27,7 @@
 //-------------------------------
 // DEFINE SECTION
 //-------------------------------
-#define MAX_NUM_BYTES_SDMA_BUF    256    //Just used as a send buff security limit
+#define MAX_NUM_BYTES_SDMA_BUF    512    //Just used as a send buff security limit
 //-------------------------------
 // ENUM SECTION
 //-------------------------------

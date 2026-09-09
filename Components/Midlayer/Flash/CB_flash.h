@@ -84,4 +84,8 @@ enFlashStatus cb_flash_read_sector(uint16_t SectorNumber, uint8_t *data, uint16_
 enFlashStatus cb_flash_read_by_addr(uint32_t address, uint8_t *data, uint16_t length);
 enFlashStatus cb_flash_read_status_reg1(uint8_t *status_reg1);
 
+/*encryption function ********************************************************/
+void cb_flash_encryption_enable(void);
+void cb_flash_encrytpion_disable(void);
+
 #endif

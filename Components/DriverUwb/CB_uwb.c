@@ -161,7 +161,7 @@ void cb_uwb_rx0_done_irqhandler(void)
   // Disable RX EVENT IRQ - RX0 done
   // Disable RX CPU IRQ   - RX0 done
   //-----------------------  
-  cb_uwbdriver_disable_event_irq(EN_UWB_IRQ_EVENT_RX0_DONE);
+  (*cb_getfn_uwbdriver_disable_event_irq())(EN_UWB_IRQ_EVENT_RX0_DONE);
   NVIC_DisableIRQ(UWB_RX0_DONE_IRQn);    
   
   cb_uwb_rx0_done_irqcb();
@@ -180,7 +180,7 @@ void cb_uwb_rx0_preamble_detected_irqhandler(void)
   // Disable RX EVENT IRQ - RX0 PD done
   // Disable RX CPU IRQ   - RX0 PD done
   //-----------------------  
-  cb_uwbdriver_disable_event_irq(EN_UWB_IRQ_EVENT_RX0_PD_DONE);
+  (*cb_getfn_uwbdriver_disable_event_irq())(EN_UWB_IRQ_EVENT_RX0_PD_DONE);
   NVIC_DisableIRQ(UWB_RX0_PD_DONE_IRQn);  
 
   cb_uwb_rx0_preamble_detected_irqcb();
@@ -199,7 +199,7 @@ void cb_uwb_rx0_sfd_detected_irqhandler(void)
   // Disable RX EVENT IRQ - RX0 SFD Detection Done
   // Disable RX CPU IRQ   - RX0 SFD Detection Done
   //-----------------------
-  cb_uwbdriver_disable_event_irq(EN_UWB_IRQ_EVENT_RX0_SFD_DET_DONE);
+  (*cb_getfn_uwbdriver_disable_event_irq())(EN_UWB_IRQ_EVENT_RX0_SFD_DET_DONE);
   NVIC_DisableIRQ(UWB_RX0_SFD_DET_DONE_IRQn);    
   
   cb_uwb_rx0_sfd_detected_irqcb();
@@ -218,7 +218,7 @@ void cb_uwb_rx1_done_irqhandler(void)
   // Disable RX EVENT IRQ - RX1 done
   // Disable RX CPU IRQ   - RX1 done
   //-----------------------
-  cb_uwbdriver_disable_event_irq(EN_UWB_IRQ_EVENT_RX1_DONE);
+  (*cb_getfn_uwbdriver_disable_event_irq())(EN_UWB_IRQ_EVENT_RX1_DONE);
   NVIC_DisableIRQ(UWB_RX1_DONE_IRQn);
 
   cb_uwb_rx1_done_irqcb();
@@ -237,7 +237,7 @@ void cb_uwb_rx1_preamble_detected_irqhandler(void)
   // Disable RX EVENT IRQ - RX1 PD done
   // Disable RX CPU IRQ   - RX1 PD done
   //-----------------------
-  cb_uwbdriver_disable_event_irq(EN_UWB_IRQ_EVENT_RX1_PD_DONE);
+  (*cb_getfn_uwbdriver_disable_event_irq())(EN_UWB_IRQ_EVENT_RX1_PD_DONE);
   NVIC_DisableIRQ(UWB_RX1_PD_DONE_IRQn);  
 
   cb_uwb_rx1_preamble_detected_irqcb();
@@ -256,7 +256,7 @@ void cb_uwb_rx1_sfd_detected_irqhandler(void)
   // Disable RX EVENT IRQ - RX1 SFD Detection Done
   // Disable RX CPU IRQ   - RX1 SFD Detection Done
   //-----------------------
-  cb_uwbdriver_disable_event_irq(EN_UWB_IRQ_EVENT_RX1_SFD_DET_DONE);
+  (*cb_getfn_uwbdriver_disable_event_irq())(EN_UWB_IRQ_EVENT_RX1_SFD_DET_DONE);
   NVIC_DisableIRQ(UWB_RX1_SFD_DET_DONE_IRQn);  
 
   cb_uwb_rx1_sfd_detected_irqcb();
@@ -275,7 +275,7 @@ void cb_uwb_rx2_done_irqhandler(void)
   // Disable RX EVENT IRQ - RX2 done
   // Disable RX CPU IRQ   - RX2 done
   //-----------------------
-  cb_uwbdriver_disable_event_irq(EN_UWB_IRQ_EVENT_RX2_DONE);
+  (*cb_getfn_uwbdriver_disable_event_irq())(EN_UWB_IRQ_EVENT_RX2_DONE);
   NVIC_DisableIRQ(UWB_RX2_DONE_IRQn); 
   
   cb_uwb_rx2_done_irqcb();
@@ -294,7 +294,7 @@ void cb_uwb_rx2_preamble_detected_irqhandler(void)
   // Disable RX EVENT IRQ - RX2 PD done
   // Disable RX CPU IRQ   - RX2 PD done
   //-----------------------
-  cb_uwbdriver_disable_event_irq(EN_UWB_IRQ_EVENT_RX2_PD_DONE);
+  (*cb_getfn_uwbdriver_disable_event_irq())(EN_UWB_IRQ_EVENT_RX2_PD_DONE);
   NVIC_DisableIRQ(UWB_RX2_PD_DONE_IRQn);  
 
   cb_uwb_rx2_preamble_detected_irqcb();
@@ -313,7 +313,7 @@ void cb_uwb_rx2_sfd_detected_irqhandler(void)
   // Disable RX EVENT IRQ - RX2 SFD Detection Done
   // Disable RX CPU IRQ   - RX2 SFD Detection Done
   //-----------------------
-  cb_uwbdriver_disable_event_irq(EN_UWB_IRQ_EVENT_RX2_SFD_DET_DONE);
+  (*cb_getfn_uwbdriver_disable_event_irq())(EN_UWB_IRQ_EVENT_RX2_SFD_DET_DONE);
   NVIC_DisableIRQ(UWB_RX2_SFD_DET_DONE_IRQn);    
 
   cb_uwb_rx2_sfd_detected_irqcb();
@@ -332,7 +332,7 @@ void cb_uwb_rx_sts_cir_end_irqhandler(void)
   // Disable RX EVENT IRQ - RX STS CIR End
   // Disable RX CPU IRQ   - RX STS CIR End
   //-----------------------
-  cb_uwbdriver_disable_event_irq(EN_UWB_IRQ_EVENT_RX_STS_CIR_END);
+  (*cb_getfn_uwbdriver_disable_event_irq())(EN_UWB_IRQ_EVENT_RX_STS_CIR_END);
   NVIC_DisableIRQ(UWB_RX_STS_CIR_END_IRQn);  
 
   cb_uwb_rx_sts_cir_end_irqcb();
@@ -351,7 +351,7 @@ void cb_uwb_rx_phr_detected_irqhandler(void)
   // Disable RX EVENT IRQ - RX PHR Detected
   // Disable RX CPU IRQ   - RX PHR Detected
   //----------------------- 
-  cb_uwbdriver_disable_event_irq(EN_UWB_IRQ_EVENT_RX_PHY_PHR);
+  (*cb_getfn_uwbdriver_disable_event_irq())(EN_UWB_IRQ_EVENT_RX_PHY_PHR);
   NVIC_DisableIRQ(UWB_RX_PHR_DETECTED_IRQn);    
  
   cb_uwb_rx_phr_detected_irqcb();
@@ -370,7 +370,7 @@ void cb_uwb_rx_done_irqhandler(void)
   // Disable RX EVENT IRQ - RX Done
   // Disable RX CPU IRQ   - RX Done
   //-----------------------
-  cb_uwbdriver_disable_event_irq(EN_UWB_IRQ_EVENT_RX_DONE);
+  (*cb_getfn_uwbdriver_disable_event_irq())(EN_UWB_IRQ_EVENT_RX_DONE);
   NVIC_DisableIRQ(UWB_RX_DONE_IRQn);    
  
   cb_uwb_rx_done_irqcb();
@@ -389,7 +389,7 @@ void cb_uwb_tx_done_irqhandler(void)
   // Disable TX EVENT IRQ - TX Done
   // Disable TX CPU IRQ   - TX Done 
   //-----------------------
-  cb_uwbdriver_disable_event_irq(EN_UWB_IRQ_EVENT_TX_DONE);
+  (*cb_getfn_uwbdriver_disable_event_irq())(EN_UWB_IRQ_EVENT_TX_DONE);
   NVIC_DisableIRQ(UWB_TX_DONE_IRQn);    
   
   cb_uwb_tx_done_irqcb();
@@ -408,7 +408,7 @@ void cb_uwb_tx_sfd_mark_irqhandler(void)
   // Disable TX EVENT IRQ - TX SRD Mark
   // Disable TX CPU IRQ   - TX SRD Mark 
   //-----------------------
-  cb_uwbdriver_disable_event_irq(EN_UWB_IRQ_EVENT_TX_SFD_MARK);
+  (*cb_getfn_uwbdriver_disable_event_irq())(EN_UWB_IRQ_EVENT_TX_SFD_MARK);
   NVIC_DisableIRQ(UWB_TX_SFD_MARK_IRQn);  
  
   cb_uwb_tx_sfd_mark_irqcb();

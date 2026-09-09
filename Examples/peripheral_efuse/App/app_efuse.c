@@ -78,7 +78,7 @@ static uint8_t efuse_count = 0;
 void app_efuse_example_handler(uint32_t tcnum) 
 {
     app_efuse_print("[AppEfuse] Received request to run tc: %d\n", tcnum);
-
+    
     if (tcnum > s_num_examples-1) 
     {
       app_efuse_print("[AppEfuse] Specified number %d (+1) > supported number of examples %d",tcnum, s_num_examples);
@@ -149,17 +149,20 @@ void app_efuse_lock_aes_setting(void)
 }
 
 /**
- * @brief: Write 128-bit AES Key API example usage.
+ * @brief: Write 128-bit AES Key and seed into eFuse API example usage.
  * @details: Be careful, once ran, this function forever burns the example
- * AES key into the eFuse. You will not be able to clear bits that are already
- * set, so it is recommended to change the aeskey array in the code to the real 
- * desired AES key. This function won't work if they AES key is already locked.
- * @see app_efuse_read_aes_key() for API usage to read back the key.
- * @see app_efuse_lock_aes_key() for API usage to lock the AES key.
+ * AES key and seed value into the eFuse. You will not be able to clear bits that are already
+ * set, so it is recommended to change the aeskey array and seed variable in the code to the real 
+ * desired AES key and seed value. This function won't work if the AES key area is already locked.
+ * @param aeskey: 128-bit AES encryption key buffer, split into 4 uint32_t elements
+ * @param seed: Random seed parameter used when writing key to eFuse
+ * @see app_efuse_read_aes_key() for API usage to read back the AES key from eFuse.
+ * @see app_efuse_lock_aes_key() for API usage to lock the AES key eFuse area after writing.
  */
 void app_efuse_write_aes_key(void) 
 {
     uint32_t aeskey[4] = {0x11110211,0x88888888,0x18120501,0x77777777};
+    uint32_t seed = 0x12345678;
 
     app_efuse_print("[AppEfuse] Burning AES Key: \n\t");
 
@@ -169,7 +172,7 @@ void app_efuse_write_aes_key(void)
     }
     app_efuse_print("\n");
 
-    cb_efuse_qspi_flash_encryption_key_write(aeskey);
+    cb_efuse_qspi_flash_encryption_key_write(aeskey,seed);
 }
 
 /**
@@ -221,7 +224,7 @@ void app_efuse_set_user_config2_bits(void)
 #define NUM_BITS_TO_SET 16u
 
     // Define the positions of the bits to set
-    uint8_t bitpositions[NUM_BITS_TO_SET] = {1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31};
+   uint8_t bitpositions[NUM_BITS_TO_SET] = {1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31};
 
     // Print the bits being set
     app_efuse_print("[AppEfuse] Setting Bits:\n\t");
@@ -313,6 +316,7 @@ void app_peripheral_efuse_demo_init(void)
  */
 void app_peripheral_efuse_demo_loop(void)
 {
+    #define DEF_ASCII2NUM 48
     // Check if the receive operation is complete
     if (uart_efuse.rx_flag_done == 1)  
     {
@@ -321,10 +325,10 @@ void app_peripheral_efuse_demo_loop(void)
       app_efuse_print("Uart Receive data\n");    // Indicate UART data reception
 
       // Validate the received data header
-      if (uart_efuse.rx_buffer[0] == 0xCC && uart_efuse.rx_buffer[1] == 0xCC)
+      if (uart_efuse.rx_buffer[0] == 'C' && uart_efuse.rx_buffer[1] == 'C' && uart_efuse.rx_buffer[2] == 'C' && uart_efuse.rx_buffer[3] == 'C')
       {
           // Call EFuse example handler with the third byte of received data
-          app_efuse_example_handler(uart_efuse.rx_buffer[2]);
+          app_efuse_example_handler(uart_efuse.rx_buffer[4] - DEF_ASCII2NUM);
       }
       else
       {

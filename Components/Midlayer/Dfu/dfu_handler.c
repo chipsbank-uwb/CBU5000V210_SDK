@@ -514,11 +514,6 @@ void dfu_reset_chip(uint16_t command, uint8_t *buf, uint8_t len)
     uint8_t statuscode = 0;
     uint8_t respondLen = sizeof(statuscode);
     dfu_command_respond_port(command,&statuscode,respondLen);
-
-    #ifndef BOOT
-    #include "CB_ble.h" 
-    BLE_DeInit();
-    #endif
     NVIC_SystemReset();
 }
 
@@ -681,6 +676,37 @@ static void boot_jumpAddress(uint32_t address)__attribute__((optnone))
     __IO uint32_t sp = *(__IO uint32_t *)address;
     boot_enterApp(pc,sp);
 }
+
+static uint8_t boot_has_embedded_application(uint32_t address)
+{
+    if(address < 0x1000)
+    {
+        return APP_FALSE;
+    }
+
+    address -= 0x1000;
+
+    __IO uint32_t sp = *(__IO uint32_t *)address;
+    __IO uint32_t pc = *(__IO uint32_t *)(address + 4);
+
+    if((sp < 0x20000000U) || (sp >= 0x20018000U))
+    {
+        return APP_FALSE;
+    }
+
+    if((pc & 0x1U) == 0U)
+    {
+        return APP_FALSE;
+    }
+
+    if((pc < 0x00004001U) || (pc >= 0x00080000U))
+    {
+        return APP_FALSE;
+    }
+
+    return APP_TRUE;
+}
+
 void dfu_jump_application(uint16_t command, uint8_t *buf, uint8_t len)
 {
     LOG("%s\r\n",__func__);
@@ -789,6 +815,11 @@ uint32_t dfu_boot_startup(void)
                 }
             }
         }
+    }
+
+    if((rt != APP_TRUE) && (boot_has_embedded_application(APP_BANK_ADDRESS) == APP_TRUE))
+    {
+        boot_jumpAddress(APP_BANK_ADDRESS);
     }
 
     // if jump app fail, enter boot mode

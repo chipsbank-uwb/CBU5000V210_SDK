@@ -1387,6 +1387,9 @@ typedef struct
 
 #define SCR_CPU_CTRL_MASK_icache_refresh           0x08000000UL  // bit 27
 #define SCR_CPU_CTRL_MASK_icache_bypass            0x04000000UL  // bit 26
+#define SCR_CPU_CTRL_MASK_ibuf_force_to_use        0x02000000UL  // bit 25
+#define SCR_CPU_CTRL_MASK_clk_sel                  0x01800000UL  // bit [24:23]
+#define SCR_CPU_CTRL_POS_clk_sel                   23UL          // bit [24:23]
 #define SCR_CPU_CTRL_MASK_ibuf_reload              0x00010000UL  // bit 16
 #define SCR_CPU_CTRL_MASK_skip_init_ibuf           0x00002000UL  // bit 13
 #define SCR_CPU_CTRL_MASK_pson_wic_in_dsleep       0x00001000UL  // bit 12

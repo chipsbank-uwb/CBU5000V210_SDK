@@ -28,7 +28,7 @@
 //-------------------------------
 // DEFINE SECTION
 //-------------------------------
-#define DEF_SIMPLE_RX_TIMEOUT_MS   600 
+#define DEF_SIMPLE_RX_TIMEOUT_US   MS_TO_US(600) 
 
 //-------------------------------
 // ENUM SECTION
@@ -109,12 +109,12 @@ void app_commrx_qmode(void)
     switch(s_appCommRxState)
     {
       case EN_APP_STATE_RECEIVE:
-          cb_framework_uwb_qmode_rx_start(&Rxpacketconfig, &stRxIrqEnable); // RX START
-          startTime = cb_hal_get_tick();
+          cb_framework_uwb_qmode_rx_start(&Rxpacketconfig, &stRxIrqEnable, EN_TRX_START_NON_DEFERRED); // RX START
+          startTime = cb_hal_get_time_us();
           s_appCommRxState = EN_APP_STATE_WAIT_RX_DONE;
         break;
       case EN_APP_STATE_WAIT_RX_DONE:
-        if (cb_hal_is_time_elapsed(startTime, DEF_SIMPLE_RX_TIMEOUT_MS) == APP_TRUE)  
+        if (cb_hal_is_time_elapsed_us(startTime, DEF_SIMPLE_RX_TIMEOUT_US) == CB_PASS)  
         {
           cb_framework_uwb_qmode_rx_end();
           s_appCommRxState = EN_APP_STATE_RECEIVE;
@@ -172,11 +172,11 @@ void app_commrx_nmode(void)
     {
       case EN_APP_STATE_RECEIVE:
           cb_framework_uwb_rx_start(EN_UWB_RX_0, &Rxpacketconfig, &stRxIrqEnable, EN_TRX_START_NON_DEFERRED); // RX START
-          startTime = cb_hal_get_tick();
+          startTime = cb_hal_get_time_us();
           s_appCommRxState = EN_APP_STATE_WAIT_RX_DONE;
         break;
       case EN_APP_STATE_WAIT_RX_DONE:
-        if (cb_hal_is_time_elapsed(startTime, DEF_SIMPLE_RX_TIMEOUT_MS) == APP_TRUE)  
+        if (cb_hal_is_time_elapsed_us(startTime, DEF_SIMPLE_RX_TIMEOUT_US) == CB_PASS)  
         {
           cb_framework_uwb_rx_end(EN_UWB_RX_0);
           s_appCommRxState = EN_APP_STATE_RECEIVE;
@@ -240,7 +240,7 @@ void app_commrx_rx_payload_and_timestamp_printout(void)
   
   cb_uwbsystem_rxstatus_un rxStatus = cb_framework_uwb_get_rx_status();
   
-  if ((rxStatus.rx0_ok == CB_TRUE) && (rxStatus.sfd0_det == CB_TRUE) && (rxStatus.pd0_det == CB_TRUE)) 
+  if ((rxStatus.rx0_ok == CB_TRUE) && (rxStatus.sfd0_det == CB_TRUE) && (rxStatus.pd0_det == CB_TRUE) && (rxStatus.crc_fail == CB_FALSE)) 
   {  
     app_uwb_commrx_print("- status register: OK\n");
       

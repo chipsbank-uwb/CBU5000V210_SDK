@@ -27,7 +27,8 @@
 // INCLUDE SECTION
 //-------------------------------
 #include "main.h"
-
+#include "CB_efuse.h"
+extern enEfuseErrCode cb_efuse_init(void);
 //-------------------------------
 // FUNCTION BODY SECTION
 //-------------------------------
@@ -44,6 +45,7 @@
 int main(void)
 { 
     //Efuse demo_init 
+		cb_efuse_init();
     app_peripheral_efuse_demo_init();
     while(1)
     {

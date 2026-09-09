@@ -14,9 +14,9 @@
 
 #include "CB_system.h"
 #include "NonLIB_sharedUtils.h"
+
 #include "CB_wdt.h"
 #include "CB_timer.h"
-#include "CB_UwbDrivers.h"
 
 //-------------------------------
 // CONFIGURATION SECTION
@@ -147,7 +147,7 @@ void cb_system_uwb_ram_init(void* pTxRamAddr, void* pRxRamAddr, uint32_t TxRamSi
     args[2] = TxRamSize;
     args[3] = RxRamSize;
 
-    cb_uwbdriver_uwb_system_ram_init(args);  /*Init pointer*/
+    (*cb_getfn_uwbdriver_uwb_system_ram_init())(args); /*Init pointer*/
 
     /*Once address pointer & size initialized, we clear the targeted memory.*/
     cb_system_uwb_tx_memclr();
@@ -162,7 +162,7 @@ void cb_system_uwb_ram_init(void* pTxRamAddr, void* pRxRamAddr, uint32_t TxRamSi
  */
 void cb_system_uwb_init(void)
 {
-  cb_uwbdriver_uwb_init(&s_Local_UwbAllConfigContainer.CB_SystemConfigContainer);
+  (*cb_getfn_uwbdriver_uwb_init())(&s_Local_UwbAllConfigContainer.CB_SystemConfigContainer);
 }
 
 /**
@@ -173,7 +173,7 @@ void cb_system_uwb_init(void)
  */
 void cb_system_uwb_off(void)
 {
-  cb_uwbdriver_uwb_off();
+  (*cb_getfn_uwbdriver_uwb_off())();
 }
 
 /**
@@ -184,7 +184,7 @@ void cb_system_uwb_off(void)
  */
 void cb_system_uwb_rx_top_init(void)
 {
-  cb_uwbdriver_rx_top_init();
+  (*cb_getfn_uwbdriver_rx_top_init())();
 }
 
 /**
@@ -193,7 +193,7 @@ void cb_system_uwb_rx_top_init(void)
  */
 void cb_system_uwb_trx_init(void)
 {
-  cb_uwbdriver_trx_init(); 
+  (*cb_getfn_uwbdriver_trx_init())();
 }
 
 /**
@@ -223,20 +223,49 @@ void cb_system_uwb_config_tx(cb_uwbsystem_packetconfig_st* config, cb_uwbsystem_
   /*System Configuration*/
   cb_system_uwb_tx_memclr();
   cb_system_uwb_configure_tx_irq(stTxIrqEnable); 
-  cb_uwbdriver_configure_tx_timestamp_capture();
-  cb_uwbdriver_configure_tx_power(s_Local_UwbAllConfigContainer.CB_SystemConfigContainer.powerCode_tx);
+    
+  (*cb_getfn_uwbdriver_configure_tx_timestamp_capture())();
+  (*cb_getfn_uwbdriver_configure_tx_power())               (s_Local_UwbAllConfigContainer.CB_SystemConfigContainer.powerCode_tx);
 
   /*Packet Type Configuration*/
-  cb_uwbdriver_configure_prf_mode_psdu_data_rate(&s_Local_UwbAllConfigContainer.CB_TxConfigContainer, EN_UWB_CONFIG_TX); //Note: Load Up Setting Template here
-  cb_uwbdriver_configure_preamble_code_index(&s_Local_UwbAllConfigContainer.CB_TxConfigContainer, EN_UWB_CONFIG_TX);
-  cb_uwbdriver_configure_sfd_id(&s_Local_UwbAllConfigContainer.CB_TxConfigContainer, EN_UWB_CONFIG_TX);
-  cb_uwbdriver_configure_preamble_duration(&s_Local_UwbAllConfigContainer.CB_TxConfigContainer, EN_UWB_CONFIG_TX);
-  cb_uwbdriver_configure_sts(&s_Local_UwbAllConfigContainer.CB_TxConfigContainer, EN_UWB_CONFIG_TX);
-  cb_uwbdriver_configure_mac_fcs_type(&s_Local_UwbAllConfigContainer.CB_TxConfigContainer, EN_UWB_CONFIG_TX);
+  (*cb_getfn_uwbdriver_configure_prf_mode_psdu_data_rate())(&s_Local_UwbAllConfigContainer.CB_TxConfigContainer, EN_UWB_CONFIG_TX); //Note: Load Up Setting Template here
+  (*cb_getfn_uwbdriver_configure_preamble_code_index())    (&s_Local_UwbAllConfigContainer.CB_TxConfigContainer, EN_UWB_CONFIG_TX);
+  (*cb_getfn_uwbdriver_configure_sfd_id())                 (&s_Local_UwbAllConfigContainer.CB_TxConfigContainer, EN_UWB_CONFIG_TX);
+  (*cb_getfn_uwbdriver_configure_preamble_duration())      (&s_Local_UwbAllConfigContainer.CB_TxConfigContainer, EN_UWB_CONFIG_TX);
+  (*cb_getfn_uwbdriver_configure_sts())                    (&s_Local_UwbAllConfigContainer.CB_TxConfigContainer, EN_UWB_CONFIG_TX);
+  (*cb_getfn_uwbdriver_configure_mac_fcs_type())           (&s_Local_UwbAllConfigContainer.CB_TxConfigContainer, EN_UWB_CONFIG_TX);
 
   /*Payload Configuration*/
   cb_system_uwb_tx_prepare_payload(txPayload->ptrAddress, txPayload->payloadSize);
-  cb_uwbdriver_configure_tx_phr_psdu(&s_Local_UwbAllConfigContainer.CB_TxConfigContainer, txPayload);   
+  (*cb_getfn_uwbdriver_configure_tx_phr_psdu())(&s_Local_UwbAllConfigContainer.CB_TxConfigContainer, txPayload);   
+}
+
+/**
+ * @brief Configures the UWB TX CW power code.
+ *
+ * This function starts the UWB communication transmitter power code.
+ * 
+ * @param txPacketConfig Configuration.
+ */
+void cb_system_uwb_config_tx_cw(cb_uwbsystem_packetconfig_st* config)
+{
+  /*Copy Configure Parameter to Local Data Container */
+  memcpy(&s_Local_UwbAllConfigContainer.CB_TxConfigContainer,config,sizeof (cb_uwbsystem_packetconfig_st));
+
+  /*Configure power code*/
+  (*cb_getfn_uwbdriver_configure_tx_power())               (s_Local_UwbAllConfigContainer.CB_SystemConfigContainer.powerCode_tx);
+}
+
+/**
+ * @brief starts the UWB TX CW.
+ *
+ * This function starts the UWB communication transmitter in cw mode.
+ * 
+ */
+void cb_system_uwb_start_tx_cw(void)
+{
+  /*Start tx cw*/
+  (*cb_getfn_uwbdriver_tx_cw_start())();
 }
 
 /**
@@ -267,18 +296,19 @@ void cb_system_uwb_config_ftm_rx(cb_uwbsystem_packetconfig_st* config, cb_uwbsys
   /*System Configuration*/
 // cb_system_uwb_rx_memclr(); 
   cb_system_uwb_configure_rx_irq(stRxIrqEnable);
-  cb_uwbdriver_configure_rx_timestamp_capture();
+    
+  (*cb_getfn_uwbdriver_configure_rx_timestamp_capture())();
   cb_system_uwb_configure_rx_operation_mode(s_Local_UwbAllConfigContainer.CB_SystemConfigContainer.operationMode_rx);
   
   /*Packet Type Configuration*/
-  cb_uwbdriver_configure_prf_mode_psdu_data_rate(&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX); //Note: Load Up Setting Template here
-  cb_uwbdriver_configure_preamble_code_index(&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX);
-  cb_uwbdriver_configure_sfd_id(&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX);
-  cb_uwbdriver_configure_preamble_duration(&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX);
-  cb_uwbdriver_configure_sts(&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX);
-  cb_uwbdriver_configure_mac_fcs_type(&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX);
+  (*cb_getfn_uwbdriver_configure_prf_mode_psdu_data_rate()) (&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX); //Note: Load Up Setting Template here
+  (*cb_getfn_uwbdriver_configure_preamble_code_index())     (&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX);
+  (*cb_getfn_uwbdriver_configure_sfd_id())                  (&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX);
+  (*cb_getfn_uwbdriver_configure_preamble_duration())       (&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX);
+  (*cb_getfn_uwbdriver_configure_sts())                     (&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX);
+  (*cb_getfn_uwbdriver_configure_mac_fcs_type())            (&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX);
     
-  cb_uwbdriver_configure_fixed_cfo_value(stBypass_cfo->enableBypass, stBypass_cfo->cfoValue);
+  (*cb_getfn_uwbdriver_configure_fixed_cfo_value())         (stBypass_cfo->enableBypass, stBypass_cfo->cfoValue);
 }
 
 
@@ -310,18 +340,19 @@ void cb_system_uwb_config_rx(cb_uwbsystem_packetconfig_st* config, cb_uwbsystem_
   /*System Configuration*/
   cb_system_uwb_rx_memclr();
   cb_system_uwb_configure_rx_irq(stRxIrqEnable);
-  cb_uwbdriver_configure_rx_timestamp_capture();
+    
+  (*cb_getfn_uwbdriver_configure_rx_timestamp_capture())();
   cb_system_uwb_configure_rx_operation_mode(s_Local_UwbAllConfigContainer.CB_SystemConfigContainer.operationMode_rx);
   
   /*Packet Type Configuration*/
-  cb_uwbdriver_configure_prf_mode_psdu_data_rate(&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX); //Note: Load Up Setting Template here
-  cb_uwbdriver_configure_preamble_code_index(&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX);
-  cb_uwbdriver_configure_sfd_id(&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX);
-  cb_uwbdriver_configure_preamble_duration(&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX);
-  cb_uwbdriver_configure_sts(&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX);
-  cb_uwbdriver_configure_mac_fcs_type(&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX);
+  (*cb_getfn_uwbdriver_configure_prf_mode_psdu_data_rate())(&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX); //Note: Load Up Setting Template here
+  (*cb_getfn_uwbdriver_configure_preamble_code_index())    (&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX);
+  (*cb_getfn_uwbdriver_configure_sfd_id())                 (&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX);
+  (*cb_getfn_uwbdriver_configure_preamble_duration())      (&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX);
+  (*cb_getfn_uwbdriver_configure_sts())                    (&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX);
+  (*cb_getfn_uwbdriver_configure_mac_fcs_type())           (&s_Local_UwbAllConfigContainer.CB_RxConfigContainer, EN_UWB_CONFIG_RX);
     
-  cb_uwbdriver_configure_fixed_cfo_value(stBypass_cfo->enableBypass, stBypass_cfo->cfoValue);
+  (*cb_getfn_uwbdriver_configure_fixed_cfo_value())        (stBypass_cfo->enableBypass, stBypass_cfo->cfoValue);
 }
 
 /**
@@ -345,40 +376,37 @@ void cb_system_uwb_configure_rx_operation_mode(cb_uwbsystem_rxoperationmode_en m
  * 
  * This function starts the UWB receiver on the specified port with the given gain settings.
  * It configures the receiver gain parameters and enables reception on the selected port.
+ * The receiver can be started either immediately or in deferred mode based on the trxStartMode parameter.
  *
- * @param enRxPort The UWB receiver port to start.Can be a single port
- *                 (EN_UWB_RX_0, EN_UWB_RX_1, EN_UWB_RX_2) or a combination of ports
- *                 (EN_UWB_RX_02, EN_UWB_RX_ALL)
+ * @param enRxPort The UWB receiver port to start (RX0, RX1, RX2, or combination).
  * @param stBypass_gain Pointer to structure containing gain bypass configuration parameters.
+ * @param trxStartMode Start mode selection:
+ *                     - EN_TRX_START_NON_DEFERRED: Start reception immediately
+ *                     - EN_TRX_START_DEFERRED: Prepare for deferred start
  */
-void cb_system_uwb_rx_start(cb_uwbsystem_rxport_en enRxPort, cb_uwbsystem_rx_dbb_gain_st* stBypass_gain)
+void cb_system_uwb_rx_start(cb_uwbsystem_rxport_en enRxPort, cb_uwbsystem_rx_dbb_gain_st* stBypass_gain, cb_uwbsystem_trx_startmode_en trxStartMode)
 {
-    cb_uwbdriver_rx_start(enRxPort, stBypass_gain); //combine function to test
+  (*cb_getfn_uwbdriver_rx_start())(enRxPort, stBypass_gain, trxStartMode);
 }
-
 
 /**
  * @brief Stops the UWB (Ultra-Wideband) receiver on the specified port.
  * 
- * @param enRxPort The UWB receiver port to stop. Can be a single port
- *                 (EN_UWB_RX_0, EN_UWB_RX_1, EN_UWB_RX_2) or a combination of ports
- *                 (EN_UWB_RX_02, EN_UWB_RX_ALL)
+ * @param enRxPort The UWB receiver port to stop.
  */
 void cb_system_uwb_rx_stop(cb_uwbsystem_rxport_en enRxPort)
 {
-  cb_uwbdriver_rx_stop(enRxPort);
+  (*cb_getfn_uwbdriver_rx_stop())(enRxPort);
 }
 
 /**
  * @brief Turns off the UWB (Ultra-Wideband) receiver on the specified port.
  * 
- * @param enRxPort The UWB receiver port to turn off.Can be a single port
- *                 (EN_UWB_RX_0, EN_UWB_RX_1, EN_UWB_RX_2) or a combination of ports
- *                 (EN_UWB_RX_02, EN_UWB_RX_ALL)
+ * @param enRxPort The UWB receiver port to turn off.
  */
 void cb_system_uwb_rx_off(cb_uwbsystem_rxport_en enRxPort)
 {
-  cb_uwbdriver_rx_off(enRxPort);
+  (*cb_getfn_uwbdriver_rx_off())(enRxPort);
 }
 
 /**
@@ -395,19 +423,19 @@ void cb_system_uwb_configure_tx_irq(cb_uwbsystem_tx_irqenable_st* irqEnable)
 {
   //----------------------------------
   // Reset register before configuring
-  //----------------------------------
-  cb_uwbdriver_irq_reset_registers();
+  //----------------------------------  
+  (*cb_getfn_uwbdriver_irq_reset_registers())();
   NVIC_DisableIRQ(UWB_TX_DONE_IRQn);
   NVIC_DisableIRQ(UWB_TX_SFD_MARK_IRQn);
 
   //----------------------------------
   // DIG UWB Interrupt Configuration
   //----------------------------------
-  if (irqEnable->txDone == CB_TRUE)  { cb_uwbdriver_irq_mask_configuration(EN_UWB_IRQ_EVENT_TX_DONE); }   
-  if (irqEnable->sfdDone == CB_TRUE) { cb_uwbdriver_irq_mask_configuration(EN_UWB_IRQ_EVENT_TX_SFD_MARK); }
+  if (irqEnable->txDone == CB_TRUE)  { (*cb_getfn_uwbdriver_irq_mask_configuration())(EN_UWB_IRQ_EVENT_TX_DONE); }   
+  if (irqEnable->sfdDone == CB_TRUE) { (*cb_getfn_uwbdriver_irq_mask_configuration())(EN_UWB_IRQ_EVENT_TX_SFD_MARK); }
 
-  if (irqEnable->txDone == CB_TRUE)  { cb_uwbdriver_enable_event_irq(EN_UWB_IRQ_EVENT_TX_DONE);     }
-  if (irqEnable->sfdDone == CB_TRUE) { cb_uwbdriver_enable_event_irq(EN_UWB_IRQ_EVENT_TX_SFD_MARK); }
+  if (irqEnable->txDone == CB_TRUE)  { (*cb_getfn_uwbdriver_enable_event_irq())(EN_UWB_IRQ_EVENT_TX_DONE);     }
+  if (irqEnable->sfdDone == CB_TRUE) { (*cb_getfn_uwbdriver_enable_event_irq())(EN_UWB_IRQ_EVENT_TX_SFD_MARK); }
 
   //----------------------------------
   // CPU Interrupt Configuration
@@ -440,82 +468,82 @@ void cb_system_uwb_configure_rx_irq(cb_uwbsystem_rx_irqenable_st* stRxIrqEnable)
 {
   //----------------------------------
   // UWB Interrupt Configuration
-  //----------------------------------
+  //----------------------------------  
   //----------------------------------------------------------------------------------------------------------------
   if (stRxIrqEnable->rx0Done == CB_TRUE)
   {
-      cb_uwbdriver_irq_mask_configuration(EN_UWB_IRQ_EVENT_RX0_DONE);                
-      cb_uwbdriver_enable_event_irq(EN_UWB_IRQ_EVENT_RX0_DONE);                   // Enable EVENT IRQ - RX0_Done
+      (*cb_getfn_uwbdriver_irq_mask_configuration())(EN_UWB_IRQ_EVENT_RX0_DONE);                
+      (*cb_getfn_uwbdriver_enable_event_irq())(EN_UWB_IRQ_EVENT_RX0_DONE);         // Enable EVENT IRQ - RX0_Done
       NVIC_EnableIRQ(UWB_RX0_DONE_IRQn);                                        // Enable CPU IRQ   - RX0 Done
   }
   if (stRxIrqEnable->rx0PdDone == CB_TRUE)
   {
-      cb_uwbdriver_irq_mask_configuration(EN_UWB_IRQ_EVENT_RX0_PD_DONE);
-      cb_uwbdriver_enable_event_irq(EN_UWB_IRQ_EVENT_RX0_PD_DONE);                // Enable EVENT IRQ - RX0 PD done
+      (*cb_getfn_uwbdriver_irq_mask_configuration())(EN_UWB_IRQ_EVENT_RX0_PD_DONE);
+      (*cb_getfn_uwbdriver_enable_event_irq())(EN_UWB_IRQ_EVENT_RX0_PD_DONE);      // Enable EVENT IRQ - RX0 PD done
       NVIC_EnableIRQ(UWB_RX0_PD_DONE_IRQn);                                     // Enable CPU IRQ   - RX0 Preamble detected
   }
   if (stRxIrqEnable->rx0SfdDetDone == CB_TRUE)
   {
-      cb_uwbdriver_irq_mask_configuration(EN_UWB_IRQ_EVENT_RX0_SFD_DET_DONE);
-      cb_uwbdriver_enable_event_irq(EN_UWB_IRQ_EVENT_RX0_SFD_DET_DONE);           // Enable EVENT IRQ - RX0 SFD Detected
+      (*cb_getfn_uwbdriver_irq_mask_configuration())(EN_UWB_IRQ_EVENT_RX0_SFD_DET_DONE);
+      (*cb_getfn_uwbdriver_enable_event_irq())(EN_UWB_IRQ_EVENT_RX0_SFD_DET_DONE); // Enable EVENT IRQ - RX0 SFD Detected
       NVIC_EnableIRQ(UWB_RX0_SFD_DET_DONE_IRQn);                                // Enable CPU IRQ   - RX0 SFD detected
   }
   //----------------------------------------------------------------------------------------------------------------
   if (stRxIrqEnable->rx1Done == CB_TRUE)
   {
-      cb_uwbdriver_irq_mask_configuration(EN_UWB_IRQ_EVENT_RX1_DONE);
-      cb_uwbdriver_enable_event_irq(EN_UWB_IRQ_EVENT_RX1_DONE);                   // Enable EVENT IRQ - RX1_Done
+      (*cb_getfn_uwbdriver_irq_mask_configuration())(EN_UWB_IRQ_EVENT_RX1_DONE);
+      (*cb_getfn_uwbdriver_enable_event_irq())(EN_UWB_IRQ_EVENT_RX1_DONE);         // Enable EVENT IRQ - RX1_Done
       NVIC_EnableIRQ(UWB_RX1_DONE_IRQn);                                        // Enable CPU IRQ   - RX1 Done
   }
   if (stRxIrqEnable->rx1PdDone == CB_TRUE)
   {
-      cb_uwbdriver_irq_mask_configuration(EN_UWB_IRQ_EVENT_RX1_PD_DONE);
-      cb_uwbdriver_enable_event_irq(EN_UWB_IRQ_EVENT_RX1_PD_DONE);                // Enable EVENT IRQ - RX1 PD done
+      (*cb_getfn_uwbdriver_irq_mask_configuration())(EN_UWB_IRQ_EVENT_RX1_PD_DONE);
+      (*cb_getfn_uwbdriver_enable_event_irq())(EN_UWB_IRQ_EVENT_RX1_PD_DONE);      // Enable EVENT IRQ - RX1 PD done
       NVIC_EnableIRQ(UWB_RX1_PD_DONE_IRQn);                                     // Enable CPU IRQ   - RX1 Preamble detected
   }
   if (stRxIrqEnable->rx1SfdDetDone == CB_TRUE)
   {
-      cb_uwbdriver_irq_mask_configuration(EN_UWB_IRQ_EVENT_RX1_SFD_DET_DONE);
-      cb_uwbdriver_enable_event_irq(EN_UWB_IRQ_EVENT_RX1_SFD_DET_DONE);           // Enable EVENT IRQ - RX1 SFD Detected        
+      (*cb_getfn_uwbdriver_irq_mask_configuration())(EN_UWB_IRQ_EVENT_RX1_SFD_DET_DONE);
+      (*cb_getfn_uwbdriver_enable_event_irq())(EN_UWB_IRQ_EVENT_RX1_SFD_DET_DONE); // Enable EVENT IRQ - RX1 SFD Detected        
       NVIC_EnableIRQ(UWB_RX1_SFD_DET_DONE_IRQn);                                // Enable CPU IRQ   - RX1 SFD detected
   }
   //----------------------------------------------------------------------------------------------------------------
   if (stRxIrqEnable->rx2Done == CB_TRUE)
   {
-      cb_uwbdriver_irq_mask_configuration(EN_UWB_IRQ_EVENT_RX2_DONE);
-      cb_uwbdriver_enable_event_irq(EN_UWB_IRQ_EVENT_RX2_DONE);                   // Enable EVENT IRQ - RX2_Done        
+      (*cb_getfn_uwbdriver_irq_mask_configuration())(EN_UWB_IRQ_EVENT_RX2_DONE);
+      (*cb_getfn_uwbdriver_enable_event_irq())(EN_UWB_IRQ_EVENT_RX2_DONE);      // Enable EVENT IRQ - RX2_Done        
       NVIC_EnableIRQ(UWB_RX2_DONE_IRQn);                                        // Enable CPU IRQ   - RX2 Done
   }
   if (stRxIrqEnable->rx2PdDone == CB_TRUE)
   {
-      cb_uwbdriver_irq_mask_configuration(EN_UWB_IRQ_EVENT_RX2_PD_DONE);
-      cb_uwbdriver_enable_event_irq(EN_UWB_IRQ_EVENT_RX2_PD_DONE);                // Enable EVENT IRQ - RX2 PD done        
+      (*cb_getfn_uwbdriver_irq_mask_configuration())(EN_UWB_IRQ_EVENT_RX2_PD_DONE);
+      (*cb_getfn_uwbdriver_enable_event_irq())(EN_UWB_IRQ_EVENT_RX2_PD_DONE);   // Enable EVENT IRQ - RX2 PD done        
       NVIC_EnableIRQ(UWB_RX2_PD_DONE_IRQn);                                     // Enable CPU IRQ   - RX2 Preamble detected
   }
   if (stRxIrqEnable->rx2SfdDetDone == CB_TRUE)
   {
-      cb_uwbdriver_irq_mask_configuration(EN_UWB_IRQ_EVENT_RX2_SFD_DET_DONE);
-      cb_uwbdriver_enable_event_irq(EN_UWB_IRQ_EVENT_RX2_SFD_DET_DONE);           // Enable EVENT IRQ - RX2 SFD Detected   
+      (*cb_getfn_uwbdriver_irq_mask_configuration())(EN_UWB_IRQ_EVENT_RX2_SFD_DET_DONE);
+      (*cb_getfn_uwbdriver_enable_event_irq())(EN_UWB_IRQ_EVENT_RX2_SFD_DET_DONE); // Enable EVENT IRQ - RX2 SFD Detected   
       NVIC_EnableIRQ(UWB_RX2_SFD_DET_DONE_IRQn);                                // Enable CPU IRQ   - RX2 SFD detected
   }
   //----------------------------------------------------------------------------------------------------------------
   if (stRxIrqEnable->rxStsCirEnd == CB_TRUE)
   {
-      cb_uwbdriver_irq_mask_configuration(EN_UWB_IRQ_EVENT_RX_STS_CIR_END);
-      cb_uwbdriver_enable_event_irq(EN_UWB_IRQ_EVENT_RX_STS_CIR_END);             // Enable EVENT IRQ - RX STS END
+      (*cb_getfn_uwbdriver_irq_mask_configuration())(EN_UWB_IRQ_EVENT_RX_STS_CIR_END);
+      (*cb_getfn_uwbdriver_enable_event_irq())(EN_UWB_IRQ_EVENT_RX_STS_CIR_END);// Enable EVENT IRQ - RX STS END
       NVIC_EnableIRQ(UWB_RX_STS_CIR_END_IRQn);                                  // Enable CPU IRQ   - RX STS END
   }
   if (stRxIrqEnable->rxPhrDetected == CB_TRUE)
   {
-      cb_uwbdriver_irq_mask_configuration(EN_UWB_IRQ_EVENT_RX_PHY_PHR);
-      cb_uwbdriver_enable_event_irq(EN_UWB_IRQ_EVENT_RX_PHY_PHR);                 // Enable EVENT IRQ - RX PHR Detected        
+      (*cb_getfn_uwbdriver_irq_mask_configuration())(EN_UWB_IRQ_EVENT_RX_PHY_PHR);
+      (*cb_getfn_uwbdriver_enable_event_irq())(EN_UWB_IRQ_EVENT_RX_PHY_PHR);    // Enable EVENT IRQ - RX PHR Detected        
       NVIC_EnableIRQ(UWB_RX_PHR_DETECTED_IRQn);                                 // Enable CPU IRQ   - RX PHR Detected
 
   }
   if (stRxIrqEnable->rxDone == CB_TRUE)
   {
-      cb_uwbdriver_irq_mask_configuration(EN_UWB_IRQ_EVENT_RX_DONE);
-      cb_uwbdriver_enable_event_irq(EN_UWB_IRQ_EVENT_RX_DONE);                    // Enable EVENT IRQ   - RX DONE
+      (*cb_getfn_uwbdriver_irq_mask_configuration())(EN_UWB_IRQ_EVENT_RX_DONE);
+      (*cb_getfn_uwbdriver_enable_event_irq())(EN_UWB_IRQ_EVENT_RX_DONE);       // Enable EVENT IRQ   - RX DONE
       NVIC_EnableIRQ(UWB_RX_DONE_IRQn);                                         // Enable CPU IRQ     - RX DONE
   }
   //----------------------------------------------------------------------------------------------------------------
@@ -527,7 +555,7 @@ void cb_system_uwb_configure_rx_irq(cb_uwbsystem_rx_irqenable_st* stRxIrqEnable)
  */
 void cb_system_uwb_tx_init(void)
 {
-  cb_uwbdriver_tx_init();
+  (*cb_getfn_uwbdriver_tx_init())();
 }
 
 /**
@@ -536,50 +564,22 @@ void cb_system_uwb_tx_init(void)
  */
 void cb_system_uwb_rx_init(cb_uwbsystem_rxport_en enRxPort)
 {
-    switch (enRxPort)
-    {
-        case EN_UWB_RX_0:   cb_uwbdriver_rx0_init();     break;   // RX0 INIT
-        case EN_UWB_RX_1:   cb_uwbdriver_rx1_init();     break;   // RX1 INIT
-        case EN_UWB_RX_2:   cb_uwbdriver_rx2_init();     break;   // RX2 INIT
-        case EN_UWB_RX_02:  cb_uwbdriver_rx02_init();     break;  // RX02 INIT
-        case EN_UWB_RX_ALL: cb_uwbdriver_rx_all_init();   break;  // RXALL INIT
-    }
+  (*cb_getfn_uwbdriver_rx_init())(enRxPort);
 }
 
 /**
- * @brief Start the UWB communication for TX
+ * @brief Starts the UWB transmitter.
  *
- */
-void cb_system_uwb_tx_start(void)
-{
-  cb_uwbdriver_tx_start();
-}
-
-/**
- * @brief Start the UWB communication for TX (For deferred TX)
+ * This function starts the UWB transmitter either immediately or in deferred mode
+ * based on the specified start mode parameter.
  *
+ * @param trxStartMode Start mode selection:
+ *                     - EN_TRX_START_NON_DEFERRED: Start transmission immediately
+ *                     - EN_TRX_START_DEFERRED: Prepare for deferred start
  */
-void cb_system_uwb_tx_start_prepare(void)
+void cb_system_uwb_tx_start(cb_uwbsystem_trx_startmode_en trxStartMode)
 {
-  cb_uwbdriver_tx_start_prepare();
-}
-
-/**
- * @brief Start the UWB communication for RX0 (For deferred RX)
- *
- */
-void cb_system_uwb_rx_start_prepare(void)
-{
-  cb_uwbdriver_rx_start_prepare();
-}
-
-/**
- * @brief Restart the UWB communication for TX
- *
- */
-void cb_system_uwb_stage_tx_start(void)
-{
-  cb_uwbdriver_stage_tx_start();
+  (*cb_getfn_uwbdriver_tx_start())(trxStartMode);
 }
 
 /**
@@ -588,7 +588,7 @@ void cb_system_uwb_stage_tx_start(void)
  */
 void cb_system_uwb_tx_stop(void)
 {
-  cb_uwbdriver_tx_stop();
+  (*cb_getfn_uwbdriver_tx_stop())();
 }
 
 /**
@@ -605,7 +605,7 @@ void cb_system_uwb_trx_off(void)
  */
 void cb_system_uwb_rx_top_off (void)
 {
-  cb_uwbdriver_rx_top_off();
+  (*cb_getfn_uwbdriver_rx_top_off())();
 }
 
 /**
@@ -613,7 +613,7 @@ void cb_system_uwb_rx_top_off (void)
  */
 void cb_system_uwb_tx_off(void)
 {
-  cb_uwbdriver_tx_off();
+  (*cb_getfn_uwbdriver_tx_off())();
 }
 
 /**
@@ -625,7 +625,7 @@ void cb_system_uwb_tx_off(void)
  */
 void cb_system_uwb_tx_freeze_pll(void)
 {
-  cb_uwbdriver_tx_freezepll();
+  (*cb_getfn_uwbdriver_tx_freezepll())();
 }
 
 /**
@@ -637,7 +637,23 @@ void cb_system_uwb_tx_freeze_pll(void)
  */
 void cb_system_uwb_tx_unfreeze_pll(void)
 {
-  cb_uwbdriver_tx_unfreezepll();
+  (*cb_getfn_uwbdriver_tx_unfreezepll())();
+}
+
+/**
+ * @brief Configures the common TSU and time mask for the UWB transceiver.
+ */
+void cb_system_uwb_trx_config_cmn_tsu_timemask(void)
+{
+  (*cb_getfn_uwbdriver_trx_config_cmn_tsu_timemask())();
+}
+
+/**
+ * @brief Configures the CIR correlation length.
+ */
+void cb_system_uwb_rx_config_cir_correlation_length(uint8_t correlation_length)
+{
+  (*cb_getfn_uwbdriver_rx_configure_cir_correction_length())(correlation_length);
 }
 
 /**
@@ -661,7 +677,7 @@ void cb_system_delay_in_us(uint32_t microseconds)
  */
 void cb_system_uwb_tx_prepare_payload(uint8_t* pTxpayloadAddress, uint16_t SizeInByte)
 {
-  memcpy(cb_uwbdriver_get_uwb_tx_memory_start_addr(), pTxpayloadAddress, SizeInByte);
+  memcpy((*cb_getfn_uwbdriver_get_uwb_tx_memory_start_addr())(), pTxpayloadAddress, SizeInByte);
 }
 
 /**
@@ -669,7 +685,7 @@ void cb_system_uwb_tx_prepare_payload(uint8_t* pTxpayloadAddress, uint16_t SizeI
  */
 void cb_system_uwb_tx_memclr(void)
 {
-  memset(cb_uwbdriver_get_uwb_tx_memory_start_addr(), 0x00, cb_uwbdriver_get_uwb_tx_memory_size());
+  memset((*cb_getfn_uwbdriver_get_uwb_tx_memory_start_addr())(), 0x00, (*cb_getfn_uwbdriver_get_uwb_tx_memory_size())());
 }
 
 /**
@@ -677,15 +693,15 @@ void cb_system_uwb_tx_memclr(void)
  */
 void cb_system_uwb_rx_memclr(void)
 { 
-  memset(cb_uwbdriver_get_uwb_rx_memory_start_addr(), 0x00, cb_uwbdriver_get_uwb_rx_memory_size());
+  memset((*cb_getfn_uwbdriver_get_uwb_rx_memory_start_addr())(), 0x00, (*cb_getfn_uwbdriver_get_uwb_rx_memory_size())());
 }
 
 /**
  * @brief Read UWB Rx Payload/PSDU Content
  */
 void cb_system_uwb_rx_get_payload(uint8_t* pRxpayloadAddress, uint16_t SizeInByte)
-{   
-  memcpy(pRxpayloadAddress, cb_uwbdriver_get_uwb_rx_memory_start_addr(), SizeInByte);
+{
+  memcpy(pRxpayloadAddress, (*cb_getfn_uwbdriver_get_uwb_rx_memory_start_addr())(), SizeInByte);
 }
 
 /**
@@ -711,7 +727,6 @@ cb_uwbsystem_rx_phrstatus_st cb_system_uwb_get_rx_phr_status(void)
   return phrStatus;
 }
 
-
 /**
  * @brief Sets the UWB threshold value.
  *
@@ -723,7 +738,7 @@ cb_uwbsystem_rx_phrstatus_st cb_system_uwb_get_rx_phr_status(void)
  */
 void cb_system_uwb_set_rx_threshold(uint32_t threshold)
 {
-  cb_uwbdriver_set_rx_threshold(threshold);
+  (*cb_getfn_uwbdriver_set_rx_threshold())(threshold);
 }
 
 /**
@@ -738,7 +753,7 @@ void cb_system_uwb_set_rx_threshold(uint32_t threshold)
  */
 void cb_system_uwb_set_gain_rx_init(uint32_t gainRxInit)
 {
-  cb_uwbdriver_set_gain_rx_init(gainRxInit);
+  (*cb_getfn_uwbdriver_set_gain_rx_init())(gainRxInit);
 }
 
 /**
@@ -748,7 +763,7 @@ void cb_system_uwb_set_gain_rx_init(uint32_t gainRxInit)
  */
 uint32_t cb_system_uwb_get_tx_rf_pll_lock(void)
 {
-  return cb_uwbdriver_get_tx_rfpll_lock();
+  return (*cb_getfn_uwbdriver_get_tx_rfpll_lock())();
 }
 
 /**
@@ -760,7 +775,7 @@ uint32_t cb_system_uwb_get_tx_rf_pll_lock(void)
  */
 float cb_system_get_chip_temperature(void)
 {
-  return cb_uwbdriver_get_chip_temp();
+  return (*cb_getfn_uwbdriver_get_chip_temp())();
 }
 
 /**
@@ -790,8 +805,35 @@ float cb_system_get_chip_temperature(void)
  */
 float cb_system_adc_read_AIN_voltage(uint8_t gain_stage)
 {
-  return cb_adc_read_AIN_voltage(gain_stage);
+  return (*cb_getfn_uwbdriver_adc_read_AIN_voltage())(gain_stage);
 }
+
+/**
+ * @brief Read ADC input and return a 10-bit scaled code value.
+ *
+ * This function reads the ADC voltage for the specified gain stage using
+ * cb_adc_read_AIN_voltage(), then scales the result to a 10-bit range
+ * (0 to 1024 inclusive) based on the full-scale voltage for that gain stage.
+ *
+ * Full-scale voltages per gain stage:
+ * | Gain Stage | Full-Scale Voltage (V) |
+ * |------------|------------------------|
+ * |     0      | 3.3                    |
+ * |     1      | 2.5                    |
+ * |     2      | 1.8                    |
+ * |     3      | 1.5                    |
+ * |     4      | 1.2                    |
+ * |     5      | 0.9                    |
+ *
+ * @param gain_stage ADC gain stage (0-5). Values >5 are invalid.
+ * @return uint16_t Scaled ADC code in the range 0-1024.
+ *         Returns 0 if gain_stage is invalid.
+ */
+uint16_t cb_system_adc_read_AIN_10bit(uint8_t gain_stage)
+{
+  return (*cb_getfn_uwbdriver_adc_read_AIN_10bit_code ())(gain_stage);
+}
+
 
 /**
  * @brief Perform a one-time calibration of the RC clock.
@@ -1105,7 +1147,7 @@ void cb_system_uwb_set_system_config(cb_uwbsystem_systemconfig_st* newConfig)
  */
 void cb_system_chip_init(void)
 {
-  cb_uwbdriver_chip_init();
+  (*cb_getfn_uwbdriver_chip_init())();
 }
 
 /**
@@ -1118,7 +1160,7 @@ void cb_system_chip_init(void)
  */
 uint32_t cb_system_uwb_get_rx_packet_phr(void)
 {
-  return cb_uwbdriver_get_rx_packet_phr();
+  return (*cb_getfn_uwbdriver_get_rx_packet_phr())();
 }
 
 /**
@@ -1131,7 +1173,7 @@ uint32_t cb_system_uwb_get_rx_packet_phr(void)
  */
 uint16_t cb_system_uwb_get_rx_packet_size(cb_uwbsystem_packetconfig_st* config)
 {
-  return cb_uwbdriver_get_rx_packet_size(config);
+  return (*cb_getfn_uwbdriver_get_rx_packet_size())(config);
 }
 
 /**
@@ -1144,7 +1186,7 @@ uint16_t cb_system_uwb_get_rx_packet_size(cb_uwbsystem_packetconfig_st* config)
  */
 uint8_t cb_system_uwb_get_rx_phr_ranging_bit(cb_uwbsystem_packetconfig_st* config)
 {
-  return cb_uwbdriver_get_rx_phr_ranging_bit(config);
+  return (*cb_getfn_uwbdriver_get_rx_phr_ranging_bit())(config);
 }
 
 /**
@@ -1169,7 +1211,7 @@ amp.
  */
 void cb_system_uwb_get_tx_raw_timestamp(cb_uwbsystem_tx_timestamp_st* txTimestamp)
 {
-  cb_uwbdriver_get_tx_raw_timestamp(txTimestamp);
+  (*cb_getfn_uwbdriver_get_tx_raw_timestamp())(txTimestamp);
 }
 
 /**
@@ -1185,7 +1227,7 @@ void cb_system_uwb_get_tx_raw_timestamp(cb_uwbsystem_tx_timestamp_st* txTimestam
  */
 void cb_system_uwb_get_tx_tsu_timestamp(cb_uwbsystem_tx_tsutimestamp_st * outTxTsu)
 {
-  cb_uwbdriver_get_tx_tsu_timestamp(outTxTsu);
+  (*cb_getfn_uwbdriver_get_tx_tsu_timestamp())(outTxTsu);
 }
 
 /**
@@ -1198,7 +1240,7 @@ void cb_system_uwb_get_tx_tsu_timestamp(cb_uwbsystem_tx_tsutimestamp_st * outTxT
  */
 void cb_system_uwb_get_rx_raw_timestamp(cb_uwbsystem_rx_tsu_st* rxTsu)
 {
-  cb_uwbdriver_get_rx_raw_timestamp(rxTsu);
+  (*cb_getfn_uwbdriver_get_rx_raw_timestamp())(rxTsu);
 }
 
 /**
@@ -1222,12 +1264,33 @@ void cb_system_uwb_get_rx_raw_timestamp(cb_uwbsystem_rx_tsu_st* rxTsu)
  */
 void cb_system_uwb_get_rx_tsu_timestamp(cb_uwbsystem_rx_tsutimestamp_st* rxTsuTimestamp, cb_uwbsystem_rxport_en enRxPort)
 {
-  cb_uwbdriver_get_rx_tsu_timestamp(rxTsuTimestamp, enRxPort);
+  (*cb_getfn_uwbdriver_get_rx_tsu_timestamp())(rxTsuTimestamp, enRxPort);
 }
 
-void cb_system_uwb_store_rx_tsu_status(cb_uwbsystem_rx_tsustatus_st* p_rxTsuStatus, cb_uwbsystem_rx_tsu_st* p_rxTimeStampData, cb_uwbsystem_rxport_en enRxPort)
+/**
+ * @brief Retrieves the RX TSU timestamp.
+ * 
+ * @param rxTsuTimestamp Pointer to the structure to store the RX TSU timestamp.
+ * @param enRxPort The RX port to retrieve the timestamp from (EN_UWB_RX_0, EN_UWB_RX_1, or EN_UWB_RX_2).
+ * @param scale_factor      Peak divisor for detection threshold; default 10. For dynamic
+ *                          range, use 6, 10, or 18 for 15 dB, 20 dB, or 25 dB dynamic range.
+ * @param le_noise_th_ip    Input noise floor; default 0. Effective threshold is
+ *                          max(prefix estimate from taps 100..119, le_noise_th_ip).
+ * @param mm_option         Multipath mitigation mode:
+ *                          0 - conventional leading edge detection with precursor protection;
+ *                          1 - near-range multipath: mitigation with interpolation compensation;
+ *                          2 - near-range multipath: mitigation with near-energy compensation;
+ *                          3 - near-range multipath: compensation of both 1 and 2.
+ *
+ */
+void cb_system_uwb_get_rx_tsu_timestamp_lemm(cb_uwbsystem_rx_tsutimestamp_st* rxTsuTimestamp, cb_uwbsystem_rxport_en enRxPort, int scale_factor, int le_noise_th_ip, int mm_option)
 {
-  cb_uwbdriver_store_rx_tsu_status(p_rxTsuStatus, p_rxTimeStampData, enRxPort);
+  (*cb_getfn_uwbdriver_get_rx_tsu_timestamp_lemm())(rxTsuTimestamp, enRxPort, scale_factor, le_noise_th_ip, mm_option);
+}
+
+void cb_system_uwb_get_rx_tsu_status(cb_uwbsystem_rx_tsustatus_st* p_rxTsuStatus, cb_uwbsystem_rx_tsu_st* p_rxTimeStampData, cb_uwbsystem_rxport_en enRxPort)
+{
+  (*cb_getfn_uwbdriver_get_rx_tsu_status())(p_rxTsuStatus, p_rxTimeStampData, enRxPort);
 }
 
 /**
@@ -1238,14 +1301,14 @@ void cb_system_uwb_store_rx_tsu_status(cb_uwbsystem_rx_tsustatus_st* p_rxTsuStat
  * @param startingPosition Offset within the CIR register memory.
  * @param numSamples Number of `cb_uwbsystem_rx_cir_iqdata_st` samples to copy.
  */
-void cb_system_uwb_store_rx_cir_register(cb_uwbsystem_rx_cir_iqdata_st* destArray, cb_uwbsystem_rxport_en enRxPort, uint32_t startingPosition, uint32_t numSamples)
+void cb_system_uwb_get_rx_cir_register(cb_uwbsystem_rx_cir_iqdata_st* destArray, cb_uwbsystem_rxport_en enRxPort, uint32_t startingPosition, uint32_t numSamples)
 {
-  cb_uwbdriver_store_rx_cir_register(destArray, enRxPort, startingPosition, numSamples);
+  (*cb_getfn_uwbdriver_get_rx_cir_register())(destArray, enRxPort, startingPosition, numSamples);
 }
 
 cb_uwbalg_poa_outputperpacket_st cb_system_uwb_pdoa_cir_processing(enUwbPdoaCalType calType, uint8_t packageNum, const uint8_t numRxUsed, const cb_uwbsystem_rx_cir_iqdata_st *cirRegisterData, uint16_t cirDataSize)
 {
-  return cb_uwbalg_pdoa_cir_post_processing(calType, packageNum, numRxUsed, cirRegisterData, cirDataSize);
+  return (*cb_getfn_uwbalg_cir_pdoa_cir_post_processing())(calType, packageNum, numRxUsed, cirRegisterData, cirDataSize);
 }
 
 
@@ -1254,7 +1317,7 @@ cb_uwbalg_poa_outputperpacket_st cb_system_uwb_pdoa_cir_processing(enUwbPdoaCalT
  *
  * This function retrieves the quality flag for the Channel Impulse Response (CIR) by
  * first storing the CIR register data and then performing a quality check on the stored
- * data. It calls the `cb_system_uwb_store_rx_cir_register` function to obtain the necessary 
+ * data. It calls the `cb_system_uwb_get_rx_cir_register` function to obtain the necessary 
  * register values and subsequently calls `CB_SYSTEM_cir_quality_check` to evaluate 
  * the quality of the CIR.
  *
@@ -1262,7 +1325,7 @@ cb_uwbalg_poa_outputperpacket_st cb_system_uwb_pdoa_cir_processing(enUwbPdoaCalT
  */
 uint8_t cb_system_uwb_get_rx_cir_quality_flag(void)
 {
-  return cb_uwbdriver_get_rx_cir_quality_flag();
+  return (*cb_getfn_uwbdriver_get_rx_cir_quality_flag())();
 }
 
 /**
@@ -1280,7 +1343,7 @@ uint8_t cb_system_uwb_get_rx_cir_quality_flag(void)
  */
 cb_uwbsystem_rx_dcoc_st cb_system_uwb_get_rx_dcoc(cb_uwbsystem_rxport_en enRxPort)
 {
-  return cb_uwbdriver_get_rx_dcoc(enRxPort);
+  return (*cb_getfn_uwbdriver_get_rx_dcoc())(enRxPort);
 }
 
 /**
@@ -1302,7 +1365,7 @@ cb_uwbsystem_rx_dcoc_st cb_system_uwb_get_rx_dcoc(cb_uwbsystem_rxport_en enRxPor
  */
 cb_uwbsystem_rx_signalinfo_st cb_system_uwb_get_rx_rssi(uint8_t rssiRxPorts)
 {
-  return cb_uwbdriver_get_rx_rssi(rssiRxPorts);
+  return (*cb_getfn_uwbdriver_get_rx_rssi())(rssiRxPorts);
 }
 
 /**
@@ -1314,7 +1377,7 @@ cb_uwbsystem_rx_signalinfo_st cb_system_uwb_get_rx_rssi(uint8_t rssiRxPorts)
  */
 void cb_system_uwb_get_rx_etc_status_register(cb_uwbsystem_rx_etc_statusregister_st* const etcStatus) 
 {
-  cb_uwbdriver_get_uwb_rx_etc_status_register(etcStatus);
+  (*cb_getfn_uwbdriver_get_uwb_rx_etc_status_register())(etcStatus);
 }
 
 /**
@@ -1327,7 +1390,7 @@ void cb_system_uwb_get_rx_etc_status_register(cb_uwbsystem_rx_etc_statusregister
  */
 cb_uwbsystem_rxstatus_un cb_system_uwb_get_rx_status(void)
 {
-  return cb_uwbdriver_get_uwb_rx_status_register();
+  return (*cb_getfn_uwbdriver_get_uwb_rx_status_register())();
 }
 
 
@@ -1338,7 +1401,7 @@ cb_uwbsystem_rxstatus_un cb_system_uwb_get_rx_status(void)
 */
 uint16_t cb_system_uwb_get_rx_cir_ctl_idx(void)
 {
-  return cb_uwbdriver_get_rx_cir_ctl_idx();
+  return (*cb_getfn_uwbdriver_get_rx_cir_ctl_idx())();
 }
 
 /**
@@ -1348,7 +1411,7 @@ uint16_t cb_system_uwb_get_rx_cir_ctl_idx(void)
  */
 void cb_system_uwb_abs_timer_on(enUwbAbsoluteTimer enAbsoluteTimer)
 {
-  cb_uwbdriver_abs_timer_on(enAbsoluteTimer);
+  (*cb_getfn_uwbdriver_abs_timer_on())(enAbsoluteTimer);
 }
 
 /**
@@ -1358,7 +1421,7 @@ void cb_system_uwb_abs_timer_on(enUwbAbsoluteTimer enAbsoluteTimer)
  */
 void cb_system_uwb_abs_timer_off(enUwbAbsoluteTimer enAbsoluteTimer)
 {
-  cb_uwbdriver_abs_timer_off(enAbsoluteTimer);
+  (*cb_getfn_uwbdriver_abs_timer_off())(enAbsoluteTimer);
 }
 
 /**
@@ -1368,7 +1431,7 @@ void cb_system_uwb_abs_timer_off(enUwbAbsoluteTimer enAbsoluteTimer)
  */
 void cb_system_uwb_abs_timer_clear_internal_occurence(enUwbAbsoluteTimer enAbsoluteTimer)
 {
-  cb_uwbdriver_abs_timer_clear_internal_occurence (enAbsoluteTimer);
+  (*cb_getfn_uwbdriver_abs_timer_clear_internal_occurence())(enAbsoluteTimer);
 }
 
 /**
@@ -1389,7 +1452,7 @@ void cb_system_uwb_abs_timer_configure_timeout_value(enUwbAbsoluteTimer enAbsolu
   
   timeoutValue = (uint32_t)((uint64_t)(targetTimeoutTime) * DEF_US_TO_NS / DEF_ABS_TIMER_UNIT);
   
-  cb_uwbdriver_abs_timer_configure_timeout_value(enAbsoluteTimer, baseTime, timeoutValue);
+  (*cb_getfn_uwbdriver_abs_timer_configure_timeout_value())(enAbsoluteTimer, baseTime, timeoutValue);
 }
 
 /**
@@ -1401,7 +1464,7 @@ void cb_system_uwb_abs_timer_configure_timeout_value(enUwbAbsoluteTimer enAbsolu
  */
 void cb_system_uwb_abs_timer_configure_event_commander(enUwbEnable control, enUwbAbsoluteTimer enAbsoluteTimer, enUwbEventControl uwbEventControl)
 {
-  cb_uwbdriver_abs_timer_configure_event_commander(control, enAbsoluteTimer,uwbEventControl);  
+  (*cb_getfn_uwbdriver_abs_timer_configure_event_commander())(control, enAbsoluteTimer,uwbEventControl);  
 }
 
 /**
@@ -1411,7 +1474,7 @@ void cb_system_uwb_abs_timer_configure_event_commander(enUwbEnable control, enUw
  */
 void cb_system_uwb_enable_event_timestamp(enUwbEnable enable)
 {
-  cb_uwbdriver_enable_event_timestamp(enable);
+  (*cb_getfn_uwbdriver_enable_event_timestamp())(enable);
 }
 
 /**
@@ -1422,7 +1485,7 @@ void cb_system_uwb_enable_event_timestamp(enUwbEnable enable)
  */
 void cb_system_uwb_configure_event_timestamp_mask(enUwbEventTimestampMask eventTimestampMask,enUwbEventIndex uwbEventIndex)
 {
-  cb_uwbdriver_configure_event_timestamp_mask(eventTimestampMask, uwbEventIndex);
+  (*cb_getfn_uwbdriver_configure_event_timestamp_mask())(eventTimestampMask, uwbEventIndex);
 }
 
 /**
@@ -1433,7 +1496,7 @@ void cb_system_uwb_configure_event_timestamp_mask(enUwbEventTimestampMask eventT
  */
 uint32_t cb_system_uwb_get_event_timestamp_in_ns(enUwbEventTimestampMask eventTimestampMask)
 {
-  return cb_uwbdriver_get_event_timestamp_in_ns(eventTimestampMask);
+  return (*cb_getfn_uwbdriver_get_event_timestamp_in_ns())(eventTimestampMask);
 }
 
 /**
@@ -1441,7 +1504,7 @@ uint32_t cb_system_uwb_get_event_timestamp_in_ns(enUwbEventTimestampMask eventTi
  */
 void cb_system_uwb_tsu_clear(void)
 {
-  cb_uwbdriver_tsu_clear();
+  (*cb_getfn_uwbdriver_tsu_clear())();
 }
 
 /**
@@ -1453,7 +1516,7 @@ void cb_system_uwb_tsu_clear(void)
  */
 double cb_system_uwb_alg_pdoa_estimation(double poa_deg1, double poa_deg2)
 {
-  return cb_uwbalg_pdoa_estimation(poa_deg1, poa_deg2);
+  return (*cb_getfn_uwbalg_pdoa_estimation())(poa_deg1, poa_deg2);
 }
 
 /**
@@ -1465,7 +1528,7 @@ double cb_system_uwb_alg_pdoa_estimation(double poa_deg1, double poa_deg2)
  */
 double cb_system_uwb_alg_prop_calculation(cb_uwbsystem_rangingtroundtreply_st* result1, cb_uwbsystem_rangingtroundtreply_st* result2)
 {
-  return cb_uwbalg_prop_calculation(result1, result2);
+  return (*cb_getfn_uwbalg_prop_calculation())(result1, result2);
 }
 
 /**
@@ -1479,8 +1542,22 @@ double cb_system_uwb_alg_prop_calculation(cb_uwbsystem_rangingtroundtreply_st* r
  */
 stAOA_CompensatedData cb_system_uwb_aoa_biascomp(cb_uwbsystem_pdoa_3ddata_st pdoa_raw, float pd01_bias, float pd02_bias, float pd12_bias)
 {
-  return cb_uwbaoa_pdoa_biascomp(pdoa_raw, pd01_bias, pd02_bias, pd12_bias);
+  return (*cb_getfn_uwbalg_aoa_pdoa_biascomp())(pdoa_raw, pd01_bias, pd02_bias, pd12_bias);
+}
 
+/**
+ * @brief Calculates the 2D AOA (Angle of Arrival) using phase differences and lookup tables.
+ * 
+ * @param pd_azi Pointer to phase difference for azimuth calculation
+ * @param ele_ref Pointer to reference elevation angle in degrees
+ * @param ant_attr Pointer to 2D antenna attributes structure containing antenna positions and type
+ * @param lut_attr Pointer to LUT attributes structure containing reference data and parameters
+ * @param azi_result Pointer to store the calculated azimuth angle in degrees
+ * @return void
+ */
+void cb_system_uwb_aoa_lut_full2d(float* pd_azi, float* ele_ref, st_antenna_attribute_2d* ant_attr, cb_uwbaoa_lut_attribute_st* lut_attr, float* azi_result)
+{
+  (*cb_getfn_uwbalg_aoa_lut_full2d())(pd_azi, ele_ref, ant_attr, lut_attr, azi_result);
 }
 
 /**
@@ -1498,8 +1575,9 @@ stAOA_CompensatedData cb_system_uwb_aoa_biascomp(cb_uwbsystem_pdoa_3ddata_st pdo
  */
 void cb_system_uwb_aoa_lut_full3d(stAOA_CompensatedData* AOA_PD, st_antenna_attribute_3d* ant_attr, cb_uwbaoa_lut_attribute_st* lut_attr, float* azi_result, float* ele_result)
 {
-  cb_uwbaoa_lut_full3d(AOA_PD, ant_attr, lut_attr, azi_result, ele_result);
+  (*cb_getfn_uwbalg_aoa_lut_full3d())(AOA_PD, ant_attr, lut_attr, azi_result, ele_result);
 }
+
 /**
  * @brief Detects angle inversion in AOA (Angle of Arrival) calculations
  * @details Only works for antenna type 0 (A at top, B and C at bottom) and type 2 (A and C at top, B at bottom).
@@ -1517,38 +1595,34 @@ void cb_system_uwb_aoa_lut_full3d(stAOA_CompensatedData* AOA_PD, st_antenna_attr
  */
 uint8_t cb_system_uwb_detect_angle_inversion(float* fov_list, st_antenna_attribute_3d* ant_attr, cb_uwbaoa_fov_attribute_st* FOV_attr, stAOA_CompensatedData* AOA_PD)
 {
-  return cb_uwbaoa_detect_angle_inversion(fov_list, ant_attr, FOV_attr, AOA_PD);
-}
-/**
- * @brief Calculates the 2D AOA (Angle of Arrival) using phase differences and lookup tables.
- * 
- * @param pd_azi Pointer to phase difference for azimuth calculation
- * @param ele_ref Pointer to reference elevation angle in degrees
- * @param ant_attr Pointer to 2D antenna attributes structure containing antenna positions and type
- * @param lut_attr Pointer to LUT attributes structure containing reference data and parameters
- * @param azi_result Pointer to store the calculated azimuth angle in degrees
- * @return void
- */
-void cb_system_uwb_aoa_lut_full2d(float* pd_azi, float* ele_ref, st_antenna_attribute_2d* ant_attr, cb_uwbaoa_lut_attribute_st* lut_attr, float* azi_result)
-{
-  cb_uwbaoa_lut_full2d(pd_azi, ele_ref, ant_attr, lut_attr, azi_result);
+  return (*cb_getfn_uwbalg_aoa_detect_angle_inversion())(fov_list, ant_attr, FOV_attr, AOA_PD);
 }
 
 /*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
 /*XXXXX                         Radar Wrapper Functions                   XXXXXXXXXXXXXXXX*/
-/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
 
 /**
- * @brief Configures the radar system with specified parameters.
+ * @brief Brings the radar TX/RX hardware online for sensing.
  *
- * This function initializes the radar subsystem components including TX, RX modules,
- * and sets the power amplifier and scaling parameters.
- * @param pa        The power amplifier setting (5-bit value, 0-31 range)
- * @param scale_bit The scaling factor for radar signal (3-bit value, 0-7 range)
+ * Invokes the UWB driver radar-on function pointer. Initializes radar subsystem
+ * blocks and starts TX/RX listen where applicable.
+ *
+ * @param powerCode    TX power code passed to the driver (typically 1-60).
+ * @param num_rx_mode Antenna topology: @c CB_DRIVER_RADAR_USE_1T1R or @c CB_DRIVER_RADAR_USE_1T2R.
  */
-void cb_system_radar_config(uint32_t pa, uint32_t scale_bit)
+void cb_system_radar_on(uint32_t powerCode, uint32_t num_rx_mode)
 {
-  cb_uwbdriver_radar_config(pa, scale_bit);
+  (*cb_getfn_uwbdriver_radar_on())(powerCode, num_rx_mode);
+}
+
+/**
+ * @brief Configures radar packet type, preamble, and RFRAME for a burst.
+ */
+void cb_system_radar_config(uint32_t scaleBit, uint32_t modePrf,
+                            cb_uwbsystem_preamblecodeidx_en preambleCodeIndex)
+{
+  (*cb_getfn_uwbdriver_radar_config())(scaleBit, modePrf, preambleCodeIndex);
 }
 
 /**
@@ -1562,21 +1636,49 @@ void cb_system_radar_config(uint32_t pa, uint32_t scale_bit)
  */
 void cb_system_radar_start(uint32_t gain_idx)
 {
-  cb_uwbdriver_radar_start(gain_idx);
+  (*cb_getfn_uwbdriver_radar_start())(gain_idx);
 }
 
-void cb_system_radar_getcir(cb_uwbsystem_rx_cir_iqdata_st* destArray,cb_uwbsystem_rxport_en enRxPort,uint32_t NumCirSample)
+/**
+ * @brief Retrieves the timestamp difference between TX and RX.
+ *
+ * This function reads the hardware timestamp registers and calculates the
+ * difference between the TX and RX timestamps, handling wraparound cases.
+ *
+ * @return Timestamp difference in nanoseconds (unsigned, always positive)
+ */
+uint32_t cb_system_radar_get_timestamp_diff(cb_uwbsystem_rxport_en enRxPort)
 {
-  cb_uwbdriver_radar_getcir(destArray,enRxPort,NumCirSample);
+  return (*cb_getfn_uwbdriver_radar_get_timestamp_diff())(enRxPort);
 }
 
+/**
+ * @brief System-level interface to retrieve Channel Impulse Response (CIR) data for radar
+ *
+ * This function serves as the system-level interface for retrieving CIR data from
+ * UWB receiver ports for radar applications. It acts as a bridge between the
+ * framework layer and the low-level driver, forwarding the CIR data retrieval
+ * request to the UWB driver layer. The CIR data contains I/Q samples representing
+ * the channel impulse response, which is used for radar signal processing including
+ * range and velocity estimation.
+ *
+ * @param destArray Pointer to destination array of cb_uwbsystem_rx_cir_iqdata_st structures
+ *                  to store the retrieved CIR I/Q data
+ * @param enRxPort  The UWB receiver port to retrieve CIR data from (EN_UWB_RX_0, EN_UWB_RX_1, EN_UWB_RX_2)
+ * @param NumCirSample Number of CIR samples to retrieve
+ * @return CB_PASS if timestamp diff is in [8, 24]; otherwise CB_FAIL
+ */
+CB_STATUS cb_system_radar_getcir(cb_uwbsystem_rx_cir_iqdata_st* destArray,cb_uwbsystem_rxport_en enRxPort,uint32_t NumCirSample,uint8_t enableDetect)
+{
+  return (*cb_getfn_uwbdriver_radar_get_cir())(destArray,enRxPort,NumCirSample,enableDetect);
+}
 
 /**
  * @brief Stop radar TX and RX operations
  */
 void cb_system_radar_stop(void)
 {
-  cb_uwbdriver_radar_stop();
+  (*cb_getfn_uwbdriver_radar_stop())();
 }
 
 /**
@@ -1586,7 +1688,15 @@ void cb_system_radar_stop(void)
  */
 void cb_system_radar_off(void)
 {
-  cb_uwbdriver_radar_off();
+  (*cb_getfn_uwbdriver_radar_off())();
+}
+
+/**
+ * @brief Pulse RX domain reset (assert then release RX_RSTN).
+ */
+void cb_system_radar_reset(void)
+{
+  (*cb_getfn_uwbdriver_radar_reset())();
 }
 
 /**
@@ -1602,5 +1712,51 @@ void cb_system_radar_off(void)
  */
 void cb_system_fft(cb_uwbradar_en fft_len, float* pSrc, uint8_t ifftFlag, uint8_t doBitReverse)
 {
-  cb_uwbdriver_fft(fft_len, pSrc, ifftFlag, doBitReverse);
+  (*cb_getfn_uwbdriver_fft())(fft_len, pSrc, ifftFlag, doBitReverse);
+}
+
+//-----------------------------------------------------------
+// Tensorflow Related functions
+//-----------------------------------------------------------
+/**
+ * @brief Initialize the quality flag model interpreter.
+ *
+ * This function loads either the quantized (int8) or float32 version of the
+ * quality flag model depending on the build flag. It sets up the operator
+ * resolver, allocates tensor arenas if initialization succeeds.
+ *
+ * @note Must be called once before invoking cb_system_uwb_tf_quality_flag_check().
+ *
+ * @return CB_ALG_STATUS  EN_ALG_OK on success, EN_ALG_ERROR failed initialized
+ */
+CB_ALG_STATUS cb_system_uwb_tf_quality_flag_init(void)
+{
+  return (*cb_getfn_uwbalg_tf_quality_flag_init())();
+}
+
+/**
+ * @brief Run quality flag inference on feature vector.
+ *
+ * This function checks that the interpreter has been successfully
+ * initialized, validates input/output tensors, loads the feature
+ * vector into the model, runs inference, and outputs the
+ * predicted class index (0-3).
+ * @param[out] outputlabel Pointer to Predicted class index in range [0,3] on success.
+ * @return CB_ALG_STATUS  EN_ALG_OK on success, EN_ALG_ERROR failed invoking
+ */
+CB_ALG_STATUS cb_system_uwb_tf_quality_flag_check(uint8_t* outputlabel)
+{
+  return (*cb_getfn_uwbalg_tf_quality_flag_check())(outputlabel);
+}
+
+/**
+ * @brief Initializes the UWB chip with low power mode enabled.
+ *
+ * @note This function is used to configure the UWB chip for power-efficient operation.
+ *
+ * @retval None
+ */
+void cb_system_chip_init_lowpower_enable(void)
+{
+  (*cb_getfn_uwbdriver_chip_init_lowpower_enable())();
 }

@@ -16,9 +16,8 @@
 #include "CB_Common.h"
 #include "CB_qspi.h"
 #include "CB_system_types.h"
-#include "CB_UwbDrivers.h"
 #include "CB_Algorithm.h"
-#include "CB_aoa.h"
+#include "CB_UwbDrivers.h"
 
 //-------------------------------
 // DEFINE SECTION
@@ -79,6 +78,23 @@ void cb_system_uwb_rx_top_init(void);
 void cb_system_uwb_config_tx(cb_uwbsystem_packetconfig_st* config, cb_uwbsystem_txpayload_st* txPayload, cb_uwbsystem_tx_irqenable_st* stTxIrqEnable);
 
 /**
+ * @brief Configures the UWB TX CW power code.
+ *
+ * This function starts the UWB communication transmitter power code.
+ * 
+ * @param txPacketConfig Configuration.
+ */
+void cb_system_uwb_config_tx_cw(cb_uwbsystem_packetconfig_st* config);
+
+/**
+ * @brief starts the UWB TX CW.
+ *
+ * This function starts the UWB communication transmitter in cw mode.
+ * 
+ */
+void cb_system_uwb_start_tx_cw(void);
+
+/**
  * @brief Configures the UWB receiver with packet detection and CFO bypass settings.
  *
  * @param config Pointer to packet configuration structure
@@ -113,34 +129,16 @@ void cb_system_uwb_tx_init             (void);
 void cb_system_uwb_rx_init             (cb_uwbsystem_rxport_en enRxPort);
 
 /**
- * @brief Start the UWB communication for TX
+ * @brief Starts the UWB transmitter.
  *
- */
-void cb_system_uwb_tx_start             (void);
-
-/**
- * @brief Start the UWB communication for TX (For deferred TX)
+ * This function starts the UWB transmitter either immediately or in deferred mode
+ * based on the specified start mode parameter.
  *
+ * @param trxStartMode Start mode selection:
+ *                     - EN_TRX_START_NON_DEFERRED: Start transmission immediately
+ *                     - EN_TRX_START_DEFERRED: Prepare for deferred start
  */
-void cb_system_uwb_tx_start_prepare(void);
-
-/**
- * @brief Start the UWB communication for RX0 (For deferred RX)
- *
- */
-void cb_system_uwb_rx_start_prepare(void);
-
-/**
- * @brief Restart the UWB communication for TX
- *
- */
-void cb_system_uwb_stage_tx_start           (void);
-
-/**
- * @brief Start the UWB communication for RX (For deferred RX)
- *
- */
-void cb_system_uwb_stage_rx_start (void);
+void cb_system_uwb_tx_start             (cb_uwbsystem_trx_startmode_en trxStartMode);
 
 /**
  * @brief Stop the UWB communication for TX
@@ -153,29 +151,27 @@ void cb_system_uwb_tx_stop             (void);
  * 
  * This function starts the UWB receiver on the specified port with the given gain settings.
  * It configures the receiver gain parameters and enables reception on the selected port.
+ * The receiver can be started either immediately or in deferred mode based on the trxStartMode parameter.
  *
- * @param enRxPort The UWB receiver port to start.Can be a single port
- *                 (EN_UWB_RX_0, EN_UWB_RX_1, EN_UWB_RX_2) or a combination of ports
- *                 (EN_UWB_RX_02, EN_UWB_RX_ALL)
+ * @param enRxPort The UWB receiver port to start (RX0, RX1, RX2, or combination).
  * @param stBypass_gain Pointer to structure containing gain bypass configuration parameters.
+ * @param trxStartMode Start mode selection:
+ *                     - EN_TRX_START_NON_DEFERRED: Start reception immediately
+ *                     - EN_TRX_START_DEFERRED: Prepare for deferred start
  */
-void cb_system_uwb_rx_start(cb_uwbsystem_rxport_en enRxPort, cb_uwbsystem_rx_dbb_gain_st* stBypass_gain);
+void cb_system_uwb_rx_start(cb_uwbsystem_rxport_en enRxPort, cb_uwbsystem_rx_dbb_gain_st* stBypass_gain, cb_uwbsystem_trx_startmode_en trxStartMode);
  
 /**
  * @brief Stops the UWB (Ultra-Wideband) receiver on the specified port.
  * 
- * @param enRxPort The UWB receiver port to stop. Can be a single port
- *                 (EN_UWB_RX_0, EN_UWB_RX_1, EN_UWB_RX_2) or a combination of ports
- *                 (EN_UWB_RX_02, EN_UWB_RX_ALL)
+ * @param enRxPort The UWB receiver port to stop. 
  */
 void cb_system_uwb_rx_stop (cb_uwbsystem_rxport_en enRxPort);
  
 /**
  * @brief Turns off the UWB (Ultra-Wideband) receiver on the specified port.
  * 
- * @param enRxPort The UWB receiver port to turn off.Can be a single port
- *                 (EN_UWB_RX_0, EN_UWB_RX_1, EN_UWB_RX_2) or a combination of ports
- *                 (EN_UWB_RX_02, EN_UWB_RX_ALL)
+ * @param enRxPort The UWB receiver port to turn off.
  */
 void cb_system_uwb_rx_off (cb_uwbsystem_rxport_en enRxPort);
 
@@ -361,6 +357,29 @@ float cb_system_get_chip_temperature(void);
 float cb_system_adc_read_AIN_voltage(uint8_t gain_stage);
 
 /**
+ * @brief Read ADC input and return a 10-bit scaled code value.
+ *
+ * This function reads the ADC voltage for the specified gain stage using
+ * cb_adc_read_AIN_voltage(), then scales the result to a 10-bit range
+ * (0 to 1024 inclusive) based on the full-scale voltage for that gain stage.
+ *
+ * Full-scale voltages per gain stage:
+ * | Gain Stage | Full-Scale Voltage (V) |
+ * |------------|------------------------|
+ * |     0      | 3.3                    |
+ * |     1      | 2.5                    |
+ * |     2      | 1.8                    |
+ * |     3      | 1.5                    |
+ * |     4      | 1.2                    |
+ * |     5      | 0.9                    |
+ *
+ * @param gain_stage ADC gain stage (0-5). Values >5 are invalid.
+ * @return uint16_t Scaled ADC code in the range 0-1024.
+ *         Returns 0 if gain_stage is invalid.
+ */
+uint16_t cb_system_adc_read_AIN_10bit(uint8_t gain_stage);
+
+/**
  * @brief Perform a one-time calibration of the RC clock.
  *
  * This function calibrates the drift time of the RC clock
@@ -543,6 +562,24 @@ void cb_system_uwb_get_rx_raw_timestamp(cb_uwbsystem_rx_tsu_st* rxTsu);
 void cb_system_uwb_get_rx_tsu_timestamp(cb_uwbsystem_rx_tsutimestamp_st* rxTsuTimestamp, cb_uwbsystem_rxport_en enRxPort);
 
 /**
+ * @brief Retrieves the RX TSU timestamp.
+ * 
+ * @param rxTsuTimestamp Pointer to the structure to store the RX TSU timestamp.
+ * @param enRxPort The RX port to retrieve the timestamp from (EN_UWB_RX_0, EN_UWB_RX_1, or EN_UWB_RX_2).
+ * @param scale_factor      Peak divisor for detection threshold; default 10. For dynamic
+ *                          range, use 6, 10, or 18 for 15 dB, 20 dB, or 25 dB dynamic range.
+ * @param le_noise_th_ip    Input noise floor; default 0. Effective threshold is
+ *                          max(prefix estimate from taps 100..119, le_noise_th_ip).
+ * @param mm_option         Multipath mitigation mode:
+ *                          0 - conventional leading edge detection with precursor protection;
+ *                          1 - near-range multipath: mitigation with interpolation compensation;
+ *                          2 - near-range multipath: mitigation with near-energy compensation;
+ *                          3 - near-range multipath: compensation of both 1 and 2.
+ *
+ */
+void cb_system_uwb_get_rx_tsu_timestamp_lemm(cb_uwbsystem_rx_tsutimestamp_st* rxTsuTimestamp, cb_uwbsystem_rxport_en enRxPort, int scale_factor, int le_noise_th_ip, int mm_option);
+
+/**
  * @brief Stores the RX TSU status and timestamp data.
  *
  * This function retrieves the RX TSU status and timestamp data from the hardware registers
@@ -553,7 +590,7 @@ void cb_system_uwb_get_rx_tsu_timestamp(cb_uwbsystem_rx_tsutimestamp_st* rxTsuTi
  * @param p_rxTimeStampData Pointer to the structure where the RX timestamp data will be stored.
  * @param enRxPort The RX port from which to retrieve the data (e.g., EN_UWB_RX_0, EN_UWB_RX_1, EN_UWB_RX_2).
  */
-void cb_system_uwb_store_rx_tsu_status(cb_uwbsystem_rx_tsustatus_st* p_rxTsuStatus, cb_uwbsystem_rx_tsu_st* p_rxTimeStampData, cb_uwbsystem_rxport_en enRxPort);
+void cb_system_uwb_get_rx_tsu_status(cb_uwbsystem_rx_tsustatus_st* p_rxTsuStatus, cb_uwbsystem_rx_tsu_st* p_rxTimeStampData, cb_uwbsystem_rxport_en enRxPort);
 
 /**
  * @brief Copies CIR register data into the provided array of `cb_uwbsystem_rx_cir_iqdata_st`.
@@ -563,7 +600,7 @@ void cb_system_uwb_store_rx_tsu_status(cb_uwbsystem_rx_tsustatus_st* p_rxTsuStat
  * @param startingPosition Offset within the CIR register memory.
  * @param numSamples Number of `cb_uwbsystem_rx_cir_iqdata_st` samples to copy.
  */
-void cb_system_uwb_store_rx_cir_register(cb_uwbsystem_rx_cir_iqdata_st* destArray, cb_uwbsystem_rxport_en enRxPort, uint32_t startingPosition, uint32_t numSamples);
+void cb_system_uwb_get_rx_cir_register(cb_uwbsystem_rx_cir_iqdata_st* destArray, cb_uwbsystem_rxport_en enRxPort, uint32_t startingPosition, uint32_t numSamples);
 
 /**
  * @brief Processes the CIR (Channel Impulse Response) data for UWB PDOA (Phase Difference of Arrival).
@@ -588,7 +625,7 @@ cb_uwbalg_poa_outputperpacket_st cb_system_uwb_pdoa_cir_processing(enUwbPdoaCalT
  *
  * This function retrieves the quality flag for the Channel Impulse Response (CIR) by
  * first storing the CIR register data and then performing a quality check on the stored
- * data. It calls the `cb_system_uwb_store_rx_cir_register` function to obtain the necessary 
+ * data. It calls the `cb_system_uwb_get_rx_cir_register` function to obtain the necessary 
  * register values and subsequently calls `CB_SYSTEM_cir_quality_check` to evaluate 
  * the quality of the CIR.
  *
@@ -696,6 +733,16 @@ void cb_system_uwb_tx_freeze_pll(void);
  */
 void cb_system_uwb_tx_unfreeze_pll(void);
 
+/**
+ * @brief Configures the common TSU and time mask for the UWB transceiver.
+ */
+void cb_system_uwb_trx_config_cmn_tsu_timemask(void);
+
+/**
+ * @brief Configures the CIR correlation length.
+ */
+void cb_system_uwb_rx_config_cir_correlation_length(uint8_t correlation_length);
+    
 /**
  * @brief Enables the UWB absolute timer.
  * 
@@ -833,6 +880,16 @@ uint8_t cb_system_uwb_detect_angle_inversion(float* fov_list, st_antenna_attribu
  */
  void cb_system_uwb_aoa_lut_full2d(float* pd_azi, float* ele_ref, st_antenna_attribute_2d* ant_attr, cb_uwbaoa_lut_attribute_st* lut_attr, float* azi_result);
  
+ /**
+ * @brief   HS-AOA 3D LUT estimator (1-NN in PDOA space + two-neighbor interpolation).
+ * @param   AOA_PD      Compensated phase differences (PD01/02/12), degrees
+ * @param   lut_attr    Grid metadata + lut_data (size_col >= 3)
+ * @param   azi_result  Estimated azimuth (deg)
+ * @param   ele_result  Estimated elevation (deg)
+ * @return  EN_AOA_OK on success, EN_AOA_ERROR on invalid parameters
+ */
+void cb_system_uwb_aoa_lut_hs(stAOA_CompensatedData* AOA_PD, const cb_uwbaoa_lut_attribute_st* lut_attr, float* azi_result, float* ele_result);
+ 
  void cb_system_uwb_config_ftm_rx(cb_uwbsystem_packetconfig_st* config, cb_uwbsystem_rx_irqenable_st* stRxIrqEnable, cb_uwbsystem_rx_dbb_cfo_st* stBypass_cfo);
 
 /*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
@@ -840,14 +897,24 @@ uint8_t cb_system_uwb_detect_angle_inversion(float* fov_list, st_antenna_attribu
 /*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
 
 /**
- * @brief Configures the radar system with specified parameters.
+ * @brief Brings the radar TX/RX hardware online for sensing.
  *
- * This function initializes the radar subsystem components including TX, RX modules,
- * and sets the power amplifier and scaling parameters.
- * @param pa        The power amplifier setting (5-bit value, 0-31 range)
- * @param scale_bit The scaling factor for radar signal (3-bit value, 0-7 range)
+ * @param powerCode    TX power code passed to the driver (typically 1-60).
+ * @param num_rx_mode Antenna topology: @c CB_DRIVER_RADAR_USE_1T1R or @c CB_DRIVER_RADAR_USE_1T2R.
  */
-void cb_system_radar_config(uint32_t pa, uint32_t scale_bit);
+void cb_system_radar_on(uint32_t powerCode, uint32_t num_rx_mode);
+
+/**
+ * @brief Configures radar packet type, preamble, and RFRAME for a burst.
+ *
+ * Uses antenna topology from prior @ref cb_system_radar_on.
+ *
+ * @param scaleBit     AGC scale bit (0-7).
+ * @param modePrf      PRF packet mode: 0=M5P1, 1=M4P2, 2=M1P2; invalid values default to M5P1.
+ * @param preambleCodeIndex Preamble code index (9-32); applied when modePrf is 0 or 1.
+ */
+void cb_system_radar_config(uint32_t scaleBit, uint32_t modePrf,
+                            cb_uwbsystem_preamblecodeidx_en preambleCodeIndex);
 
 /**
  * @brief Start radar TX and RX operations based on gain index
@@ -862,6 +929,16 @@ void cb_system_radar_config(uint32_t pa, uint32_t scale_bit);
 void cb_system_radar_start(uint32_t gain_idx);
 
 /**
+ * @brief Retrieves the timestamp difference between TX and RX.
+ *
+ * This function reads the hardware timestamp registers and calculates the
+ * difference between the TX and RX timestamps, handling wraparound cases.
+ *
+ * @return Timestamp difference in nanoseconds (unsigned, always positive)
+ */
+uint32_t cb_system_radar_get_timestamp_diff(cb_uwbsystem_rxport_en enRxPort);
+ 
+/**
  * @brief System-level interface to retrieve Channel Impulse Response (CIR) data for radar
  *
  * This function serves as the system-level interface for retrieving CIR data from
@@ -875,8 +952,10 @@ void cb_system_radar_start(uint32_t gain_idx);
  *                  to store the retrieved CIR I/Q data
  * @param enRxPort  The UWB receiver port to retrieve CIR data from (EN_UWB_RX_0, EN_UWB_RX_1, EN_UWB_RX_2)
  * @param NumCirSample Number of CIR samples to retrieve
+ * @param enableDetect Non-zero to run ratio-based first-CIR detect on the flagged RX port
+ * @return CB_PASS if timestamp diff is in [8, 24]; otherwise CB_FAIL
  */
-void cb_system_radar_getcir(cb_uwbsystem_rx_cir_iqdata_st* destArray,cb_uwbsystem_rxport_en enRxPort,uint32_t NumCirSample);
+CB_STATUS cb_system_radar_getcir(cb_uwbsystem_rx_cir_iqdata_st* destArray,cb_uwbsystem_rxport_en enRxPort,uint32_t NumCirSample,uint8_t enableDetect);
 
 /**
  * @brief Stop radar TX and RX operations
@@ -891,6 +970,11 @@ void cb_system_radar_stop(void);
 void cb_system_radar_off(void);
 
 /**
+ * @brief Pulse RX domain reset (assert then release RX_RSTN).
+ */
+void cb_system_radar_reset(void);
+
+/**
  * @brief Perform FFT processing on radar data.
  *
  * This function performs Fast Fourier Transform (FFT) processing on the provided data.
@@ -903,4 +987,40 @@ void cb_system_radar_off(void);
  */
 void cb_system_fft(cb_uwbradar_en fft_len, float* pSrc, uint8_t ifftFlag, uint8_t doBitReverse);
 
+//-----------------------------------------------------------
+// Tensorflow Related functions
+//-----------------------------------------------------------
+/**
+ * @brief Initialize the quality flag model interpreter.
+ *
+ * This function loads either the quantized (int8) or float32 version of the
+ * quality flag model depending on the build flag. It sets up the operator
+ * resolver, allocates tensor arenas if initialization succeeds.
+ *
+ * @note Must be called once before invoking cb_system_uwb_tf_quality_flag_check().
+ *
+ * @return CB_ALG_STATUS  EN_ALG_OK on success, EN_ALG_ERROR failed initialized
+ */
+CB_ALG_STATUS cb_system_uwb_tf_quality_flag_init(void);
+
+/**
+ * @brief Run quality flag inference on feature vector.
+ *
+ * This function checks that the interpreter has been successfully
+ * initialized, validates input/output tensors, loads the feature
+ * vector into the model, runs inference, and outputs the
+ * predicted class index (0-3).
+ * @param[out] outputlabel Pointer to Predicted class index in range [0,3] on success.
+ * @return CB_ALG_STATUS  EN_ALG_OK on success, EN_ALG_ERROR failed invoking
+ */
+CB_ALG_STATUS cb_system_uwb_tf_quality_flag_check(uint8_t* outputlabel);
+
+/**
+ * @brief Initializes the UWB chip with low power mode enabled.
+ *
+ * @note This function is used to configure the UWB chip for power-efficient operation.
+ *
+ * @retval None
+ */
+void cb_system_chip_init_lowpower_enable(void);
 #endif /*__CB_SYSTEM_H*/

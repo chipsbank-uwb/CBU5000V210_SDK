@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>APP-DSTWR-1TO5 &mdash; CBU5000V210 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=29a6c3e3"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/design-tabs.js?v=f930bc37"></script>
+        <script src="../_static/tabs.js?v=3030b3cb"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="APP-PDOA" href="APP_PDOA.html" />
+    <link rel="prev" title="APP-DSTWR" href="APP_DSTWR.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CBU5000V210
+          </a>
+              <div class="version">
+                2.0.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../CBU5000V210SDK/CBU5000V210SDK.html">CBU5000V210 SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ApiReference.html">API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="UwbExamples.html">UWB Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="APP_COMMTRX.html">APP-COMMTRX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_DSTWR.html">APP-DSTWR</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">APP-DSTWR-1TO5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_PDOA.html">APP-PDOA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_RNGAOA.html">APP-RNGAOA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_PeriodicTRX.html">APP-PeriodicTRX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_RXPER.html">APP-RXPER</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_PSR.html">APP-PSR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_ABSTIMER.html">APP-AbsTimer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_CLI.html">APP_CLI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_TDOA.html">APP-TDOA</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../CpuExamples/CpuExamples.html">CPU Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calibration.html">UWB Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Appendix.html">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../VersionHistory.html">Version History</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CBU5000V210</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="UwbExamples.html">UWB Examples</a></li>
+      <li class="breadcrumb-item active">APP-DSTWR-1TO5</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="app-dstwr-1to5">
+<h1>APP-DSTWR-1TO5<a class="headerlink" href="#app-dstwr-1to5" title="Link to this heading"></a></h1>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-5Lit5paH" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-5Lit5paH" name="5Lit5paH" role="tab" tabindex="0">中文</button><button aria-controls="panel-0-RW5nbGlzaA==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tab" tabindex="-1">English</button></div><div aria-labelledby="tab-0-5Lit5paH" class="sphinx-tabs-panel group-tab" id="panel-0-5Lit5paH" name="5Lit5paH" role="tabpanel" tabindex="0"><p><strong>概述</strong></p>
+<p>本文档提供了验证一对多（一个发起者对最多五个响应者）双面双向测距（DS-TWR）功能的指南。该示例在标准DS-TWR的基础上增加了设备发现机制：发起者广播SCAN消息自动发现周围的响应者并建立设备列表，随后按列表逐个与响应者完成一次完整的DS-TWR测距，并将测得的距离回传给该响应者，因此发起者和响应者都能打印出距离结果和对端（responder）的设备ID。</p>
+<p><strong>要求</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>需要以下开发板中的两个至六个：</dt><dd><ul>
+<li><p>CB5000V210 Anchor开发板（一个作为发起者，最多五个作为响应者）</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>软件：</dt><dd><ul>
+<li><p>串行终端工具（例如PuTTY、SSCOM）</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>用户界面</strong></p>
+<ul class="simple">
+<li><p>在每个开发板上找到GPIO00引脚，并将其连接到串行接收线（RX）。</p></li>
+<li><p>在每个开发板上找到GPIO01引脚，并将其连接到串行发送线（TX）。</p></li>
+<li><p>确保连接牢固，以避免通信问题。</p></li>
+</ul>
+<p><strong>构建和运行</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>该示例可以在ChipsBank Connect SDK文件夹结构中的以下位置找到：</dt><dd><ul>
+<li><p>”Firmware\Examples\uwb_ds_twr_initiator_1to5”</p></li>
+<li><p>”Firmware\Examples\uwb_ds_twr_responder_1to5”</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>工作流程</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Initiator                        Responder (最多5个)
+ Idle                                Idle
+   |--------0a. SCAN(广播)----------&gt;|
+   |&lt;-------0b. ID(0x55 0xAA + ID)---|  随机退避后应答
+   |--------1. SYNC(目标ID)---------&gt;|
+   |&lt;-------2. ACK-------------------|
+ a |--------3. DSTWR(POLL)----------&gt;| d
+ b |&lt;-------4. DSTWR(RESPONSE) ------| e
+ c |--------5. DSTWR(FINAL) --------&gt;| f
+   |&lt;-------6. RESULT ---------------|
+   |--------7. DISTANCE ------------&gt;|
+ Terminate                         Terminate
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>0a/0b：设备发现阶段。发起者广播4字节的”SCAN”消息，响应者收到后以”0x55 0xAA + 芯片ID低4字节”应答。为避免多个响应者同时应答造成碰撞，每个响应者以自身芯片ID作为随机数种子，退避 (1~100)×300us 后再发送应答。</p></li>
+<li><p>发起者的扫描窗口为30ms，窗口内最多记录5个（SUPPORT_MAX_DEVICE）设备；集满5个或窗口超时后进入测距阶段。若窗口内一个设备也没有发现，则重新广播SCAN。</p></li>
+<li><p>1/2：发起者从设备列表中取出一个设备，将该设备的4字节ID作为SYNC消息的载荷发送出去。只有ID匹配的响应者才会回复ACK并参与本次测距，其余响应者继续等待。</p></li>
+<li><p>3~6：与标准DS-TWR一致，POLL/RESPONSE/FINAL的收发由UWB绝对定时器调度，响应者最后把Tround/Treply时间戳数据回传给发起者，由发起者计算距离。</p></li>
+<li><p>7：发起者把计算出的距离（单位cm，4字节大端整数）发送给响应者，使响应者也能打印距离结果。</p></li>
+<li><p>一次测距结束后，发起者对列表中的下一个设备重复1~7；列表清空后重新执行SCAN。</p></li>
+</ul>
+<p><strong>测试</strong></p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><strong>连接开发板</strong></dt><dd><ul class="simple">
+<li><p>准备合适的USB线，确保两端与您的计算机和开发板兼容。</p></li>
+<li><p>将USB线的一端插入计算机的USB端口，另一端插入开发板的USB端口。</p></li>
+<li><p>打开计算机上的设备管理器，检查是否识别到新的COM端口。如果没有，请检查USB线连接并确保安装了正确的驱动程序。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>配置串行终端</strong></dt><dd><ul class="simple">
+<li><p>在计算机上为每块开发板各打开一个串行终端工具，例如PuTTY、SSCOM或类似工具。</p></li>
+<li><p>在每个串行终端工具中选择识别到的COM端口。</p></li>
+<li><p>将波特率设置为115200，停止位设置为1，数据位顺序设置为LSB，奇偶校验设置为NONE。</p></li>
+<li><p>点击连接按钮以建立与每个开发板的串行通信。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>烧录并重置开发板</strong></dt><dd><ul class="simple">
+<li><p>将一个开发板刷入uwb_ds_twr_initiator_1to5固件，其余开发板（最多五个）刷入uwb_ds_twr_responder_1to5固件。</p></li>
+<li><p>响应者固件无需逐个修改，各设备通过芯片ID自动区分。</p></li>
+<li><p>在每个开发板上找到复位按钮，按下并释放以重启每个开发板。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>执行测试操作</strong></dt><dd><ul class="simple">
+<li><p>重置后，观察串行终端工具中的输出。</p></li>
+<li><dl class="simple">
+<dt>发起者将开始一对多DS-TWR过程：</dt><dd><ol class="arabic simple">
+<li><p>广播SCAN消息并等待30ms，收集响应者上报的设备ID</p></li>
+<li><p>打印”scan timer out:N”，N为本次扫描发现的设备数量</p></li>
+<li><p>逐个向设备列表中的响应者发送SYNC消息（载荷为目标设备ID）</p></li>
+<li><p>等待响应者的ACK响应</p></li>
+<li><p>依次完成POLL、RESPONSE、FINAL的收发</p></li>
+<li><p>接收来自响应者的RESULT消息并计算距离</p></li>
+<li><p>将距离回传给响应者，打印距离和对端设备ID</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>每个响应者将：</dt><dd><ol class="arabic simple">
+<li><p>接收SCAN消息，随机退避后上报自身芯片ID</p></li>
+<li><p>接收SYNC消息并与自身芯片ID比对，不匹配则继续等待</p></li>
+<li><p>匹配时向发起者回复ACK消息</p></li>
+<li><p>接收POLL、发送RESPONSE、接收FINAL</p></li>
+<li><p>向发起者发送RESULT（Tround/Treply时间戳数据）</p></li>
+<li><p>接收发起者回传的距离并打印距离和自身设备ID</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p>观察所有开发板上的串行终端输出以验证成功的距离测量。</p></li>
+<li><p>如果在测距过程中发生超时（DEF_DSTWR_OVERALL_PROCESS_TIMEOUT_MS为10ms），错误消息将指示哪个阶段失败。</p></li>
+<li><p>若SYNC后10ms（DEF_DSTWR_SYNC_ACK_TIMEOUT_MS）内未收到ACK，发起者将重新发起扫描或对下一个设备测距。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<p><strong>预期输出</strong></p>
+<ul class="simple">
+<li><p>重置所有开发板（一个发起者和若干响应者）后，串行终端将显示以下输出（ID为各响应者芯片ID的低4字节，实际值随设备不同而不同）：</p></li>
+</ul>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>DSTWR INITIATOR
+scan time out:3
+Cycle:0, D:25 cm ID:12:34:56:78
+Cycle:1, D:112 cm ID:23:45:67:89
+Cycle:2, D:243 cm ID:34:56:78:9a
+scan time out:3
+Cycle:3, D:25 cm ID:12:34:56:78
+Cycle:4, D:113 cm ID:23:45:67:89
+Cycle:5, D:242 cm ID:34:56:78:9a
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>DSTWR RESPONDER
+Cycle:0 D:25 cm ID:12:34:56:78
+Cycle:1 D:25 cm ID:12:34:56:78
+Cycle:2 D:24 cm ID:12:34:56:78
+Cycle:3 D:25 cm ID:12:34:56:78
+Cycle:4 D:25 cm ID:12:34:56:78
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-RW5nbGlzaA==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tabpanel" tabindex="0"><p><strong>Overview</strong></p>
+<p>This document provides a guide to verify the functionality of one-to-many (one initiator against up to five responders) Double-Sided Two-Way Ranging (DS-TWR) using UWB technology. On top of the standard DS-TWR flow, this example adds a device discovery mechanism: the initiator broadcasts a SCAN message to discover the surrounding responders and builds a device list, then performs a complete DS-TWR ranging sequence with each responder in turn and sends the measured distance back to that responder. As a result, both the initiator and the responders print the distance result together with the peer device ID.</p>
+<p><strong>Requirements</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Two to six of the following development boards:</dt><dd><ul>
+<li><p>CB5000V210 Anchor demo boards (one as initiator, up to five as responders)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Software:</dt><dd><ul>
+<li><p>Serial terminal tool (e.g., PuTTY, SSCOM)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>User interface</strong></p>
+<ul class="simple">
+<li><p>Locate the GPIO00 pin on each development board and connect it to the serial receive line (RX).</p></li>
+<li><p>Locate the GPIO01 pin on each development board and connect it to the serial transmit line (TX).</p></li>
+<li><p>Ensure the connections are secure to avoid communication issues.</p></li>
+</ul>
+<p><strong>Building and running</strong></p>
+<p>This sample can be found under the following locations in the ChipsBank Connect SDK folder structure:</p>
+<ul class="simple">
+<li><p>“Firmware\Examples\uwb_ds_twr_initiator_1to5”</p></li>
+<li><p>“Firmware\Examples\uwb_ds_twr_responder_1to5”</p></li>
+</ul>
+<p><strong>Operation flow</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Initiator                        Responder (up to 5)
+ Idle                                Idle
+   |--------0a. SCAN (broadcast)----&gt;|
+   |&lt;-------0b. ID (0x55 0xAA + ID)--|  replies after random backoff
+   |--------1. SYNC (target ID)-----&gt;|
+   |&lt;-------2. ACK  -----------------|
+ a |--------3. DSTWR(POLL) ---------&gt;| d
+ b |&lt;-------4. DSTWR(RESPONSE) -----| e
+ c |--------5. DSTWR(FINAL) --------&gt;| f
+   |&lt;-------6. RESULT --------------|
+   |--------7. DISTANCE ------------&gt;|
+ Terminate                         Terminate
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>0a/0b: Device discovery stage. The initiator broadcasts a 4-byte “SCAN” message, and each responder replies with “0x55 0xAA + the lower 4 bytes of its chip ID”. To avoid collisions when several responders reply at the same time, each responder uses its own chip ID as the random seed and backs off for (1~100)×300us before sending the reply.</p></li>
+<li><p>The scan window of the initiator is 30ms, and up to five devices (SUPPORT_MAX_DEVICE) are recorded within the window. The ranging stage starts once five devices are collected or the window expires. If no device is discovered within the window, the SCAN message is broadcast again.</p></li>
+<li><p>1/2: The initiator takes one device from the device list and sends its 4-byte ID as the payload of the SYNC message. Only the responder whose ID matches replies with an ACK and takes part in this ranging cycle, while the other responders keep waiting.</p></li>
+<li><p>3~6: Identical to the standard DS-TWR flow. The POLL/RESPONSE/FINAL transmissions are scheduled by the UWB absolute timer, and the responder finally sends the Tround/Treply timestamp data back so that the initiator can calculate the distance.</p></li>
+<li><p>7: The initiator sends the calculated distance (in cm, 4-byte big-endian integer) to the responder, so that the responder can print the distance result as well.</p></li>
+<li><p>After one ranging cycle completes, the initiator repeats steps 1~7 for the next device in the list. Once the list is empty, the SCAN stage is executed again.</p></li>
+</ul>
+<p><strong>Testing</strong></p>
+<ol class="arabic">
+<li><p><strong>Connect the Development Boards</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Prepare suitable USB cables, ensuring both ends are compatible with your computer and demo boards.</p></li>
+<li><p>Insert one end of each USB cable into USB ports on your computer and the other ends into the USB ports on the demo boards.</p></li>
+<li><p>Open the Device Manager on your computer to check if new COM ports have been recognized. If not, verify the USB cable connections and ensure the correct drivers are installed.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Configure the Serial Terminals</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Open one serial terminal tool per development board on your computer, such as PuTTY, SSCOM, or any similar tool.</p></li>
+<li><p>In each serial terminal tool, select the recognized COM port for each board.</p></li>
+<li><p>Set the baud rate to 115200, stop bits to 1, data bits order to LSB, and parity to NONE.</p></li>
+<li><p>Click the connect button to establish serial communication with each development board.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Program and Reset the Development Boards</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Program one development board with the uwb_ds_twr_initiator_1to5 firmware and the remaining boards (up to five) with the uwb_ds_twr_responder_1to5 firmware.</p></li>
+<li><p>The responder firmware does not need to be modified per board, as the devices are distinguished automatically by their chip IDs.</p></li>
+<li><p>Locate the reset button on each demo board, then press and release it to restart each development board.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Execute Test Operations</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>After resetting, observe the output in the serial terminal tool.</p></li>
+<li><dl class="simple">
+<dt>The Initiator will begin the one-to-many DS-TWR process by:</dt><dd><ol class="arabic simple">
+<li><p>Broadcasting the SCAN message and waiting 30ms to collect the device IDs reported by the responders</p></li>
+<li><p>Printing “scan timer out:N”, where N is the number of devices discovered in this scan</p></li>
+<li><p>Sending a SYNC message (with the target device ID as payload) to each responder in the device list</p></li>
+<li><p>Waiting for an ACK response from the responder</p></li>
+<li><p>Completing the POLL, RESPONSE and FINAL exchanges in sequence</p></li>
+<li><p>Receiving the RESULT message from the responder and calculating the distance</p></li>
+<li><p>Sending the distance back to the responder and printing the distance and the peer device ID</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Each Responder will:</dt><dd><ol class="arabic simple">
+<li><p>Receive the SCAN message and report its own chip ID after a random backoff</p></li>
+<li><p>Receive the SYNC message and compare it with its own chip ID, and keep waiting if it does not match</p></li>
+<li><p>Send an ACK message back to the Initiator when it matches</p></li>
+<li><p>Receive the POLL message, send the RESPONSE message and receive the FINAL message</p></li>
+<li><p>Send the RESULT message (Tround/Treply timestamp data) to the Initiator</p></li>
+<li><p>Receive the distance sent back by the Initiator and print the distance and its own device ID</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p>Observe the serial terminal outputs on all boards to verify successful distance measurement.</p></li>
+<li><p>If a timeout occurs during ranging (DEF_DSTWR_OVERALL_PROCESS_TIMEOUT_MS is 10ms), an error message will indicate which stage failed.</p></li>
+<li><p>If no ACK is received within 10ms (DEF_DSTWR_SYNC_ACK_TIMEOUT_MS) after SYNC, the initiator restarts the scan or moves on to the next device.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+<p><strong>Expected Output</strong></p>
+<ul class="simple">
+<li><p>The following output will be displayed in the serial terminals after resetting all development boards (one initiator and several responders). The ID is the lower 4 bytes of the chip ID of each responder, so the actual values differ from device to device:</p></li>
+</ul>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>DSTWR INITIATOR
+scan timer out:3
+Cycle:0, D:25 cm ID:12:34:56:78
+Cycle:1, D:112 cm ID:23:45:67:89
+Cycle:2, D:243 cm ID:34:56:78:9a
+scan timer out:3
+Cycle:3, D:25 cm ID:12:34:56:78
+Cycle:4, D:113 cm ID:23:45:67:89
+Cycle:5, D:242 cm ID:34:56:78:9a
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>DSTWR RESPONDER
+Cycle:0 D:25 cm ID:12:34:56:78
+Cycle:1 D:25 cm ID:12:34:56:78
+Cycle:2 D:24 cm ID:12:34:56:78
+Cycle:3 D:25 cm ID:12:34:56:78
+Cycle:4 D:25 cm ID:12:34:56:78
+</pre></div>
+</div>
+</div></div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="APP_DSTWR.html" class="btn btn-neutral float-left" title="APP-DSTWR" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="APP_PDOA.html" class="btn btn-neutral float-right" title="APP-PDOA" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Chipsbank.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

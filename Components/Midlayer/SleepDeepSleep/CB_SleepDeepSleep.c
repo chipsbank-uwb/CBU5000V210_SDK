@@ -112,7 +112,7 @@ void cb_scr_sleep_operation(void)
   /*0x4002000C-SleepModeRegister: sleep_time[20:1]0xFFF(default),force_sleep[0] 0:Clear SleepMode to active memory access, 1:Sleep Mode*/
   *((volatile uint32_t *)(0x4002000C)) = 0x1FFEUL; //this line hardcoded, because the memory is restricted from being access in this moment. 
   __asm volatile(
-    NOP_50_CPU_CYCLES
+    NOP_1000_CPU_CYCLES
   );
    
   /* Enable Ibuf */

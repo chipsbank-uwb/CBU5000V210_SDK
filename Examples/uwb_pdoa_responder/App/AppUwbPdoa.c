@@ -34,9 +34,10 @@
 //-------------------------------
 #define DEF_SYNC_RX_PAYLOAD_SIZE       4
 #define DEF_SYNC_ACK_TX_PAYLOAD_SIZE   3
-#define DEF_PDOA_PD01_BIAS              (170.0f)// 3D
-#define DEF_PDOA_PD02_BIAS              (40.0f) // 2D,3D
-#define DEF_PDOA_PD12_BIAS              (10.0f) // 3D
+// DemoKit calibration at 1m distance (device-specific)
+#define DEF_PDOA_PD01_BIAS              (-86.0f)  // 3D
+#define DEF_PDOA_PD02_BIAS              (-155.0f) // 2D,3D
+#define DEF_PDOA_PD12_BIAS              (-70.0f)  // 3D
 
 // PDOA Mode Configuration:
 #define APP_PDOA_HIGH_ACCURACY_MODE   APP_FALSE // PDOA High Accuracy Mode: End then restart for better accuracy
@@ -124,15 +125,15 @@ static float                            s_eleResult                = 0.0f;
 //     Terminate                         Terminate  
 //
 // DEF_PDOA_OVERALL_PROCESS_TIMEOUT_MS : 3
-// DEF_PDOA_SYNC_RX_RESTART_TIMEOUT_MS : 1
-// DEF_PDOA_APP_CYCLE_TIME_MS          : Idle
+// DEF_PDOA_SYNC_RX_RESTART_TIMEOUT_US : 1
+// DEF_PDOA_APP_CYCLE_TIME_US          : Idle
 // DEF_NUMBER_OF_PDOA_REPEATED_RX      : 3 (n cycles)
 //
 //-------------------------------------------------------
 #define DEF_PDOA_OVERALL_PROCESS_TIMEOUT_MS   10 
 #define DEF_NUMBER_OF_PDOA_REPEATED_RX        DEF_PDOA_NUMPKT_SUPERFRAME_MAX
-#define DEF_PDOA_SYNC_RX_RESTART_TIMEOUT_MS   4 
-#define DEF_PDOA_APP_CYCLE_TIME_MS            498
+#define DEF_PDOA_SYNC_RX_RESTART_TIMEOUT_US   MS_TO_US(4) 
+#define DEF_PDOA_APP_CYCLE_TIME_US            MS_TO_US(498)
 
 //-------------------------------
 // FUNCTION PROTOTYPE SECTION
@@ -188,7 +189,7 @@ void app_pdoa_responder(void)
       // IDLE
       //-------------------------------------         
         // Wait for next cycle
-        if (cb_hal_is_time_elapsed(iterationTime, DEF_PDOA_APP_CYCLE_TIME_MS))
+        if (cb_hal_is_time_elapsed_us(iterationTime, DEF_PDOA_APP_CYCLE_TIME_US))
         {
           s_enAppPdoaResponderState = EN_APP_STATE_SYNC_RECEIVE;
         }
@@ -200,10 +201,10 @@ void app_pdoa_responder(void)
       case EN_APP_STATE_SYNC_RECEIVE:
         cb_framework_uwb_rx_start(EN_UWB_RX_0, &s_stUwbPacketConfig, &stSyncRxIrqEnable, EN_TRX_START_NON_DEFERRED); // RX START
         s_enAppPdoaResponderState = EN_APP_STATE_SYNC_WAIT_RX_DONE;
-        startTime = cb_hal_get_tick();
+        startTime = cb_hal_get_time_us();
         break;
       case EN_APP_STATE_SYNC_WAIT_RX_DONE:
-        if (cb_hal_is_time_elapsed(startTime, DEF_PDOA_SYNC_RX_RESTART_TIMEOUT_MS) == APP_TRUE)
+        if (cb_hal_is_time_elapsed_us(startTime, DEF_PDOA_SYNC_RX_RESTART_TIMEOUT_US) == APP_TRUE)
         {
           s_enAppPdoaResponderState = EN_APP_STATE_SYNC_RECEIVE;
           cb_framework_uwb_rx_end(EN_UWB_RX_0);
@@ -311,7 +312,7 @@ void app_pdoa_responder(void)
         break;
       case EN_APP_STATE_TERMINATE:
         app_pdoa_timer_off();
-        iterationTime = cb_hal_get_tick();
+        iterationTime = cb_hal_get_time_us();
         s_enAppPdoaResponderState = EN_APP_STATE_IDLE;
         app_pdoa_reset();
         break;
@@ -384,9 +385,9 @@ uint8_t app_pdoa_validate_sync_ack_payload(void)
   uint8_t  result = APP_TRUE;
   uint8_t  syncRxPayload[DEF_SYNC_RX_PAYLOAD_SIZE] = {0};
   
-  cb_uwbsystem_rxstatus_un unRxStatus = cb_framework_uwb_get_rx_status();
+  cb_uwbsystem_rxstatus_un rxStatus = cb_framework_uwb_get_rx_status();
   
-  if (unRxStatus.rx0_ok == CB_TRUE)
+  if ((rxStatus.rx0_ok == CB_TRUE) && (rxStatus.crc_fail == CB_FALSE))
   {
     cb_framework_uwb_get_rx_payload(&syncRxPayload[0], DEF_SYNC_RX_PAYLOAD_SIZE);
     for (uint16_t i = 0; i < DEF_SYNC_RX_PAYLOAD_SIZE; i++)

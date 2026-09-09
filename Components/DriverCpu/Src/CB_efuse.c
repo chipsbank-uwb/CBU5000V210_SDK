@@ -61,21 +61,6 @@ typedef enum {
   EN_EFUSE_MODE_PGM = (1u << 0), /*!< Writes data and self-correct if anything goes wrong */
 } enEfuseMode;
 
-/**
- * @brief Enumerator for potential error codes returned by Efuse API.
- * @details Values of each enum doesn't mean much, just for ease of debugging
- */
-typedef enum {
-  EN_EFUSE_OK = 0u, /*!< Operation successful */
-  EN_EFUSE_INVALID_ADDR = 1u, /*!< Inaccesible efuse array word */
-  EN_EFUSE_WRITE_PROTECTED = 2u, /*!< Word cannot be overwritten*/
-  EN_EFUSE_READ_PROTECTED = 3u, /*!< Word cannot be read. Probably sensitive information */
-  EN_EFUSE_LOCKED = 4u, /*!< Word is locked from reading and writing*/
-  EN_EFUSE_INVALID_BITPOS = 5u, /*!< Setting an invalid bit. Each efuse word is 32 bits */
-  EN_EFUSE_UNKNOWN_ERR = 6u, /*!< Other misc/non-efuse erros */
-  EN_EFUSE_SPECIAL_WORDS = 7u, /*!< Direct writes to word 0,1,2 are limited */
-} enEfuseErrCode;
-
 //-------------------------------
 // STRUCT/UNION SECTION
 //-------------------------------
@@ -96,7 +81,8 @@ static stEfuse_TypeDef *EFUSE = (stEfuse_TypeDef *)EFUSE_BASE_ADDR;
 //-------------------------------
 // FUNCTION PROTOTYPE SECTION
 //-------------------------------
-static inline enEfuseErrCode cb_efuse_init(void);
+//static inline enEfuseErrCode cb_efuse_init(void);
+inline enEfuseErrCode cb_efuse_init(void);
 static inline void cb_efuse_configure_mode(enEfuseMode mode);
 static inline enEfuseErrCode cb_efuse_configure(uint32_t start, uint32_t end);
 static inline enEfuseErrCode cb_efuse_deinit(void);
@@ -122,7 +108,7 @@ static inline const char* CB_EFUSE_GetErrString(enEfuseErrCode);
 void cb_efuse_qspi_flash_encryption_enable(void) 
 {
 	enEfuseErrCode err;
-	err = cb_efuse_init();
+
 #if (DEBUG_BUILD == CB_TRUE)
 	CB_EFUSE_PRINT("  [CB_Efuse] Init: %s\n", CB_EFUSE_GetErrString(err));
 #else
@@ -136,7 +122,6 @@ void cb_efuse_qspi_flash_encryption_enable(void)
 	(void)(err);
 #endif
   
-	err = cb_efuse_deinit();
 #if (DEBUG_BUILD == CB_TRUE)
 	CB_EFUSE_PRINT("  [CB_Efuse] Deinit: %s\n", CB_EFUSE_GetErrString(err));
 #else
@@ -153,7 +138,7 @@ void cb_efuse_qspi_flash_encryption_enable(void)
 uint8_t cb_efuse_qspi_flash_encryption_is_enabled(void) 
 {
     enEfuseErrCode err;
-	err = cb_efuse_init();
+
 #if (DEBUG_BUILD == CB_TRUE)
 	CB_EFUSE_PRINT("  [CB_Efuse] Init: %s\n", CB_EFUSE_GetErrString(err));
 #else
@@ -168,7 +153,6 @@ uint8_t cb_efuse_qspi_flash_encryption_is_enabled(void)
     (void)(err);
 #endif
 
-    err = cb_efuse_deinit();
 #if (DEBUG_BUILD == CB_TRUE)
 	CB_EFUSE_PRINT("  [CB_Efuse] Deinit: %s\n", CB_EFUSE_GetErrString(err));
 #else
@@ -187,7 +171,7 @@ uint8_t cb_efuse_qspi_flash_encryption_is_enabled(void)
 void cb_efuse_qspi_flash_encryption_lock(void) 
 {
     enEfuseErrCode err;
-    err = cb_efuse_init();
+
 #if (DEBUG_BUILD == CB_TRUE)
     CB_EFUSE_PRINT("  [CB_Efuse] Init: %s\n", CB_EFUSE_GetErrString(err));
 #else
@@ -204,7 +188,6 @@ void cb_efuse_qspi_flash_encryption_lock(void)
     (void)(err);
 #endif
 
-    err = cb_efuse_deinit();
     uint32_t dmp;
     cb_efuse_read_word(0, &dmp);
 #if (DEBUG_BUILD == CB_TRUE)
@@ -215,21 +198,22 @@ void cb_efuse_qspi_flash_encryption_lock(void)
 }
 
 /**
- * @brief Write the 128-bit AES key.
- * @details Once written, the set bit won't be able to clear anymore.
- * @param secretKey A 4-byte unsigned integer array of size 4 
- * to represent 128-bit AES key.
+ * @brief Write the 128-bit AES key and seed value to eFuse.
+ * @details Once written, the set bits in eFuse cannot be cleared anymore; key and seed will be permanently burned.
+ * @param secretKey A uint32_t array of size 4 to represent 128-bit AES key.
+ * @param seed Auxiliary seed parameter for eFuse key burning operation.
  */
-void cb_efuse_qspi_flash_encryption_key_write(uint32_t secretKey[static 4]) 
+void cb_efuse_qspi_flash_encryption_key_write(uint32_t secretKey[static 4],uint32_t seed) 
 {
     enEfuseErrCode err;
-    err = cb_efuse_init();
+
 #if (DEBUG_BUILD == CB_TRUE)
     CB_EFUSE_PRINT("  [CB_Efuse] Init: %s\n", CB_EFUSE_GetErrString(err));
 #else
     (void)(err);
 #endif
 
+    err = cb_efuse_write_word(4, seed);
     for (uint32_t word = 5; word < 9; ++word) 
     {
         err = cb_efuse_write_word(word, secretKey[word-5]);
@@ -241,7 +225,6 @@ void cb_efuse_qspi_flash_encryption_key_write(uint32_t secretKey[static 4])
        DELAY;
     }
   
-    err = cb_efuse_deinit();
 #if (DEBUG_BUILD == CB_TRUE)
     CB_EFUSE_PRINT("  [CB_Efuse] Deinit: %s\n", CB_EFUSE_GetErrString(err));
 #else
@@ -257,7 +240,7 @@ void cb_efuse_qspi_flash_encryption_key_write(uint32_t secretKey[static 4])
 void cb_efuse_qspi_flash_encryption_key_read(uint32_t outKey[static 4]) 
 {
     enEfuseErrCode err;
-    err = cb_efuse_init();
+
 #if (DEBUG_BUILD == CB_TRUE)
     CB_EFUSE_PRINT("  [CB_Efuse] Init: %s\n", CB_EFUSE_GetErrString(err));
 #else
@@ -274,7 +257,6 @@ void cb_efuse_qspi_flash_encryption_key_read(uint32_t outKey[static 4])
 #endif
 	}
 
-    err = cb_efuse_deinit();
 #if (DEBUG_BUILD == CB_TRUE)
     CB_EFUSE_PRINT("  [CB_Efuse] Deinit: %s\n", CB_EFUSE_GetErrString(err));
 #else
@@ -288,7 +270,7 @@ void cb_efuse_qspi_flash_encryption_key_read(uint32_t outKey[static 4])
 void cb_efuse_qspi_flash_encryption_key_lock(void) 
 {
     enEfuseErrCode err;
-    err = cb_efuse_init();
+
 #if (DEBUG_BUILD == CB_TRUE)
     CB_EFUSE_PRINT("  [CB_Efuse] Init: %s\n", CB_EFUSE_GetErrString(err));
 #else
@@ -311,7 +293,6 @@ void cb_efuse_qspi_flash_encryption_key_lock(void)
     (void)(err);
 #endif
 
-    err = cb_efuse_deinit();
 #if (DEBUG_BUILD == CB_TRUE)
     CB_EFUSE_PRINT("  [CB_Efuse] Deinit: %s\n", CB_EFUSE_GetErrString(err));
 #else
@@ -326,7 +307,7 @@ void cb_efuse_qspi_flash_encryption_key_lock(void)
 uint32_t cb_efuse_read_chip_id_w3(void) 
 {
     enEfuseErrCode err;
-    err = cb_efuse_init();
+
 #if (DEBUG_BUILD == CB_TRUE)
     CB_EFUSE_PRINT("  [CB_Efuse] Init: %s\n", CB_EFUSE_GetErrString(err));
 #else
@@ -341,7 +322,6 @@ uint32_t cb_efuse_read_chip_id_w3(void)
     (void)(err);
 #endif
   
-    err = cb_efuse_deinit();
 #if (DEBUG_BUILD == CB_TRUE)
     CB_EFUSE_PRINT("  [CB_Efuse] Deinit: %s\n", CB_EFUSE_GetErrString(err));
 #else
@@ -358,7 +338,7 @@ uint32_t cb_efuse_read_chip_id_w3(void)
 uint32_t cb_efuse_read_chip_id_w10(void) 
 {
     enEfuseErrCode err;
-    err = cb_efuse_init();
+
 #if (DEBUG_BUILD == CB_TRUE)
     CB_EFUSE_PRINT("  [CB_Efuse] Init: %s\n", CB_EFUSE_GetErrString(err));
 #else
@@ -373,7 +353,6 @@ uint32_t cb_efuse_read_chip_id_w10(void)
     (void)(err);
 #endif
 
-    err = cb_efuse_deinit();
 #if (DEBUG_BUILD == CB_TRUE)
     CB_EFUSE_PRINT("  [CB_Efuse] Deinit: %s\n", CB_EFUSE_GetErrString(err));
 #else
@@ -414,7 +393,7 @@ uint64_t cb_efuse_read_chip_id(void)
 void cb_efuse_userconfig2_set_bits(uint8_t bitPosNum, uint8_t bitPosArr[static bitPosNum]) 
 {
     enEfuseErrCode err;
-    err = cb_efuse_init();
+
 #if (DEBUG_BUILD == CB_TRUE)
     CB_EFUSE_PRINT("  [CB_Efuse] Init: %s\n", CB_EFUSE_GetErrString(err));
 #else
@@ -428,7 +407,6 @@ void cb_efuse_userconfig2_set_bits(uint8_t bitPosNum, uint8_t bitPosArr[static b
     (void)(err);
 #endif
 
-    err = cb_efuse_deinit();
 #if (DEBUG_BUILD == CB_TRUE)
     CB_EFUSE_PRINT("  [CB_Efuse] Deinit: %s\n", CB_EFUSE_GetErrString(err));
 #else
@@ -443,7 +421,7 @@ void cb_efuse_userconfig2_set_bits(uint8_t bitPosNum, uint8_t bitPosArr[static b
 uint32_t cb_efuse_userconfig2_read(void) 
 {
     enEfuseErrCode err;
-    err = cb_efuse_init();
+
 #if (DEBUG_BUILD == CB_TRUE)
     CB_EFUSE_PRINT("  [CB_Efuse] Init: %s\n", CB_EFUSE_GetErrString(err));
 #else
@@ -458,7 +436,6 @@ uint32_t cb_efuse_userconfig2_read(void)
     (void)(err);
 #endif
 
-    err = cb_efuse_deinit();
 #if (DEBUG_BUILD == CB_TRUE)
     CB_EFUSE_PRINT("  [CB_Efuse] Deinit: %s\n", CB_EFUSE_GetErrString(err));
 #else
@@ -473,7 +450,7 @@ uint32_t cb_efuse_userconfig2_read(void)
 void cb_efuse_userconfig2_lock(void) 
 {
     enEfuseErrCode err;
-    err = cb_efuse_init();
+
 #if (DEBUG_BUILD == CB_TRUE)
     CB_EFUSE_PRINT("  [CB_Efuse] Init: %s\n", CB_EFUSE_GetErrString(err));
 #else
@@ -494,7 +471,6 @@ void cb_efuse_userconfig2_lock(void)
     (void)(result);
 #endif
 
-    err = cb_efuse_deinit();
 #if (DEBUG_BUILD == CB_TRUE)
     CB_EFUSE_PRINT("  [CB_Efuse] Deinit: %s\n", CB_EFUSE_GetErrString(err));
 #else
@@ -505,12 +481,13 @@ void cb_efuse_userconfig2_lock(void)
 /**
  * @brief Enables the efuse.
  */
-static inline enEfuseErrCode cb_efuse_init(void) 
+//static inline enEfuseErrCode cb_efuse_init(void) 
+inline enEfuseErrCode cb_efuse_init(void) 
 {
     cb_scr_efuse_module_on();
     return EN_EFUSE_OK;
 }
-
+extern enEfuseErrCode cb_efuse_init(void);
 /**
  * @brief Disables the efuse.
  * @return enEfuseErrCode error code of the de-init operation.
@@ -631,6 +608,7 @@ static inline enEfuseErrCode cb_efuse_set_bits(uint32_t word, uint8_t* bitPosArr
 #if (DEBUG_BUILD == CB_TRUE)
         CB_EFUSE_PRINT("Setting bit %d \n", bitPosArr[i]);
 #endif
+		cb_hal_delay_in_us(10);
         EFUSE->pgmBit = (EFUSE->pgmBit & ~0x3Cu)| ((word & 0xF) << 2);
         EFUSE->pgmBit = (EFUSE->pgmBit & ~0x7C0u) | ((bitPosArr[i] & 0x1Fu) << 6);
         EFUSE->pgmBit |= (1u << 0);

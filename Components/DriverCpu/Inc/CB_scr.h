@@ -39,6 +39,13 @@ typedef enum
   EN_EADC_DFT_MEASURE_VBG = 1,    // measuring EADC bias voltage Vbg
 } enEADCDFTMeasure;
 
+/* Values match the clk_sel field of SCR CPU_CTRL bit[24:23]. */
+typedef enum
+{
+  EN_SCR_CPU_CLK_64MHZ  = 2,
+  EN_SCR_CPU_CLK_128MHZ = 3,
+} enScrCpuClock;
+
 //-------------------------------
 // STRUCT/UNION SECTION
 //-------------------------------
@@ -50,10 +57,23 @@ typedef enum
 //-------------------------------
 // FUNCTION PROTOTYPE SECTION
 //-------------------------------
+
 /**
  * @brief Configure RC code to be stablize for wake up from deepsleep.
  */
 void cb_scr_stabilize_rc(void);
+
+/**
+ * @brief Selects the CPU / AMBA clock frequency.
+ *
+ * @param cpuClock EN_SCR_CPU_CLK_64MHZ or EN_SCR_CPU_CLK_128MHZ.
+ *
+ * @note SystemCoreClock is not updated, so the cycle based delays and the driver
+ *       timeouts still assume the build time frequency. Peripherals whose
+ *       dividers were derived from the previous frequency (UART baudrate for
+ *       example) must be re-initialised after this call.
+ */
+void cb_scr_configure_cpu_clock(enScrCpuClock cpuClock);
 
 /**
  * @brief Turns on the GPIO module.
