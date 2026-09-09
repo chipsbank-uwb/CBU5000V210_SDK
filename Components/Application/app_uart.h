@@ -72,4 +72,25 @@ void APP_UART_0_BREAK_ERR_Callback(void);
  */
 void app_uart_printf(const char *format, ...);
 
+/**
+ * @brief   Transmits a 32-bit unsigned integer as raw bytes over UART.
+ * @details This function splits the 32-bit value into four bytes in
+ *          big-endian order (MSB first) and transmits them directly
+ *          over UART without any formatting or conversion.
+ *          The function waits until the UART transmitter is idle
+ *          before starting the transmission.
+ * @param   value The 32-bit unsigned integer to be transmitted.
+ */
+void app_uart_print_u32_raw(uint32_t value);
+
+/**
+ * @brief   Transmits raw byte data over UART.
+ * @details This function sends a buffer of raw bytes directly over UART
+ *          without any formatting or encoding. It waits until the UART
+ *          transmitter is idle before initiating the transmission.
+ * @param   ptrByte Pointer to the byte buffer to be transmitted.
+ * @param   len     Number of bytes to transmit.
+ */
+void app_uart_output_raw(uint8_t* ptrByte,uint16_t len);
+
 #endif  // __APP_CPU_UART_H

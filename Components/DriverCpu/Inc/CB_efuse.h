@@ -19,7 +19,19 @@
 //-------------------------------
 // ENUM
 //-------------------------------
-
+/**
+ * @brief Enumerator for potential error codes returned by Efuse API.
+ */
+typedef enum {
+  EN_EFUSE_OK = 0u,             /*!< Operation successful */
+  EN_EFUSE_INVALID_ADDR = 1u,   /*!< Inaccesible efuse array word */
+  EN_EFUSE_WRITE_PROTECTED = 2u,/*!< Word cannot be overwritten*/
+  EN_EFUSE_READ_PROTECTED = 3u, /*!< Word cannot be read. Probably sensitive information */
+  EN_EFUSE_LOCKED = 4u,         /*!< Word is locked from reading and writing*/
+  EN_EFUSE_INVALID_BITPOS = 5u, /*!< Setting an invalid bit. Each efuse word is 32 bits */
+  EN_EFUSE_UNKNOWN_ERR = 6u,    /*!< Other misc/non-efuse erros */
+  EN_EFUSE_SPECIAL_WORDS = 7u,  /*!< Direct writes to word 0,1,2 are limited */
+} enEfuseErrCode;
 //-------------------------------
 // STRUCT/UNION SECTION
 //-------------------------------
@@ -55,12 +67,12 @@ uint8_t cb_efuse_qspi_flash_encryption_is_enabled(void);
 void cb_efuse_qspi_flash_encryption_lock(void);
 
 /**
- * @brief Write the 128-bit AES key.
- * @details Once written, the set bit won't be able to clear anymore.
- * @param secretKey A 4-byte unsigned integer array of size 4 
- * to represent 128-bit AES key.
+ * @brief Write the 128-bit AES key and seed value to eFuse.
+ * @details Once written, the set bits in eFuse cannot be cleared anymore; key and seed will be permanently burned.
+ * @param secretKey A uint32_t array of size 4 to represent 128-bit AES key.
+ * @param seed Auxiliary seed parameter for eFuse key burning operation.
  */
-void cb_efuse_qspi_flash_encryption_key_write(uint32_t secretKey[static 4]);
+void cb_efuse_qspi_flash_encryption_key_write(uint32_t secretKey[static 4], uint32_t seed);
 
 /**
  * @brief Read the 128-bit AES key.

@@ -130,13 +130,13 @@ void app_commtx_qmode(void)
     switch (s_appCommTxState)
     {
       case EN_APP_STATE_IDLE:
-        if(cb_hal_is_time_elapsed(startTime, 500) == CB_PASS)   // Delay 500ms
+        if(cb_hal_is_time_elapsed_us(startTime, 500000) == CB_PASS)   // Delay 500ms
         {
           s_appCommTxState = EN_APP_STATE_TRANSMIT;
         }
         break;
       case EN_APP_STATE_TRANSMIT:
-        cb_framework_uwb_qmode_tx_start(&Txpacketconfig, &txPayload, &stTxIrqEnable);  // TX START
+        cb_framework_uwb_qmode_tx_start(&Txpacketconfig, &txPayload, &stTxIrqEnable, EN_TRX_START_NON_DEFERRED);  // TX START
         s_appCommTxState = EN_APP_STATE_WAIT_TX_DONE;
         break;
       case EN_APP_STATE_WAIT_TX_DONE:
@@ -146,7 +146,7 @@ void app_commtx_qmode(void)
           app_commtx_print_tx_timestamp();
           cb_framework_uwb_qmode_tx_end();                        // TX END
           s_appCommTxState = EN_APP_STATE_IDLE;
-          startTime = cb_hal_get_tick();
+          startTime = cb_hal_get_time_us();
         }
         break;
       default:
@@ -214,7 +214,7 @@ void app_commtx_nmode(void)
     switch (s_appCommTxState)
     {
       case EN_APP_STATE_IDLE:
-        if(cb_hal_is_time_elapsed(startTime, 500) == CB_PASS)   // Delay 500ms
+        if(cb_hal_is_time_elapsed_us(startTime, 500000) == CB_PASS)   // Delay 500ms
         {
           s_appCommTxState = EN_APP_STATE_TRANSMIT;
         }
@@ -230,7 +230,7 @@ void app_commtx_nmode(void)
           app_commtx_print_tx_timestamp();
           cb_framework_uwb_tx_end();                        // TX END
           s_appCommTxState = EN_APP_STATE_IDLE;
-          startTime = cb_hal_get_tick();
+          startTime = cb_hal_get_time_us();
         }
         break;
       default:

@@ -21,7 +21,6 @@
 #include "TaskHandler.h" /**< For task flags */
 #include "CB_Uart.h"
 #include "CB_uwbframework.h"
-#include "CB_aoa.h"
 #include "AppUwbCommTrx.h"
 #include "AppUwbDstwr.h"
 #include "AppUwbPdoa.h"

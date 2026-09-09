@@ -126,21 +126,13 @@ static uint8_t dfu_uart_rxbuf[DUF_RX_BUF_SIZE];
 static void dfu_uart_configer(uint8_t role)
 {
     cb_scr_uwb_module_on();
-    cb_scr_uart0_module_off();
-    cb_scr_uart0_module_on();
+    cb_scr_uart1_module_off();
+    cb_scr_uart1_module_on();
 
-    if(role == UART_ROLE_67)
-    {
-        cb_iomux_config(EN_IOMUX_GPIO_7,&(stIomuxGpioMode){EN_IOMUX_GPIO_MODE_SOC_PERIPHERALS,(uint8_t)EN_IOMUX_GPIO_AF_UART0_RXD});
-        cb_iomux_config(EN_IOMUX_GPIO_6,&(stIomuxGpioMode){EN_IOMUX_GPIO_MODE_SOC_PERIPHERALS,(uint8_t)EN_IOMUX_GPIO_AF_UART0_TXD});
-    }
-    else //if(role == UART_ROLE_EVK)  //EVK
-    {
-        cb_iomux_config(EN_IOMUX_GPIO_0,&(stIomuxGpioMode){EN_IOMUX_GPIO_MODE_SOC_PERIPHERALS,(uint8_t)EN_IOMUX_GPIO_AF_UART0_RXD});
-        cb_iomux_config(EN_IOMUX_GPIO_1,&(stIomuxGpioMode){EN_IOMUX_GPIO_MODE_SOC_PERIPHERALS,(uint8_t)EN_IOMUX_GPIO_AF_UART0_TXD});
-    }
+    cb_iomux_config(EN_IOMUX_GPIO_6,&(stIomuxGpioMode){EN_IOMUX_GPIO_MODE_SOC_PERIPHERALS,(uint8_t)EN_IOMUX_GPIO_AF_UART1_RXD});
+    cb_iomux_config(EN_IOMUX_GPIO_7,&(stIomuxGpioMode){EN_IOMUX_GPIO_MODE_SOC_PERIPHERALS,(uint8_t)EN_IOMUX_GPIO_AF_UART1_TXD});
 
-    uartConfig.uartChannel        = EN_UART_0;
+    uartConfig.uartChannel        = EN_UART_1;
     uartConfig.uartMode           = EN_UART_MODE_SDMA;
     uartConfig.uartBaudrate       = EN_UART_BAUDRATE_921600;
     uartConfig.uartRxMaxBytes   = 200;
@@ -175,7 +167,7 @@ static void dfu_uart_send_port(uint8_t *prtData, uint16_t len)
 
 static void dfu_uart_deinit(void)
 {
-    cb_scr_uart0_module_off();
+    cb_scr_uart1_module_off();
 }
 
 
@@ -196,10 +188,10 @@ static void dfu_uart_pooling_cmd(void)
 
     while (dfu_uart_cmd_ready_flag != APP_TRUE)
     {
-        received_len = cb_uart_check_num_received_bytes(EN_UART_0);
+        received_len = cb_uart_check_num_received_bytes(EN_UART_1);
         if (received_len >= expected_len )
         {
-            cb_uart_get_rx_buffer(EN_UART_0,&dfu_uart_rxbuf[0],expected_len); //updating the Buffer
+            cb_uart_get_rx_buffer(EN_UART_1,&dfu_uart_rxbuf[0],expected_len); //updating the Buffer
             switch (dfu_uart_state)
             {
                 case EN_UartRxWAITING:
@@ -212,7 +204,7 @@ static void dfu_uart_pooling_cmd(void)
                     else
                     {
                         //Marker Mismtached
-                        cb_uart_rx_restart(EN_UART_0);
+                        cb_uart_rx_restart(EN_UART_1);
                     }
                 break;
                 case EN_UartRxMARKER_DONE:
@@ -229,11 +221,11 @@ static void dfu_uart_pooling_cmd(void)
                     }
 
                     //Marker Mismtached
-                    cb_uart_rx_restart(EN_UART_0);
+                    cb_uart_rx_restart(EN_UART_1);
                 break;
 
                 case EN_UartRxHEADER_DONE:
-                    cb_uart_rx_stop(EN_UART_0); //Terminate the UART Rx.
+                    cb_uart_rx_stop(EN_UART_1); //Terminate the UART Rx.
                     checksum_pos = DEF_DL_POS+DEF_DL_SIZE;
                     checksum_pos += dfu_uart_rxbuf[DEF_DL_POS];
                     uint8_t checksun = 0;
@@ -248,12 +240,12 @@ static void dfu_uart_pooling_cmd(void)
                     else{
                         expected_len = DEF_RXMARKER_SIZE;
                         dfu_uart_state = EN_UartRxWAITING;
-                        cb_uart_rx_restart(EN_UART_0);
+                        cb_uart_rx_restart(EN_UART_1);
                     }
                 break;
                 case EN_UartRxCHECKSUM_DONE:
                 default: //unexpected behaviour
-                    cb_uart_rx_restart(EN_UART_0);
+                    cb_uart_rx_restart(EN_UART_1);
                 break;
             }
         }
@@ -336,11 +328,11 @@ void dfu_uart_polling(void)
     dfu_uart_pooling_cmd();
     if(dfu_uart_cmd_ready_flag)
     {
-        uint16_t received_length = cb_uart_check_num_received_bytes(EN_UART_0); 
+        uint16_t received_length = cb_uart_check_num_received_bytes(EN_UART_1); 
         //command ready to send
         dfu_uart_process_buffer(&dfu_uart_rxbuf[0],received_length);
         memset(dfu_uart_rxbuf, 0, sizeof(dfu_uart_rxbuf));// Reset buffer 
-        cb_uart_rx_restart(EN_UART_0);
+        cb_uart_rx_restart(EN_UART_1);
     }
 
 }

@@ -24,6 +24,8 @@
 // FUNCTION PROTOTYPE SECTION
 //-------------------------------
 void DWT_Init(void);
+extern volatile const unsigned char appBin[] __attribute__((aligned(4)));
+extern volatile const unsigned char bootsettingBin[] __attribute__((aligned(4)));
 
 //-------------------------------
 // FUNCTION BODY SECTION
@@ -40,6 +42,11 @@ void DWT_Init(void)
 
 int main(void) 
 {
+    volatile unsigned char embedded_app_probe = appBin[0];
+    volatile unsigned char embedded_bootsetting_probe = bootsettingBin[0];
+    (void)embedded_app_probe;
+    (void)embedded_bootsetting_probe;
+
     DWT_Init();
     dfu_uart_init();
     dfu_boot_startup();

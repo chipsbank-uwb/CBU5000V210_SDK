@@ -21,7 +21,7 @@
 //-------------------------------
 // DEFINE SECTION
 //-------------------------------
-#define DEF_RXMARKER_VAL        0x5A
+#define DEF_RXMARKER_VAL        0x9b
 /*SizeInByte*/
 #define DEF_RXMARKER_SIZE       1
 #define DEF_CMD_SIZE            2

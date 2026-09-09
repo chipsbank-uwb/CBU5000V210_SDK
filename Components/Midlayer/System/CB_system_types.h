@@ -31,11 +31,11 @@
  */
 typedef enum
 {
-  EN_UWB_RX_0   = 0b001,  // UWB RX port 0
-  EN_UWB_RX_1   = 0b010,  // UWB RX port 1
-  EN_UWB_RX_2   = 0b100,  // UWB RX port 2
-  EN_UWB_RX_02  = 0b101,  // UWB RX port 0 & 2 
-  EN_UWB_RX_ALL = 0b111,  // All UWB RX ports
+  EN_UWB_RX_0   = 0b001,                                       // UWB RX port 0
+  EN_UWB_RX_1   = 0b010,                                       // UWB RX port 1
+  EN_UWB_RX_2   = 0b100,                                       // UWB RX port 2
+  EN_UWB_RX_02  = (EN_UWB_RX_0 | EN_UWB_RX_2),                 // UWB RX port 0 & 2 
+  EN_UWB_RX_ALL = (EN_UWB_RX_0 | EN_UWB_RX_1 | EN_UWB_RX_2) ,  // All UWB RX ports
 } cb_uwbsystem_rxport_en;
 
 typedef enum 
@@ -95,11 +95,20 @@ typedef enum {
 
 /**
  * @brief Enumeration defining UWB Preamble Code Indexes
- * 
+ *
+ * @note 1 - 8: radar/custom short preamble (SHR_CLEN=31)
  * @note 9 - 24 is used for BPRF, 25-32 is used for HPRF
  */
 typedef enum
 {
+  EN_UWB_PREAMBLE_CODE_IDX_1  = 1,
+  EN_UWB_PREAMBLE_CODE_IDX_2  = 2,
+  EN_UWB_PREAMBLE_CODE_IDX_3  = 3,
+  EN_UWB_PREAMBLE_CODE_IDX_4  = 4,
+  EN_UWB_PREAMBLE_CODE_IDX_5  = 5,
+  EN_UWB_PREAMBLE_CODE_IDX_6  = 6,
+  EN_UWB_PREAMBLE_CODE_IDX_7  = 7,
+  EN_UWB_PREAMBLE_CODE_IDX_8  = 8,
   EN_UWB_PREAMBLE_CODE_IDX_9  = 9,  // Fira3.0 UCI definition
   EN_UWB_PREAMBLE_CODE_IDX_10 = 10, // Fira3.0 UCI definition
   EN_UWB_PREAMBLE_CODE_IDX_11 = 11, // Fira3.0 UCI definition
@@ -284,10 +293,10 @@ typedef enum
  */
 typedef struct
 {
-  uint32_t cfoEst;
+  int32_t cfoEst;
   cb_uwbsystem_rx_dcoc_st dcocRx;
-	int16_t  rssiRx;
-	uint8_t  gainIdx;
+  int16_t  rssiRx;
+  uint8_t  gainIdx;
 }__attribute__((aligned(4))) cb_uwbsystem_rx_signalinfo_st;
 
 /**
@@ -335,8 +344,8 @@ typedef union
     uint16_t no0_signal   : 1;   // [9]  < no0_signal
     uint16_t no1_signal   : 1;   // [10] < no1_signal
     uint16_t no2_signal   : 1;   // [11] < no2_signal
-    uint16_t phr_ded      : 1;   // [12] < PHR (Preamble Header) detected
-    uint16_t phr_sec      : 1;   // [13] < PHR (Preamble Header) second
+    uint16_t phr_ded      : 1;   // [12] < PHR single error correction by SECDED decoder
+    uint16_t phr_sec      : 1;   // [13] < PHR double error detection by SECDED decoder
     uint16_t crc_fail     : 1;   // [14] < CRC (Cyclic Redundancy Check) fail
     uint16_t dsr_ovf      : 1;   // [15] < DSR (Data Sampling Rate) overflow
   };
@@ -400,30 +409,8 @@ typedef struct
   uint32_t rxTsuInt;      /**< RX TSU integer part:    1 count = 1/124.8MHz     (~8ns)    */
   uint16_t rxTsuFrac;     /**< RX TSU fractional part: 1 count = 1/124.8MHz/512 (~15.6ps) */
   double rxTsu;
+  double rxTsuOffset;
 } __attribute__((aligned(4))) cb_uwbsystem_rx_tsutimestamp_st;
-
-/**
- * @brief Structure representing RX Timestamps.
- */
-typedef struct stRxTimestamp_
-{
-  uint32_t startCnt;
-  uint32_t startCap;
-  uint32_t preambleDetectionCnt;
-  uint32_t preambleDetectionCap;
-  uint32_t sfdDetectionCnt;
-  uint32_t sfdDetectionCap;
-  uint32_t stsSegment0Cnt;
-  uint32_t stsSegment0Cap;
-  uint32_t stsSegment1Cnt;
-  uint32_t stsSegment1Cap;
-  uint32_t stsCirCnt;
-  uint32_t stsCirCap;
-  uint32_t phrDoneCnt;
-  uint32_t phrDoneCap;
-  uint32_t doneCnt;
-  uint32_t doneCap;
-} cb_uwbsystem_rx_timestamp_st;
 
 /**
  * @brief Structure representing parameters for RX ranging.
@@ -503,7 +490,7 @@ typedef struct {
 
 typedef struct {
   uint8_t  enableBypass;
-  uint32_t  cfoValue;
+  int32_t  cfoValue;
 } cb_uwbsystem_rx_dbb_cfo_st; 
 
 typedef struct {
@@ -511,6 +498,13 @@ typedef struct {
   cb_uwbsystem_rx_dbb_cfo_st  stRxCfo;
 } cb_uwbsystem_rx_dbb_config_st;
 
+/**
+ * @brief Enumeration for transaction start modes
+ */
+typedef enum {
+  EN_TRX_START_NON_DEFERRED, /**< Immediate start */
+  EN_TRX_START_DEFERRED      /**< Deferred start */
+} cb_uwbsystem_trx_startmode_en;
 
 //-------------------------------
 // GLOBAL VARIABLE SECTION

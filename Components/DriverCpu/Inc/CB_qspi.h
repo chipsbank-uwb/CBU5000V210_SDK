@@ -114,6 +114,18 @@ typedef enum
   EN_QSPI_QuadSPI_Command
 } enCommandMode;
 
+typedef enum
+{
+	EN_AES_DISABLE = 0,
+	EN_AES_ENABLE
+}enAesEn;
+
+typedef enum
+{
+	EN_AES_SELECT_OTP = 0,
+	EN_AES_SELECT_AES_EN_REG
+}enAesEnRegSel;
+
 //-------------------------------
 // STRUCT/UNION SECTION
 /**
@@ -207,6 +219,19 @@ CB_STATUS cb_qspi_read_data_without_addr(stQSPI_HandleTypeDef *hqspi,stQSPI_CmdT
  * @param BurstReadAction The action to perform (enBurstReadAction).
  */
 CB_STATUS cb_qspi_send_read_mode_command(enBurstReadAction BurstReadAction, stQSPI_CmdTypeDef *cmd, uint8_t burstReadData);
+
+/**
+ * @brief  Enable AES encryption/decryption for QSPI transactions.
+ * @param  hqspi            Pointer to QSPI handle
+ * @param  aes_en_reg_sel   AES enable register source selection
+ *         - EN_AES_SELECT_AES_EN_REG: Use register to control AES
+ * @param  aes_en           AES enable
+ *         - EN_AES_ENABLE: Enable AES
+ * @return CB_STATUS        Return status (CB_PASS/CB_FAIL)
+ * @note   Only needs to be called once! The hardware will automatically
+ *         encrypt/decrypt data for all subsequent read/write operations.
+ */
+CB_STATUS cb_qspi_enable_aes(stQSPI_HandleTypeDef *hqspi, enAesEnRegSel aes_en_reg_sel, enAesEn aes_en);
 
 #endif /* __CB_QSPI_H_ */
 

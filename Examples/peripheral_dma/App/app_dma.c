@@ -123,7 +123,7 @@ static uint32_t current_size;
 void app_dma_init(void)
 {
     cb_dma_init();
-    app_irq_deregister_irqcallback(EN_IRQENTRY_DMA_APP_IRQ, app_amd_irq_callback);
+    app_irq_register_irqcallback(EN_IRQENTRY_DMA_APP_IRQ, app_amd_irq_callback);
 
     memset(dma_destination_memory_1, 0, sizeof(dma_destination_memory_1));
     memset(dma_destination_memory_2, 0, sizeof(dma_destination_memory_2));

@@ -18,8 +18,6 @@
 #include "CB_CompileOption.h"
 #include "CB_uwbframework.h"
 #include "CB_system.h"
-#include "CB_UwbDrivers.h"
-#include "CB_aoa.h"
 
 //-------------------------------
 // CONFIGURATION SECTION
@@ -81,12 +79,20 @@ extern const uint8_t lut_binary_data_start[];
 st_antenna_attribute_3d g_stAntAttr = {
     .ant_height = 1.628f,
     .ant_width  = 1.88f,
+#if (GC_DEMO_BOARD_TYPE == GC_USE_CBD5213)
     .ant_type   = DEF_ANTENNA_TYPE_TRIANGLE_UP,
+#else
+    .ant_type   = DEF_ANTENNA_TYPE_TRIANGLE_DOWN,
+#endif
     .ant_pos[DEF_ANTENNA_POSITION_A] = DEF_ANTENNA_PORT_RX1,
     .ant_pos[DEF_ANTENNA_POSITION_B] = DEF_ANTENNA_PORT_RX0,
     .ant_pos[DEF_ANTENNA_POSITION_C] = DEF_ANTENNA_PORT_RX2,
 };
-
+st_antenna_attribute_2d g_stAntAttr2d = {
+    .ant_width  = 1.88f,
+    .ant_pos[DEF_ANTENNA_POSITION_A] = DEF_ANTENNA_PORT_RX2,
+    .ant_pos[DEF_ANTENNA_POSITION_B] = DEF_ANTENNA_PORT_RX0,
+};
 cb_uwbaoa_lut_attribute_st g_stLutAttr;
 cb_uwbaoa_fov_attribute_st g_stFovAttr;
 //-------------------------------
@@ -135,6 +141,14 @@ void cb_framework_uwb_off(void)
   cb_system_uwb_rx_memclr();  // RX memory clear
 }
 
+/**
+ * @brief Configures the common TSU and time mask for the UWB transceiver.
+ */
+void cb_framework_uwb_trx_config_cmn_tsu_timemask(void)
+{
+  cb_system_uwb_trx_config_cmn_tsu_timemask();
+}
+
 //----------------------------------------------------------------//
 //                 COMM-TRX QUICK MODE API                        //
 //----------------------------------------------------------------//
@@ -169,11 +183,11 @@ void cb_framework_uwb_qmode_trx_disable(void)
  * @param txPayload Payload data to be transmitted
  * @param txIrqEnable Interrupt enable configuration for transmission
  */
-void cb_framework_uwb_qmode_tx_start(cb_uwbsystem_packetconfig_st* txPacketConfig,cb_uwbsystem_txpayload_st* txPayload, cb_uwbsystem_tx_irqenable_st* stTxIrqEnable)
+void cb_framework_uwb_qmode_tx_start(cb_uwbsystem_packetconfig_st* txPacketConfig,cb_uwbsystem_txpayload_st* txPayload, cb_uwbsystem_tx_irqenable_st* stTxIrqEnable, cb_uwbsystem_trx_startmode_en trxStartMode)
 {
   cb_system_uwb_config_tx(txPacketConfig, txPayload, stTxIrqEnable);  // Config TX
   cb_system_uwb_tx_freeze_pll();
-  cb_system_uwb_tx_start();                                         // TX START
+  cb_system_uwb_tx_start(trxStartMode);                                         // TX START
 }
 
 /**
@@ -197,11 +211,11 @@ void cb_framework_uwb_qmode_tx_end(void)
  * @param rxPacketConfig Configuration for the packet to be received
  * @param stRxIrqEnable Interrupt enable configuration for reception
  */
-void cb_framework_uwb_qmode_rx_start(cb_uwbsystem_packetconfig_st* rxPacketConfig, cb_uwbsystem_rx_irqenable_st* stRxIrqEnable)
+void cb_framework_uwb_qmode_rx_start(cb_uwbsystem_packetconfig_st* rxPacketConfig, cb_uwbsystem_rx_irqenable_st* stRxIrqEnable, cb_uwbsystem_trx_startmode_en trxStartMode)
 {
   cb_uwbsystem_rxport_en enRxPort = EN_UWB_RX_0;
   cb_system_uwb_config_rx(rxPacketConfig, stRxIrqEnable, &(s_stRxCfg_CfoGainBypass.stRxCfo));   // RX Config
-  cb_system_uwb_rx_start(enRxPort, &(s_stRxCfg_CfoGainBypass.stRxGain));                        // RX START
+  cb_system_uwb_rx_start(enRxPort, &(s_stRxCfg_CfoGainBypass.stRxGain), trxStartMode); // RX START
 }
 
 /**
@@ -231,22 +245,31 @@ void cb_framework_uwb_qmode_rx_end (void)
  * @param stTxIrqEnable Interrupt enable configuration for transmission
  * @param trxStartMode Start mode (immediate or deferred)
  */
-void cb_framework_uwb_tx_start(cb_uwbsystem_packetconfig_st* txPacketConfig, cb_uwbsystem_txpayload_st* txPayload, cb_uwbsystem_tx_irqenable_st* stTxIrqEnable, cb_uwbframework_trx_startmode_en trxStartMode)
+void cb_framework_uwb_tx_start(cb_uwbsystem_packetconfig_st* txPacketConfig, cb_uwbsystem_txpayload_st* txPayload, cb_uwbsystem_tx_irqenable_st* stTxIrqEnable, cb_uwbsystem_trx_startmode_en trxStartMode)
 {
   cb_system_uwb_tx_init     ();                                      // TX Init
   cb_system_uwb_config_tx   (txPacketConfig, txPayload, stTxIrqEnable);// TX Config
-  
-  switch (trxStartMode)
-  {
-    case EN_TRX_START_NON_DEFERRED:
-      cb_system_uwb_tx_start ();        // TX Start     
-      break;
-    case EN_TRX_START_DEFERRED:
-      cb_system_uwb_tx_start_prepare(); // TX Start (deferred)
-      break;
-  }  
+  cb_system_uwb_tx_start (trxStartMode);        // TX Start     
 }
+/**
+ * @brief Calculate Angle of Arrival (AoA) from PDoA data
+ * 
+ * @param pdoa_result PDoA 2D data containing phase differences between antenna pairs
+ * @param pd01_bias Phase difference bias between antenna 0 and 1
+ * @param pd02_bias Phase difference bias between antenna 0 and 2  
+ * @param pd12_bias Phase difference bias between antenna 1 and 2
+ * @param azi_result Pointer to store the calculated azimuth angle in degrees
+ */
+void cb_framework_uwb_pdoa_calculate_2daoa(cb_uwbsystem_pdoa_3ddata_st pdoa_result, float pd01_bias, float pd02_bias, float pd12_bias, float* azi_result)
 
+{
+    stAOA_CompensatedData stAoaPd = {0};
+    stAoaPd = cb_system_uwb_aoa_biascomp(pdoa_result, pd01_bias, pd02_bias, pd12_bias);
+    
+    float ele_ref_value = 0.0;
+        
+    cb_system_uwb_aoa_lut_full2d(&(stAoaPd.phaseDiffRx0Rx2), &ele_ref_value, &g_stAntAttr2d, &g_stLutAttr, azi_result);  //todo 2D lut
+}
 /**
  * @brief End the UWB communication transmitter in normal mode.
  *
@@ -268,19 +291,11 @@ void cb_framework_uwb_tx_end(void)
  * @param stTxIrqEnable Interrupt enable configuration for transmission
  * @param trxStartMode Start mode (immediate or deferred)
  */
-void cb_framework_uwb_tx_restart(cb_uwbsystem_tx_irqenable_st* stTxIrqEnable, cb_uwbframework_trx_startmode_en trxStartMode)
+void cb_framework_uwb_tx_restart(cb_uwbsystem_tx_irqenable_st* stTxIrqEnable, cb_uwbsystem_trx_startmode_en trxStartMode)
 {
     cb_system_uwb_tx_stop();
     cb_system_uwb_configure_tx_irq(stTxIrqEnable); 
-    switch (trxStartMode)
-    {
-    case EN_TRX_START_NON_DEFERRED:
-      cb_system_uwb_tx_start ();        // TX Start     
-      break;
-    case EN_TRX_START_DEFERRED:
-      cb_system_uwb_tx_start_prepare(); // TX Start (deferred)
-      break;
-    }  
+    cb_system_uwb_tx_start (trxStartMode);        // TX Start     
 }
 
 /**
@@ -291,20 +306,12 @@ void cb_framework_uwb_tx_restart(cb_uwbsystem_tx_irqenable_st* stTxIrqEnable, cb
  * @param stRxIrqEnable Interrupt enable configuration for reception
  * @param trxStartMode Start mode (immediate or deferred)
  */
-void cb_framework_uwb_rx_start(cb_uwbsystem_rxport_en enRxPort, cb_uwbsystem_packetconfig_st* rxPacketConfig, cb_uwbsystem_rx_irqenable_st* stRxIrqEnable, cb_uwbframework_trx_startmode_en trxStartMode)
+void cb_framework_uwb_rx_start(cb_uwbsystem_rxport_en enRxPort, cb_uwbsystem_packetconfig_st* rxPacketConfig, cb_uwbsystem_rx_irqenable_st* stRxIrqEnable, cb_uwbsystem_trx_startmode_en trxStartMode)
 {
   cb_system_uwb_rx_top_init    ();
   cb_system_uwb_rx_init       (enRxPort);
   cb_system_uwb_config_rx     (rxPacketConfig, stRxIrqEnable, &(s_stRxCfg_CfoGainBypass.stRxCfo));
-  switch (trxStartMode)
-  {
-    case EN_TRX_START_NON_DEFERRED:
-      cb_system_uwb_rx_start  (enRxPort, &(s_stRxCfg_CfoGainBypass.stRxGain)); 
-      break;
-    case EN_TRX_START_DEFERRED:
-      cb_system_uwb_rx_start_prepare();
-      break;
-  }
+  cb_system_uwb_rx_start  (enRxPort, &(s_stRxCfg_CfoGainBypass.stRxGain), trxStartMode); 
 }
 
 /**
@@ -331,19 +338,11 @@ void cb_framework_uwb_rx_end(cb_uwbsystem_rxport_en enRxPort)
  * @param stRxIrqEnable Interrupt enable configuration for reception
  * @param trxStartMode Start mode (immediate or deferred)
  */
-void cb_framework_ftm_uwb_rx_restart(cb_uwbsystem_rxport_en enRxPort, cb_uwbsystem_packetconfig_st* rxPacketConfig, cb_uwbsystem_rx_irqenable_st* stRxIrqEnable, cb_uwbframework_trx_startmode_en trxStartMode)
+void cb_framework_ftm_uwb_rx_restart(cb_uwbsystem_rxport_en enRxPort, cb_uwbsystem_packetconfig_st* rxPacketConfig, cb_uwbsystem_rx_irqenable_st* stRxIrqEnable, cb_uwbsystem_trx_startmode_en trxStartMode)
 { 
   cb_system_uwb_rx_stop(enRxPort);
   cb_system_uwb_config_ftm_rx(rxPacketConfig, stRxIrqEnable, &(s_stRxCfg_CfoGainBypass.stRxCfo));
-  switch (trxStartMode)
-  {
-    case EN_TRX_START_NON_DEFERRED:
-      cb_system_uwb_rx_start  (enRxPort, &(s_stRxCfg_CfoGainBypass.stRxGain)); 
-      break;
-    case EN_TRX_START_DEFERRED:
-      cb_system_uwb_rx_start_prepare();
-      break;
-  }
+  cb_system_uwb_rx_start  (enRxPort, &(s_stRxCfg_CfoGainBypass.stRxGain), trxStartMode); 
 }
 
 /**
@@ -357,19 +356,28 @@ void cb_framework_ftm_uwb_rx_restart(cb_uwbsystem_rxport_en enRxPort, cb_uwbsyst
  * @param stRxIrqEnable Interrupt enable configuration for reception
  * @param trxStartMode Start mode (immediate or deferred)
  */
-void cb_framework_uwb_rx_restart(cb_uwbsystem_rxport_en enRxPort, cb_uwbsystem_packetconfig_st* rxPacketConfig, cb_uwbsystem_rx_irqenable_st* stRxIrqEnable, cb_uwbframework_trx_startmode_en trxStartMode)
+void cb_framework_uwb_rx_restart(cb_uwbsystem_rxport_en enRxPort, cb_uwbsystem_packetconfig_st* rxPacketConfig, cb_uwbsystem_rx_irqenable_st* stRxIrqEnable, cb_uwbsystem_trx_startmode_en trxStartMode)
 { 
   cb_system_uwb_rx_stop(enRxPort);
   cb_system_uwb_config_rx     (rxPacketConfig, stRxIrqEnable, &(s_stRxCfg_CfoGainBypass.stRxCfo));
-  switch (trxStartMode)
-  {
-    case EN_TRX_START_NON_DEFERRED:
-      cb_system_uwb_rx_start  (enRxPort, &(s_stRxCfg_CfoGainBypass.stRxGain)); 
-      break;
-    case EN_TRX_START_DEFERRED:
-      cb_system_uwb_rx_start_prepare();
-      break;
-  }
+  cb_system_uwb_rx_start  (enRxPort, &(s_stRxCfg_CfoGainBypass.stRxGain), trxStartMode); 
+}
+
+//----------------------------------------------------------------//
+//                 TX CW API                                      //
+//----------------------------------------------------------------//
+/**
+ * @brief Start the UWB communication transmitter in cw mode.
+ *
+ * This function starts the UWB communication transmitter in cw mode.
+ * 
+ * @param txPacketConfig Configuration for the packet to be transmitted
+ */
+void cb_framework_uwb_tx_cw_start(cb_uwbsystem_packetconfig_st* txPacketConfig)
+{
+  cb_system_uwb_tx_init(); 
+  cb_system_uwb_config_tx_cw(txPacketConfig);
+  cb_system_uwb_start_tx_cw();
 }
 
 //----------------------------------------------------------------//
@@ -466,6 +474,28 @@ void cb_framework_uwb_get_rx_tsu_timestamp(cb_uwbsystem_rx_tsutimestamp_st* rxTs
 }
 
 /**
+ * @brief Retrieves the RX TSU timestamp.
+ * 
+ * @param rxTsuTimestamp Pointer to the structure to store the RX TSU timestamp.
+ * @param enRxPort The RX port to retrieve the timestamp from (EN_UWB_RX_0, EN_UWB_RX_1, or EN_UWB_RX_2).
+ * @param scale_factor      Peak divisor for detection threshold; default 10. For dynamic
+ *                          range, use 6, 10, or 18 for 15 dB, 20 dB, or 25 dB dynamic range.
+ * @param le_noise_th_ip    Input noise floor; default 0. Effective threshold is
+ *                          max(prefix estimate from taps 100..119, le_noise_th_ip).
+ * @param mm_option         Multipath mitigation mode:
+ *                          0 - conventional leading edge detection with precursor protection;
+ *                          1 - near-range multipath: mitigation with interpolation compensation;
+ *                          2 - near-range multipath: mitigation with near-energy compensation;
+ *                          3 - near-range multipath: compensation of both 1 and 2.
+ *
+ */
+void cb_framework_uwb_get_rx_tsu_timestamp_lemm(cb_uwbsystem_rx_tsutimestamp_st* rxTsuTimestamp, cb_uwbsystem_rxport_en enRxPort, int scale_factor, int le_noise_th_ip, int mm_option)
+{
+  cb_system_uwb_get_rx_tsu_timestamp_lemm(rxTsuTimestamp, enRxPort, scale_factor, le_noise_th_ip, mm_option);
+}
+
+
+/**
  * @brief Get TSU timestamp for UWB transmission
  * 
  * @param txTsuTimestamp Pointer to store the TX TSU timestamp
@@ -515,9 +545,9 @@ void cb_framework_uwb_get_rx_etc_status_register(cb_uwbsystem_rx_etc_statusregis
  * @param startingPosition Starting position in the CIR register
  * @param numSamples Number of samples to store
  */
-void cb_framework_uwb_store_rx_cir_register(cb_uwbsystem_rx_cir_iqdata_st* destArray, cb_uwbsystem_rxport_en enRxPort, uint32_t startingPosition, uint32_t numSamples)
+void cb_framework_uwb_get_rx_cir_register(cb_uwbsystem_rx_cir_iqdata_st* destArray, cb_uwbsystem_rxport_en enRxPort, uint32_t startingPosition, uint32_t numSamples)
 {
-  cb_system_uwb_store_rx_cir_register(destArray, enRxPort, startingPosition, numSamples);
+  cb_system_uwb_get_rx_cir_register(destArray, enRxPort, startingPosition, numSamples);
 }
 
 /**
@@ -564,7 +594,7 @@ double cb_framework_uwb_calculate_distance(cb_uwbframework_rangingdatacontainer_
   double DS_TWR_T_Prop = cb_system_uwb_alg_prop_calculation(&s_stInitiatorDataContainer.dstwrTroundTreply, 
                                                          &s_stResponderDataContainer.dstwrTroundTreply);
   
-  return ((DS_TWR_T_Prop * 30) - 18617 + (double)s_stInitiatorDataContainer.dstwrRangingBias + (double)s_stResponderDataContainer.dstwrRangingBias);
+  return ((DS_TWR_T_Prop * 30) + (double)s_stInitiatorDataContainer.dstwrRangingBias + (double)s_stResponderDataContainer.dstwrRangingBias);
 }
 
 /**
@@ -702,9 +732,9 @@ void cb_framework_uwb_pdoa_reset_cir_data_container(void)
  */
 void cb_framework_uwb_pdoa_store_cir_data(uint8_t countOfPdoaScheduledRx)
 {
-  cb_system_uwb_store_rx_cir_register(g_stPdoaRxCirDataContainer[countOfPdoaScheduledRx][0], EN_UWB_RX_0, (cb_system_uwb_get_rx_cir_ctl_idx() - DEF_PDOA_CIR_DATASET_OFFSET), DEF_PDOA_NUM_CIR_DATASET);
-  cb_system_uwb_store_rx_cir_register(g_stPdoaRxCirDataContainer[countOfPdoaScheduledRx][1], EN_UWB_RX_1, (cb_system_uwb_get_rx_cir_ctl_idx() - DEF_PDOA_CIR_DATASET_OFFSET), DEF_PDOA_NUM_CIR_DATASET);
-  cb_system_uwb_store_rx_cir_register(g_stPdoaRxCirDataContainer[countOfPdoaScheduledRx][2], EN_UWB_RX_2, (cb_system_uwb_get_rx_cir_ctl_idx() - DEF_PDOA_CIR_DATASET_OFFSET), DEF_PDOA_NUM_CIR_DATASET);
+  cb_system_uwb_get_rx_cir_register(g_stPdoaRxCirDataContainer[countOfPdoaScheduledRx][0], EN_UWB_RX_0, (cb_system_uwb_get_rx_cir_ctl_idx() - DEF_PDOA_CIR_DATASET_OFFSET), DEF_PDOA_NUM_CIR_DATASET);
+  cb_system_uwb_get_rx_cir_register(g_stPdoaRxCirDataContainer[countOfPdoaScheduledRx][1], EN_UWB_RX_1, (cb_system_uwb_get_rx_cir_ctl_idx() - DEF_PDOA_CIR_DATASET_OFFSET), DEF_PDOA_NUM_CIR_DATASET);
+  cb_system_uwb_get_rx_cir_register(g_stPdoaRxCirDataContainer[countOfPdoaScheduledRx][2], EN_UWB_RX_2, (cb_system_uwb_get_rx_cir_ctl_idx() - DEF_PDOA_CIR_DATASET_OFFSET), DEF_PDOA_NUM_CIR_DATASET);
 }
 
 /**
@@ -920,20 +950,62 @@ void cb_framework_uwb_pdoa_configure_lut(cb_uwbaoa_lut_attribute_st* p_lut_attr)
 }
 
 //----------------------------------------------------------------//
+//                         Tensorflow API                        //
+//----------------------------------------------------------------//
+/**
+ * @brief Initialize the quality flag model interpreter.
+ *
+ * This function loads either the quantized (int8) or float32 version of the
+ * AoA quality model depending on the build flag. It sets up the operator
+ * resolver, allocates tensor arenas if initialization succeeds.
+ *
+ * @note Must be called once before invoking cb_framework_uwb_tf_quality_flag_check().
+ *
+ * @return CB_ALG_STATUS  EN_ALG_OK on success, EN_ALG_ERROR failed initialized
+ */
+CB_ALG_STATUS cb_framework_uwb_tf_quality_flag_init(void)
+{
+  return cb_system_uwb_tf_quality_flag_init();
+}
+
+/**
+ * @brief Run quality flag inference on feature vector.
+ *
+ * This function checks that the interpreter has been successfully
+ * initialized, validates input/output tensors, loads the 23-element
+ * feature vector into the model, runs inference, and output the
+ * predicted class index (0-3).
+ * @param[out] outputlabel Pointer to Predicted class index in range [0,3] on success.
+ * @return CB_ALG_STATUS  EN_ALG_OK on success, EN_ALG_ERROR failed invoking
+ */
+CB_ALG_STATUS cb_framework_uwb_tf_quality_flag_check(uint8_t* outputlabel)
+{
+  return cb_system_uwb_tf_quality_flag_check(outputlabel);
+}
+
+//----------------------------------------------------------------//
 //                         Radar API                              //
 //----------------------------------------------------------------//
 
 /**
- * @brief Configures the radar system with specified parameters.
+ * @brief Brings the radar TX/RX hardware online for sensing.
  *
- * This function initializes the radar subsystem components including TX, RX modules,
- * and sets the power amplifier and scaling parameters.
- * @param pa        The power amplifier setting (5-bit value, 0-31 range)
- * @param scale_bit The scaling factor for radar signal (3-bit value, 0-7 range)
+ * Forwards to @ref cb_system_radar_on.
  */
-void cb_framework_radar_config(uint32_t pa, uint32_t scale_bit)
+void cb_framework_radar_on(uint32_t powerCode, uint32_t num_rx_mode)
 {
-  cb_system_radar_config(pa, scale_bit);
+  cb_system_radar_on(powerCode, num_rx_mode);
+}
+
+/**
+ * @brief Configures radar packet type, preamble, and RFRAME for a burst.
+ *
+ * Forwards to @ref cb_system_radar_config.
+ */
+void cb_framework_radar_config(uint32_t scaleBit, uint32_t modePrf,
+                               cb_uwbsystem_preamblecodeidx_en preambleCodeIndex)
+{
+  cb_system_radar_config(scaleBit, modePrf, preambleCodeIndex);
 }
 
 /**
@@ -950,9 +1022,22 @@ void cb_framework_radar_start(uint32_t gain_idx)
   cb_system_radar_start(gain_idx);
 }
 
-void cb_framework_radar_getcir(cb_uwbsystem_rx_cir_iqdata_st* destArray,cb_uwbsystem_rxport_en enRxPort,uint32_t NumCirSample)
+/**
+ * @brief Retrieves the timestamp difference between TX and RX.
+ *
+ * This function reads the hardware timestamp registers and calculates the
+ * difference between the TX and RX timestamps, handling wraparound cases.
+ *
+ * @return Timestamp difference in nanoseconds (unsigned, always positive)
+ */
+uint32_t cb_framework_radar_get_timestamp_diff(cb_uwbsystem_rxport_en enRxPort)
 {
-  cb_system_radar_getcir(destArray,enRxPort,NumCirSample);
+  return cb_system_radar_get_timestamp_diff(enRxPort);
+}
+
+CB_STATUS cb_framework_radar_getcir(cb_uwbsystem_rx_cir_iqdata_st* destArray,cb_uwbsystem_rxport_en enRxPort,uint32_t NumCirSample,uint8_t enableDetect)
+{
+  return cb_system_radar_getcir(destArray,enRxPort,NumCirSample,enableDetect);
 }
 /**
  * @brief Stop radar TX and RX operations
@@ -970,6 +1055,14 @@ void cb_framework_radar_stop(void)
 void cb_framework_radar_off(void)
 {
   cb_system_radar_off();
+}
+
+/**
+ * @brief Pulse RX domain reset (assert then release RX_RSTN).
+ */
+void cb_framework_radar_reset(void)
+{
+  cb_system_radar_reset();
 }
 
 /**

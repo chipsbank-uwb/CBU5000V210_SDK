@@ -10,7 +10,7 @@
       <TargetName>Target 1</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>6220000::V6.22::ARMCLANG</pCCUsed>
+      <pCCUsed>6210000::V6.21::ARMCLANG</pCCUsed>
       <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -49,7 +49,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\Objects\</OutputDirectory>
-          <OutputName>CBU5000V210</OutputName>
+          <OutputName>CBU5000V210_BOOT</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
@@ -70,9 +70,9 @@
             <nStopU2X>0</nStopU2X>
           </BeforeCompile>
           <BeforeMake>
-            <RunUserProg1>0</RunUserProg1>
+            <RunUserProg1>1</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name></UserProg1Name>
+            <UserProg1Name>powershell -NoProfile -ExecutionPolicy Bypass -EncodedCommand JABFAHIAcgBvAHIAQQBjAHQAaQBvAG4AUAByAGUAZgBlAHIAZQBuAGMAZQAgAD0AIAAnAFMAdABvAHAAJwAKACQAUAByAG8AZwByAGUAcwBzAFAAcgBlAGYAZQByAGUAbgBjAGUAIAA9ACAAJwBTAGkAbABlAG4AdABsAHkAQwBvAG4AdABpAG4AdQBlACcACgAkAGEAcABwAEIAaQBuAFAAYQB0AGgAIAA9ACAAJwAuAC4AXAAuAC4AXAB1AHcAYgBfAHIAbgBnAGEAbwBhAF8AZgB0AG0AXwBkAGYAdQBcAEsAZQBpAGwAXABDAEIAVQA1ADAAMAAwAFYAMgAxADAAXwBBAFAAUAAuAGIAaQBuACcACgAkAGIAbwBvAHQAcwBlAHQAdABpAG4AZwBQAGEAdABoACAAPQAgACcALgBcAEIAaQBuAEYAaQBsAGUAXABiAG8AbwB0AHMAZQB0AHQAaQBuAGcALgBiAGkAbgAnAAoAaQBmACAAKAAtAG4AbwB0ACAAKABUAGUAcwB0AC0AUABhAHQAaAAgACQAYQBwAHAAQgBpAG4AUABhAHQAaAApACkAIAB7ACAAdABoAHIAbwB3ACAAJwBBAFAAUAAgAGIAaQBuACAAbgBvAHQAIABmAG8AdQBuAGQAOgAgACcAIAArACAAJABhAHAAcABCAGkAbgBQAGEAdABoACAAfQAKAGYAdQBuAGMAdABpAG8AbgAgAEcAZQB0AC0AQwByAGMAMwAyACAAewAKACAAIAAgACAAcABhAHIAYQBtACgAWwBiAHkAdABlAFsAXQBdACAAJABCAHkAdABlAHMAKQAKACAAIAAgACAAWwBpAG4AdAA2ADQAXQAgACQAYwByAGMAIAA9ACAAMAB4AEYARgBGAEYARgBGAEYARgBMAAoAIAAgACAAIABmAG8AcgBlAGEAYwBoACAAKAAkAHYAYQBsAHUAZQAgAGkAbgAgACQAQgB5AHQAZQBzACkAIAB7AAoAIAAgACAAIAAgACAAIAAgACQAYwByAGMAIAA9ACAAKAAkAGMAcgBjACAALQBiAHgAbwByACAAWwBpAG4AdAA2ADQAXQAkAHYAYQBsAHUAZQApACAALQBiAGEAbgBkACAAMAB4AEYARgBGAEYARgBGAEYARgBMAAoAIAAgACAAIAAgACAAIAAgAGYAbwByACAAKAAkAGIAaQB0ACAAPQAgADAAOwAgACQAYgBpAHQAIAAtAGwAdAAgADgAOwAgACQAYgBpAHQAKwArACkAIAB7AAoAIAAgACAAIAAgACAAIAAgACAAIAAgACAAaQBmACAAKAAoACQAYwByAGMAIAAtAGIAYQBuAGQAIAAxACkAIAAtAG4AZQAgADAAKQAgAHsACgAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACQAYwByAGMAIAA9ACAAKAAoACgAJABjAHIAYwAgAC0AcwBoAHIAIAAxACkAIAAtAGIAeABvAHIAIAAwAHgARQBEAEIAOAA4ADMAMgAwAEwAKQAgAC0AYgBhAG4AZAAgADAAeABGAEYARgBGAEYARgBGAEYATAApAAoAIAAgACAAIAAgACAAIAAgACAAIAAgACAAfQAgAGUAbABzAGUAIAB7AAoAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAkAGMAcgBjACAAPQAgACgAKAAkAGMAcgBjACAALQBzAGgAcgAgADEAKQAgAC0AYgBhAG4AZAAgADAAeABGAEYARgBGAEYARgBGAEYATAApAAoAIAAgACAAIAAgACAAIAAgACAAIAAgACAAfQAKACAAIAAgACAAIAAgACAAIAB9AAoAIAAgACAAIAB9AAoAIAAgACAAIAByAGUAdAB1AHIAbgAgACgAKAAtAGIAbgBvAHQAIAAkAGMAcgBjACkAIAAtAGIAYQBuAGQAIAAwAHgARgBGAEYARgBGAEYARgBGAEwAKQAKAH0ACgBmAHUAbgBjAHQAaQBvAG4AIABXAHIAaQB0AGUALQBVADMAMgAgAHsACgAgACAAIAAgAHAAYQByAGEAbQAoAFsAYgB5AHQAZQBbAF0AXQAgACQAQgB1AGYAZgBlAHIALAAgAFsAaQBuAHQAXQAgACQATwBmAGYAcwBlAHQALAAgAFsAdQBpAG4AdAAzADIAXQAgACQAVgBhAGwAdQBlACkACgAgACAAIAAgAFsAYgB5AHQAZQBbAF0AXQAgACQAYgB5AHQAZQBzACAAPQAgAFsAQgBpAHQAQwBvAG4AdgBlAHIAdABlAHIAXQA6ADoARwBlAHQAQgB5AHQAZQBzACgAJABWAGEAbAB1AGUAKQAKACAAIAAgACAAWwBBAHIAcgBhAHkAXQA6ADoAQwBvAHAAeQAoACQAYgB5AHQAZQBzACwAIAAwACwAIAAkAEIAdQBmAGYAZQByACwAIAAkAE8AZgBmAHMAZQB0ACwAIAA0ACkACgB9AAoAJABhAHAAcABCAHkAdABlAHMAIAA9ACAAWwBTAHkAcwB0AGUAbQAuAEkATwAuAEYAaQBsAGUAXQA6ADoAUgBlAGEAZABBAGwAbABCAHkAdABlAHMAKAAkAGEAcABwAEIAaQBuAFAAYQB0AGgAKQAKACQAYQBwAHAAUwBpAHoAZQAgAD0AIABbAHUAaQBuAHQAMwAyAF0AJABhAHAAcABCAHkAdABlAHMALgBMAGUAbgBnAHQAaAAKACQAYQBwAHAAQwByAGMAIAA9ACAAWwB1AGkAbgB0ADMAMgBdACgAKABHAGUAdAAtAEMAcgBjADMAMgAgAC0AQgB5AHQAZQBzACAAJABhAHAAcABCAHkAdABlAHMAKQApAAoAJABhAHAAcABWAGUAcgBzAGkAbwBuACAAPQAgAFsAdQBpAG4AdAAzADIAXQAxAAoAJABiAG8AbwB0AHMAZQB0AHQAaQBuAGcAIAA9ACAATgBlAHcALQBPAGIAagBlAGMAdAAgAGIAeQB0AGUAWwBdACAAMwA0ADQACgBXAHIAaQB0AGUALQBVADMAMgAgACQAYgBvAG8AdABzAGUAdAB0AGkAbgBnACAANAAgADAACgBXAHIAaQB0AGUALQBVADMAMgAgACQAYgBvAG8AdABzAGUAdAB0AGkAbgBnACAAOAAgADAAeAAwADAAMAAwADUAMAAwADAACgBXAHIAaQB0AGUALQBVADMAMgAgACQAYgBvAG8AdABzAGUAdAB0AGkAbgBnACAAMQAyACAAMAB4ADAAMAAwADAAMAAwADAAMAAKAFcAcgBpAHQAZQAtAFUAMwAyACAAJABiAG8AbwB0AHMAZQB0AHQAaQBuAGcAIAAxADYAIAAkAGEAcABwAFMAaQB6AGUACgBXAHIAaQB0AGUALQBVADMAMgAgACQAYgBvAG8AdABzAGUAdAB0AGkAbgBnACAAMgAwACAAJABhAHAAcABDAHIAYwAKAFcAcgBpAHQAZQAtAFUAMwAyACAAJABiAG8AbwB0AHMAZQB0AHQAaQBuAGcAIAAyADQAIAAkAGEAcABwAFYAZQByAHMAaQBvAG4ACgBXAHIAaQB0AGUALQBVADMAMgAgACQAYgBvAG8AdABzAGUAdAB0AGkAbgBnACAAMgA4ACAAMQAKACQAYwByAGMARABhAHQAYQAgAD0AIABOAGUAdwAtAE8AYgBqAGUAYwB0ACAAYgB5AHQAZQBbAF0AIAAoACQAYgBvAG8AdABzAGUAdAB0AGkAbgBnAC4ATABlAG4AZwB0AGgAIAAtACAANAApAAoAWwBBAHIAcgBhAHkAXQA6ADoAQwBvAHAAeQAoACQAYgBvAG8AdABzAGUAdAB0AGkAbgBnACwAIAA0ACwAIAAkAGMAcgBjAEQAYQB0AGEALAAgADAALAAgACQAYwByAGMARABhAHQAYQAuAEwAZQBuAGcAdABoACkACgAkAGQAYQB0AGEAQwByAGMAIAA9ACAAWwB1AGkAbgB0ADMAMgBdACgAKABHAGUAdAAtAEMAcgBjADMAMgAgAC0AQgB5AHQAZQBzACAAJABjAHIAYwBEAGEAdABhACkAKQAKAFcAcgBpAHQAZQAtAFUAMwAyACAAJABiAG8AbwB0AHMAZQB0AHQAaQBuAGcAIAAwACAAJABkAGEAdABhAEMAcgBjAAoAWwBTAHkAcwB0AGUAbQAuAEkATwAuAEYAaQBsAGUAXQA6ADoAVwByAGkAdABlAEEAbABsAEIAeQB0AGUAcwAoACQAYgBvAG8AdABzAGUAdAB0AGkAbgBnAFAAYQB0AGgALAAgACQAYgBvAG8AdABzAGUAdAB0AGkAbgBnACkACgBXAHIAaQB0AGUALQBPAHUAdABwAHUAdAAgACgAJwBHAGUAbgBlAHIAYQB0AGUAZAAgAGIAbwBvAHQAcwBlAHQAdABpAG4AZwAuAGIAaQBuACAAcwBpAHoAZQA9AHsAMAB9ACAAYwByAGMAPQAwAHgAewAxADoAWAA4AH0AIABhAHAAcABfAGMAcgBjAD0AMAB4AHsAMgA6AFgAOAB9ACcAIAAtAGYAIAAkAGIAbwBvAHQAcwBlAHQAdABpAG4AZwAuAEwAZQBuAGcAdABoACwAIAAkAGQAYQB0AGEAQwByAGMALAAgACQAYQBwAHAAQwByAGMAKQANAAoA</UserProg1Name>
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
@@ -81,9 +81,9 @@
           </BeforeMake>
           <AfterMake>
             <RunUserProg1>1</RunUserProg1>
-            <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name>fromelf --bin --output ./BinFile/APP.bin ./Objects/CBU5000V210.axf</UserProg1Name>
-            <UserProg2Name></UserProg2Name>
+            <RunUserProg2>1</RunUserProg2>
+            <UserProg1Name>cmd.exe /C copy .\Objects\CBU5000V210_BOOT.axf .\BinFile</UserProg1Name>
+            <UserProg2Name>cmd.exe /C copy .\Objects\CBU5000V210_BOOT.hex .\BinFile</UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
             <nStopA1X>0</nStopA1X>
@@ -340,7 +340,7 @@
               <MiscControls>-Wno-padded -Wno-declaration-after-statement -Wno-covered-switch-default -Wno-c11-extensions -Wno-format-nonliteral -Wno-gnu-binary-literal -Wno-overlength-strings -Wno-incompatible-pointer-types-discards-qualifiers -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-cast-qual -Wno-missing-variable-declarations -Wno-strict-prototypes -Wno-undef -Wno-missing-noreturn -Wno-implicit-float-conversion -Wno-missing-prototypes -Wno-zero-length-array -Wno-extra-semi -Wno-variadic-macros -Wno-extra-semi-stmt -Wno-macro-redefined -Wno-unsafe-buffer-usage</MiscControls>
               <Define>BOOT</Define>
               <Undefine></Undefine>
-              <IncludePath>.\ARMCM33_DSP_FP;..\..\..\Components\Midlayer\Flash;..\..\..\Components\Midlayer\SleepDeepSleep;..\..\..\Components\DriverCpu\Inc;..\..\..\External\LibCRC\include;..\..\..\Components\Midlayer\Dfu;..\..\..\Components\SharedUtils;..\..\..\Components\Midlayer\System;..\..\..\Components\ArmCore;..\..\..\Components\ArmCore\CMSIS_5.8.0\Core\Include;..\..\..\Components\Configuration;..\..\..\Components\DriverUwb\uwb_drivers;..\..\..\Components\Algorithm;..\..\..\Components\Midlayer\Aoa</IncludePath>
+              <IncludePath>.\ARMCM33_DSP_FP;..\..\..\Components\Midlayer\Flash;..\..\..\Components\Midlayer\SleepDeepSleep;..\..\..\Components\DriverCpu\Inc;..\..\..\External\LibCRC\include;..\..\..\Components\Midlayer\Dfu;..\..\..\Components\SharedUtils;..\..\..\Components\Midlayer\System;..\..\..\Components\ArmCore;..\..\..\Components\ArmCore\CMSIS_6.2.0\Core\Include;..\..\..\Components\Configuration;..\..\..\Components\DriverUwb\uwb_drivers;..\..\..\Components\Algorithm;..\..\..\Components\Midlayer\Aoa</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -527,6 +527,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>BIN</GroupName>
+          <Files>
+            <File>
+              <FileName>app_bin.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\..\uwb_rngaoa_ftm_dfu\Keil\app_bin.s</FilePath>
+            </File>
+            <File>
+              <FileName>bootsetting_bin.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\BinFile\bootsetting_bin.s</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Device</GroupName>
           <Files>
             <File>
@@ -551,21 +566,6 @@
   </Targets>
 
   <RTE>
-    <packages>
-      <filter>
-        <targetInfos/>
-      </filter>
-      <package name="CBU5000V210_DFP" vendor="Keil">
-        <targetInfos>
-          <targetInfo name="Target 1"/>
-        </targetInfos>
-      </package>
-      <package name="CBU5000V210_DFP" vendor="Keil" version="1.0.0">
-        <targetInfos>
-          <targetInfo name="Target 1" versionMatchMode="fixed"/>
-        </targetInfos>
-      </package>
-    </packages>
     <apis/>
     <components/>
     <files/>

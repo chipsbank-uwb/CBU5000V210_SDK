@@ -26,6 +26,15 @@
 //-------------------------------
 // DEFINE SECTION
 //-------------------------------
+#define NOP_50_CPU_CYCLES     "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" \
+                              "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" \
+                              "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" \
+                              "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" \
+                              "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t" "nop\n\t"
+
+#define NOP_100_CPU_CYCLES    NOP_50_CPU_CYCLES NOP_50_CPU_CYCLES
+#define NOP_1000_CPU_CYCLES   NOP_100_CPU_CYCLES NOP_100_CPU_CYCLES NOP_100_CPU_CYCLES NOP_100_CPU_CYCLES NOP_100_CPU_CYCLES \
+                              NOP_100_CPU_CYCLES NOP_100_CPU_CYCLES NOP_100_CPU_CYCLES NOP_100_CPU_CYCLES NOP_100_CPU_CYCLES
 //-------------------------------
 // ENUM SECTION
 //-------------------------------
@@ -42,6 +51,32 @@ static stSCR_TypeDef  *pSCR  = (stSCR_TypeDef* ) SCR_BASE_ADDR;
 //-------------------------------
 // FUNCTION BODY SECTION
 //-------------------------------
+
+/**
+ * @brief Selects the CPU / AMBA clock frequency.
+ *
+ * @param cpuClock EN_SCR_CPU_CLK_64MHZ or EN_SCR_CPU_CLK_128MHZ.
+ */
+void cb_scr_configure_cpu_clock(enScrCpuClock cpuClock)
+{
+    uint32_t cpu_ctrl;
+
+    if ((cpuClock != EN_SCR_CPU_CLK_64MHZ) && (cpuClock != EN_SCR_CPU_CLK_128MHZ))
+    {
+        return;
+    }
+
+    cpu_ctrl  = pSCR->cpu_ctrl;
+    cpu_ctrl &= ~SCR_CPU_CTRL_MASK_clk_sel;
+    cpu_ctrl |= (((uint32_t)cpuClock << SCR_CPU_CTRL_POS_clk_sel) & SCR_CPU_CTRL_MASK_clk_sel);
+    pSCR->cpu_ctrl = cpu_ctrl;
+
+    __asm volatile
+    (
+        NOP_1000_CPU_CYCLES
+    );
+}
+
 /**
  * @brief Configure RC code to be stablize for wake up from deepsleep.
  */

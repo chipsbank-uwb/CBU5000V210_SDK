@@ -14,6 +14,8 @@
 #include "ARMCM33_DSP_FP.h"
 #include "CB_Common.h"
 
+#define MS_TO_US(ms)    ((ms) * 1000U)
+
 /**
  * @brief Global system tick counter variable
  * 
@@ -49,7 +51,7 @@ void cb_hal_delay_in_ms(uint32_t milliseconds);
  * 
  * @return The current tick count value
  */
-uint32_t cb_hal_get_tick(void);
+uint32_t cb_hal_get_time_ms(void);
 
 /**
  * @brief Check if a specified time period has elapsed
@@ -62,7 +64,29 @@ uint32_t cb_hal_get_tick(void);
  * 
  * @return CB_STATUS_OK if the time has elapsed, CB_STATUS_TIMEOUT otherwise
  */
-CB_STATUS cb_hal_is_time_elapsed(uint32_t start_tick, uint32_t timeout_ms);
+CB_STATUS cb_hal_is_time_elapsed_ms(uint32_t start_tick, uint32_t timeout_ms);
+
+/**
+ * @brief Returns system time in microseconds.
+ *
+ * Takes a stable SysTick snapshot to avoid inconsistent reads.
+ * Timestamp is 32-bit and wraps every ~1.19 hours.
+ *
+ * @return Current time in microseconds.
+ */
+uint32_t cb_hal_get_time_us(void);
+
+/**
+ * @brief Checks if a timeout has elapsed.
+ *
+ * Uses unsigned subtraction, which safely handles 32-bit wraparound.
+ *
+ * @param start_us   Start timestamp.
+ * @param timeout_us Timeout duration in microseconds.
+ *
+ * @return CB_PASS if elapsed >= timeout_us, else CB_FAIL.
+ */
+CB_STATUS cb_hal_is_time_elapsed_us(uint32_t start_us, uint32_t timeout_us);
 
 /**
  * @brief Convert a value to its two's complement representation.

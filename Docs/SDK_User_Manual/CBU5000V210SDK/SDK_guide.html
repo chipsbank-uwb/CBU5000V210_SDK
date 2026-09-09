@@ -5,7 +5,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Getting Started Guide &mdash; CBU5000V210 1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -130,6 +130,11 @@
 <p><strong>设置开发环境</strong></p>
 <p><strong>1. 安装Keil IDE开发工具</strong></p>
 <p>访问官方Arm Keil网站 (<a class="reference external" href="https://www.keil.com/download/product/">https://www.keil.com/download/product/</a>) 下载最新的Keil开发工具，并按照安装向导完成安装。</p>
+<p>若需要运行 <code class="docutils literal notranslate"><span class="pre">SDK_generator.bat</span></code> 打包 SDK，请将 Windows 环境变量 <code class="docutils literal notranslate"><span class="pre">KEIL_PATH</span></code> 设置为 Keil UV4 目录（该目录下应包含 <code class="docutils literal notranslate"><span class="pre">UV4.exe</span></code>），例如 <code class="docutils literal notranslate"><span class="pre">C:\Keil_v5\UV4</span></code> 或 <code class="docutils literal notranslate"><span class="pre">D:\Keil_v5\UV4</span></code>。可在命令提示符中执行：</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>setx KEIL_PATH <span class="s2">&quot;C:\Keil_v5\UV4&quot;</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">SDK_generator.bat</span></code> 从此环境变量读取 Keil 路径，不再使用脚本内写死的盘符。新开的终端才会读到 <code class="docutils literal notranslate"><span class="pre">setx</span></code> 写入的变量。</p>
 <p><strong>2. 获取SDK</strong></p>
 <p>在基于CBU5000V210芯片开发应用程序之前，可以从ChipsBank提供的指定GitHub仓库获取最新的SDK。</p>
 <p><strong>3. 安装软件包</strong></p>
@@ -209,6 +214,11 @@ hello world !
 <p><strong>Setting up the development environment</strong></p>
 <p><strong>1. Installing the Keil IDE development tool</strong></p>
 <p>Visit the official Arm Keil website (<a class="reference external" href="https://www.keil.com/download/product/">https://www.keil.com/download/product/</a>) to download the latest Keil development tool, and complete the installation following the installation wizard.</p>
+<p>To run <code class="docutils literal notranslate"><span class="pre">SDK_generator.bat</span></code> to package the SDK, set the Windows environment variable <code class="docutils literal notranslate"><span class="pre">KEIL_PATH</span></code> to the Keil UV4 directory (the folder that contains <code class="docutils literal notranslate"><span class="pre">UV4.exe</span></code>), for example <code class="docutils literal notranslate"><span class="pre">C:\Keil_v5\UV4</span></code> or <code class="docutils literal notranslate"><span class="pre">D:\Keil_v5\UV4</span></code>. From a Command Prompt:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>setx KEIL_PATH <span class="s2">&quot;C:\Keil_v5\UV4&quot;</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">SDK_generator.bat</span></code> reads this variable instead of a hardcoded drive letter. Open a new terminal after <code class="docutils literal notranslate"><span class="pre">setx</span></code> so the variable is picked up.</p>
 <p><strong>2. Obtaining the SDK</strong></p>
 <p>Before developing applications based on the CBU5000V210 chip, you can obtain the latest SDK from the specified GitHub repository provided by ChipsBank.</p>
 <p><strong>3. Installing the software package</strong></p>

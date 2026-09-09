@@ -44,7 +44,6 @@ typedef struct
 typedef struct
 {
   uint32_t result;
-  uint32_t cpuCylces;
 } CRYPTO_TestResult;
 
 //-------------------------------
@@ -63,6 +62,12 @@ void CB_CRYPTO_AES_128_ECB(enEncryptDecrypt enEncryptDecrypt, uint8_t* in, uint8
 void CB_CRYPTO_AES_128_CMAC_Encrypt(uint8_t* in, uint8_t length, uint8_t* out, uint8_t* key);
 void CB_CRYPTO_AES_128_CCM(enEncryptDecrypt enEncryptDecrypt, const uint8_t *key, const uint8_t *nonce, const uint8_t *adata, uint32_t adata_len,
                                            const uint8_t *payload, uint32_t payload_len, uint8_t *mic, uint8_t mic_len, uint8_t *outbuf);
+
+void CB_CRYPTO_AES_256_ECB(enEncryptDecrypt enEncryptDecrypt, uint8_t* in, uint8_t* out, uint8_t* key);
+void CB_CRYPTO_AES_256_CMAC_Encrypt(uint8_t* in, uint8_t length, uint8_t* out, uint8_t* key);
+void CB_CRYPTO_AES_256_CCM(enEncryptDecrypt enEncryptDecrypt, const uint8_t *key, const uint8_t *nonce,const uint8_t *adata, uint32_t adata_len,
+                                           const uint8_t *payload, uint32_t payload_len,uint8_t *mic, uint8_t mic_len, uint8_t *outbuf);
+
 //void CRYPTO_IRQ_Handler(void);
 
 #endif  // INC_CRYPTO_H_

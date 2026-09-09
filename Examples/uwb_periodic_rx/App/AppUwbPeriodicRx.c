@@ -112,15 +112,18 @@ void app_uwb_periodicrx_receive_packet(const stUwbPeriodicRxPacketConfig *const 
   stRxIrqEnable.rx0Done       = CB_TRUE;
   stRxIrqEnable.rx0PdDone     = CB_FALSE;
   stRxIrqEnable.rx0SfdDetDone = CB_FALSE; 
-    
-  switch (PacketConfig->enRxPort)
+  
+  if (PacketConfig->enRxPort == EN_UWB_RX_0)
   {
-    case EN_UWB_RX_0:   { stRxIrqEnable.rx0Done = APP_TRUE; break; }
-    case EN_UWB_RX_1:   { stRxIrqEnable.rx1Done = APP_TRUE; break; }
-    case EN_UWB_RX_2:   { stRxIrqEnable.rx2Done = APP_TRUE; break; }
-    case EN_UWB_RX_02:  { break; }
-    case EN_UWB_RX_ALL: { break; }
-    default: { break; }
+    stRxIrqEnable.rx0Done = APP_TRUE;
+  }
+  else if (PacketConfig->enRxPort == EN_UWB_RX_1)
+  {
+    stRxIrqEnable.rx1Done = APP_TRUE;
+  }
+  else if (PacketConfig->enRxPort == EN_UWB_RX_2)
+  {
+    stRxIrqEnable.rx2Done = APP_TRUE;
   }
 
   logSettings.enRxPort = PacketConfig->enRxPort;
@@ -189,34 +192,26 @@ static void app_uwb_periodicrx_log(stLogSettings* const LogSettings)
   
   uint8_t rxPortNum = 0;
   
-  switch(LogSettings->enRxPort)
+  if (LogSettings->enRxPort == EN_UWB_RX_0)
   {
-    case EN_UWB_RX_0:
-      rx_ok   = statusRegister.rx0_ok;
-      sfd_det = statusRegister.sfd0_det;
-      pd_det  = statusRegister.pd0_det;
-      rxPortNum = 0;
-      break;
-    
-    case EN_UWB_RX_1:
-      rx_ok   = statusRegister.rx1_ok;
-      sfd_det = statusRegister.sfd1_det;
-      pd_det  = statusRegister.pd1_det;
-      rxPortNum = 1;
-      break;   
-    
-    case EN_UWB_RX_2:
-      rx_ok   = statusRegister.rx2_ok;
-      sfd_det = statusRegister.sfd2_det;
-      pd_det  = statusRegister.pd2_det;
-      rxPortNum = 2;
-      break;
-    
-    case EN_UWB_RX_02: //unused case
-    case EN_UWB_RX_ALL:
-      break;
-    
-    default:  break;
+    rx_ok   = statusRegister.rx0_ok;
+    sfd_det = statusRegister.sfd0_det;
+    pd_det  = statusRegister.pd0_det;
+    rxPortNum = 0;
+  }
+  else if (LogSettings->enRxPort == EN_UWB_RX_1)
+  {
+    rx_ok   = statusRegister.rx1_ok;
+    sfd_det = statusRegister.sfd1_det;
+    pd_det  = statusRegister.pd1_det;
+    rxPortNum = 1;
+  }
+  else if (LogSettings->enRxPort == EN_UWB_RX_2)
+  {
+    rx_ok   = statusRegister.rx2_ok;
+    sfd_det = statusRegister.sfd2_det;
+    pd_det  = statusRegister.pd2_det;
+    rxPortNum = 2;
   }
   
   uint8_t regStatOk = (rx_ok == APP_TRUE) && (sfd_det == APP_TRUE) && (pd_det == APP_TRUE);
@@ -234,7 +229,7 @@ static void app_uwb_periodicrx_log(stLogSettings* const LogSettings)
   {
     cb_uwbsystem_rx_cir_iqdata_st cirRegisterData[256];
     
-    cb_framework_uwb_store_rx_cir_register(cirRegisterData, EN_UWB_RX_0, 0, 256);
+    cb_framework_uwb_get_rx_cir_register(cirRegisterData, EN_UWB_RX_0, 0, 256);
     
     app_uwb_periodicrx_print("I: ");
     for (uint32_t i = 0; i < 256; ++i) 

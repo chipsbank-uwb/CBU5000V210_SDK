@@ -161,32 +161,24 @@ void per_param_init(cb_uwbsystem_rxport_en enRxPort)
   statusRegisterNotOK.value = 0;
   countPositionWhenStatusRegisterNotOK = 0;
   memset(&stRxIrqEnable, 0, sizeof(cb_uwbsystem_rx_irqenable_st));
-  switch (enRxPort)
+
+  if (enRxPort == EN_UWB_RX_0)
   {
-    case EN_UWB_RX_0:
-      stRxIrqEnable.rx0Done       = CB_TRUE;
-      stRxIrqEnable.rx0PdDone     = CB_FALSE;
-      stRxIrqEnable.rx0SfdDetDone = CB_FALSE;
-      break;
-    
-    case EN_UWB_RX_1:
-      stRxIrqEnable.rx1Done       = CB_TRUE;
-      stRxIrqEnable.rx1PdDone     = CB_FALSE;
-      stRxIrqEnable.rx1SfdDetDone = CB_FALSE;
-      break;    
-    
-    case EN_UWB_RX_2:
-      stRxIrqEnable.rx2Done       = CB_TRUE;
-      stRxIrqEnable.rx2PdDone     = CB_FALSE;
-      stRxIrqEnable.rx2SfdDetDone = CB_FALSE;
-      break;
-    
-    case EN_UWB_RX_02: //unused case
-    case EN_UWB_RX_ALL:
-      break;
-    
-    default: 
-      break;
+    stRxIrqEnable.rx0Done       = CB_TRUE;
+    stRxIrqEnable.rx0PdDone     = CB_FALSE;
+    stRxIrqEnable.rx0SfdDetDone = CB_FALSE;
+  }
+  else if (enRxPort == EN_UWB_RX_1)
+  {
+    stRxIrqEnable.rx1Done       = CB_TRUE;
+    stRxIrqEnable.rx1PdDone     = CB_FALSE;
+    stRxIrqEnable.rx1SfdDetDone = CB_FALSE;
+  }
+  else if (enRxPort == EN_UWB_RX_2)
+  {
+    stRxIrqEnable.rx2Done       = CB_TRUE;
+    stRxIrqEnable.rx2PdDone     = CB_FALSE;
+    stRxIrqEnable.rx2SfdDetDone = CB_FALSE;
   }
 }
 
@@ -215,14 +207,14 @@ void app_uwbtrx_rx_per(cb_uwbsystem_rxport_en enRxPort, uint32_t rxTimeIntervalI
     cb_framework_uwb_rx_start(enRxPort, &Rxpacketconfig, &stRxIrqEnable, EN_TRX_START_NON_DEFERRED); // RX START
     while ((rxPacketCount == rxPacketCountBuf)&&(is_timer_timeout_flag == CB_FALSE))
     {
-       if(cb_hal_is_time_elapsed(startTime, 3) == CB_PASS)   // Delay 3ms
+       if(cb_hal_is_time_elapsed_us(startTime, 3000) == CB_PASS)   // Delay 3000us
        {
           rxPacketNotReceived++;
           break;
        }
     }
     rxPacketCountBuf = rxPacketCount;
-    startTime = cb_hal_get_tick();
+    startTime = cb_hal_get_time_us();
     if (is_timer_timeout_flag == CB_TRUE) 
     {
       break;  // break the while(1) loop once timeout
@@ -250,33 +242,25 @@ void app_uwb_rxper_packet_count_logging(cb_uwbsystem_rxport_en enRxPort)
   uint16_t sfd_det   = 0;
   uint16_t pd_det    = 0;
   
-  switch(enRxPort)
+  if (enRxPort == EN_UWB_RX_0)
   {
-    case EN_UWB_RX_0:
-      rx_ok    = statusRegister.rx0_ok;
-      sfd_det  = statusRegister.sfd0_det;
-      pd_det   = statusRegister.pd0_det;
-      break;
-    
-    case EN_UWB_RX_1:
-      rx_ok    = statusRegister.rx1_ok;
-      sfd_det  = statusRegister.sfd1_det;
-      pd_det   = statusRegister.pd1_det;
-      break; 
-    
-    case EN_UWB_RX_2:
-      rx_ok    = statusRegister.rx2_ok;
-      sfd_det  = statusRegister.sfd2_det;
-      pd_det   = statusRegister.pd2_det;
-      break;
-    
-    case EN_UWB_RX_02: //unused case
-    case EN_UWB_RX_ALL:
-      break;
-    
-    default:  break;
+    rx_ok    = statusRegister.rx0_ok;
+    sfd_det  = statusRegister.sfd0_det;
+    pd_det   = statusRegister.pd0_det;
   }
-  
+  else if (enRxPort == EN_UWB_RX_1)
+  {
+    rx_ok    = statusRegister.rx1_ok;
+    sfd_det  = statusRegister.sfd1_det;
+    pd_det   = statusRegister.pd1_det;
+  }
+  else if (enRxPort == EN_UWB_RX_2)
+  {
+    rx_ok    = statusRegister.rx2_ok;
+    sfd_det  = statusRegister.sfd2_det;
+    pd_det   = statusRegister.pd2_det;
+  }
+
   if ((rx_ok == CB_TRUE) && (sfd_det == CB_TRUE) && (pd_det == CB_TRUE))
   {
     rxPacketCountWithAllStatusOK++;

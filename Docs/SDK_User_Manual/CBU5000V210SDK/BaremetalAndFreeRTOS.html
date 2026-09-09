@@ -5,7 +5,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Baremetal &amp; FreeRTOS &mdash; CBU5000V210 1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -113,6 +113,42 @@
 <p>If the macro <code class="docutils literal notranslate"><span class="pre">APP_FREERTOS_ENABLE</span></code> is set to <code class="docutils literal notranslate"><span class="pre">APP_FALSE</span></code>, a simple while loop will be used to run TaskHandler function.</p>
 </div></div>
 </div></blockquote>
+<figure class="align-center">
+<p class="plantuml">
+<img src="../_images/plantuml-53b47abb4d402774c39912fc3a8e2d197d41a02c.png" alt="Title BareMetal &amp; FreeRTOS
+
+scale 0.8
+hide footbox
+autonumber
+actor User as User
+
+box CPU Subsystem #lightyellow
+    participant main as main
+end box
+box System Application #lightyellow
+    participant Rtos as Rtos
+end box
+box FreeRTOS #lightyellow
+    participant FreeRTOS as FreeRTOS
+end box
+box Chipsbank_LIB #lightgreen 
+    participant CB_LIB as CB_LIB
+end box
+
+== Initialization ==
+main --&gt; CB_LIB: Initializations
+
+alt APP_FREERTOS_ENABLE == APP_TRUE
+main --&gt; Rtos: RTOS init and start scheduler
+Rtos --&gt; FreeRTOS: xTaskCreate: create task for TaskHandler
+Rtos --&gt; FreeRTOS: vTaskStartScheduler: Start task scheduler
+else APP_FREERTOS_ENABLE == APP_FALSE
+    loop while(1)
+        main --&gt; main: TaskHandler()
+    end
+end"/>
+</p>
+</figure>
 </section>
 
 

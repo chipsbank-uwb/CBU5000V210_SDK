@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<ProjectWorkspace xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="project_mpw.xsd">
+
+  <SchemaVersion>1.0</SchemaVersion>
+
+  <Header>### uVision Project, (C) Keil Software</Header>
+
+  <WorkspaceName>D:\chipsbank\TDOA\Sub_CBU_DEV\Firmware\Examples\uwb_tdoa_anchor_responder\Keil\tdoa_workspace.uvmpw</WorkspaceName>
+
+  <project>
+    <PathAndName>..\..\uwb_tdoa_anchor_initiator\Keil\uwb_tdoa_anchor_initiator.uvprojx</PathAndName>
+  </project>
+
+  <project>
+    <PathAndName>.\uwb_tdoa_anchor_responder.uvprojx</PathAndName>
+    <NodeIsActive>1</NodeIsActive>
+  </project>
+
+  <project>
+    <PathAndName>..\..\uwb_tdoa_tag\Keil\uwb_tdoa_tag.uvprojx</PathAndName>
+  </project>
+
+</ProjectWorkspace>

@@ -1,6 +1,6 @@
 /**
  * @file    CB_flash.c
- * @brief   Flash memory OTA operations for QSPI interface.
+ * @brief   Flash memory operations for QSPI interface.
  * @details This file contains functions for reading from and writing to flash memory in APP memory regions.
  *          It includes functions for configuring flash commands.
  * @author  Chipsbank
@@ -24,7 +24,6 @@ extern uint32_t SystemCoreClock;
 #define DEF_FLASH_WIP_TIMEOUT_MS          700
 #define DEF_FLASH_TIMEOUT_CPU_CYCLES      (((SystemCoreClock) / 1000U) * DEF_FLASH_TIMEOUT_MS)  // number of CPU cycles 
 #define DEF_FLASH_WIP_TIMEOUT_CPU_CYCLES  (((SystemCoreClock) / 1000U) * DEF_FLASH_WIP_TIMEOUT_MS)  // number of CPU cycles 
-
 
 
 /*Status Register*/
@@ -1838,4 +1837,16 @@ enFlashStatus cb_flash_unlock(void)
   result = cb_flash_block_protect(flash_bp_param.bp_unlock_param);
 
   return result;
+}
+
+
+void cb_flash_encryption_enable(void)
+{
+		cb_qspi_enable_aes(pQSPI, EN_AES_SELECT_AES_EN_REG,EN_AES_ENABLE);         
+}
+
+
+void cb_flash_encrytpion_disable(void)
+{
+	cb_qspi_enable_aes(pQSPI, EN_AES_SELECT_AES_EN_REG,EN_AES_DISABLE);    
 }

@@ -18,7 +18,7 @@
 //-------------------------------
 // DEFINE SECTION
 //-------------------------------
-#define DEF_RXMARKER_VAL        0x5A
+#define DEF_RXMARKER_VAL        0x9b
 /*SizeInByte*/
 #define DEF_RXMARKER_SIZE       1
 #define DEF_CMD_SIZE            2
@@ -47,8 +47,8 @@
 #endif
 
 
-#define EVK_UART_RX_PIN  EN_IOMUX_GPIO_0
-#define EVK_UART_TX_PIN  EN_IOMUX_GPIO_1
+#define EVK_UART_RX_PIN  EN_IOMUX_GPIO_6
+#define EVK_UART_TX_PIN  EN_IOMUX_GPIO_7
 
 //-------------------------------
 // ENUM SECTION

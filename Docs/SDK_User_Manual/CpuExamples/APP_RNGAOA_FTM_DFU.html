@@ -1,0 +1,2042 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>APP-RNGAOA-FTM-DFU &mdash; CBU5000V210 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=29a6c3e3"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/design-tabs.js?v=f930bc37"></script>
+        <script src="../_static/tabs.js?v=3030b3cb"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="APP_ADC" href="APP_ADC.html" />
+    <link rel="prev" title="APP_DFU" href="APP_DFU.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CBU5000V210
+          </a>
+              <div class="version">
+                2.0.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../CBU5000V210SDK/CBU5000V210SDK.html">CBU5000V210 SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ApiReference.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UwbExamples/UwbExamples.html">UWB Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="CpuExamples.html">CPU Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="APP_DFU.html">APP_DFU</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">APP-RNGAOA-FTM-DFU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_ADC.html">APP_ADC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_CRC.html">APP-CRC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_CRYPTO.html">APP-CRYPTO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_DMA.html">APP-DMA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_Efuse.html">APP-Efuse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_Flash.html">APP-Flash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_FlashEncryption.html">APP-FlashEncryption</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_Gpio.html">APP-Gpio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_I2C.html">APP-I2C</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_PKA.html">APP-PKA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_Sleep.html">APP-Sleep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_SpiMaster.html">APP-SpiMaster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_SpiSlaver.html">APP-SpiSlaver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_Timer.html">APP-Timer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_Trng.html">APP-Trng</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APPCpuUart.html">APP-UART</a></li>
+<li class="toctree-l2"><a class="reference internal" href="APP_Watchdog.html">APP-Watchdog</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Calibration.html">UWB Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Appendix.html">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../VersionHistory.html">Version History</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CBU5000V210</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="CpuExamples.html">CPU Examples</a></li>
+      <li class="breadcrumb-item active">APP-RNGAOA-FTM-DFU</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="app-rngaoa-ftm-dfu">
+<h1>APP-RNGAOA-FTM-DFU<a class="headerlink" href="#app-rngaoa-ftm-dfu" title="Link to this heading"></a></h1>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-5Lit5paH" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-5Lit5paH" name="5Lit5paH" role="tab" tabindex="0">中文</button><button aria-controls="panel-0-RW5nbGlzaA==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tab" tabindex="-1">English</button></div><div aria-labelledby="tab-0-5Lit5paH" class="sphinx-tabs-panel group-tab" id="panel-0-5Lit5paH" name="5Lit5paH" role="tabpanel" tabindex="0"><p><strong>概述</strong></p>
+<p>本文档提供了 uwb_rngaoa_ftm_dfu 示例的使用指南。该示例是一个集测距测角、产测标定与固件升级于一体的综合例程，主要用于配合上位机产测工具在量产阶段对开发板进行校准与烧录。它包含三个功能模块：</p>
+<ul class="simple">
+<li><p><strong>RNGAOA（测距 + 测角）</strong>：在发起者与响应者之间进行双面双向测距（DS-TWR）和到达角（AoA/PDoA）测量，是设备上电后的默认运行任务。</p></li>
+<li><p><strong>FTM（产测模式）</strong>：通过 UART 命令帧接收上位机下发的产测标定指令，读写频偏、功率码、飞行时间（ToF）、AoA 等校准参数至非易失存储（NVM）。</p></li>
+<li><p><strong>DFU（固件升级）</strong>：通过 UART 通道接收上位机推送的固件，实现设备固件在线更新。</p></li>
+</ul>
+<p>设备上电后默认执行 RNGAOA 测距测角任务，同时在主循环中持续轮询 UART，将收到的命令分别分发给 DFU 与 FTM 处理器。当上位机下发进入产测模式的命令后，测距任务会被挂起，转而执行标定流程；退出产测模式后恢复测距。</p>
+<p><strong>要求</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>需要以下开发板中的两个：</dt><dd><ul>
+<li><p>CB5000V210 Anchor开发板（一个作为发起者，一个作为响应者）</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>软件：</dt><dd><ul>
+<li><p>ChipsBank UWB 上位机工具（ChipsBankUWBTool），用于产测标定与固件升级</p></li>
+<li><p>串行终端工具（例如 PuTTY、SSCOM），用于观察测距测角日志</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>用户界面</strong></p>
+<ul class="simple">
+<li><p>在每个开发板上找到 GPIO00 引脚，并将其连接到串行接收线（RX）。</p></li>
+<li><p>在每个开发板上找到 GPIO01 引脚，并将其连接到串行发送线（TX）。</p></li>
+<li><p>UART0 波特率 115200，停止位 1，数据位顺序 LSB，无奇偶校验。UART0 承载测距日志。</p></li>
+<li><p>在每个开发板上找到 GPIO07 引脚，并将其连接到串行接收线（RX）。</p></li>
+<li><p>在每个开发板上找到 GPIO06 引脚，并将其连接到串行发送线（TX）。</p></li>
+<li><p>UART1 波特率 921600，UART1 承载产测命令与固件升级数据。</p></li>
+<li><p>确保连接牢固，以避免通信问题。</p></li>
+</ul>
+<p><strong>构建和运行</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>该示例可以在ChipsBank Connect SDK文件夹结构中的以下位置找到：</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Firmware\\Examples\\uwb_rngaoa_ftm_dfu</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>进入上述目录的 <code class="docutils literal notranslate"><span class="pre">Keil</span></code> 文件夹，双击工作区文件 <code class="docutils literal notranslate"><span class="pre">uwb_rngaoa_ftm_dfu.uvmpw</span></code>，即可使用 Keil MDK 打开工程。</p></li>
+<li><p>设备角色由 <code class="docutils literal notranslate"><span class="pre">App\AppUwbRngAoa.h</span></code> 中的编译宏 <code class="docutils literal notranslate"><span class="pre">APP_RNGAOA_ROLE</span></code> 决定：设为 <code class="docutils literal notranslate"><span class="pre">INITIATOR</span></code> 编译为发起者固件，设为 <code class="docutils literal notranslate"><span class="pre">RESPONDER</span></code> 编译为响应者固件。将一块开发板烧录为发起者固件，另一块烧录为响应者固件。</p></li>
+<li><p>该示例配合 DFU 引导（Bootloader）使用，编译产物为 <code class="docutils literal notranslate"><span class="pre">CBU5000V210_APP.bin</span></code>，可通过 Keil 直接烧录，也可通过上位机 DFU 功能进行升级。</p></li>
+</ul>
+<p><strong>预期输出</strong></p>
+<ul class="simple">
+<li><p>正常测距测角时（未进入产测模式），发起者串行终端将输出每个周期的距离、相位差与角度信息（数值随实际摆放而变化）：</p></li>
+</ul>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>uwb_rngaoa_ftm_dfu INITIATOR
+Cycle:0, D:25.132500cm,PD01:12.500000, PD02:-8.300000, PD12:-20.700000 (in degrees),azimuth: 15.200000 degrees,elevation: -3.400000 degrees
+Cycle:1, D:24.981200cm,PD01:12.700000, PD02:-8.100000, PD12:-20.900000 (in degrees),azimuth: 15.400000 degrees,elevation: -3.100000 degrees
+Cycle:2, D:25.007800cm,PD01:12.600000, PD02:-8.200000, PD12:-20.800000 (in degrees),azimuth: 15.300000 degrees,elevation: -3.300000 degrees
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>uwb_rngaoa_ftm_dfu RESPONDER
+Cycle:0, Ranging Successful:1,PD01:12.500000, PD02:-8.300000, PD12:-20.700000 (in degrees),azimuth: 15.200000 degrees,elevation: -3.400000 degrees
+Cycle:1, Ranging Successful:1,PD01:12.700000, PD02:-8.100000, PD12:-20.900000 (in degrees),azimuth: 15.400000 degrees,elevation: -3.100000 degrees
+</pre></div>
+</div>
+<p><strong>上位机工具介绍</strong></p>
+<p>ChipsBank UWB 上位机工具主界面采用标签页组织，与本示例配合使用的主要是以下两个标签页：</p>
+<ul class="simple">
+<li><p><strong>串口调试助手</strong>：通用串口收发与日志分析界面，可选择 COM 端口与波特率，实时显示开发板输出的测距测角日志，并支持将日志解析为图表。</p></li>
+<li><dl class="simple">
+<dt><strong>开发板功能验证</strong>：芯片功能测试界面，工具会自动查找已插入的 Chipsbank 设备。该页面顶部有两个功能按钮：</dt><dd><ul>
+<li><p><strong>升级</strong>：固件升级（DFU）面板。</p></li>
+<li><p><strong>工厂模式</strong>：产测标定（FTM）面板。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>工厂模式操作界面</strong></p>
+<p>选择“工厂模式”，设置设备对应的串口和波特率并打开工厂产测开关；日志区出现“工厂模式已开启”表示进入产测模式成功。</p>
+<a class="reference internal image-reference" href="../_images/RNGAOA_FTM_factory_mode.png"><img alt="RNGAOA FTM 工厂模式操作界面" class="align-center" src="../_images/RNGAOA_FTM_factory_mode.png" style="width: 70%;" /></a>
+<p><strong>固件升级操作界面</strong></p>
+<p>选择“升级”，设置波特率并检测目标串口，确认当前固件版本后选择待升级的 APP bin 文件，点击“开始升级”，日志区会依次显示升级过程和完成结果。</p>
+<a class="reference internal image-reference" href="../_images/RNGAOA_DFU_upgrade.png"><img alt="RNGAOA DFU 固件升级操作界面" class="align-center" src="../_images/RNGAOA_DFU_upgrade.png" style="width: 70%;" /></a>
+<p><strong>命令帧协议</strong></p>
+<p>产测标定命令采用固定格式的二进制帧，通过 UART 与设备交互。帧结构如下：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>+-----------+--------+--------+--------+--------+---------+----------+
+| StartCode | Cmd_H  | Cmd_L  | Resp   | Length | Data... | Checksum |
++-----------+--------+--------+--------+--------+---------+----------+
+    1B         1B       1B       1B       1B      N Byte     1B
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>StartCode</strong>：起始字节，固定为 0x9B。</p></li>
+<li><p><strong>Cmd_H / Cmd_L</strong>：16 位命令 ID 的高/低字节（例如 0x0001 读芯片 ID、0x0010 读频偏、0x7525 产测模式开关）。</p></li>
+<li><p><strong>Resp</strong>：响应标志位。</p></li>
+<li><p><strong>Length</strong>：其后 Data 字段的字节数。</p></li>
+<li><p><strong>Checksum</strong>：从 Cmd_H 起到 Data 末尾所有字节按字节求和后取低 8 位。</p></li>
+</ul>
+<p><strong>产测命令列表</strong></p>
+<p>以下命令统一称为产测命令。</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>命令 ID</p></th>
+<th class="head"><p>处理函数</p></th>
+<th class="head"><p>功能说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x7525</p></td>
+<td><p>ftm_on_0ff</p></td>
+<td><p>开启或关闭工厂模式</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0001</p></td>
+<td><p>ftm_read_chip_id</p></td>
+<td><p>读取芯片 ID</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00F5</p></td>
+<td><p>APP_User_PreambleScanSet</p></td>
+<td><p>Preamble 扫描。数据段 3 字节：第 1 字节为开关（非 0 启动扫描、0 为停止），第 2~3 字节为扫描时长（大端，单位 ms）。扫描完成后返回 1 字节最优 preamble 码索引；若返回值不为 0xFF（即扫描成功），设备**会自动复位**以使新配置生效。</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00F6</p></td>
+<td><p>APP_User_PreambleSet</p></td>
+<td><p>写 preamble 码。数据段 1 字节为 preamble 码索引，写入 NVM。返回 1 字节状态码；写入成功后设备**会自动复位**以使新配置生效。</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00F7</p></td>
+<td><p>APP_User_PreambleGet</p></td>
+<td><p>读 preamble 码。从 NVM 读取当前 preamble 码索引并返回 1 字节；若 NVM 中无有效数据则返回 0xFF。该命令不会触发复位。</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00F0</p></td>
+<td><p>ftm_preamble_scan</p></td>
+<td><p>扫描最优 Preamble 码，不触发自动复位</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00F1</p></td>
+<td><p>ftm_preamble_set</p></td>
+<td><p>将 Preamble 校准值写入 NVM</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00F2</p></td>
+<td><p>ftm_preamble_get</p></td>
+<td><p>从 NVM 读取 Preamble 校准值</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00F3</p></td>
+<td><p>ftm_device_role_set</p></td>
+<td><p>将设备角色写入 NVM</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00F4</p></td>
+<td><p>ftm_device_role_get</p></td>
+<td><p>从 NVM 读取设备角色</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0010</p></td>
+<td><p>ftm_read_freq_offset_cal</p></td>
+<td><p>读取频偏校准值</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0011</p></td>
+<td><p>ftm_write_freq_offset_cal</p></td>
+<td><p>写入频偏校准值</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0012</p></td>
+<td><p>ftm_read_power_code</p></td>
+<td><p>读取发射功率码</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0013</p></td>
+<td><p>ftm_write_power_code</p></td>
+<td><p>写入发射功率码</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0014</p></td>
+<td><p>ftm_read_tof_cal</p></td>
+<td><p>读取 ToF 校准值</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0015</p></td>
+<td><p>ftm_write_tof_cal</p></td>
+<td><p>写入 ToF 校准值</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0016</p></td>
+<td><p>ftm_read_num_of_aoa</p></td>
+<td><p>读取 AoA 校准项数量</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0017</p></td>
+<td><p>ftm_read_aoa_cal</p></td>
+<td><p>读取指定索引的 AoA 校准值</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0018</p></td>
+<td><p>ftm_write_aoa_cal</p></td>
+<td><p>写入指定索引的 AoA 校准值</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0030</p></td>
+<td><p>ftm_set_tx_num_of_packet</p></td>
+<td><p>设置校准发射包数量</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0031</p></td>
+<td><p>ftm_set_tx_interval</p></td>
+<td><p>设置校准发射包间隔</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0032</p></td>
+<td><p>ftm_set_tx_on_off</p></td>
+<td><p>开启或停止周期性 UWB 发射</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0040</p></td>
+<td><p>ftm_set_rx_channel</p></td>
+<td><p>设置校准接收通道</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0041</p></td>
+<td><p>ftm_set_rx_on_off</p></td>
+<td><p>开启或停止校准接收</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0042</p></td>
+<td><p>ftm_read_rx_num_of_packs</p></td>
+<td><p>读取校准期间的接收包数量</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0051</p></td>
+<td><p>ftm_read_rang_aoa_id</p></td>
+<td><p>读取测距测角同步 ID</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0050</p></td>
+<td><p>ftm_write_rang_aoa_id</p></td>
+<td><p>写入测距测角同步 ID</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0053</p></td>
+<td><p>ftm_read_rang_aoa_freq</p></td>
+<td><p>读取测距测角工作频率</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0052</p></td>
+<td><p>ftm_write_rang_aoa_freq</p></td>
+<td><p>写入测距测角工作频率</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0060</p></td>
+<td><p>ftm_set_rang_aoa_tx_on_off</p></td>
+<td><p>开启或关闭测距测角发射</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0070</p></td>
+<td><p>ftm_set_rang_aoa_rx_channel</p></td>
+<td><p>设置测距测角接收通道</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0071</p></td>
+<td><p>ftm_set_rang_aoa_rx_on_off</p></td>
+<td><p>开启或关闭测距测角接收</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0072</p></td>
+<td><p>ftm_get_rang_aoa_rx_result</p></td>
+<td><p>读取测距测角接收结果</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0073</p></td>
+<td><p>ftm_set_ranging_tx_on_off</p></td>
+<td><p>测距发射端开关。数据段 1 字节，非 0 为开启、0 为关闭。开启后设备以发起者身份按当前测距频率周期性发起测距。</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0074</p></td>
+<td><p>ftm_set_ranging_rx_on_off</p></td>
+<td><p>测距接收端开关。数据段 1 字节，非 0 为开启、0 为关闭。开启后设备以响应者身份应答测距。</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0075</p></td>
+<td><p>ftm_write_ranging_freq</p></td>
+<td><p>写测距频率。数据段 1 字节，单位 Hz，支持 10、20、50（同时兼容 0x10、0x20、0x50 写法），分别对应约 100ms、50ms、20ms 的测距周期；传入其他值时按 20Hz 处理。</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0076</p></td>
+<td><p>ftm_get_ranging_rx_distance</p></td>
+<td><p>读取最近一次测距结果。返回 4 字节距离值（大端序），单位 cm。</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0077</p></td>
+<td><p>ftm_read_ranging_freq</p></td>
+<td><p>读取当前测距频率。返回 1 字节，单位 Hz。</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>产测标定流程（工厂模式）</strong></p>
+<ol class="arabic simple">
+<li><p>用 USB 线连接开发板，在上位机“开发板功能验证”页面确认工具已识别到 Chipsbank 设备并选择对应端口。</p></li>
+<li><p>点击“工厂模式”按钮进入产测标定面板。此时工具会向设备下发产测模式开启命令（0x7525），设备挂起测距任务进入标定状态。</p></li>
+<li><p>根据需要在各标定子面板中读写校准参数，主要包括： <strong>频率偏移（频偏）</strong>：写入 / 读取晶振频率偏移校准值。 <strong>Preamble</strong>：扫描并写入 / 读取最优 preamble 码。 <strong>功率等级</strong>：写入 / 读取发射功率码。 <strong>ToF 标定</strong>：写入 / 读取飞行时间（测距零偏）校准值。 <strong>AoA 标定</strong>：读取 / 写入各索引的 PDoA（Pdoa01/Pdoa02/Pdoa12 及参考值）校准数据。 <strong>测距模式频率配置</strong>：配置测距 / 测角的工作频率等参数。</p></li>
+<li><p>每条命令下发后，设备按命令帧格式回传结果（校准值或状态码），工具在界面与日志中显示读写是否成功。写入的参数保存在设备 NVM 中，掉电不丢失。</p></li>
+<li><p>标定完成后退出工厂模式，工具下发产测模式关闭命令，设备恢复正常的测距测角任务。</p></li>
+</ol>
+<p><strong>Flash map</strong></p>
+<p>以下是flash的内存分配表</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Bus Address</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Bank Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Flash Address</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x7E000</p></td>
+<td><p>4K</p></td>
+<td><p>User Calibration</p></td>
+<td></td>
+<td><p>0x7F000</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x7D000</p></td>
+<td><p>4K</p></td>
+<td><p>Boot setting A</p></td>
+<td></td>
+<td><p>0x7E000</p></td>
+</tr>
+<tr class="row-even"><td><p>0x7C000</p></td>
+<td><p>4K</p></td>
+<td><p>Boot setting B</p></td>
+<td><p>Backup for boot setting</p></td>
+<td><p>0x7D000</p></td>
+</tr>
+<tr class="row-odd"><td><p>…</p></td>
+<td></td>
+<td><p>User Data (Option)</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0x40000*</p></td>
+<td><p>240K</p></td>
+<td><p>Backup bank</p></td>
+<td><p>Save the new APP</p></td>
+<td><p>0x41000*</p></td>
+</tr>
+<tr class="row-odd"><td><p>…</p></td>
+<td></td>
+<td><p>User Data (Option)</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0x04000</p></td>
+<td><p>240K</p></td>
+<td><p>APP bank</p></td>
+<td></td>
+<td><p>0x05000</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00000</p></td>
+<td><p>16K</p></td>
+<td><p>Dfu Boot</p></td>
+<td><p>UART+Copy+Jump</p></td>
+<td><p>0x01000</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意：</strong></p>
+<ul class="simple">
+<li><p>1.芯片引导信息区（4K）不包括在Flash Map上。</p></li>
+<li><p>2.Flash代码区（&lt;=256K）： Dfu Boot 16K + APP Bank 240K = 256K。</p></li>
+<li><p>3.备份bank起始地址可通过更新进度配置。</p></li>
+</ul>
+<p><strong>Boot 配置区</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Size</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>CRC</p></td>
+<td><p>CRC for Boot setting (Boot mode + APP bank info + Backup bank info + ECC Public Key)</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Boot mode</p></td>
+<td><p>1: Stay at boot mode only. 0: Normal boot</p></td>
+</tr>
+<tr class="row-even"><td><p>4*10</p></td>
+<td><p>APP bank info</p></td>
+<td><p>4Byte: Firmware Start address 4Byte: Reserve 4Byte: Firmware Size 4Byte: Firmware CRC 4Byte: Firmware Version 4Byte: Firmware Active 4Byte x 4: Reserve</p></td>
+</tr>
+<tr class="row-odd"><td><p>4*10</p></td>
+<td><p>Backup bank info</p></td>
+<td><p>4Byte: Firmware Start address 4Byte: Load Address 4Byte: Firmware Size 4Byte: Firmware CRC 4Byte: Firmware Version 4Byte: Firmware Active 4Byte x 4: Reserve</p></td>
+</tr>
+<tr class="row-even"><td><p>64</p></td>
+<td><p>ECC Public Key</p></td>
+<td><p>Public Key for verify the update</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>命令帧 (Max 256 Byte)</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Head</p></th>
+<th class="head"><p>CMD_H</p></th>
+<th class="head"><p>CMD_L</p></th>
+<th class="head"><p>Request/ Respond</p></th>
+<th class="head"><p>Data length(MAX 128Byte)</p></th>
+<th class="head"><p>Data(n byte)</p></th>
+<th class="head"><p>Check sum</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x9B</p></td>
+<td></td>
+<td></td>
+<td><p>0</p></td>
+<td><p>n</p></td>
+<td></td>
+<td><p>Command ID + len + Data</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>响应帧</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Head</p></th>
+<th class="head"><p>CMD_H</p></th>
+<th class="head"><p>CMD_L</p></th>
+<th class="head"><p>Request/ Respond</p></th>
+<th class="head"><p>Data length(MAX 128Byte)</p></th>
+<th class="head"><p>Data(n byte)</p></th>
+<th class="head"><p>Check sum</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x9B</p></td>
+<td></td>
+<td></td>
+<td><p>1</p></td>
+<td><p>n</p></td>
+<td><p>code</p></td>
+<td><p>Command ID + len + Data</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>命令列表</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>NB</p></th>
+<th class="head"><p>Command ID</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0x0100</p></td>
+<td><p>Get firmware version</p></td>
+<td><p>Fix respond just for confirm</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>0x0110</p></td>
+<td><p>Start upgrade with version</p></td>
+<td><p>The firmware version going to update (address is Backup bank address)</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>0x0111</p></td>
+<td><p>Pack Data</p></td>
+<td><p>The specific firmware data in the pack</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>0x0112</p></td>
+<td><p>Verify and active</p></td>
+<td><p>Verify the firmware when send all packs.</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>0x0113</p></td>
+<td><p>Finish DFU</p></td>
+<td><p>Exit DFU mode</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>0x0120</p></td>
+<td><p>Reset</p></td>
+<td><p>Reset the chip</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>启动升级命令格式</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Size(Byte)</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Version</p></td>
+<td><p>The firmware version of firmware file.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>包命令格式</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Size(Byte)</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Address Offset</p></td>
+<td><p>The address offset of this pack.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Size</p></td>
+<td><p>The size of this pack.</p></td>
+</tr>
+<tr class="row-even"><td><p>128</p></td>
+<td><p>Data</p></td>
+<td><p>The firmware file data</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>CRC</p></td>
+<td><p>The CRC of this pack.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>验证和激活</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Size(Byte)</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>CRC</p></td>
+<td><p>The CRC of whole new firmware file.</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Size(option)</p></td>
+<td><p>The size of new firmware file.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>固件信息响应</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Size(Byte)</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>APP bank start address</p></td>
+<td><p>The start address of application firmware.</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Load address</p></td>
+<td><p>The start address of where to save the firmware.</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Size</p></td>
+<td><p>The size of new firmware file.</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>CRC</p></td>
+<td><p>The CRC of whole firmware file.</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Version</p></td>
+<td><p>The firmware version of firmware file.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Bank信息命令格式</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Size(Byte)</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>APP bank start address</p></td>
+<td><p>The start address of application firmware.</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Load address</p></td>
+<td><p>The start address of where to save the firmware.</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Version</p></td>
+<td><p>The firmware version of firmware file.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>移植说明：为其他例程添加 FTM / DFU / Bootloader 支持</strong></p>
+<p>本节说明如何把 FTM 产测模式、DFU 固件升级与 Bootloader 引导机制移植到一个原本不带这些功能的 UWB 例程中。整个过程分为五步：添加源文件、修改应用主循环、修改 APP 工程的地址空间（sct）、把 APP 与 Bootloader 的 bin 链接在一起、按正确顺序编译和烧录。</p>
+<p><strong>第一步：添加源文件到目标工程</strong></p>
+<p>在目标例程的 <code class="docutils literal notranslate"><span class="pre">.uvprojx</span></code> 中添加以下源文件（可参考 uwb_rngaoa_ftm_dfu 工程的分组方式）：</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>功能</p></th>
+<th class="head"><p>源文件</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>FTM 产测</p></td>
+<td><p>AppFtmftm_handler.c、ftm_cal_nvm.c、ftm_uwb_cal.c、ftm_uwb_psr.c（从 uwb_rngaoa_ftm_dfu 例程整个 <code class="docutils literal notranslate"><span class="pre">App\Ftm</span></code> 目录复制到目标例程的 App 目录下）</p></td>
+</tr>
+<tr class="row-odd"><td><p>DFU 升级</p></td>
+<td><p>ComponentsMidlayerDfudfu_handler.c（<strong>仅此一个文件参与编译</strong>）</p></td>
+</tr>
+<tr class="row-even"><td><p>命令解析</p></td>
+<td><p>ComponentsCmdparsercmd_parser_uart.c</p></td>
+</tr>
+<tr class="row-odd"><td><p>依赖模块</p></td>
+<td><p>ComponentsMidlayerFlashCB_flash.c（校准参数与固件写入 Flash）、ComponentsDriverCpuSrcCB_qspi.c（Flash 底层 QSPI 读写，被 CB_flash.c 调用）、ComponentsDriverCpuSrcCB_crc.c（CRC 校验）、ComponentsDriverCpuSrcCB_efuse.c（读芯片 ID）、ComponentsApplicationapp_uart.c（UART 收发）、ComponentsApplicationAppSysIrqCallback.c（应用层中断回调注册，被 ftm_uwb_cal.c/ftm_uwb_psr.c 调用）</p></td>
+</tr>
+</tbody>
+</table>
+<p>此外，FTM 的 preamble 扫描模块（ftm_uwb_psr.c）会用到硬件真随机数（TRNG）。TRNG 的实现（<code class="docutils literal notranslate"><span class="pre">CB_TRNG_Init</span></code>、<code class="docutils literal notranslate"><span class="pre">CB_TRNG_Snoise</span></code>、<code class="docutils literal notranslate"><span class="pre">CB_TRNG_GetRng</span></code>）不在任何 <code class="docutils literal notranslate"><span class="pre">.c</span></code> 源码中，而由预编译库提供，因此目标工程必须同时链接以下两个库（普通 UWB 例程通常只链接了前者，移植时需补上后者，否则会出现 TRNG 符号未定义的链接错误）：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>LibsCB_LibCBU5000V210_UWB_LIB.lib（UWB 核心）</p></li>
+<li><p>LibsBLE_LibCBU5000V210_REGULATED_LIB.lib（提供 TRNG 等受控功能）</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>若编译时出现类似下列的 L6218E 未定义符号链接错误，即为上述依赖缺失所致，按“引用来源—所属文件”对照补齐即可：<a href="#id1"><span class="problematic" id="id2">``</span></a>cb_qspi_*``（来自 cb_flash.o）需 CB_qspi.c；<a href="#id3"><span class="problematic" id="id4">``</span></a>cb_crc_*``（来自 ftm_cal_nvm.o）需 CB_crc.c；<a href="#id5"><span class="problematic" id="id6">``</span></a>app_irq_*``（来自 ftm_uwb_cal.o / ftm_uwb_psr.o）需 AppSysIrqCallback.c；<a href="#id7"><span class="problematic" id="id8">``</span></a>CB_TRNG_*``（来自 ftm_uwb_psr.o）需链接 REGULATED 库。</p>
+</div>
+<p>同时在工程的 Include Paths 中加入 <code class="docutils literal notranslate"><span class="pre">App\Ftm</span></code>、<code class="docutils literal notranslate"><span class="pre">Components\Midlayer\Dfu</span></code>、<code class="docutils literal notranslate"><span class="pre">Components\Cmdparser</span></code> 三个头文件目录。</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>DFU 目录下的 <code class="docutils literal notranslate"><span class="pre">dfu_uart.c</span></code> 与 <code class="docutils literal notranslate"><span class="pre">dfu_blesvc.c</span></code> <strong>不要加入编译</strong>。本例程采用的是基于命令解析器（cmd_parser_uart）的 UART DFU，UART 数据的收发由命令解析器完成，DFU 协议逻辑全部在 <code class="docutils literal notranslate"><span class="pre">dfu_handler.c</span></code> 中，无需 <code class="docutils literal notranslate"><span class="pre">dfu_uart.c</span></code>；而 <code class="docutils literal notranslate"><span class="pre">dfu_blesvc.c</span></code> 是 <a href="#id9"><span class="problematic" id="id10">**</span></a>BLE 通道**的 DFU 服务，依赖 NimBLE 协议栈（<code class="docutils literal notranslate"><span class="pre">sysinit/sysinit.h</span></code>、<code class="docutils literal notranslate"><span class="pre">host/ble_hs.h</span></code> 等）。在不带 BLE 的例程中编译它会报错：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>../../../Components/Midlayer/Dfu/dfu_blesvc.c(25): error: &#39;sysinit/sysinit.h&#39; file not found
+   25 | #include &quot;sysinit/sysinit.h&quot;
+</pre></div>
+</div>
+<p>在 uwb_rngaoa_ftm_dfu 原工程中，这两个文件是被加入工程但设为“排除编译”的（Keil 中右键文件 &gt; <em>Options for File &gt; Properties</em>，取消勾选 <em>Include in Target Build</em>，文件图标会变为带红点的排除状态）。移植时最简单的做法是**根本不添加**这两个文件；若已添加，请按上述方式将其排除编译。</p>
+</div>
+<p><strong>第二步：在应用主循环中接入命令轮询</strong></p>
+<p>在应用的初始化处完成命令解析器与 DFU 的初始化，并在主循环中轮询 UART，把收到的数据依次交给 DFU 与 FTM 处理器：</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;cmd_parser_uart.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;dfu_handler.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;ftm_handler.h&quot;</span>
+
+<span class="cm">/* 初始化：命令解析器 + DFU */</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">app_uart_command_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">dfu_cfg_t</span><span class="w"> </span><span class="n">uart_cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+<span class="w">  </span><span class="n">cmd_parser_uart_init</span><span class="p">();</span>
+<span class="w">  </span><span class="n">uart_cfg</span><span class="p">.</span><span class="n">responder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cmd_parser_uart_responder</span><span class="p">;</span>
+<span class="w">  </span><span class="n">uart_cfg</span><span class="p">.</span><span class="n">reinit</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">cmd_parser_uart_deinit</span><span class="p">;</span>
+<span class="w">  </span><span class="n">dfu_halder_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">uart_cfg</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/* 轮询：把收到的命令分发给 DFU 与 FTM */</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">app_uart_command_poll</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cmd_parser_uart_pooling_cmd</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">APP_TRUE</span><span class="p">)</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">len</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">cmd_parser_uart_received_length</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cmd_parser_uart_received_buffer</span><span class="p">();</span>
+<span class="w">    </span><span class="n">cmd_parser_uart_process_buffer</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="n">len</span><span class="p">,</span><span class="w"> </span><span class="n">dfu_halder_polling</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cmd_parser_uart_process_buffer</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="n">len</span><span class="p">,</span><span class="w"> </span><span class="n">ftm_halder_polling</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cmd_parser_uart_rx_restart</span><span class="p">();</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">app_rngaoa_pause</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">app_rngaoa_reset</span><span class="p">();</span>
+<span class="w">  </span><span class="n">s_enAppRngaoaState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EN_APP_STATE_IDLE</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">app_rngaoa_resume</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="o">*</span><span class="n">iterationTime</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">app_rngaoa_reset</span><span class="p">();</span>
+<span class="w">  </span><span class="o">*</span><span class="n">iterationTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cb_hal_get_time_us</span><span class="p">();</span>
+<span class="w">  </span><span class="n">s_enAppRngaoaState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EN_APP_STATE_SYNC_RECEIVE</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">app_rngaoa_initiator</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">startTime</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">iterationTime</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">ftm_active_last</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">ftm_halder_get_state</span><span class="p">();</span>
+
+<span class="w">  </span><span class="cm">/* UWB、Payload、UART 命令及中断回调初始化 */</span>
+<span class="w">  </span><span class="cm">/* ... */</span>
+
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">ftm_active</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ftm_halder_get_state</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">app_uart_command_poll</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ftm_active</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">APP_TRUE</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ftm_active_last</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">APP_FALSE</span><span class="p">)</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="n">app_rngaoa_pause</span><span class="p">();</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="n">ftm_active_last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ftm_active</span><span class="p">;</span>
+<span class="w">      </span><span class="k">continue</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ftm_active_last</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">APP_TRUE</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="n">app_rngaoa_resume</span><span class="p">(</span><span class="o">&amp;</span><span class="n">iterationTime</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">ftm_active_last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ftm_active</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/* 原有 RNGAOA 状态机 */</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">s_enAppRngaoaState</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="cm">/* ... */</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">ftm_active_last</span></code> 必须定义为应用任务函数的局部变量，并在进入 <code class="docutils literal notranslate"><span class="pre">while(1)</span></code> 之前初始化。参考 <code class="docutils literal notranslate"><span class="pre">AppUwbRngAoa.c</span></code>，应把它放在 <code class="docutils literal notranslate"><span class="pre">startTime</span></code>、<code class="docutils literal notranslate"><span class="pre">iterationTime</span></code> 等局部变量之后、UWB 初始化之前。这样变量能跨循环保存上一次 FTM 状态，用于识别“进入”和“退出”两个状态边沿；不能在循环体内反复初始化。</p>
+<p><code class="docutils literal notranslate"><span class="pre">app_rngaoa_pause()</span></code> 先调用 <code class="docutils literal notranslate"><span class="pre">app_rngaoa_reset()</span></code>：清零测距结果、TX/RX 完成标志、超时标志和测距数据容器，清除 TSU，并通过 <code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_tx_end()</span></code>、<code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_rx_end(EN_UWB_RX_0)</span></code> 结束当前 UWB 收发；随后把业务状态机置为 <code class="docutils literal notranslate"><span class="pre">EN_APP_STATE_IDLE</span></code>。产测激活期间通过 <code class="docutils literal notranslate"><span class="pre">continue</span></code> 跳过原有 RNGAOA 状态机，避免与 FTM 共用 UWB 硬件。</p>
+<p><code class="docutils literal notranslate"><span class="pre">app_rngaoa_resume()</span></code> 在检测到 FTM 从激活变为未激活时调用：先再次执行 <code class="docutils literal notranslate"><span class="pre">app_rngaoa_reset()</span></code> 清除产测阶段残留状态，再把 <code class="docutils literal notranslate"><span class="pre">iterationTime</span></code> 更新为当前微秒时间，最后将状态机切到 <code class="docutils literal notranslate"><span class="pre">EN_APP_STATE_SYNC_RECEIVE</span></code>，从新的业务周期恢复测距测角流程。</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>加入 AppSysIrqCallback.c 后，可能出现 UWB / 定时器中断回调符号重复定义的链接错误：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>L6200E: Symbol cb_uwbapp_tx_done_irqhandler multiply defined (by appuwbrngaoa.o and appsysirqcallback.o).
+L6200E: Symbol cb_uwbapp_rx0_done_irqcb multiply defined (by appuwbrngaoa.o and appsysirqcallback.o).
+L6200E: Symbol cb_timer_0_app_irq_callback multiply defined (by appuwbrngaoa.o and appsysirqcallback.o).
+</pre></div>
+</div>
+<p>原因：普通例程直接以 SDK 约定的名字（<code class="docutils literal notranslate"><span class="pre">cb_uwbapp_tx_done_irqhandler</span></code>、<code class="docutils literal notranslate"><span class="pre">cb_uwbapp_rx0_done_irqcb</span></code>、<code class="docutils literal notranslate"><span class="pre">cb_timer_0_app_irq_callback</span></code> 等）定义中断回调，以覆盖 SDK 的弱默认实现；而 AppSysIrqCallback.c 把这些名字实现为**强符号**并改为“注册—分发”机制（FTM 的标定模块正是依赖它在运行时动态注册中断回调）。两处同名强符号即冲突。</p>
+<p>解决：把应用的中断回调从“直接以约定名定义”改为“私有函数 + 运行时注册”。即在应用文件中把这些回调改名为你自己的私有函数（函数体不变），再在初始化时用 <code class="docutils literal notranslate"><span class="pre">app_irq_register_irqcallback()</span></code> 把事件与回调对应起来：</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* 改造前：与 AppSysIrqCallback.c 冲突（约定名，强符号） */</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">cb_uwbapp_tx_done_irqhandler</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">s_stIrqStatus</span><span class="p">.</span><span class="n">TxDone</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">APP_TRUE</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">cb_uwbapp_rx0_done_irqcb</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w">     </span><span class="p">{</span><span class="w"> </span><span class="n">s_stIrqStatus</span><span class="p">.</span><span class="n">Rx0Done</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">APP_TRUE</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">cb_timer_0_app_irq_callback</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="n">s_applicationTimeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">APP_TRUE</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="cm">/* 改造后：私有回调（改名，函数体不变） */</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">app_tx_done</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="n">s_stIrqStatus</span><span class="p">.</span><span class="n">TxDone</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">APP_TRUE</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">app_rx0_done</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">s_stIrqStatus</span><span class="p">.</span><span class="n">Rx0Done</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">APP_TRUE</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">app_timer0</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w">   </span><span class="p">{</span><span class="w"> </span><span class="n">s_applicationTimeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">APP_TRUE</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="cm">/* 初始化时注册（可放在 app_uart_command_init 附近） */</span>
+<span class="n">app_irq_register_irqcallback</span><span class="p">(</span><span class="n">EN_IRQENTRY_UWB_TX_DONE_APP_IRQ</span><span class="p">,</span><span class="w">  </span><span class="n">app_tx_done</span><span class="p">);</span>
+<span class="n">app_irq_register_irqcallback</span><span class="p">(</span><span class="n">EN_IRQENTRY_UWB_RX0_DONE_APP_IRQ</span><span class="p">,</span><span class="w"> </span><span class="n">app_rx0_done</span><span class="p">);</span>
+<span class="n">app_irq_register_irqcallback</span><span class="p">(</span><span class="n">EN_IRQENTRY_TIMER_0_APP_IRQ</span><span class="p">,</span><span class="w">      </span><span class="n">app_timer0</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>应用中用到的**每一个**中断事件都要照此改名并注册。常用事件枚举对应关系：TX Done → <code class="docutils literal notranslate"><span class="pre">EN_IRQENTRY_UWB_TX_DONE_APP_IRQ</span></code>；RX0 Done → <code class="docutils literal notranslate"><span class="pre">EN_IRQENTRY_UWB_RX0_DONE_APP_IRQ</span></code>；RX0/RX1/RX2 SFD → <code class="docutils literal notranslate"><span class="pre">EN_IRQENTRY_UWB_RX0/1/2_SFD_DET_DONE_APP_IRQ</span></code>；Timer0 → <code class="docutils literal notranslate"><span class="pre">EN_IRQENTRY_TIMER_0_APP_IRQ</span></code>。</p>
+</div>
+<p><strong>第三步：修改 APP 工程的地址空间（sct 文件）</strong></p>
+<p>不带 Bootloader 的例程默认从 0x00000000 开始运行、占用全部 512KB Flash。加入 Bootloader 后，前 16KB 需要让给 Bootloader，因此必须修改目标例程的 <code class="docutils literal notranslate"><span class="pre">Keil\ARMCM33_DSP_FP\ARMCM33_ac6.sct</span></code>，把 APP 的 ROM 基址改为 0x00004000：</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* 修改前（无 Bootloader）*/</span>
+<span class="cp">#define __ROM_BASE          0x00000000</span>
+<span class="cp">#define __ROM_SIZE          0x00080000</span>
+
+<span class="cm">/* 修改后（配合 Bootloader）*/</span>
+<span class="cp">#define __ROM_BASE          0x00004000   </span><span class="cm">/* 前 16KB 留给 Bootloader */</span>
+<span class="cp">#define __ROM_SIZE          0x00040000</span>
+</pre></div>
+</div>
+<p>Flash 的整体分区如下（由 Bootloader 工程的 sct 定义）：</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>区域</p></th>
+<th class="head"><p>起始地址</p></th>
+<th class="head"><p>大小</p></th>
+<th class="head"><p>用途</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Bootloader</p></td>
+<td><p>0x00000000</p></td>
+<td><p>16 KB</p></td>
+<td><p>引导程序本体</p></td>
+</tr>
+<tr class="row-odd"><td><p>APP</p></td>
+<td><p>0x00004000</p></td>
+<td><p>240 KB</p></td>
+<td><p>应用固件镜像</p></td>
+</tr>
+<tr class="row-even"><td><p>bootsetting</p></td>
+<td><p>0x00079000</p></td>
+<td><p>4 KB</p></td>
+<td><p>引导配置信息</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>APP 的代码大小不得超过 Bootloader 划定的 APP 分区大小（240KB），否则升级时会越界覆盖 bootsetting 区。RAM 的分区（UWB TX/RX Bank、UART SDMA）保持原样，无需修改。</p>
+</div>
+<p><strong>第四步：把 APP 的 bin 与 Bootloader 链接在一起</strong></p>
+<p>APP 与 Bootloader 是两个独立的 Keil 工程，最终需要合成一个完整镜像。合成方式是：Bootloader 工程通过一个汇编文件用 <code class="docutils literal notranslate"><span class="pre">INCBIN</span></code> 指令把 APP 编译产物 <code class="docutils literal notranslate"><span class="pre">CBU5000V210_APP.bin</span></code> 作为只读数据嵌入，再由 Bootloader 的 sct 把这段数据定位到 APP 分区地址。</p>
+<ol class="arabic simple">
+<li><p>在目标例程的 <code class="docutils literal notranslate"><span class="pre">Keil</span></code> 目录下创建 <a href="#id11"><span class="problematic" id="id12">``</span></a>app_bin.s``（可直接复制 uwb_rngaoa_ftm_dfu 例程的同名文件）：</p></li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>        AREA    APPBIN_ROM, DATA, READONLY
+
+        EXPORT  appBin
+
+appBin
+        INCBIN  CBU5000V210_APP.bin
+
+appBin_End
+
+        END
+</pre></div>
+</div>
+<ol class="arabic">
+<li><dl>
+<dt>为 APP 工程配置 fromelf 自动生成 bin 文件（关键步骤）。Keil 编译得到的是 axf 文件，需要通过 fromelf 转换成 <code class="docutils literal notranslate"><span class="pre">INCBIN</span></code> 所需的原始 bin。具体操作：</dt><dd><ul class="simple">
+<li><p>打开 APP 工程，进入 <em>Project &gt; Options for Target*（或工具栏的魔术棒图标），切换到 **Output*</em> 选项卡，记下 <a href="#id13"><span class="problematic" id="id14">*</span></a>Name of Executable*（本例程为 <code class="docutils literal notranslate"><span class="pre">CBU5000V210</span></code>），编译产物即为 <code class="docutils literal notranslate"><span class="pre">.\Objects\CBU5000V210.axf</span></code>。</p></li>
+<li><p>切换到 <strong>User</strong> 选项卡，展开 <em>After Build/Rebuild</em> 分组，勾选 <em>Run #1</em>，在 <em>User Command</em> 中填入以下命令：</p></li>
+</ul>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>fromelf --bin --output .\CBU5000V210_APP.bin ./Objects/CBU5000V210.axf
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>命令含义：<code class="docutils literal notranslate"><span class="pre">--bin</span></code> 输出原始二进制；<code class="docutils literal notranslate"><span class="pre">--output</span> <span class="pre">.\CBU5000V210_APP.bin</span></code> 指定输出文件为当前工程（Keil）目录下的 <code class="docutils literal notranslate"><span class="pre">CBU5000V210_APP.bin</span></code>；末尾是输入的 axf 路径。命令中的路径均相对于 <code class="docutils literal notranslate"><span class="pre">.uvprojx</span></code> 所在目录。</p></li>
+<li><p>其中的 <code class="docutils literal notranslate"><span class="pre">CBU5000V210.axf</span></code> 必须与 Output 选项卡的可执行文件名一致；输出的 <code class="docutils literal notranslate"><span class="pre">CBU5000V210_APP.bin</span></code> 文件名与目录必须与 <code class="docutils literal notranslate"><span class="pre">app_bin.s</span></code> 中 <code class="docutils literal notranslate"><span class="pre">INCBIN</span></code> 引用的一致（两者都在 Keil 目录下，故 <code class="docutils literal notranslate"><span class="pre">INCBIN</span></code> 只写文件名即可）。</p></li>
+<li><p>fromelf 是 ARM Compiler 自带工具，无需额外安装。配置完成后，每次编译 APP 工程都会在 Keil 目录下自动更新 <code class="docutils literal notranslate"><span class="pre">CBU5000V210_APP.bin</span></code>；可在 Build Output 窗口看到 fromelf 的执行记录，并确认 Keil 目录下 bin 文件的时间戳已更新。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>在 Bootloader 工程 <code class="docutils literal notranslate"><span class="pre">DFU_Bootloader.uvprojx</span></code> 中添加该 <code class="docutils literal notranslate"><span class="pre">app_bin.s</span></code>，路径指向目标例程的 Keil 目录（原工程中的引用为 <code class="docutils literal notranslate"><span class="pre">..\..\uwb_rngaoa_ftm_dfu\Keil\app_bin.s</span></code>，移植时改为你自己的例程路径）。</p></li>
+<li><p>Bootloader 的 sct 已定义好三个独立的加载域，分别把 app_bin 与 bootsetting 定位到对应地址，无需修改：</p></li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>LR_APPBIN __APPBIN_BASE __APPBIN_SIZE  {      ; APP 镜像 @ 0x00004000
+  ER_APPBIN_ROM __APPBIN_BASE __APPBIN_SIZE  {
+   app_bin.o (+RO)
+  }
+}
+
+LR_BLINFO __BLINFO_BASE __BLINFO_SIZE  {      ; bootsetting @ 0x00079000
+  ER_BLINFO_ROM __BLINFO_BASE __BLINFO_SIZE  {
+   bootsetting_bin.o (+RO)
+  }
+}
+
+LR_ROM __RO_BASE __RO_SIZE  {                 ; Bootloader 本体 @ 0x00000000
+  ...
+}
+</pre></div>
+</div>
+<ol class="arabic">
+<li><dl>
+<dt>配置 bootsetting 生成脚本，使其指向自己的 APP（关键步骤，最易遗漏）。</dt><dd><ul class="simple">
+<li><p>Bootloader 启动时**并非无条件跳转**到 APP，而是先读取 bootsetting 分区中记录的 APP 长度与 CRC32，据此校验 APP 分区中的实际镜像；校验通过才跳转执行 APP，否则停留在 DFU 模式等待升级。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bootsetting.bin</span></code> 由 Bootloader 工程的**前置构建脚本**自动生成，配置位置为 <em>Options for Target &gt; User &gt; Before Build/Rebuild &gt; Run #1</em>。脚本读取 APP bin、计算其长度与 CRC32，写入 <code class="docutils literal notranslate"><span class="pre">.\BinFile\bootsetting.bin</span></code>。</p></li>
+<li><p><strong>推荐配置方式（外置脚本）</strong>：使用 <code class="docutils literal notranslate"><span class="pre">Firmware\Examples\DFU_Bootloader\Keil\gen_bootsetting.ps1</span></code>，在 Run #1 的 <em>User Command</em> 中填入下面这条命令。APP 路径直接写在命令行上，在 Keil 对话框中**可见可改**：</p></li>
+</ul>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>powershell -NoProfile -ExecutionPolicy Bypass -File .\gen_bootsetting.ps1 -AppBin ..\..\&lt;你的例程目录&gt;\Keil\CBU5000V210_APP.bin
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>移植到其它例程时，<strong>只需修改 ``-AppBin`` 后面的例程目录名</strong>。该路径相对于 <code class="docutils literal notranslate"><span class="pre">DFU_Bootloader\Keil\</span></code> 目录，且必须与 <code class="docutils literal notranslate"><span class="pre">app_bin.s</span></code> 中 <code class="docutils literal notranslate"><span class="pre">INCBIN</span></code> 嵌入的是**同一个 bin 文件**。若省略 <code class="docutils literal notranslate"><span class="pre">-AppBin</span></code>，则使用脚本 <code class="docutils literal notranslate"><span class="pre">param()</span></code> 中的默认路径。</p></li>
+<li><p>若指定的 APP bin 不存在，脚本会直接报错中止（<code class="docutils literal notranslate"><span class="pre">APP</span> <span class="pre">bin</span> <span class="pre">not</span> <span class="pre">found:</span> <span class="pre">...</span></code>），可避免用过期的 bootsetting 静默构建出错误固件。</p></li>
+<li><p>生成的 bootsetting 共 344 字节，主要字段（小端）为：偏移 0 = bootsetting 自身 CRC32，偏移 16 = <strong>APP 长度</strong>，偏移 20 = <strong>APP 的 CRC32</strong>，偏移 24 = 版本号，偏移 28 = 有效标志。排查问题时可直接查看该文件偏移 16 处的长度是否等于自己 APP bin 的实际大小。</p></li>
+<li><p><a href="#id15"><span class="problematic" id="id16">**</span></a>若现有工程中该命令是内嵌形式**（<code class="docutils literal notranslate"><span class="pre">powershell</span> <span class="pre">...</span> <span class="pre">-EncodedCommand</span> <span class="pre">&lt;base64&gt;</span></code>），脚本正文以 UTF-16LE 的 base64 保存在 <code class="docutils literal notranslate"><span class="pre">.uvprojx</span></code> 中，在 Keil 界面上只显示为一长串乱码、无法直接编辑。可用下面的命令把它导出成可编辑的 <code class="docutils literal notranslate"><span class="pre">.ps1</span></code>，再改用上面的 <code class="docutils literal notranslate"><span class="pre">-File</span></code> 形式调用：</p></li>
+</ul>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>python -c &quot;import re,base64;t=open(r&#39;DFU_Bootloader.uvprojx&#39;,encoding=&#39;utf-8&#39;).read();print(base64.b64decode(re.search(r&#39;EncodedCommand ([A-Za-z0-9+/=]+)&#39;,t).group(1)).decode(&#39;utf-16-le&#39;))&quot;
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>导出或自行编写的 <code class="docutils literal notranslate"><span class="pre">.ps1</span></code> 若包含中文注释，必须保存为 <strong>UTF-8 with BOM</strong>。Windows PowerShell 5.1 会把无 BOM 的 UTF-8 文件按系统 ANSI 解析，中文乱码后可能破坏 <code class="docutils literal notranslate"><span class="pre">param()</span></code> 语句，导致参数取值为空并报错：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Test-Path : Cannot bind argument to parameter &#39;Path&#39; because it is null.
+</pre></div>
+</div>
+<p>也可以把注释全部改为英文来规避该问题。</p>
+</div>
+<p>脚本正文如下（供核对或重建，各字段与 Bootloader 的校验逻辑一一对应）：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>param(
+    # 移植时改这里（或用 -AppBin 参数在 Keil 命令行中覆盖）
+    [string] $AppBin = &#39;..\..\uwb_rngaoa_ftm_dfu\Keil\CBU5000V210_APP.bin&#39;
+)
+
+$ErrorActionPreference = &#39;Stop&#39;
+$ProgressPreference = &#39;SilentlyContinue&#39;
+
+$appBinPath      = $AppBin
+$bootsettingPath = &#39;.\BinFile\bootsetting.bin&#39;
+
+if (-not (Test-Path $appBinPath)) { throw &#39;APP bin not found: &#39; + $appBinPath }
+
+function Get-Crc32 {
+    param([byte[]] $Bytes)
+    [int64] $crc = 0xFFFFFFFFL
+    foreach ($value in $Bytes) {
+        $crc = ($crc -bxor [int64]$value) -band 0xFFFFFFFFL
+        for ($bit = 0; $bit -lt 8; $bit++) {
+            if (($crc -band 1) -ne 0) {
+                $crc = ((($crc -shr 1) -bxor 0xEDB88320L) -band 0xFFFFFFFFL)
+            } else {
+                $crc = (($crc -shr 1) -band 0xFFFFFFFFL)
+            }
+        }
+    }
+    return ((-bnot $crc) -band 0xFFFFFFFFL)
+}
+
+function Write-U32 {
+    param([byte[]] $Buffer, [int] $Offset, [uint32] $Value)
+    [byte[]] $bytes = [BitConverter]::GetBytes($Value)
+    [Array]::Copy($bytes, 0, $Buffer, $Offset, 4)
+}
+
+$appBytes   = [System.IO.File]::ReadAllBytes($appBinPath)
+$appSize    = [uint32]$appBytes.Length
+$appCrc     = [uint32]((Get-Crc32 -Bytes $appBytes))
+$appVersion = [uint32]1
+
+$bootsetting = New-Object byte[] 344
+Write-U32 $bootsetting 4  0
+Write-U32 $bootsetting 8  0x00005000
+Write-U32 $bootsetting 12 0x00000000
+Write-U32 $bootsetting 16 $appSize      # APP 长度
+Write-U32 $bootsetting 20 $appCrc       # APP 的 CRC32
+Write-U32 $bootsetting 24 $appVersion   # 版本号
+Write-U32 $bootsetting 28 1             # 有效标志
+
+$crcData = New-Object byte[] ($bootsetting.Length - 4)
+[Array]::Copy($bootsetting, 4, $crcData, 0, $crcData.Length)
+$dataCrc = [uint32]((Get-Crc32 -Bytes $crcData))
+Write-U32 $bootsetting 0 $dataCrc       # bootsetting 自身 CRC32
+
+[System.IO.File]::WriteAllBytes($bootsettingPath, $bootsetting)
+Write-Output (&#39;Generated bootsetting.bin from {0}  size={1} app_size={2} crc=0x{3:X8} app_crc=0x{4:X8}&#39; -f $appBinPath, $bootsetting.Length, $appSize, $dataCrc, $appCrc)
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>若 <code class="docutils literal notranslate"><span class="pre">app_bin.s</span></code> 已指向新例程、而 bootsetting 生成脚本仍指向原例程，则 bootsetting 中记录的长度与 CRC 来自**另一个固件**，与实际嵌入的 APP 不一致，Bootloader 校验失败并停留在 DFU 模式。</p>
+<p>典型现象：烧录 Bootloader 后重新上电，设备无法直接运行 APP（产测指令、测距等功能均无响应），<a href="#id17"><span class="problematic" id="id18">**</span></a>必须先用上位机 OTA 升级一次**才恢复正常——因为 OTA 会按真实固件重写 bootsetting。</p>
+<p>自查方法：对比 <code class="docutils literal notranslate"><span class="pre">bootsetting.bin</span></code> 偏移 16 处记录的长度与自己 <code class="docutils literal notranslate"><span class="pre">CBU5000V210_APP.bin</span></code> 的实际字节数，若两者不等即为此问题。</p>
+</div>
+<p><strong>第五步：编译与烧录顺序</strong></p>
+<p>由于 Bootloader 工程在编译时需要读取 APP 已生成的 bin 文件，两个工程的编译存在**严格的先后依赖**：</p>
+<ol class="arabic simple">
+<li><p><strong>先编译 APP 工程</strong>，确认在 Keil 目录下生成了最新的 <code class="docutils literal notranslate"><span class="pre">CBU5000V210_APP.bin</span></code>。</p></li>
+<li><p><strong>再编译 Bootloader 工程</strong>。前置脚本会先按最新的 APP bin 重新生成 bootsetting，随后 <code class="docutils literal notranslate"><span class="pre">INCBIN</span></code> 把该 APP bin 嵌入，产出的镜像已经包含 Bootloader + APP + bootsetting 三部分。可在 Build Output 窗口看到脚本打印的一行信息，用于确认**来源 APP 路径**以及长度与 CRC 已按新固件更新：</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Generated bootsetting.bin from ..\..\uwb_rngaoa_ftm_dfu\Keil\CBU5000V210_APP.bin  size=344 app_size=&lt;实际字节数&gt; crc=0x&lt;BOOTSETTING_CRC&gt; app_crc=0x&lt;APP_CRC&gt;
+</pre></div>
+</div>
+<p>其中 <code class="docutils literal notranslate"><span class="pre">app_size</span></code> 应与自己 APP 工程生成的 <code class="docutils literal notranslate"><span class="pre">CBU5000V210_APP.bin</span></code> 实际字节数一致；<code class="docutils literal notranslate"><span class="pre">from</span></code> 后面的路径应指向自己的例程。</p>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p><strong>只需烧录 Bootloader 工程的输出文件</strong>。因为 APP 已经被嵌入其中，无需单独烧录 APP。</p></li>
+<li><p><strong>重新上电</strong>，Bootloader 启动后校验并跳转到 0x00004000，即可运行 APP 程序。</p></li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>修改 APP 代码后必须**重新编译 APP 工程，再重新编译 Bootloader 工程**，否则 Bootloader 中嵌入的仍是旧版本的 APP bin。若只编译 Bootloader，烧录后运行的将是上一次的 APP 固件。</p>
+</div>
+<p>后续的固件更新可不再依赖烧录器：设备中已存在 Bootloader 后，直接用上位机的 DFU 功能推送新的 <code class="docutils literal notranslate"><span class="pre">CBU5000V210_APP.bin</span></code> 即可完成 APP 分区的在线升级。</p>
+</div><div aria-labelledby="tab-0-RW5nbGlzaA==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-RW5nbGlzaA==" name="RW5nbGlzaA==" role="tabpanel" tabindex="0"><p><strong>Overview</strong></p>
+<p>This document provides a guide to the uwb_rngaoa_ftm_dfu example. It is an integrated example that combines ranging &amp; angle measurement, factory-test calibration and firmware update, and is mainly used together with the PC factory-test tool to calibrate and program the development boards during mass production. It contains three functional modules:</p>
+<ul class="simple">
+<li><p><strong>RNGAOA (ranging + angle)</strong>: performs Double-Sided Two-Way Ranging (DS-TWR) and Angle of Arrival (AoA/PDoA) measurement between an initiator and a responder. This is the default task after the device powers up.</p></li>
+<li><p><strong>FTM (Factory Test Mode)</strong>: receives calibration commands from the PC tool over UART command frames, and reads/writes calibration parameters such as frequency offset, power code, time-of-flight (ToF) and AoA to non-volatile memory (NVM).</p></li>
+<li><p><strong>DFU (Device Firmware Update)</strong>: receives firmware pushed from the PC tool over the UART channel to update the device firmware online.</p></li>
+</ul>
+<p>After power-up, the device runs the RNGAOA task by default while continuously polling UART in the main loop, dispatching received commands to both the DFU and FTM handlers. When the PC tool sends the command to enter factory test mode, the ranging task is suspended and the calibration flow takes over; ranging resumes after exiting factory test mode.</p>
+<p><strong>Requirements</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Two of the following development boards:</dt><dd><ul>
+<li><p>CB5000V210 Anchor demo boards (one as initiator, one as responder)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Software:</dt><dd><ul>
+<li><p>ChipsBank UWB PC tool (ChipsBankUWBTool), used for factory calibration and firmware update</p></li>
+<li><p>Serial terminal tool (e.g., PuTTY, SSCOM), used to observe the ranging/angle log</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>User interface</strong></p>
+<ul class="simple">
+<li><p>Locate the GPIO00 pin on each development board and connect it to the serial receive line (RX).</p></li>
+<li><p>Locate the GPIO01 pin on each development board and connect it to the serial transmit line (TX).</p></li>
+<li><p>UART0 baud rate 115200, stop bits 1, data bits order LSB, no parity. UART0 carries the ranging log.</p></li>
+<li><p>Locate the GPIO07 pin on each development board and connect it to the serial receive line (RX).</p></li>
+<li><p>Locate the GPIO06 pin on each development board and connect it to the serial transmit line (TX).</p></li>
+<li><p>UART1 baud rate 921600. UART1 carries the factory-test commands and the firmware-update data.</p></li>
+<li><p>Ensure the connections are secure to avoid communication issues.</p></li>
+</ul>
+<p><strong>Building and running</strong></p>
+<p>This sample can be found under the following location in the ChipsBank Connect SDK folder structure:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Firmware\\Examples\\uwb_rngaoa_ftm_dfu</span></code></p></li>
+<li><p>Enter the <code class="docutils literal notranslate"><span class="pre">Keil</span></code> folder under that directory and double-click the workspace file <code class="docutils literal notranslate"><span class="pre">uwb_rngaoa_ftm_dfu.uvmpw</span></code> to open the project in Keil MDK.</p></li>
+<li><p>The device role is determined by the compile macro <code class="docutils literal notranslate"><span class="pre">APP_RNGAOA_ROLE</span></code> in <code class="docutils literal notranslate"><span class="pre">App\AppUwbRngAoa.h</span></code>: set it to <code class="docutils literal notranslate"><span class="pre">INITIATOR</span></code> to build the initiator firmware, or <code class="docutils literal notranslate"><span class="pre">RESPONDER</span></code> to build the responder firmware. Program one board with the initiator firmware and the other with the responder firmware.</p></li>
+<li><p>This sample works together with the DFU bootloader. The build output is <code class="docutils literal notranslate"><span class="pre">CBU5000V210_APP.bin</span></code>, which can be programmed directly with Keil or upgraded through the DFU function of the PC tool.</p></li>
+</ul>
+<p><strong>Expected Output</strong></p>
+<ul class="simple">
+<li><p>During normal ranging/angle measurement (not in factory mode), the initiator serial terminal outputs the distance, phase difference and angle information for each cycle (values vary with the actual placement):</p></li>
+</ul>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>uwb_rngaoa_ftm_dfu INITIATOR
+Cycle:0, D:25.132500cm,PD01:12.500000, PD02:-8.300000, PD12:-20.700000 (in degrees),azimuth: 15.200000 degrees,elevation: -3.400000 degrees
+Cycle:1, D:24.981200cm,PD01:12.700000, PD02:-8.100000, PD12:-20.900000 (in degrees),azimuth: 15.400000 degrees,elevation: -3.100000 degrees
+Cycle:2, D:25.007800cm,PD01:12.600000, PD02:-8.200000, PD12:-20.800000 (in degrees),azimuth: 15.300000 degrees,elevation: -3.300000 degrees
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>uwb_rngaoa_ftm_dfu RESPONDER
+Cycle:0, Ranging Successful:1,PD01:12.500000, PD02:-8.300000, PD12:-20.700000 (in degrees),azimuth: 15.200000 degrees,elevation: -3.400000 degrees
+Cycle:1, Ranging Successful:1,PD01:12.700000, PD02:-8.100000, PD12:-20.900000 (in degrees),azimuth: 15.400000 degrees,elevation: -3.100000 degrees
+</pre></div>
+</div>
+<p><strong>PC Tool Overview</strong></p>
+<p>The main window of the ChipsBank UWB PC tool is organized in tabs. The two tabs used together with this example are:</p>
+<ul class="simple">
+<li><p><strong>Serial Debug Assistant</strong>: a general-purpose serial send/receive and log-analysis view. You can select the COM port and baud rate, view the ranging/angle log output by the board in real time, and parse the log into charts.</p></li>
+<li><dl class="simple">
+<dt><strong>Board Function Verification</strong>: a chip function test view. The tool automatically searches for connected Chipsbank devices. There are two function buttons at the top of this page:</dt><dd><ul>
+<li><p><strong>Upgrade</strong>: the firmware update (DFU) panel.</p></li>
+<li><p><strong>Factory Mode</strong>: the factory-test calibration (FTM) panel.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>Factory Mode Panel</strong></p>
+<p>Select Factory Mode, choose the device COM port and baud rate, and enable the factory-test switch. The “Factory mode enabled” log confirms that factory mode was entered successfully.</p>
+<a class="reference internal image-reference" href="../_images/RNGAOA_FTM_factory_mode.png"><img alt="RNGAOA FTM factory mode panel" class="align-center" src="../_images/RNGAOA_FTM_factory_mode.png" style="width: 70%;" /></a>
+<p><strong>Firmware Upgrade Panel</strong></p>
+<p>Select Upgrade, set the baud rate and detect the target port, confirm the current firmware version, select the APP bin file, and click Start Upgrade. The log area shows the upgrade progress and final result.</p>
+<a class="reference internal image-reference" href="../_images/RNGAOA_DFU_upgrade.png"><img alt="RNGAOA DFU firmware upgrade panel" class="align-center" src="../_images/RNGAOA_DFU_upgrade.png" style="width: 70%;" /></a>
+<p><strong>Command Frame Protocol</strong></p>
+<p>The factory-test calibration commands use a fixed binary frame format exchanged with the device over UART. The frame structure is:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>+-----------+--------+--------+--------+--------+---------+----------+
+| StartCode | Cmd_H  | Cmd_L  | Resp   | Length | Data... | Checksum |
++-----------+--------+--------+--------+--------+---------+----------+
+    1B         1B       1B       1B       1B      N Byte     1B
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>StartCode</strong>: start byte, fixed to 0x9B.</p></li>
+<li><p><strong>Cmd_H / Cmd_L</strong>: high/low byte of the 16-bit command ID (e.g., 0x0001 read chip ID, 0x0010 read frequency offset, 0x7525 factory mode on/off).</p></li>
+<li><p><strong>Resp</strong>: response flag.</p></li>
+<li><p><strong>Length</strong>: number of bytes in the following Data field.</p></li>
+<li><p><strong>Checksum</strong>: the low 8 bits of the byte-wise sum of all bytes from Cmd_H to the end of Data.</p></li>
+</ul>
+<p><strong>Factory-Test Command List</strong></p>
+<p>All commands below are collectively referred to as factory-test commands.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Command ID</p></th>
+<th class="head"><p>Handler</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x7525</p></td>
+<td><p>ftm_on_0ff</p></td>
+<td><p>Enable or disable factory mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0001</p></td>
+<td><p>ftm_read_chip_id</p></td>
+<td><p>Read the chip ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00F5</p></td>
+<td><p>APP_User_PreambleScanSet</p></td>
+<td><p>Preamble scan. 3-byte data: byte 1 is the switch (non-zero starts the scan, 0 stops it), bytes 2~3 are the scan duration (big-endian, in ms). Returns 1 byte with the best preamble code index. If the returned value is not 0xFF (i.e. the scan succeeded), the device <strong>resets automatically</strong> so that the new configuration takes effect.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00F6</p></td>
+<td><p>APP_User_PreambleSet</p></td>
+<td><p>Write the preamble code. 1-byte data holds the preamble code index, which is written to NVM. Returns a 1-byte status code; after a successful write the device <strong>resets automatically</strong> so that the new configuration takes effect.</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00F7</p></td>
+<td><p>APP_User_PreambleGet</p></td>
+<td><p>Read the preamble code. Reads the current preamble code index from NVM and returns 1 byte; 0xFF is returned when no valid data exists in NVM. This command does not trigger a reset.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00F0</p></td>
+<td><p>ftm_preamble_scan</p></td>
+<td><p>Scan for the optimal preamble code without an automatic reset.</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00F1</p></td>
+<td><p>ftm_preamble_set</p></td>
+<td><p>Write the preamble calibration value to NVM.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00F2</p></td>
+<td><p>ftm_preamble_get</p></td>
+<td><p>Read the preamble calibration value from NVM.</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00F3</p></td>
+<td><p>ftm_device_role_set</p></td>
+<td><p>Write the device role to NVM.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00F4</p></td>
+<td><p>ftm_device_role_get</p></td>
+<td><p>Read the device role from NVM.</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0010</p></td>
+<td><p>ftm_read_freq_offset_cal</p></td>
+<td><p>Read the frequency-offset calibration value.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0011</p></td>
+<td><p>ftm_write_freq_offset_cal</p></td>
+<td><p>Write the frequency-offset calibration value.</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0012</p></td>
+<td><p>ftm_read_power_code</p></td>
+<td><p>Read the transmit power code.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0013</p></td>
+<td><p>ftm_write_power_code</p></td>
+<td><p>Write the transmit power code.</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0014</p></td>
+<td><p>ftm_read_tof_cal</p></td>
+<td><p>Read the time-of-flight (ToF) calibration value.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0015</p></td>
+<td><p>ftm_write_tof_cal</p></td>
+<td><p>Write the time-of-flight (ToF) calibration value.</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0016</p></td>
+<td><p>ftm_read_num_of_aoa</p></td>
+<td><p>Read the number of AoA calibration entries.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0017</p></td>
+<td><p>ftm_read_aoa_cal</p></td>
+<td><p>Read the AoA calibration values for a specified index.</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0018</p></td>
+<td><p>ftm_write_aoa_cal</p></td>
+<td><p>Write the AoA calibration values for a specified index.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0030</p></td>
+<td><p>ftm_set_tx_num_of_packet</p></td>
+<td><p>Set the number of packets transmitted during calibration.</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0031</p></td>
+<td><p>ftm_set_tx_interval</p></td>
+<td><p>Set the packet transmission interval during calibration.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0032</p></td>
+<td><p>ftm_set_tx_on_off</p></td>
+<td><p>Start or stop periodic UWB transmission.</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0040</p></td>
+<td><p>ftm_set_rx_channel</p></td>
+<td><p>Set the UWB receive channel used for calibration.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0041</p></td>
+<td><p>ftm_set_rx_on_off</p></td>
+<td><p>Start or stop UWB reception during calibration.</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0042</p></td>
+<td><p>ftm_read_rx_num_of_packs</p></td>
+<td><p>Read the number of UWB packets received during calibration.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0051</p></td>
+<td><p>ftm_read_rang_aoa_id</p></td>
+<td><p>Read the ranging/AoA synchronization ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0050</p></td>
+<td><p>ftm_write_rang_aoa_id</p></td>
+<td><p>Write the ranging/AoA synchronization ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0053</p></td>
+<td><p>ftm_read_rang_aoa_freq</p></td>
+<td><p>Read the ranging/AoA operating frequency.</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0052</p></td>
+<td><p>ftm_write_rang_aoa_freq</p></td>
+<td><p>Write the ranging/AoA operating frequency.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0060</p></td>
+<td><p>ftm_set_rang_aoa_tx_on_off</p></td>
+<td><p>Enable or disable ranging/AoA transmission.</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0070</p></td>
+<td><p>ftm_set_rang_aoa_rx_channel</p></td>
+<td><p>Set the ranging/AoA receive channel.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0071</p></td>
+<td><p>ftm_set_rang_aoa_rx_on_off</p></td>
+<td><p>Enable or disable ranging/AoA reception.</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0072</p></td>
+<td><p>ftm_get_rang_aoa_rx_result</p></td>
+<td><p>Read the ranging/AoA receive result.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0073</p></td>
+<td><p>ftm_set_ranging_tx_on_off</p></td>
+<td><p>Ranging TX on/off. 1-byte data: non-zero to turn on, 0 to turn off. Once on, the device acts as the initiator and starts ranging periodically at the current ranging frequency.</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0074</p></td>
+<td><p>ftm_set_ranging_rx_on_off</p></td>
+<td><p>Ranging RX on/off. 1-byte data: non-zero to turn on, 0 to turn off. Once on, the device acts as the responder and answers the ranging exchange.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0075</p></td>
+<td><p>ftm_write_ranging_freq</p></td>
+<td><p>Write the ranging frequency. 1-byte data in Hz; 10, 20 and 50 are supported (0x10, 0x20 and 0x50 are also accepted), corresponding to a ranging period of about 100ms, 50ms and 20ms respectively. Any other value is treated as 20Hz.</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0076</p></td>
+<td><p>ftm_get_ranging_rx_distance</p></td>
+<td><p>Read the latest ranging result. Returns a 4-byte distance value (big-endian) in cm.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0077</p></td>
+<td><p>ftm_read_ranging_freq</p></td>
+<td><p>Read the current ranging frequency. Returns 1 byte in Hz.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Factory Calibration Flow (Factory Mode)</strong></p>
+<ol class="arabic simple">
+<li><p>Connect the board with a USB cable, and on the “Board Function Verification” page make sure the tool has recognized the Chipsbank device and select the corresponding port.</p></li>
+<li><p>Click the “Factory Mode” button to enter the factory-test calibration panel. The tool sends the factory-mode-on command (0x7525), and the device suspends the ranging task and enters the calibration state.</p></li>
+<li><p>Read/write calibration parameters in the sub-panels as needed, mainly including: <strong>Frequency Offset</strong>: write / read the crystal frequency offset calibration value. <strong>Preamble</strong>: scan and write / read the optimal preamble code. <strong>Power Level</strong>: write / read the TX power code. <strong>ToF Calibration</strong>: write / read the time-of-flight (ranging offset) calibration value. <strong>AoA Calibration</strong>: read / write the PDoA calibration data (Pdoa01/Pdoa02/Pdoa12 and reference value) at each index. <strong>Ranging Mode Frequency Config</strong>: configure the operating frequency and related parameters for ranging / angle measurement.</p></li>
+<li><p>After each command is sent, the device returns the result (calibration value or status code) in the command-frame format, and the tool shows whether the read/write succeeded in the UI and log. The written parameters are stored in the device NVM and retained after power loss.</p></li>
+<li><p>When calibration is finished, exit factory mode. The tool sends the factory-mode-off command and the device resumes the normal ranging/angle task.</p></li>
+</ol>
+<p><strong>Flash map</strong></p>
+<p>The following is flash’s memory allocation table</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Bus Address</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Bank Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Flash Address</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x7E000</p></td>
+<td><p>4K</p></td>
+<td><p>User Calibration</p></td>
+<td></td>
+<td><p>0x7F000</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x7D000</p></td>
+<td><p>4K</p></td>
+<td><p>Boot setting A</p></td>
+<td></td>
+<td><p>0x7E000</p></td>
+</tr>
+<tr class="row-even"><td><p>0x7C000</p></td>
+<td><p>4K</p></td>
+<td><p>Boot setting B</p></td>
+<td><p>Backup for boot setting</p></td>
+<td><p>0x7D000</p></td>
+</tr>
+<tr class="row-odd"><td><p>…</p></td>
+<td></td>
+<td><p>User Data (Option)</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0x40000*</p></td>
+<td><p>240K</p></td>
+<td><p>Backup bank</p></td>
+<td><p>Save the new APP</p></td>
+<td><p>0x41000*</p></td>
+</tr>
+<tr class="row-odd"><td><p>…</p></td>
+<td></td>
+<td><p>User Data (Option)</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0x04000</p></td>
+<td><p>240K</p></td>
+<td><p>APP bank</p></td>
+<td></td>
+<td><p>0x05000</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00000</p></td>
+<td><p>16K</p></td>
+<td><p>Dfu Boot</p></td>
+<td><p>UART+Copy+Jump</p></td>
+<td><p>0x01000</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note：</strong></p>
+<ul class="simple">
+<li><ol class="arabic simple">
+<li><p>The chip booting info area(4K) not included on the Flash Map.</p></li>
+</ol>
+</li>
+<li><ol class="arabic simple" start="2">
+<li><p>Flash code area(&lt;=256K): Dfu Boot 16K + APP Bank 230K = 246K.</p></li>
+</ol>
+</li>
+<li><ol class="arabic simple" start="3">
+<li><p>Backup Bank start address configurable by update progress.</p></li>
+</ol>
+</li>
+</ul>
+<p><strong>Boot setting bank</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Size</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>CRC</p></td>
+<td><p>CRC for Boot setting (Boot mode + APP bank info + Backup bank info + ECC Public Key)</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Boot mode</p></td>
+<td><p>1: Stay at boot mode only. 0: Normal boot</p></td>
+</tr>
+<tr class="row-even"><td><p>4*10</p></td>
+<td><p>APP bank info</p></td>
+<td><p>4Byte: Firmware Start address 4Byte: Reserve 4Byte: Firmware Size 4Byte: Firmware CRC 4Byte: Firmware Version 4Byte: Firmware Active 4Byte x 4: Reserve</p></td>
+</tr>
+<tr class="row-odd"><td><p>4*10</p></td>
+<td><p>Backup bank info</p></td>
+<td><p>4Byte: Firmware Start address 4Byte: Load Address 4Byte: Firmware Size 4Byte: Firmware CRC 4Byte: Firmware Version 4Byte: Firmware Active 4Byte x 4: Reserve</p></td>
+</tr>
+<tr class="row-even"><td><p>64</p></td>
+<td><p>ECC Public Key</p></td>
+<td><p>Public Key for verify the update</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Command Frame (Max 256 Byte)</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Head</p></th>
+<th class="head"><p>CMD_H</p></th>
+<th class="head"><p>CMD_L</p></th>
+<th class="head"><p>Request/ Respond</p></th>
+<th class="head"><p>Data length(MAX 128Byte)</p></th>
+<th class="head"><p>Data(n byte)</p></th>
+<th class="head"><p>Check sum</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x5A</p></td>
+<td></td>
+<td></td>
+<td><p>0</p></td>
+<td><p>n</p></td>
+<td></td>
+<td><p>Command ID + len + Data</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Respond frame</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Head</p></th>
+<th class="head"><p>CMD_H</p></th>
+<th class="head"><p>CMD_L</p></th>
+<th class="head"><p>Request/ Respond</p></th>
+<th class="head"><p>Data length(MAX 128Byte)</p></th>
+<th class="head"><p>Data(n byte)</p></th>
+<th class="head"><p>Check sum</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x5A</p></td>
+<td></td>
+<td></td>
+<td><p>1</p></td>
+<td><p>n</p></td>
+<td><p>code</p></td>
+<td><p>Command ID + len + Data</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Command list</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>NB</p></th>
+<th class="head"><p>Command ID</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0x0100</p></td>
+<td><p>Get firmware version</p></td>
+<td><p>Fix respond just for confirm</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>0x0110</p></td>
+<td><p>Start upgrade with version</p></td>
+<td><p>The firmware version going to update (address is Backup bank address)</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>0x0111</p></td>
+<td><p>Pack Data</p></td>
+<td><p>The specific firmware data in the pack</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>0x0112</p></td>
+<td><p>Verify and active</p></td>
+<td><p>Verify the firmware when send all packs.</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>0x0113</p></td>
+<td><p>Finish DFU</p></td>
+<td><p>Exit DFU mode</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>0x0120</p></td>
+<td><p>Reset</p></td>
+<td><p>Reset the chip</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Start upgrade command format</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Size(Byte)</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Version</p></td>
+<td><p>The firmware version of firmware file.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Pack command format</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Size(Byte)</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Address Offset</p></td>
+<td><p>The address offset of this pack.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Size</p></td>
+<td><p>The size of this pack.</p></td>
+</tr>
+<tr class="row-even"><td><p>128</p></td>
+<td><p>Data</p></td>
+<td><p>The firmware file data</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>CRC</p></td>
+<td><p>The CRC of this pack.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Verify and active</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Size(Byte)</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>CRC</p></td>
+<td><p>The CRC of whole new firmware file.</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Size(option)</p></td>
+<td><p>The size of new firmware file.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Firmware Info respond</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Size(Byte)</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>APP bank start address</p></td>
+<td><p>The start address of application firmware.</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Load address</p></td>
+<td><p>The start address of where to save the firmware.</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Size</p></td>
+<td><p>The size of new firmware file.</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>CRC</p></td>
+<td><p>The CRC of whole firmware file.</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Version</p></td>
+<td><p>The firmware version of firmware file.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Bank info command format</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Size(Byte)</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>APP bank start address</p></td>
+<td><p>The start address of application firmware.</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Load address</p></td>
+<td><p>The start address of where to save the firmware.</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Version</p></td>
+<td><p>The firmware version of firmware file.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Porting Guide: Adding FTM / DFU / Bootloader to Another Example</strong></p>
+<p>This section explains how to port the FTM factory test mode, the DFU firmware update and the bootloader boot mechanism into a UWB example that does not originally have them. The process consists of five steps: add the source files, hook the command polling into the application main loop, modify the address space (sct) of the APP project, link the APP and bootloader binaries together, and build and program them in the correct order.</p>
+<p><strong>Step 1: Add the source files to the target project</strong></p>
+<p>Add the following source files to the <code class="docutils literal notranslate"><span class="pre">.uvprojx</span></code> of the target example (the grouping of the uwb_rngaoa_ftm_dfu project can be used as a reference):</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Source files</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>FTM factory test</p></td>
+<td><p>AppFtmftm_handler.c, ftm_cal_nvm.c, ftm_uwb_cal.c, ftm_uwb_psr.c (copy the whole <code class="docutils literal notranslate"><span class="pre">App\Ftm</span></code> directory of the uwb_rngaoa_ftm_dfu example into the App directory of the target example)</p></td>
+</tr>
+<tr class="row-odd"><td><p>DFU update</p></td>
+<td><p>ComponentsMidlayerDfudfu_handler.c (<strong>this file only</strong> is compiled)</p></td>
+</tr>
+<tr class="row-even"><td><p>Command parsing</p></td>
+<td><p>ComponentsCmdparsercmd_parser_uart.c</p></td>
+</tr>
+<tr class="row-odd"><td><p>Dependencies</p></td>
+<td><p>ComponentsMidlayerFlashCB_flash.c (writes calibration data and firmware to Flash), ComponentsDriverCpuSrcCB_qspi.c (low-level QSPI Flash access, called by CB_flash.c), ComponentsDriverCpuSrcCB_crc.c (CRC check), ComponentsDriverCpuSrcCB_efuse.c (reads the chip ID), ComponentsApplicationapp_uart.c (UART transfer), ComponentsApplicationAppSysIrqCallback.c (application IRQ callback registration, called by ftm_uwb_cal.c/ftm_uwb_psr.c)</p></td>
+</tr>
+</tbody>
+</table>
+<p>In addition, the FTM preamble scan module (ftm_uwb_psr.c) uses the hardware true random number generator (TRNG). The TRNG implementation (<code class="docutils literal notranslate"><span class="pre">CB_TRNG_Init</span></code>, <code class="docutils literal notranslate"><span class="pre">CB_TRNG_Snoise</span></code>, <code class="docutils literal notranslate"><span class="pre">CB_TRNG_GetRng</span></code>) is not in any <code class="docutils literal notranslate"><span class="pre">.c</span></code> source but is provided by a precompiled library, so the target project must link both of the following libraries (a plain UWB example usually links only the first one, so the second must be added when porting, otherwise a TRNG undefined-symbol link error occurs):</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>LibsCB_LibCBU5000V210_UWB_LIB.lib (UWB core)</p></li>
+<li><p>LibsBLE_LibCBU5000V210_REGULATED_LIB.lib (provides TRNG and other regulated functions)</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the build reports L6218E undefined-symbol link errors like the ones below, they are caused by the missing dependencies above; resolve them by the “referring object — owning file” mapping: <code class="docutils literal notranslate"><span class="pre">cb_qspi_*</span></code> (from cb_flash.o) needs CB_qspi.c; <code class="docutils literal notranslate"><span class="pre">cb_crc_*</span></code> (from ftm_cal_nvm.o) needs CB_crc.c; <code class="docutils literal notranslate"><span class="pre">app_irq_*</span></code> (from ftm_uwb_cal.o / ftm_uwb_psr.o) needs AppSysIrqCallback.c; <code class="docutils literal notranslate"><span class="pre">CB_TRNG_*</span></code> (from ftm_uwb_psr.o) needs the REGULATED library.</p>
+</div>
+<p>Also add the three header directories <code class="docutils literal notranslate"><span class="pre">App\Ftm</span></code>, <code class="docutils literal notranslate"><span class="pre">Components\Midlayer\Dfu</span></code> and <code class="docutils literal notranslate"><span class="pre">Components\Cmdparser</span></code> to the Include Paths of the project.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code class="docutils literal notranslate"><span class="pre">dfu_uart.c</span></code> and <code class="docutils literal notranslate"><span class="pre">dfu_blesvc.c</span></code> in the DFU directory <strong>must not be compiled</strong>. This example uses a UART DFU based on the command parser (cmd_parser_uart): the UART data transfer is done by the command parser and all the DFU protocol logic lives in <code class="docutils literal notranslate"><span class="pre">dfu_handler.c</span></code>, so <code class="docutils literal notranslate"><span class="pre">dfu_uart.c</span></code> is not needed; and <code class="docutils literal notranslate"><span class="pre">dfu_blesvc.c</span></code> is the DFU service for the <strong>BLE channel</strong> and depends on the NimBLE stack (<code class="docutils literal notranslate"><span class="pre">sysinit/sysinit.h</span></code>, <code class="docutils literal notranslate"><span class="pre">host/ble_hs.h</span></code>, etc.). Compiling it in an example without BLE produces the error:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>../../../Components/Midlayer/Dfu/dfu_blesvc.c(25): error: &#39;sysinit/sysinit.h&#39; file not found
+   25 | #include &quot;sysinit/sysinit.h&quot;
+</pre></div>
+</div>
+<p>In the original uwb_rngaoa_ftm_dfu project these two files are added to the project but marked as “excluded from build” (in Keil, right-click the file &gt; <em>Options for File &gt; Properties</em>, uncheck <em>Include in Target Build</em>; the file icon changes to the excluded state with a red mark). The simplest approach when porting is to <strong>not add</strong> these two files at all; if they are already added, exclude them from the build as described.</p>
+</div>
+<p><strong>Step 2: Hook the command polling into the application main loop</strong></p>
+<p>Initialize the command parser and the DFU module during application initialization, and poll UART in the main loop, passing the received data to the DFU and FTM handlers in turn:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;cmd_parser_uart.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;dfu_handler.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;ftm_handler.h&quot;</span>
+
+<span class="cm">/* Init: command parser + DFU */</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">app_uart_command_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">dfu_cfg_t</span><span class="w"> </span><span class="n">uart_cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+<span class="w">  </span><span class="n">cmd_parser_uart_init</span><span class="p">();</span>
+<span class="w">  </span><span class="n">uart_cfg</span><span class="p">.</span><span class="n">responder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cmd_parser_uart_responder</span><span class="p">;</span>
+<span class="w">  </span><span class="n">uart_cfg</span><span class="p">.</span><span class="n">reinit</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">cmd_parser_uart_deinit</span><span class="p">;</span>
+<span class="w">  </span><span class="n">dfu_halder_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">uart_cfg</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/* Poll: dispatch received commands to DFU and FTM */</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">app_uart_command_poll</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cmd_parser_uart_pooling_cmd</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">APP_TRUE</span><span class="p">)</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">len</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">cmd_parser_uart_received_length</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cmd_parser_uart_received_buffer</span><span class="p">();</span>
+<span class="w">    </span><span class="n">cmd_parser_uart_process_buffer</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="n">len</span><span class="p">,</span><span class="w"> </span><span class="n">dfu_halder_polling</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cmd_parser_uart_process_buffer</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="n">len</span><span class="p">,</span><span class="w"> </span><span class="n">ftm_halder_polling</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cmd_parser_uart_rx_restart</span><span class="p">();</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">app_rngaoa_pause</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">app_rngaoa_reset</span><span class="p">();</span>
+<span class="w">  </span><span class="n">s_enAppRngaoaState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EN_APP_STATE_IDLE</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">app_rngaoa_resume</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="o">*</span><span class="n">iterationTime</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">app_rngaoa_reset</span><span class="p">();</span>
+<span class="w">  </span><span class="o">*</span><span class="n">iterationTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cb_hal_get_time_us</span><span class="p">();</span>
+<span class="w">  </span><span class="n">s_enAppRngaoaState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EN_APP_STATE_SYNC_RECEIVE</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">app_rngaoa_initiator</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">startTime</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">iterationTime</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">ftm_active_last</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">ftm_halder_get_state</span><span class="p">();</span>
+
+<span class="w">  </span><span class="cm">/* Initialize UWB, payloads, UART commands and IRQ callbacks. */</span>
+<span class="w">  </span><span class="cm">/* ... */</span>
+
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">ftm_active</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ftm_halder_get_state</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">app_uart_command_poll</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ftm_active</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">APP_TRUE</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ftm_active_last</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">APP_FALSE</span><span class="p">)</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="n">app_rngaoa_pause</span><span class="p">();</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="n">ftm_active_last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ftm_active</span><span class="p">;</span>
+<span class="w">      </span><span class="k">continue</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ftm_active_last</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">APP_TRUE</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="n">app_rngaoa_resume</span><span class="p">(</span><span class="o">&amp;</span><span class="n">iterationTime</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">ftm_active_last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ftm_active</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/* Existing RNGAOA state machine. */</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">s_enAppRngaoaState</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="cm">/* ... */</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">ftm_active_last</span></code> must be a local variable of the application task and initialized before entering <code class="docutils literal notranslate"><span class="pre">while(1)</span></code>. Following <code class="docutils literal notranslate"><span class="pre">AppUwbRngAoa.c</span></code>, place it after local variables such as <code class="docutils literal notranslate"><span class="pre">startTime</span></code> and <code class="docutils literal notranslate"><span class="pre">iterationTime</span></code>, but before UWB initialization. It must retain the previous FTM state across loop iterations so that the entry and exit edges can be detected; do not reinitialize it inside the loop.</p>
+<p><code class="docutils literal notranslate"><span class="pre">app_rngaoa_pause()</span></code> first calls <code class="docutils literal notranslate"><span class="pre">app_rngaoa_reset()</span></code> to clear the ranging result, TX/RX completion flags, timeout flag and ranging data containers, clear the TSU, and end the current UWB transfer through <code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_tx_end()</span></code> and <code class="docutils literal notranslate"><span class="pre">cb_framework_uwb_rx_end(EN_UWB_RX_0)</span></code>. It then places the application state machine in <code class="docutils literal notranslate"><span class="pre">EN_APP_STATE_IDLE</span></code>. While FTM is active, <code class="docutils literal notranslate"><span class="pre">continue</span></code> skips the original RNGAOA state machine so it cannot compete with FTM for the UWB hardware.</p>
+<p><code class="docutils literal notranslate"><span class="pre">app_rngaoa_resume()</span></code> is called when FTM changes from active to inactive. It calls <code class="docutils literal notranslate"><span class="pre">app_rngaoa_reset()</span></code> again to clear state left by the factory flow, updates <code class="docutils literal notranslate"><span class="pre">iterationTime</span></code> to the current microsecond time, and switches the state machine to <code class="docutils literal notranslate"><span class="pre">EN_APP_STATE_SYNC_RECEIVE</span></code> so ranging/angle measurement resumes on a fresh application cycle.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>After adding AppSysIrqCallback.c, a multiply-defined link error for the UWB / timer IRQ callbacks may appear:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>L6200E: Symbol cb_uwbapp_tx_done_irqhandler multiply defined (by appuwbrngaoa.o and appsysirqcallback.o).
+L6200E: Symbol cb_uwbapp_rx0_done_irqcb multiply defined (by appuwbrngaoa.o and appsysirqcallback.o).
+L6200E: Symbol cb_timer_0_app_irq_callback multiply defined (by appuwbrngaoa.o and appsysirqcallback.o).
+</pre></div>
+</div>
+<p>Cause: a plain example defines the IRQ callbacks directly with the SDK canonical names (<code class="docutils literal notranslate"><span class="pre">cb_uwbapp_tx_done_irqhandler</span></code>, <code class="docutils literal notranslate"><span class="pre">cb_uwbapp_rx0_done_irqcb</span></code>, <code class="docutils literal notranslate"><span class="pre">cb_timer_0_app_irq_callback</span></code>, etc.) to override the weak defaults of the SDK; AppSysIrqCallback.c implements these same names as <strong>strong</strong> symbols and turns them into a “register–dispatch” mechanism (the FTM calibration modules rely on it to register IRQ callbacks at runtime). Two strong symbols with the same name therefore conflict.</p>
+<p>Fix: change the application IRQ callbacks from “defined directly with the canonical names” to “private functions + runtime registration”. Rename these callbacks to your own private functions in the application file (the function bodies are unchanged), then associate each event with its callback with <code class="docutils literal notranslate"><span class="pre">app_irq_register_irqcallback()</span></code> during initialization:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Before: conflicts with AppSysIrqCallback.c (canonical names, strong symbols) */</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">cb_uwbapp_tx_done_irqhandler</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">s_stIrqStatus</span><span class="p">.</span><span class="n">TxDone</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">APP_TRUE</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">cb_uwbapp_rx0_done_irqcb</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w">     </span><span class="p">{</span><span class="w"> </span><span class="n">s_stIrqStatus</span><span class="p">.</span><span class="n">Rx0Done</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">APP_TRUE</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">cb_timer_0_app_irq_callback</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="n">s_applicationTimeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">APP_TRUE</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="cm">/* After: private callbacks (renamed, bodies unchanged) */</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">app_tx_done</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="n">s_stIrqStatus</span><span class="p">.</span><span class="n">TxDone</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">APP_TRUE</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">app_rx0_done</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">s_stIrqStatus</span><span class="p">.</span><span class="n">Rx0Done</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">APP_TRUE</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">app_timer0</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w">   </span><span class="p">{</span><span class="w"> </span><span class="n">s_applicationTimeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">APP_TRUE</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="cm">/* Register during init (e.g. near app_uart_command_init) */</span>
+<span class="n">app_irq_register_irqcallback</span><span class="p">(</span><span class="n">EN_IRQENTRY_UWB_TX_DONE_APP_IRQ</span><span class="p">,</span><span class="w">  </span><span class="n">app_tx_done</span><span class="p">);</span>
+<span class="n">app_irq_register_irqcallback</span><span class="p">(</span><span class="n">EN_IRQENTRY_UWB_RX0_DONE_APP_IRQ</span><span class="p">,</span><span class="w"> </span><span class="n">app_rx0_done</span><span class="p">);</span>
+<span class="n">app_irq_register_irqcallback</span><span class="p">(</span><span class="n">EN_IRQENTRY_TIMER_0_APP_IRQ</span><span class="p">,</span><span class="w">      </span><span class="n">app_timer0</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Every</strong> IRQ event used by the application must be renamed and registered this way. Common event enum mapping: TX Done → <code class="docutils literal notranslate"><span class="pre">EN_IRQENTRY_UWB_TX_DONE_APP_IRQ</span></code>; RX0 Done → <code class="docutils literal notranslate"><span class="pre">EN_IRQENTRY_UWB_RX0_DONE_APP_IRQ</span></code>; RX0/RX1/RX2 SFD → <code class="docutils literal notranslate"><span class="pre">EN_IRQENTRY_UWB_RX0/1/2_SFD_DET_DONE_APP_IRQ</span></code>; Timer0 → <code class="docutils literal notranslate"><span class="pre">EN_IRQENTRY_TIMER_0_APP_IRQ</span></code>.</p>
+</div>
+<p><strong>Step 3: Modify the address space (sct file) of the APP project</strong></p>
+<p>An example without a bootloader runs from 0x00000000 and occupies the whole 512KB of Flash. Once a bootloader is added, the first 16KB must be reserved for it, so the <code class="docutils literal notranslate"><span class="pre">Keil\ARMCM33_DSP_FP\ARMCM33_ac6.sct</span></code> of the target example must be modified to move the APP ROM base to 0x00004000:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Before (no bootloader) */</span>
+<span class="cp">#define __ROM_BASE          0x00000000</span>
+<span class="cp">#define __ROM_SIZE          0x00080000</span>
+
+<span class="cm">/* After (with bootloader) */</span>
+<span class="cp">#define __ROM_BASE          0x00004000   </span><span class="cm">/* first 16KB reserved for the bootloader */</span>
+<span class="cp">#define __ROM_SIZE          0x00040000</span>
+</pre></div>
+</div>
+<p>The overall Flash partitioning is as follows (defined by the sct of the bootloader project):</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Region</p></th>
+<th class="head"><p>Base address</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Bootloader</p></td>
+<td><p>0x00000000</p></td>
+<td><p>16 KB</p></td>
+<td><p>The bootloader itself</p></td>
+</tr>
+<tr class="row-odd"><td><p>APP</p></td>
+<td><p>0x00004000</p></td>
+<td><p>240 KB</p></td>
+<td><p>Application firmware image</p></td>
+</tr>
+<tr class="row-even"><td><p>bootsetting</p></td>
+<td><p>0x00079000</p></td>
+<td><p>4 KB</p></td>
+<td><p>Boot configuration data</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The APP code size must not exceed the APP partition size defined by the bootloader (240KB), otherwise an update would overrun into the bootsetting region. The RAM partitioning (UWB TX/RX bank, UART SDMA) stays unchanged.</p>
+</div>
+<p><strong>Step 4: Link the APP binary together with the bootloader</strong></p>
+<p>The APP and the bootloader are two independent Keil projects that must be merged into one complete image. The merge works as follows: the bootloader project embeds the APP build output <code class="docutils literal notranslate"><span class="pre">CBU5000V210_APP.bin</span></code> as read-only data through an assembly file using the <code class="docutils literal notranslate"><span class="pre">INCBIN</span></code> directive, and the sct of the bootloader places that data at the APP partition address.</p>
+<ol class="arabic simple">
+<li><p>Create <code class="docutils literal notranslate"><span class="pre">app_bin.s</span></code> in the <code class="docutils literal notranslate"><span class="pre">Keil</span></code> directory of the target example (the file of the uwb_rngaoa_ftm_dfu example can be copied directly):</p></li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>        AREA    APPBIN_ROM, DATA, READONLY
+
+        EXPORT  appBin
+
+appBin
+        INCBIN  CBU5000V210_APP.bin
+
+appBin_End
+
+        END
+</pre></div>
+</div>
+<ol class="arabic">
+<li><dl>
+<dt>Configure the APP project to generate the bin file automatically with fromelf (the key step). Keil produces an axf file, which must be converted by fromelf into the raw bin required by <code class="docutils literal notranslate"><span class="pre">INCBIN</span></code>. Procedure:</dt><dd><ul class="simple">
+<li><p>Open the APP project, go to <em>Project &gt; Options for Target</em> (or the magic-wand icon on the toolbar), switch to the <strong>Output</strong> tab and note the <em>Name of Executable</em> (<code class="docutils literal notranslate"><span class="pre">CBU5000V210</span></code> for this example); the build output is therefore <code class="docutils literal notranslate"><span class="pre">.\Objects\CBU5000V210.axf</span></code>.</p></li>
+<li><p>Switch to the <strong>User</strong> tab, expand the <em>After Build/Rebuild</em> group, check <em>Run #1</em>, and enter the following command in <em>User Command</em>:</p></li>
+</ul>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>fromelf --bin --output .\CBU5000V210_APP.bin ./Objects/CBU5000V210.axf
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Command meaning: <code class="docutils literal notranslate"><span class="pre">--bin</span></code> outputs a raw binary; <code class="docutils literal notranslate"><span class="pre">--output</span> <span class="pre">.\CBU5000V210_APP.bin</span></code> specifies the output file as <code class="docutils literal notranslate"><span class="pre">CBU5000V210_APP.bin</span></code> in the current project (Keil) directory; the last argument is the input axf path. All paths in the command are relative to the directory that contains the <code class="docutils literal notranslate"><span class="pre">.uvprojx</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">CBU5000V210.axf</span></code> in the command must match the executable name on the Output tab; the output <code class="docutils literal notranslate"><span class="pre">CBU5000V210_APP.bin</span></code> file name and directory must match what <code class="docutils literal notranslate"><span class="pre">INCBIN</span></code> references in <code class="docutils literal notranslate"><span class="pre">app_bin.s</span></code> (both live in the Keil directory, so <code class="docutils literal notranslate"><span class="pre">INCBIN</span></code> only needs the file name).</p></li>
+<li><p>fromelf ships with ARM Compiler and needs no extra installation. Once configured, every build of the APP project refreshes <code class="docutils literal notranslate"><span class="pre">CBU5000V210_APP.bin</span></code> in the Keil directory automatically; the fromelf execution can be seen in the Build Output window, and the bin file timestamp in the Keil directory can be checked to confirm the update.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Add this <code class="docutils literal notranslate"><span class="pre">app_bin.s</span></code> to the bootloader project <code class="docutils literal notranslate"><span class="pre">DFU_Bootloader.uvprojx</span></code>, pointing to the Keil directory of the target example (the original project references <code class="docutils literal notranslate"><span class="pre">..\..\uwb_rngaoa_ftm_dfu\Keil\app_bin.s</span></code>; change it to the path of your own example when porting).</p></li>
+<li><p>The sct of the bootloader already defines three separate load regions that place app_bin and bootsetting at their addresses, and needs no modification:</p></li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>LR_APPBIN __APPBIN_BASE __APPBIN_SIZE  {      ; APP image @ 0x00004000
+  ER_APPBIN_ROM __APPBIN_BASE __APPBIN_SIZE  {
+   app_bin.o (+RO)
+  }
+}
+
+LR_BLINFO __BLINFO_BASE __BLINFO_SIZE  {      ; bootsetting @ 0x00079000
+  ER_BLINFO_ROM __BLINFO_BASE __BLINFO_SIZE  {
+   bootsetting_bin.o (+RO)
+  }
+}
+
+LR_ROM __RO_BASE __RO_SIZE  {                 ; bootloader itself @ 0x00000000
+  ...
+}
+</pre></div>
+</div>
+<ol class="arabic">
+<li><dl>
+<dt>Configure the bootsetting generation script to point at your own APP (a key step, and the one most easily missed).</dt><dd><ul class="simple">
+<li><p>The bootloader does <strong>not</strong> jump to the APP unconditionally. It first reads the APP length and CRC32 recorded in the bootsetting region and validates the actual image in the APP partition against them; it jumps to the APP only if the check passes, otherwise it stays in DFU mode waiting for an update.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bootsetting.bin</span></code> is generated automatically by the <strong>pre-build script</strong> of the bootloader project, configured under <em>Options for Target &gt; User &gt; Before Build/Rebuild &gt; Run #1</em>. The script reads the APP bin, computes its length and CRC32, and writes <code class="docutils literal notranslate"><span class="pre">.\BinFile\bootsetting.bin</span></code>.</p></li>
+<li><p><strong>Recommended configuration (external script)</strong>: use <code class="docutils literal notranslate"><span class="pre">Firmware\Examples\DFU_Bootloader\Keil\gen_bootsetting.ps1</span></code> and enter the following command in the <em>User Command</em> field of Run #1. The APP path is written directly on the command line, so it is <strong>visible and editable</strong> in the Keil dialog:</p></li>
+</ul>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>powershell -NoProfile -ExecutionPolicy Bypass -File .\gen_bootsetting.ps1 -AppBin ..\..\&lt;your example directory&gt;\Keil\CBU5000V210_APP.bin
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>When porting to another example, <strong>only the example directory name after ``-AppBin`` needs to change</strong>. The path is relative to the <code class="docutils literal notranslate"><span class="pre">DFU_Bootloader\Keil\</span></code> directory and must refer to the <strong>same bin file</strong> that <code class="docutils literal notranslate"><span class="pre">INCBIN</span></code> embeds in <code class="docutils literal notranslate"><span class="pre">app_bin.s</span></code>. If <code class="docutils literal notranslate"><span class="pre">-AppBin</span></code> is omitted, the default path in the script <code class="docutils literal notranslate"><span class="pre">param()</span></code> block is used.</p></li>
+<li><p>If the specified APP bin does not exist, the script aborts with an error (<code class="docutils literal notranslate"><span class="pre">APP</span> <span class="pre">bin</span> <span class="pre">not</span> <span class="pre">found:</span> <span class="pre">...</span></code>), which prevents silently building a wrong firmware from a stale bootsetting.</p></li>
+<li><p>The generated bootsetting is 344 bytes; its main fields (little-endian) are: offset 0 = CRC32 of the bootsetting itself, offset 16 = <strong>APP length</strong>, offset 20 = <strong>CRC32 of the APP</strong>, offset 24 = version, offset 28 = valid flag. When troubleshooting, check whether the length at offset 16 equals the actual size of your APP bin.</p></li>
+<li><p><strong>If the command in an existing project is the embedded form</strong> (<code class="docutils literal notranslate"><span class="pre">powershell</span> <span class="pre">...</span> <span class="pre">-EncodedCommand</span> <span class="pre">&lt;base64&gt;</span></code>), the script body is stored in the <code class="docutils literal notranslate"><span class="pre">.uvprojx</span></code> as UTF-16LE base64 and appears in the Keil UI only as a long unreadable string. Use the following command to export it into an editable <code class="docutils literal notranslate"><span class="pre">.ps1</span></code>, then switch to the <code class="docutils literal notranslate"><span class="pre">-File</span></code> form shown above:</p></li>
+</ul>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>python -c &quot;import re,base64;t=open(r&#39;DFU_Bootloader.uvprojx&#39;,encoding=&#39;utf-8&#39;).read();print(base64.b64decode(re.search(r&#39;EncodedCommand ([A-Za-z0-9+/=]+)&#39;,t).group(1)).decode(&#39;utf-16-le&#39;))&quot;
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>An exported or hand-written <code class="docutils literal notranslate"><span class="pre">.ps1</span></code> that contains non-ASCII comments must be saved as <strong>UTF-8 with BOM</strong>. Windows PowerShell 5.1 parses a UTF-8 file without BOM using the system ANSI code page; the mangled comment characters can break the <code class="docutils literal notranslate"><span class="pre">param()</span></code> statement, leaving the parameter empty and producing:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Test-Path : Cannot bind argument to parameter &#39;Path&#39; because it is null.
+</pre></div>
+</div>
+<p>Using ASCII-only comments avoids the problem as well.</p>
+</div>
+<p>The script body is listed below (for reference or reconstruction; each field maps directly to the bootloader validation logic):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>param(
+    # change this when porting (or override with -AppBin on the Keil command line)
+    [string] $AppBin = &#39;..\..\uwb_rngaoa_ftm_dfu\Keil\CBU5000V210_APP.bin&#39;
+)
+
+$ErrorActionPreference = &#39;Stop&#39;
+$ProgressPreference = &#39;SilentlyContinue&#39;
+
+$appBinPath      = $AppBin
+$bootsettingPath = &#39;.\BinFile\bootsetting.bin&#39;
+
+if (-not (Test-Path $appBinPath)) { throw &#39;APP bin not found: &#39; + $appBinPath }
+
+function Get-Crc32 {
+    param([byte[]] $Bytes)
+    [int64] $crc = 0xFFFFFFFFL
+    foreach ($value in $Bytes) {
+        $crc = ($crc -bxor [int64]$value) -band 0xFFFFFFFFL
+        for ($bit = 0; $bit -lt 8; $bit++) {
+            if (($crc -band 1) -ne 0) {
+                $crc = ((($crc -shr 1) -bxor 0xEDB88320L) -band 0xFFFFFFFFL)
+            } else {
+                $crc = (($crc -shr 1) -band 0xFFFFFFFFL)
+            }
+        }
+    }
+    return ((-bnot $crc) -band 0xFFFFFFFFL)
+}
+
+function Write-U32 {
+    param([byte[]] $Buffer, [int] $Offset, [uint32] $Value)
+    [byte[]] $bytes = [BitConverter]::GetBytes($Value)
+    [Array]::Copy($bytes, 0, $Buffer, $Offset, 4)
+}
+
+$appBytes   = [System.IO.File]::ReadAllBytes($appBinPath)
+$appSize    = [uint32]$appBytes.Length
+$appCrc     = [uint32]((Get-Crc32 -Bytes $appBytes))
+$appVersion = [uint32]1
+
+$bootsetting = New-Object byte[] 344
+Write-U32 $bootsetting 4  0
+Write-U32 $bootsetting 8  0x00005000
+Write-U32 $bootsetting 12 0x00000000
+Write-U32 $bootsetting 16 $appSize      # APP length
+Write-U32 $bootsetting 20 $appCrc       # CRC32 of the APP
+Write-U32 $bootsetting 24 $appVersion   # version
+Write-U32 $bootsetting 28 1             # valid flag
+
+$crcData = New-Object byte[] ($bootsetting.Length - 4)
+[Array]::Copy($bootsetting, 4, $crcData, 0, $crcData.Length)
+$dataCrc = [uint32]((Get-Crc32 -Bytes $crcData))
+Write-U32 $bootsetting 0 $dataCrc       # CRC32 of the bootsetting itself
+
+[System.IO.File]::WriteAllBytes($bootsettingPath, $bootsetting)
+Write-Output (&#39;Generated bootsetting.bin from {0}  size={1} app_size={2} crc=0x{3:X8} app_crc=0x{4:X8}&#39; -f $appBinPath, $bootsetting.Length, $appSize, $dataCrc, $appCrc)
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">app_bin.s</span></code> already points to the new example while the bootsetting generation script still points to the original one, the length and CRC stored in the bootsetting come from <strong>a different firmware</strong> than the APP actually embedded, so the bootloader validation fails and it stays in DFU mode.</p>
+<p>Typical symptom: after programming the bootloader and power-cycling, the device does not run the APP (factory commands, ranging, etc. do not respond) and <strong>only works after one OTA update from the PC tool</strong> — because the OTA rewrites the bootsetting from the real firmware.</p>
+<p>How to check: compare the length recorded at offset 16 of <code class="docutils literal notranslate"><span class="pre">bootsetting.bin</span></code> with the actual byte size of your <code class="docutils literal notranslate"><span class="pre">CBU5000V210_APP.bin</span></code>; a mismatch indicates this problem.</p>
+</div>
+<p><strong>Step 5: Build and program order</strong></p>
+<p>Because the bootloader project reads the bin file generated by the APP project at build time, there is a <strong>strict order dependency</strong> between the two builds:</p>
+<ol class="arabic simple">
+<li><p><strong>Build the APP project first</strong> and confirm that an up-to-date <code class="docutils literal notranslate"><span class="pre">CBU5000V210_APP.bin</span></code> has been generated in the Keil directory.</p></li>
+<li><p><strong>Then build the bootloader project.</strong> The pre-build script first regenerates the bootsetting from the latest APP bin, then <code class="docutils literal notranslate"><span class="pre">INCBIN</span></code> embeds that APP bin, so the resulting image already contains the bootloader, the APP and the bootsetting data. The script prints a line in the Build Output window that confirms the <strong>source APP path</strong> as well as the length and CRC updated for the new firmware:</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Generated bootsetting.bin from ..\..\uwb_rngaoa_ftm_dfu\Keil\CBU5000V210_APP.bin  size=344 app_size=&lt;actual_bytes&gt; crc=0x&lt;BOOTSETTING_CRC&gt; app_crc=0x&lt;APP_CRC&gt;
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">app_size</span></code> must match the actual byte size of the <code class="docutils literal notranslate"><span class="pre">CBU5000V210_APP.bin</span></code> produced by your APP project, and the path after <code class="docutils literal notranslate"><span class="pre">from</span></code> must point at your own example.</p>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p><strong>Only the output of the bootloader project needs to be programmed</strong>. Since the APP is already embedded in it, the APP does not have to be programmed separately.</p></li>
+<li><p><strong>Power-cycle the board.</strong> The bootloader verifies and jumps to 0x00004000, and the APP starts running.</p></li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>After modifying the APP code you must <strong>rebuild the APP project and then rebuild the bootloader project</strong>; otherwise the bootloader still embeds the old APP bin. If only the bootloader is rebuilt, the board will run the previous APP firmware after programming.</p>
+</div>
+<p>Later firmware updates no longer require a programmer: once the bootloader is present on the device, a new <code class="docutils literal notranslate"><span class="pre">CBU5000V210_APP.bin</span></code> can simply be pushed with the DFU function of the PC tool to update the APP partition online.</p>
+</div></div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="APP_DFU.html" class="btn btn-neutral float-left" title="APP_DFU" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="APP_ADC.html" class="btn btn-neutral float-right" title="APP_ADC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Chipsbank.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

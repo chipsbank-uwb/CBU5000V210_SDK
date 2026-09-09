@@ -164,12 +164,12 @@ static uint32_t s_appCycleCount  = 0;   // Logging Purpose: cycle count
 //       |<--------6. RESULT ----------------|
 //     Terminate                         Terminate  
 //
-// DEF_DSTWR_INI_SYNC_ACK_TIMEOUT_MS       : 1 + 2
+// DEF_DSTWR_INI_SYNC_ACK_TIMEOUT_US       : 1 + 2
 // DEF_DSTWR_INI_OVERALL_PROCESS_TIMEOUT_MS: 3 + 4 + 5 + 6
-// DEF_DSTWR_INI_APP_CYCLE_TIME_MS         : Idle
-// DEF_DSTWR_INI_POLL_WAIT_TIME_MS         : 3
-// DEF_DSTWR_INI_RESPONSE_WAIT_TIME_MS     : 4
-// DEF_DSTWR_INI_FINAL_WAIT_TIME_MS        : 5
+// DEF_DSTWR_INI_APP_CYCLE_TIME_US         : Idle
+// DEF_DSTWR_INI_POLL_WAIT_TIME_US         : 3
+// DEF_DSTWR_INI_RESPONSE_WAIT_TIME_US     : 4
+// DEF_DSTWR_INI_FINAL_WAIT_TIME_US        : 5
 //
 // Initiator: Tround_1 = b - a
 //            Treply_2 = c - d     
@@ -180,12 +180,12 @@ static uint32_t s_appCycleCount  = 0;   // Logging Purpose: cycle count
 //  b: s_stIniRxTsuTimestamp0    
 //  c: s_stIniTxTsuTimestamp1    
 //-------------------------------------------------------
-#define DEF_DSTWR_INI_SYNC_ACK_TIMEOUT_MS           10 
 #define DEF_DSTWR_INI_OVERALL_PROCESS_TIMEOUT_MS    10 
-#define DEF_DSTWR_INI_APP_CYCLE_TIME_MS             500
-#define DEF_DSTWR_INI_POLL_WAIT_TIME_MS             1
-#define DEF_DSTWR_INI_RESPONSE_WAIT_TIME_MS         0
-#define DEF_DSTWR_INI_FINAL_WAIT_TIME_MS            1 
+#define DEF_DSTWR_INI_SYNC_ACK_TIMEOUT_US           MS_TO_US(10) 
+#define DEF_DSTWR_INI_APP_CYCLE_TIME_US             MS_TO_US(500)
+#define DEF_DSTWR_INI_POLL_WAIT_TIME_US             MS_TO_US(1)
+#define DEF_DSTWR_INI_RESPONSE_WAIT_TIME_US         MS_TO_US(0)
+#define DEF_DSTWR_INI_FINAL_WAIT_TIME_US            MS_TO_US(1) 
 
 
 static app_uwbdstwr_responderstate_en appDstwrResponderState   = EN_APP_RESP_STATE_IDLE;
@@ -223,11 +223,11 @@ static cb_uwbframework_rangingdatacontainer_st s_stRespResponderDataContainer =
 //     Terminate                         Terminate  
 //
 // DEF_DSTWR_OVERALL_PROCESS_TIMEOUT_MS : 3 + 4 + 5 + 6
-// DEF_DSTWR_SYNC_RX_RESTART_TIMEOUT_MS : 1
-// DEF_DSTWR_APP_CYCLE_TIME_MS          : Idle 
-// DEF_DSTWR_RESPONSE_WAIT_TIME_MS      : 4 
-// DEF_DSTWR_FINAL_WAIT_TIME_MS         : 5 
-// DEF_DSTWR_RESULT_WAIT_TIME_MS        : 6
+// DEF_DSTWR_SYNC_RX_RESTART_TIMEOUT_US : 1
+// DEF_DSTWR_APP_CYCLE_TIME_US          : Idle 
+// DEF_DSTWR_RESPONSE_WAIT_TIME_US      : 4 
+// DEF_DSTWR_FINAL_WAIT_TIME_US         : 5 
+// DEF_DSTWR_RESULT_WAIT_TIME_US        : 6
 //
 // Initiator: Tround_1 = b - a
 //            Treply_2 = c - d     
@@ -239,11 +239,11 @@ static cb_uwbframework_rangingdatacontainer_st s_stRespResponderDataContainer =
 //  c: -        f: s_stRespRxTsuTimestamp1
 //-------------------------------------------------------
 #define DEF_DSTWR_OVERALL_PROCESS_TIMEOUT_MS    10 
-#define DEF_DSTWR_SYNC_RX_RESTART_TIMEOUT_MS    4
-#define DEF_DSTWR_APP_CYCLE_TIME_MS             498
-#define DEF_DSTWR_RESPONSE_WAIT_TIME_MS         1
-#define DEF_DSTWR_FINAL_WAIT_TIME_MS            0
-#define DEF_DSTWR_RESULT_WAIT_TIME_MS           1
+#define DEF_DSTWR_SYNC_RX_RESTART_TIMEOUT_US    MS_TO_US(4)
+#define DEF_DSTWR_APP_CYCLE_TIME_US             MS_TO_US(498)
+#define DEF_DSTWR_RESPONSE_WAIT_TIME_US         MS_TO_US(1)
+#define DEF_DSTWR_FINAL_WAIT_TIME_US            MS_TO_US(0)
+#define DEF_DSTWR_RESULT_WAIT_TIME_US           MS_TO_US(1)
 
 //-------------------------------
 // FUNCTION PROTOTYPE SECTION
@@ -327,7 +327,7 @@ void app_dstwr_initiator(void)
       //-------------------------------------        
       case EN_APP_INI_STATE_IDLE:
         // Wait for next cycle
-        if (cb_hal_is_time_elapsed(iterationTime, DEF_DSTWR_INI_APP_CYCLE_TIME_MS))
+        if (cb_hal_is_time_elapsed_us(iterationTime, DEF_DSTWR_INI_APP_CYCLE_TIME_US) == CB_PASS)
         {
           s_enAppDstwrInitiatorState = EN_APP_INI_STATE_SYNC_TRANSMIT;
         }
@@ -355,10 +355,10 @@ void app_dstwr_initiator(void)
       case EN_APP_INI_STATE_SYNC_RECEIVE:
         cb_framework_uwb_rx_start(EN_UWB_RX_0, &s_stUwbPacketConfig, &stRxIrqEnable, EN_TRX_START_NON_DEFERRED);
         s_enAppDstwrInitiatorState = EN_APP_INI_STATE_SYNC_WAIT_RX_DONE;
-        startTime = cb_hal_get_tick();
+        startTime = cb_hal_get_time_us();
         break;
       case EN_APP_INI_STATE_SYNC_WAIT_RX_DONE:
-        if (cb_hal_is_time_elapsed(startTime, DEF_DSTWR_INI_SYNC_ACK_TIMEOUT_MS))
+        if (cb_hal_is_time_elapsed_us(startTime, DEF_DSTWR_INI_SYNC_ACK_TIMEOUT_US) == CB_PASS)
         {
           // if SYNC-ACK not received from Responder within 10ms, send SYNC again.
           cb_framework_uwb_rx_end(EN_UWB_RX_0);
@@ -372,7 +372,7 @@ void app_dstwr_initiator(void)
           if (ackValidateResult == APP_TRUE)
           {
             s_enAppDstwrInitiatorState = EN_APP_INI_STATE_DSTWR_TRANSMIT_POLL;
-            startTime = cb_hal_get_tick();
+            startTime = cb_hal_get_time_us();
           }
           else
           {
@@ -386,7 +386,7 @@ void app_dstwr_initiator(void)
       // DS-TWR: POLL
       //-------------------------------------    
       case EN_APP_INI_STATE_DSTWR_TRANSMIT_POLL:
-        if (cb_hal_is_time_elapsed(startTime, DEF_DSTWR_INI_POLL_WAIT_TIME_MS))
+        if (cb_hal_is_time_elapsed_us(startTime, DEF_DSTWR_INI_POLL_WAIT_TIME_US) == CB_PASS)
         {
           app_dstwr_timer_init(DEF_DSTWR_INI_OVERALL_PROCESS_TIMEOUT_MS);
           
@@ -406,7 +406,7 @@ void app_dstwr_initiator(void)
           cb_framework_uwb_get_tx_tsu_timestamp(&s_stIniTxTsuTimestamp0);
           cb_framework_uwb_tx_end();
           s_enAppDstwrInitiatorState = EN_APP_INI_STATE_DSTWR_RECEIVE_RESPONSE;
-          startTime = cb_hal_get_tick();  
+          startTime = cb_hal_get_time_us();  
         }
         break;
       //-------------------------------------
@@ -420,7 +420,7 @@ void app_dstwr_initiator(void)
 
           s_enAppDstwrInitiatorState = EN_APP_INI_STATE_DSTWR_RECEIVE_RESPONSE_WAIT_RX_DONE;
         #else
-        if (cb_hal_is_time_elapsed(startTime, DEF_DSTWR_INI_RESPONSE_WAIT_TIME_MS))
+        if (cb_hal_is_time_elapsed_us(startTime, DEF_DSTWR_INI_RESPONSE_WAIT_TIME_US) == CB_PASS)
         {
           cb_framework_uwb_rx_start(EN_UWB_RX_0, &s_stUwbPacketConfig, &stRxIrqEnable, EN_TRX_START_NON_DEFERRED);
           s_enAppDstwrInitiatorState = EN_APP_INI_STATE_DSTWR_RECEIVE_RESPONSE_WAIT_RX_DONE;
@@ -437,7 +437,7 @@ void app_dstwr_initiator(void)
           cb_framework_uwb_get_rx_tsu_timestamp(&s_stIniRxTsuTimestamp0, EN_UWB_RX_0); // Store Rx CIR info
           cb_framework_uwb_rx_end(EN_UWB_RX_0);
           s_enAppDstwrInitiatorState = EN_APP_INI_STATE_DSTWR_TRANSMIT_FINAL;
-          startTime = cb_hal_get_tick(); 
+          startTime = cb_hal_get_time_us(); 
         }
         break;
       //-------------------------------------
@@ -448,7 +448,7 @@ void app_dstwr_initiator(void)
           cb_framework_uwb_tx_start(&s_stUwbPacketConfig, &stDstwrTxPayloadPack, &stTxIrqEnable, EN_TRX_START_DEFERRED);
           s_enAppDstwrInitiatorState = EN_APP_INI_STATE_DSTWR_TRANSMIT_FINAL_WAIT_TX_DONE;
         #else
-        if (cb_hal_is_time_elapsed(startTime, DEF_DSTWR_INI_FINAL_WAIT_TIME_MS))
+        if (cb_hal_is_time_elapsed_us(startTime, DEF_DSTWR_INI_FINAL_WAIT_TIME_US) == CB_PASS)
         {
           cb_framework_uwb_tx_start(&s_stUwbPacketConfig, &stDstwrTxPayloadPack, &stTxIrqEnable, EN_TRX_START_NON_DEFERRED);
           s_enAppDstwrInitiatorState = EN_APP_INI_STATE_DSTWR_TRANSMIT_FINAL_WAIT_TX_DONE;
@@ -480,7 +480,7 @@ void app_dstwr_initiator(void)
           s_stIrqStatus.Rx0Done = APP_FALSE;
           
           cb_uwbsystem_rxstatus_un rxStatus = cb_framework_uwb_get_rx_status();    
-          if (rxStatus.rx0_ok == CB_TRUE)
+          if ((rxStatus.rx0_ok == CB_TRUE) && (rxStatus.crc_fail == CB_FALSE))
           {  
             uint16_t rxPayloadSize = cb_framework_uwb_get_rx_packet_size(&s_stUwbPacketConfig);
             cb_framework_uwb_get_rx_payload                          ((uint8_t*)(&s_stIniResponderDataContainer), rxPayloadSize);
@@ -503,7 +503,7 @@ void app_dstwr_initiator(void)
         #endif
         app_dstwr_timer_off();
         app_dstwr_initiator_reset();
-        iterationTime = cb_hal_get_tick();
+        iterationTime = cb_hal_get_time_us();
         s_enAppDstwrInitiatorState = EN_APP_INI_STATE_IDLE;
         break;
     }
@@ -531,7 +531,8 @@ void app_dstwr_initiator_reset(void)
   s_applicationTimeout       = APP_FALSE;
   s_enAppFailureInitiatorState          = EN_APP_INI_STATE_IDLE;
   memset(&s_stInitiatorDataContainer,   0, sizeof(s_stInitiatorDataContainer)); 
-  memset(&s_stIniResponderDataContainer,   0, sizeof(cb_uwbframework_rangingdatacontainer_st));
+  memset(&s_stIniResponderDataContainer,   0, sizeof(s_stIniResponderDataContainer));
+  s_stInitiatorDataContainer.dstwrRangingBias = DEF_INITIATOR_RANGING_BIAS;
   cb_framework_uwb_tsu_clear();
   cb_framework_uwb_tx_end();            // ensure propoer TX end upon abnormal condition
   cb_framework_uwb_rx_end(EN_UWB_RX_0); // ensure propoer RX end upon abnormal condition
@@ -603,7 +604,7 @@ void app_dstwr_responder(void)
       // IDLE
       //-------------------------------------         
         // Wait for next cycle
-        if (cb_hal_is_time_elapsed(iterationTime, DEF_DSTWR_APP_CYCLE_TIME_MS))
+        if (cb_hal_is_time_elapsed_us(iterationTime, DEF_DSTWR_APP_CYCLE_TIME_US) == CB_PASS)
         {
           appDstwrResponderState = EN_APP_RESP_STATE_SYNC_RECEIVE;
         }
@@ -614,10 +615,10 @@ void app_dstwr_responder(void)
       case EN_APP_RESP_STATE_SYNC_RECEIVE:
         cb_framework_uwb_rx_start(EN_UWB_RX_0, &s_stUwbPacketConfig, &stRxIrqEnable, EN_TRX_START_NON_DEFERRED);
         appDstwrResponderState = EN_APP_RESP_STATE_SYNC_WAIT_RX_DONE;
-        startTime = cb_hal_get_tick();
+        startTime = cb_hal_get_time_us();
         break;
       case EN_APP_RESP_STATE_SYNC_WAIT_RX_DONE:
-        if (cb_hal_is_time_elapsed(startTime, DEF_DSTWR_SYNC_RX_RESTART_TIMEOUT_MS))
+        if (cb_hal_is_time_elapsed_us(startTime, DEF_DSTWR_SYNC_RX_RESTART_TIMEOUT_US) == CB_PASS)
         {
           appDstwrResponderState = EN_APP_RESP_STATE_SYNC_RECEIVE;
           cb_framework_uwb_rx_end(EN_UWB_RX_0);
@@ -674,7 +675,7 @@ void app_dstwr_responder(void)
           cb_framework_uwb_get_rx_tsu_timestamp(&s_stRespRxTsuTimestamp0, EN_UWB_RX_0); // Store Rx CIR info
           cb_framework_uwb_rx_end(EN_UWB_RX_0);
           appDstwrResponderState = EN_APP_RESP_STATE_DSTWR_TRANSMIT_RESPONSE;
-          startTime = cb_hal_get_tick();
+          startTime = cb_hal_get_time_us();
         }
         break;
       //-------------------------------------
@@ -688,7 +689,7 @@ void app_dstwr_responder(void)
           cb_framework_uwb_tx_start(&s_stUwbPacketConfig, &stDstwrTxPayloadPack, &stTxIrqEnable, EN_TRX_START_DEFERRED);
           appDstwrResponderState = EN_APP_RESP_STATE_DSTWR_TRANSMIT_RESPONSE_WAIT_TX_DONE;
         #else
-        if (cb_hal_is_time_elapsed(startTime, DEF_DSTWR_RESPONSE_WAIT_TIME_MS))
+        if (cb_hal_is_time_elapsed_us(startTime, DEF_DSTWR_RESPONSE_WAIT_TIME_US) == CB_PASS)
         {
           cb_framework_uwb_tx_start(&s_stUwbPacketConfig, &stDstwrTxPayloadPack, &stTxIrqEnable, EN_TRX_START_NON_DEFERRED);
           appDstwrResponderState = EN_APP_RESP_STATE_DSTWR_TRANSMIT_RESPONSE_WAIT_TX_DONE;
@@ -707,7 +708,7 @@ void app_dstwr_responder(void)
           cb_framework_uwb_get_tx_tsu_timestamp(&s_stRespTxTsuTimestamp0);
           cb_framework_uwb_tx_end();
           appDstwrResponderState = EN_APP_RESP_STATE_DSTWR_RECEIVE_FINAL;
-          startTime = cb_hal_get_tick();
+          startTime = cb_hal_get_time_us();
         }
         break;
       //-------------------------------------
@@ -719,7 +720,7 @@ void app_dstwr_responder(void)
           cb_framework_uwb_rx_start(EN_UWB_RX_0, &s_stUwbPacketConfig, &stRxIrqEnable, EN_TRX_START_DEFERRED);
           appDstwrResponderState = EN_APP_RESP_STATE_DSTWR_RECEIVE_FINAL_WAIT_RX_DONE;
         #else
-        if (cb_hal_is_time_elapsed(startTime, DEF_DSTWR_FINAL_WAIT_TIME_MS))
+        if (cb_hal_is_time_elapsed_us(startTime, DEF_DSTWR_FINAL_WAIT_TIME_US) == CB_PASS)
         {
           cb_framework_uwb_rx_start(EN_UWB_RX_0, &s_stUwbPacketConfig, &stRxIrqEnable, EN_TRX_START_NON_DEFERRED);
           appDstwrResponderState = EN_APP_RESP_STATE_DSTWR_RECEIVE_FINAL_WAIT_RX_DONE;
@@ -740,7 +741,7 @@ void app_dstwr_responder(void)
           cb_framework_uwb_get_rx_tsu_timestamp(&s_stRespRxTsuTimestamp1, EN_UWB_RX_0); // Store Rx CIR info
           cb_framework_uwb_rx_end(EN_UWB_RX_0);
           appDstwrResponderState = EN_APP_RESP_STATE_RESULT_TRANSMIT;
-          startTime = cb_hal_get_tick();
+          startTime = cb_hal_get_time_us();
         }
         break;
       }
@@ -749,7 +750,7 @@ void app_dstwr_responder(void)
       //-------------------------------------  
       case EN_APP_RESP_STATE_RESULT_TRANSMIT:
       {
-        if (cb_hal_is_time_elapsed(startTime, DEF_DSTWR_RESULT_WAIT_TIME_MS))
+        if (cb_hal_is_time_elapsed_us(startTime, DEF_DSTWR_RESULT_WAIT_TIME_US) == CB_PASS)
         {
           cb_framework_uwb_calculate_responder_tround_treply(&s_stRespResponderDataContainer, s_stRespTxTsuTimestamp0, s_stRespRxTsuTimestamp0, s_stRespRxTsuTimestamp1);
           s_stResultTxPayload.ptrAddress = (uint8_t*)(&s_stRespResponderDataContainer.dstwrTroundTreply);
@@ -783,7 +784,7 @@ void app_dstwr_responder(void)
         #endif
         app_dstwr_timer_off();
         app_dstwr_responder_reset();
-        iterationTime = cb_hal_get_tick();
+        iterationTime = cb_hal_get_time_us();
         appDstwrResponderState = EN_APP_RESP_STATE_IDLE;
         break;
       }
@@ -809,7 +810,8 @@ void app_dstwr_responder_reset(void)
   s_stIrqStatus.Rx0Done        = APP_FALSE;
   s_applicationTimeout       = APP_FALSE;
   appFailureResponderState          = EN_APP_RESP_STATE_IDLE;
-  memset(&s_stRespResponderDataContainer,   0, sizeof(cb_uwbframework_rangingdatacontainer_st));
+  memset(&s_stRespResponderDataContainer,   0, sizeof(s_stRespResponderDataContainer));
+  s_stRespResponderDataContainer.dstwrRangingBias = DEF_RESPONDER_RANGING_BIAS;
   cb_framework_uwb_tsu_clear();
   cb_framework_uwb_tx_end();            // ensure propoer TX end upon abnormal condition
   cb_framework_uwb_rx_end(EN_UWB_RX_0); // ensure propoer RX end upon abnormal condition
@@ -881,7 +883,7 @@ uint8_t app_dstwr_initiator_validate_sync_ack_payload(void)
   
   cb_uwbsystem_rxstatus_un rxStatus = cb_framework_uwb_get_rx_status();
           
-  if (rxStatus.rx0_ok   == CB_TRUE)
+  if ((rxStatus.rx0_ok == CB_TRUE) && (rxStatus.crc_fail == CB_FALSE))
   {  
     cb_framework_uwb_get_rx_payload(&syncAckPayloadReceived[0], DEF_SYNC_ACK_RX_PAYLOAD_SIZE);
     for (uint16_t i = 0; i < DEF_SYNC_ACK_RX_PAYLOAD_SIZE; i++)
@@ -904,7 +906,7 @@ uint8_t app_dstwr_responder_validate_sync_payload(void)
   
   cb_uwbsystem_rxstatus_un rxStatus = cb_framework_uwb_get_rx_status();
           
-  if (rxStatus.rx0_ok   == CB_TRUE)
+  if ((rxStatus.rx0_ok == CB_TRUE) && (rxStatus.crc_fail == CB_FALSE))
   {
     cb_framework_uwb_get_rx_payload(&syncRxPayload[0], DEF_SYNC_RX_PAYLOAD_SIZE);
     for (uint16_t i = 0; i < DEF_SYNC_RX_PAYLOAD_SIZE; i++)

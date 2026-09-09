@@ -164,7 +164,7 @@ void app_uwb_commtx_main(void)
         s_appCommTxState = EN_APP_STATE_TRANSMIT;
         break;
       case EN_APP_STATE_TRANSMIT:
-        cb_framework_uwb_qmode_tx_start(&Txpacketconfig, &txPayload, &stTxIrqEnable);  // TX START
+        cb_framework_uwb_qmode_tx_start(&Txpacketconfig, &txPayload, &stTxIrqEnable, EN_TRX_START_NON_DEFERRED);  // TX START
         s_appCommTxState = EN_APP_STATE_WAIT_TX_DONE;
         break;
       case EN_APP_STATE_WAIT_TX_DONE:
@@ -268,7 +268,7 @@ void app_uwb_commrx_main(void)
     switch(s_appCommRxState)
     {
       case EN_APP_STATE_RECEIVE:
-          cb_framework_uwb_qmode_rx_start(&Rxpacketconfig, &stRxIrqEnable); // RX START
+          cb_framework_uwb_qmode_rx_start(&Rxpacketconfig, &stRxIrqEnable, EN_TRX_START_NON_DEFERRED); // RX START
           s_appCommRxState = EN_APP_STATE_WAIT_RX_DONE;
         break;
       case EN_APP_STATE_WAIT_RX_DONE:
@@ -335,7 +335,7 @@ void app_commtrx_rx_payload_and_timestamp_printout(void)
   
   cb_uwbsystem_rxstatus_un rxStatus = cb_framework_uwb_get_rx_status();
   
-  if ((rxStatus.rx0_ok == CB_TRUE) && (rxStatus.sfd0_det == CB_TRUE) && ( rxStatus.pd0_det == CB_TRUE))  
+  if ((rxStatus.rx0_ok == CB_TRUE) && (rxStatus.sfd0_det == CB_TRUE) && ( rxStatus.pd0_det == CB_TRUE) && (rxStatus.crc_fail == CB_FALSE))  
   {  
     app_uwb_commtrx_print("- status register: OK\n");
     app_uwb_commtrx_print("--- Payload: ---\n");
